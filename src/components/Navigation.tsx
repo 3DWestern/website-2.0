@@ -5,6 +5,7 @@ import { usePathname } from 'next/navigation';
 import { Menu, X } from 'lucide-react';
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
+import Image from 'next/image';
 
 export function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
@@ -22,18 +23,15 @@ export function Navigation() {
   const isActive = (path: string) => pathname === path;
 
   return (
-    <nav className="sticky top-0 z-50 bg-white border-b">
+    <nav className="sticky top-0 z-50 bg-white border-b border-gray-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-purple-600 rounded-lg flex items-center justify-center">
-              <span className="text-white">3DW</span>
+            <div className="rounded-full w-10 h-10">
+              <Image src="/logo.png" alt="Logo" width={50} height={50} className="object-contain rounded-full" />
             </div>
-            <div className="flex flex-col">
-              <span className="tracking-tight">3DW Makerspace</span>
-              <span className="text-xs text-muted-foreground">Western University</span>
-            </div>
+            <span className="text-lg ">3DW Makerspace</span>
           </Link>
 
           {/* Desktop Navigation */}
