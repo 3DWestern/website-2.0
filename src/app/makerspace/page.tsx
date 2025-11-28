@@ -1,13 +1,14 @@
-import { HomePage } from '@/components/pages/HomePage';
+import { MakerspacePage } from '@/components/pages/MakerspacePage';
 import { Navigation } from '@/components/Navigation';
 import { Footer } from '@/components/Footer';
 
-export default function Home() {
+export default function Makerspace() {
   return (
     <div className="min-h-screen flex flex-col">
       <Navigation />
-      <HomePage />
+      <MakerspacePage />
       <Footer />
     </div>
   );
 }
+

@@ -1,12 +1,10 @@
-'use client';
-
 import { useState } from 'react';
-import { Badge } from '@/components/ui/badge';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { ImageWithFallback } from '@/components/figma/ImageWithFallback';
+import { Badge } from '../ui/badge';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '../ui/tabs';
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '../ui/card';
+import { ImageWithFallback } from '../figma/ImageWithFallback';
 import { ExternalLink } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { Button } from '../ui/button';
 
 const projects = [
   {

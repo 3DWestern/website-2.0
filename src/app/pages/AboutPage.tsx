@@ -1,7 +1,7 @@
-import { Badge } from '@/components/ui/badge';
-import { ImageWithFallback } from '@/components/figma/ImageWithFallback';
+import { Badge } from '../ui/badge';
+import { ImageWithFallback } from '../figma/ImageWithFallback';
 import { Linkedin } from 'lucide-react';
-import { Card, CardContent } from '@/components/ui/card';
+import { Card, CardContent } from '../ui/card';
 
 const team = [
   {

@@ -1,12 +1,10 @@
-'use client';
-
 import { useState } from 'react';
-import { Badge } from '@/components/ui/badge';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { ImageWithFallback } from '@/components/figma/ImageWithFallback';
+import { Badge } from '../ui/badge';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '../ui/tabs';
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '../ui/card';
+import { ImageWithFallback } from '../figma/ImageWithFallback';
 import { ExternalLink } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { Button } from '../ui/button';
 
 const projects = [
   {
@@ -76,7 +74,7 @@ const featuredProject = {
   makerImage: "https://images.unsplash.com/photo-1653539465770-2d7120d830bb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxlbmdpbmVlcmluZyUyMHN0dWRlbnRzJTIwd29ya2luZ3xlbnwxfHx8fDE3NjMzMTAwNDV8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
 };
 
-export function ProjectsPage() {
+export function GalleryPage() {
   const [selectedCategory, setSelectedCategory] = useState('all');
 
   const filteredProjects = selectedCategory === 'all' 
@@ -89,7 +87,7 @@ export function ProjectsPage() {
       <section className="bg-gradient-to-br from-purple-50 to-indigo-50 py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <Badge className="mb-4">Showcase</Badge>
-          <h1 className="text-5xl mb-4">Student Projects</h1>
+          <h1 className="text-5xl mb-4">Project Gallery</h1>
           <p className="text-xl text-muted-foreground max-w-2xl">
             Explore amazing projects created by students in our makerspaces
           </p>

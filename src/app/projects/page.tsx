@@ -1,13 +1,14 @@
-import { HomePage } from '@/components/pages/HomePage';
+import { ProjectsPage } from '@/components/pages/ProjectsPage';
 import { Navigation } from '@/components/Navigation';
 import { Footer } from '@/components/Footer';
 
-export default function Home() {
+export default function Projects() {
   return (
     <div className="min-h-screen flex flex-col">
       <Navigation />
-      <HomePage />
+      <ProjectsPage />
       <Footer />
     </div>
   );
 }
+

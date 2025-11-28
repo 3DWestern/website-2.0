@@ -1,13 +1,14 @@
-import { HomePage } from '@/components/pages/HomePage';
+import { GalleryPage } from '@/components/pages/GalleryPage';
 import { Navigation } from '@/components/Navigation';
 import { Footer } from '@/components/Footer';
 
-export default function Home() {
+export default function Gallery() {
   return (
     <div className="min-h-screen flex flex-col">
       <Navigation />
-      <HomePage />
+      <GalleryPage />
       <Footer />
     </div>
   );
 }
+
