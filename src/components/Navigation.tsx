@@ -16,7 +16,6 @@ export function Navigation() {
     { path: '/contact', label: 'Contact' },
     { path: '/makerspace', label: 'About Makerspace' },
     { path: '/events', label: 'Events' },
-    { path: '/projects', label: 'Projects' },
     { path: '/dashboard', label: 'Dashboard' },
   ];
 

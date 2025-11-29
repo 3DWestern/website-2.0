@@ -2,6 +2,7 @@ import { Calendar, Clock, MapPin, Users, Lightbulb, Rocket, GraduationCap } from
 import { Button } from '../ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '../ui/card';
 import { Badge } from '../ui/badge';
+import { koulen, krub } from '@/app/layout';
 
 const events = [
   {
@@ -84,12 +85,13 @@ export function EventsSection() {
   return (
     <section className="py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <Badge className="mb-4">Events & Programs</Badge>
-          <h2 className="text-4xl mb-4">Upcoming Morrissette Events</h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Join workshops, competitions, and networking events to grow your entrepreneurial skills
-          </p>
+        <div className="text-center flex flex-col gap-2 mb-12">
+          <div className={`text-6xl font-bold ${koulen.className}`}>
+            OUR EVENTS
+          </div>
+          <div className={`text-lg ${krub.className}`}>
+          We cultivate innovation through workshops & events. 
+          </div>
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">

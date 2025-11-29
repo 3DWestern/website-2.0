@@ -10,9 +10,6 @@ export function HeroSection() {
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left Content */}
           <div className="space-y-8">
-            <div className="inline-block px-4 py-2 bg-purple-100 text-purple-700 rounded-full">
-              Student-Run • Morrissette Partnership
-            </div>
             
             <div className="space-y-4">
               <h1 className="text-5xl lg:text-6xl">
@@ -35,34 +32,6 @@ export function HeroSection() {
                   Contact Us
                 </Button>
               </Link>
-            </div>
-
-            {/* Quick Stats */}
-            <div className="grid grid-cols-3 gap-6 pt-8 border-t">
-              <div className="flex items-start gap-3">
-                <div className="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                  <Wrench size={20} className="text-purple-600" />
-                </div>
-                <div>
-                  <p className="text-muted-foreground">Professional Tools</p>
-                </div>
-              </div>
-              <div className="flex items-start gap-3">
-                <div className="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                  <Zap size={20} className="text-purple-600" />
-                </div>
-                <div>
-                  <p className="text-muted-foreground">Free Workshops</p>
-                </div>
-              </div>
-              <div className="flex items-start gap-3">
-                <div className="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                  <Users size={20} className="text-purple-600" />
-                </div>
-                <div>
-                  <p className="text-muted-foreground">Expert Support</p>
-                </div>
-              </div>
             </div>
           </div>
 
