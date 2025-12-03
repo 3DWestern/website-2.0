@@ -86,7 +86,7 @@ export function EventsSection() {
     <section className="py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center flex flex-col gap-2 mb-12">
-          <div className={`text-6xl font-bold ${koulen.className}`}>
+          <div className={`text-3xl font-bold ${koulen.className}`}>
             OUR EVENTS
           </div>
           <div className={`text-lg ${krub.className}`}>
