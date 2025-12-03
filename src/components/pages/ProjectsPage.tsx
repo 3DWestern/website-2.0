@@ -4,7 +4,6 @@ import { useState } from 'react';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { ImageWithFallback } from '@/components/figma/ImageWithFallback';
 import { ExternalLink } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
@@ -107,7 +106,7 @@ export function ProjectsPage() {
           <div className="grid lg:grid-cols-2 gap-12">
             <div>
               <div className="aspect-[4/3] rounded-2xl overflow-hidden mb-6">
-                <ImageWithFallback
+                <img
                   src={featuredProject.image}
                   alt={featuredProject.title}
                   className="w-full h-full object-cover"
@@ -115,7 +114,7 @@ export function ProjectsPage() {
               </div>
               <div className="flex items-center gap-4">
                 <div className="w-16 h-16 rounded-full overflow-hidden">
-                  <ImageWithFallback
+                  <img
                     src={featuredProject.makerImage}
                     alt={featuredProject.maker}
                     className="w-full h-full object-cover"
@@ -182,7 +181,7 @@ export function ProjectsPage() {
             {filteredProjects.map((project) => (
               <Card key={project.id} className="overflow-hidden hover:shadow-lg transition-shadow group">
                 <div className="aspect-square overflow-hidden bg-slate-100">
-                  <ImageWithFallback
+                  <img
                     src={project.image}
                     alt={project.title}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"

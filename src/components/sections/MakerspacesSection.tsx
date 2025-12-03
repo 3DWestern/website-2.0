@@ -1,6 +1,5 @@
 import { Cpu, Hammer, Check } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '../ui/card';
-import { ImageWithFallback } from '../figma/ImageWithFallback';
 
 const spaces = [
   {
@@ -68,13 +67,6 @@ export function MakerspacesSection() {
               <div className={`grid lg:grid-cols-2 gap-8 ${index % 2 === 1 ? 'lg:grid-flow-dense' : ''}`}>
                 {/* Image */}
                 <div className={`${index % 2 === 1 ? 'lg:col-start-2' : ''}`}>
-                  <div className="aspect-[4/3] lg:h-full">
-                    <ImageWithFallback
-                      src={space.image}
-                      alt={space.name}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
                 </div>
 
                 {/* Content */}

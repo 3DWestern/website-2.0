@@ -1,5 +1,4 @@
 import { Badge } from '../ui/badge';
-import { ImageWithFallback } from '../figma/ImageWithFallback';
 import { Linkedin } from 'lucide-react';
 import { Card, CardContent } from '../ui/card';
 
@@ -95,7 +94,7 @@ export function AboutPage() {
               </div>
             </div>
             <div className="aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl">
-              <ImageWithFallback
+              <img
                 src="https://images.unsplash.com/photo-1758876203342-fc14c0bba67c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx0ZWFtJTIwY29sbGFib3JhdGlvbiUyMG9mZmljZXxlbnwxfHx8fDE3NjMyODcxNzJ8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
                 alt="Team collaboration"
                 className="w-full h-full object-cover"
@@ -119,7 +118,7 @@ export function AboutPage() {
             {team.map((member) => (
               <Card key={member.id} className="overflow-hidden hover:shadow-lg transition-shadow">
                 <div className="aspect-square overflow-hidden bg-slate-100">
-                  <ImageWithFallback
+                  <img
                     src={member.image}
                     alt={member.name}
                     className="w-full h-full object-cover"

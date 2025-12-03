@@ -3,7 +3,6 @@ import { Button } from '../ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '../ui/card';
 import { Badge } from '../ui/badge';
 import Link from 'next/link';
-import { ImageWithFallback } from '../figma/ImageWithFallback';
 
 const featuredProjects = [
   {
@@ -67,7 +66,7 @@ export function ProjectsHighlightSection() {
           {featuredProjects.map((project) => (
             <Card key={project.id} className="overflow-hidden hover:shadow-lg transition-shadow group">
               <div className="aspect-square overflow-hidden bg-slate-100">
-                <ImageWithFallback
+                <img
                   src={project.image}
                   alt={project.title}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
