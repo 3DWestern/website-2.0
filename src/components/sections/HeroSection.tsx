@@ -1,7 +1,7 @@
 import { ArrowRight, Wrench, Zap, Users } from 'lucide-react';
-import { Button } from '../ui/button';
+import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-import { koulen, krub } from '@/app/layout';
+import { koulen, krub } from '@/lib/fonts';
 
 export function HeroSection() {
   return (
@@ -12,7 +12,7 @@ export function HeroSection() {
           <div className="">
             
             <div className="text-center">
-              <h1 className={`text-7xl lg:text-6xl font-bold ${koulen.className}`}>
+              <h1 className={`text-4xl sm:text-5xl lg:text-7xl font-bold ${koulen.className}`}>
                 3D Western
               </h1>
             </div>

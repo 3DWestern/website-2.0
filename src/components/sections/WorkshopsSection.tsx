@@ -1,7 +1,7 @@
 import { Calendar, Clock, MapPin, ArrowRight } from 'lucide-react';
-import { Button } from '../ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
-import { Badge } from '../ui/badge';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
 
 const workshops = [
   {
@@ -42,7 +42,7 @@ export function WorkshopsSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <Badge className="mb-4">Upcoming Events</Badge>
-          <h2 className="text-4xl mb-4">Free Workshops & Training</h2>
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl mb-4">Free Workshops & Training</h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
             Join our hands-on workshops to learn new skills and get certified to use our equipment
           </p>

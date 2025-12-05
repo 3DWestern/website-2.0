@@ -1,6 +1,6 @@
-import { Badge } from '../ui/badge';
+import { Badge } from '@/components/ui/badge';
 import { Linkedin } from 'lucide-react';
-import { Card, CardContent } from '../ui/card';
+import { Card, CardContent } from '@/components/ui/card';
 
 const team = [
   {

@@ -1,12 +1,12 @@
 import { ArrowRight, Wrench, Zap, Users } from 'lucide-react';
-import { Button } from '../ui/button';
+import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-import { koulen, krub } from '@/app/layout';
+import { koulen, krub } from '@/lib/fonts';
 
 export function AboutUsSection() {
   return (
     <section className="relative overflow-hidden bg-white">
-      <div className="max-w-7xl px-4 text-center">
+      <div className="max-w-7xl mx-auto px-4 text-center">
           <div className={`my-6 text-3xl lg:text-4xl font-bold ${koulen.className}`}>
             About Us
           </div>

@@ -1,5 +1,5 @@
 import { Cpu, Hammer, Check } from 'lucide-react';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '../ui/card';
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 
 const spaces = [
   {
@@ -55,7 +55,7 @@ export function MakerspacesSection() {
     <section className="py-20 bg-slate-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <h2 className="text-4xl mb-4">Our Makerspaces</h2>
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl mb-4">Our Makerspaces</h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
             Two fully-equipped facilities to support every stage of your creative journey
           </p>

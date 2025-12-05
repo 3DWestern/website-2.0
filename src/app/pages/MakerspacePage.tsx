@@ -1,8 +1,8 @@
-import { Badge } from '../ui/badge';
-import { MakerspacesSection } from '../sections/MakerspacesSection';
-import { TrainingSection } from '../sections/TrainingSection';
-import { CalendarSection } from '../sections/CalendarSection';
-import { BookingSection } from '../sections/BookingSection';
+import { Badge } from '@/components/ui/badge';
+import { MakerspacesSection } from '@/components/sections/MakerspacesSection';
+import { TrainingSection } from '@/components/sections/TrainingSection';
+import { CalendarSection } from '@/components/sections/CalendarSection';
+import { BookingSection } from '@/components/sections/BookingSection';
 
 export function MakerspacePage() {
   return (

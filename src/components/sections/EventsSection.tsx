@@ -1,8 +1,8 @@
 import { Calendar, Clock, MapPin, Users, Lightbulb, Rocket, GraduationCap } from 'lucide-react';
-import { Button } from '../ui/button';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '../ui/card';
-import { Badge } from '../ui/badge';
-import { koulen, krub } from '@/app/layout';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { koulen, krub } from '@/lib/fonts';
 
 const events = [
   {

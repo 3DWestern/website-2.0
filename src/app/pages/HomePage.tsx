@@ -1,8 +1,8 @@
-import { HeroSection } from '../sections/HeroSection';
-import { EventsSection } from '../sections/EventsSection';
-import { MakerspacesSection } from '../sections/MakerspacesSection';
-import { ProjectsHighlightSection } from '../sections/ProjectsHighlightSection';
-import { FAQSection } from '../sections/FAQSection';
+import { HeroSection } from '@/components/sections/HeroSection';
+import { EventsSection } from '@/components/sections/EventsSection';
+import { MakerspacesSection } from '@/components/sections/MakerspacesSection';
+import { ProjectsHighlightSection } from '@/components/sections/ProjectsHighlightSection';
+import { FAQSection } from '@/components/sections/FAQSection';
 
 export function HomePage() {
   return (

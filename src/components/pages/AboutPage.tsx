@@ -59,7 +59,7 @@ export function AboutPage() {
       <section className="bg-gradient-to-br from-purple-50 to-indigo-50 py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <Badge className="mb-4">About Us</Badge>
-          <h1 className="text-5xl mb-4">Building the Future of Making at Western</h1>
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl mb-4">Building the Future of Making at Western</h1>
           <p className="text-xl text-muted-foreground max-w-2xl">
             Student-led innovation in partnership with Morrissette Entrepreneurship
           </p>
@@ -71,7 +71,7 @@ export function AboutPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
-              <h2 className="text-4xl mb-6">Our Mission</h2>
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl mb-6">Our Mission</h2>
               <div className="space-y-4 text-lg text-muted-foreground">
                 <p>
                   3DW is a student-run organization partnering with Morrissette Entrepreneurship 
@@ -108,7 +108,7 @@ export function AboutPage() {
       <section className="py-20 bg-slate-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-4xl mb-4">Meet Our Team</h2>
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl mb-4">Meet Our Team</h2>
             <p className="text-xl text-muted-foreground">
               Passionate students leading Western's makerspace community
             </p>
@@ -142,7 +142,7 @@ export function AboutPage() {
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-4xl mb-4">Where Our Alumni Work</h2>
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl mb-4">Where Our Alumni Work</h2>
             <p className="text-xl text-muted-foreground">
               Our members have gone on to innovate at leading companies worldwide
             </p>
@@ -167,7 +167,7 @@ export function AboutPage() {
       <section className="py-20 bg-gradient-to-br from-purple-50 to-indigo-50">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <Badge className="mb-4">Partnership</Badge>
-          <h2 className="text-4xl mb-6">Morrissette Entrepreneurship</h2>
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl mb-6">Morrissette Entrepreneurship</h2>
           <p className="text-lg text-muted-foreground mb-8">
             Through our collaboration with Morrissette Entrepreneurship, 3DW has evolved into 
             the student organization responsible for managing Western's makerspaces. This 
@@ -185,7 +185,7 @@ export function AboutPage() {
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-4xl mb-4">Our Values</h2>
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl mb-4">Our Values</h2>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">

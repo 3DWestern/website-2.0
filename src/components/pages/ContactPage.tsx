@@ -14,7 +14,7 @@ export function ContactPage() {
       <section className="bg-gradient-to-br from-purple-50 to-indigo-50 py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <Badge className="mb-4">Get In Touch</Badge>
-          <h1 className="text-5xl mb-4">Contact Us</h1>
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl mb-4">Contact Us</h1>
           <p className="text-xl text-muted-foreground max-w-2xl">
             Have questions? Want to collaborate? We'd love to hear from you.
           </p>
@@ -25,7 +25,7 @@ export function ContactPage() {
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-4xl mb-4">How Can We Help?</h2>
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl mb-4">How Can We Help?</h2>
             <p className="text-xl text-muted-foreground">
               Choose the type of inquiry that best matches your needs
             </p>

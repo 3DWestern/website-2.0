@@ -1,13 +1,13 @@
 import { Building2, Mail, Users } from 'lucide-react';
-import { Button } from '../ui/button';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '../ui/card';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 
 export function BookingSection() {
   return (
     <section className="py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <h2 className="text-4xl mb-4">Book Our Spaces</h2>
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl mb-4">Book Our Spaces</h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
             Reserve our makerspaces for private workshops, team projects, or organizational events
           </p>

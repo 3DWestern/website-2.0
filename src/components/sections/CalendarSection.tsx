@@ -1,6 +1,6 @@
 import { Calendar, Clock } from 'lucide-react';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '../ui/card';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '../ui/tabs';
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 export function CalendarSection() {
   return (
@@ -11,7 +11,7 @@ export function CalendarSection() {
             <Calendar size={16} />
             <span>Hours & Availability</span>
           </div>
-          <h2 className="text-4xl mb-4">Makerspace Schedules</h2>
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl mb-4">Makerspace Schedules</h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
             Check real-time availability and open hours for both makerspaces
           </p>
