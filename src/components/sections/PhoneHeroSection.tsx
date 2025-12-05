@@ -1,7 +1,17 @@
+'use client';
 
-import { koulen } from '@/app/layout';
+import { useState, useEffect } from 'react';
+import { koulen } from '@/lib/fonts';
 
 export function PhoneHeroSection() {
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  useEffect(() => {
+    const handleLoadingComplete = () => setIsLoaded(true);
+    window.addEventListener('loadingComplete', handleLoadingComplete);
+    return () => window.removeEventListener('loadingComplete', handleLoadingComplete);
+  }, []);
+
   return (
     <section className="h-[98vh] bg-white overflow-hidden px-4 pt-8 relative">
       {/* Content container with rounded corners - 98% height */}
@@ -25,7 +35,7 @@ export function PhoneHeroSection() {
       </div>
 
       {/* Bottom left info - blends with white background, only top-right corner rounded */}
-      <div className="absolute bottom-0 left-0 bg-white rounded-tr-2xl pl-8 pr-5 py-3">
+      <div className={`absolute bottom-0 left-0 bg-white rounded-tr-2xl pl-8 pr-5 py-3 transition-all duration-1000 ${isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'}`}>
         <p className="text-gray-900 font-semibold">
           3D Western{' '}
           <span className="text-gray-500 font-normal">

@@ -1,7 +1,7 @@
 import { ArrowRight, Wrench, Zap, Users } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-import { koulen, krub } from '@/app/layout';
+import { koulen, krub } from '@/lib/fonts';
 
 export function HeroSection() {
   return (

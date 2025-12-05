@@ -8,7 +8,15 @@ import { useState, useEffect } from 'react';
 
 export function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
   const pathname = usePathname();
+
+  // Listen for loading complete event
+  useEffect(() => {
+    const handleLoadingComplete = () => setIsLoaded(true);
+    window.addEventListener('loadingComplete', handleLoadingComplete);
+    return () => window.removeEventListener('loadingComplete', handleLoadingComplete);
+  }, []);
 
   // Prevent scrolling when menu is open
   useEffect(() => {
@@ -36,9 +44,9 @@ export function Navigation() {
 
   return (
     <>
-      {/* Mobile menu button - fixed position */}
+{/* Mobile menu button - fixed position */}
       <button
-        className="md:hidden fixed top-0 right-0 z-50 p-3 pr-4 bg-white rounded-bl-xl"
+        className={`md:hidden fixed top-0 right-0 z-50 p-3 pr-4 bg-white rounded-bl-xl transition-all duration-1000 ${isLoaded ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0'}`}
         onClick={() => setIsOpen(!isOpen)}
         aria-label="Toggle menu"
       >

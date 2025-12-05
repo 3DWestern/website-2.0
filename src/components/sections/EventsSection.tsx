@@ -2,7 +2,7 @@ import { Calendar, Clock, MapPin, Users, Lightbulb, Rocket, GraduationCap } from
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { koulen, krub } from '@/app/layout';
+import { koulen, krub } from '@/lib/fonts';
 
 const events = [
   {

@@ -1,16 +1,6 @@
 import type { Metadata } from "next";
-import { Koulen, Krub } from "next/font/google";
 import "./globals.css";
-
-export const koulen = Koulen({
-  subsets: ["latin"],
-  weight: "400",
-});
-
-export const krub = Krub({
-  subsets: ["latin"],
-  weight: "400",
-});
+import { LoadingWrapper } from "@/components/LoadingWrapper";
 
 export const metadata: Metadata = {
   title: "3DW Makerspace",
@@ -30,7 +20,9 @@ export default function RootLayout({
       <body
         className={`antialiased`}
       >
-        {children}
+        <LoadingWrapper>
+          {children}
+        </LoadingWrapper>
       </body>
     </html>
   );
