@@ -1,5 +1,5 @@
 import { ArrowRight, Wrench, Zap, Users } from 'lucide-react';
-import { Button } from '../ui/button';
+import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { koulen, krub } from '@/app/layout';
 

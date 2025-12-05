@@ -20,9 +20,19 @@ export function Navigation() {
   const isActive = (path: string) => pathname === path;
 
   return (
-    <div className="fixed top-0 rounded-bl-xl right-0 z-50 p-3 pr-4 bg-white">
-        {/* Desktop Navigation */}
-        <div className="hidden md:flex items-center gap-8">
+    <>
+      {/* Mobile menu button - fixed position */}
+      <button
+        className="md:hidden fixed top-0 right-0 z-50 p-3 pr-4 bg-white rounded-bl-xl"
+        onClick={() => setIsOpen(!isOpen)}
+        aria-label="Toggle menu"
+      >
+        {isOpen ? <X size={24} /> : <Menu size={24} />}
+      </button>
+
+      {/* Desktop Navigation */}
+      <div className="fixed top-0 right-0 z-50 p-3 pr-4 bg-white rounded-bl-xl hidden md:block">
+        <div className="flex items-center gap-8">
           {/* {navLinks.map((link) => (
             <Link
               key={link.path}
@@ -40,37 +50,29 @@ export function Navigation() {
             <Button>Login</Button>
           </Link> */}
         </div>
+      </div>
 
-        {/* Mobile menu button */}
-        <button
-          className="md:hidden"
-          onClick={() => setIsOpen(!isOpen)}
-          aria-label="Toggle menu"
-        >
-          {isOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
-
-        {/* Mobile Navigation */}
-        {isOpen && (
-          <div className="md:hidden py-4 border-t">
-            <div className="flex flex-col gap-4">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.path}
-                  href={link.path}
-                  className={`px-4 py-2 transition-colors ${
-                    isActive(link.path)
-                      ? 'text-purple-600'
-                      : 'text-muted-foreground'
-                  }`}
-                  onClick={() => setIsOpen(false)}
-                >
-                  {link.label}
-                </Link>
-              ))}
-            </div>
+      {/* Mobile Navigation - Full Screen Overlay */}
+      {isOpen && (
+        <div className="md:hidden fixed inset-0 z-40 bg-white flex flex-col items-start justify-center">
+          <div className="flex flex-col items-start gap-6 pl-4 p-3">
+            {navLinks.map((link) => (
+              <Link
+                key={link.path}
+                href={link.path}
+                className={`text-2xl font-medium transition-colors ${
+                  isActive(link.path)
+                    ? 'text-purple-600'
+                    : 'text-gray-700 hover:text-purple-600'
+                }`}
+                onClick={() => setIsOpen(false)}
+              >
+                {link.label}
+              </Link>
+            ))}
           </div>
-        )}
-    </div>
+        </div>
+      )}
+    </>
   );
 }
