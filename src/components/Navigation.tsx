@@ -1,13 +1,28 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { Menu, X } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
+
+  // Prevent scrolling when menu is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    
+    // Cleanup on unmount
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isOpen]);
 
   const navLinks = [
     { path: '/about', label: 'About Us' },
@@ -55,12 +70,22 @@ export function Navigation() {
       {/* Mobile Navigation - Full Screen Overlay */}
       {isOpen && (
         <div className="md:hidden fixed inset-0 z-40 bg-white flex flex-col items-start justify-center">
+          {/* Sewing machine icon in top left */}
+          <div className="absolute top-4 left-4">
+            <Image
+              src="/images/sewing-machine.svg"
+              alt="Sewing machine"
+              width={48}
+              height={48}
+            />
+          </div>
+          
           <div className="flex flex-col items-start gap-6 pl-4 p-3">
             {navLinks.map((link) => (
               <Link
                 key={link.path}
                 href={link.path}
-                className={`text-2xl font-medium transition-colors ${
+                className={`text-5xl font-medium transition-colors ${
                   isActive(link.path)
                     ? 'text-purple-600'
                     : 'text-gray-700 hover:text-purple-600'
