@@ -53,7 +53,7 @@ export function FAQSection() {
     <section className="py-20 bg-slate-50">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <h2 className="text-4xl mb-4">Frequently Asked Questions</h2>
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl mb-4">Frequently Asked Questions</h2>
           <p className="text-xl text-muted-foreground">
             Everything you need to know about accessing and using our makerspaces
           </p>

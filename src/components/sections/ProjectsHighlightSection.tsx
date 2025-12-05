@@ -50,7 +50,7 @@ export function ProjectsHighlightSection() {
         <div className="flex items-end justify-between mb-12">
           <div>
             <Badge className="mb-4">Student Work</Badge>
-            <h2 className="text-4xl mb-4">Featured Projects</h2>
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl mb-4">Featured Projects</h2>
             <p className="text-xl text-muted-foreground max-w-2xl">
               See what students are building in our makerspaces
             </p>

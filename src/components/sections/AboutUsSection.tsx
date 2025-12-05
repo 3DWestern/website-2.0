@@ -6,7 +6,7 @@ import { koulen, krub } from '@/app/layout';
 export function AboutUsSection() {
   return (
     <section className="relative overflow-hidden bg-white">
-      <div className="max-w-7xl px-4 text-center">
+      <div className="max-w-7xl mx-auto px-4 text-center">
           <div className={`my-6 text-3xl lg:text-4xl font-bold ${koulen.className}`}>
             About Us
           </div>
