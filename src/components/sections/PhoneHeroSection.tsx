@@ -25,7 +25,7 @@ export function PhoneHeroSection() {
       </div>
 
       {/* Bottom left info - blends with white background, only top-right corner rounded */}
-      <div className="absolute bottom-0 left-0 bg-white rounded-tr-2xl pl-6 pr-5 py-3">
+      <div className="absolute bottom-0 left-0 bg-white rounded-tr-2xl pl-8 pr-5 py-3">
         <p className="text-gray-900 font-semibold">
           3D Western{' '}
           <span className="text-gray-500 font-normal">
