@@ -1,9 +1,12 @@
+'use client';
+
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion';
+import { motion } from 'motion/react';
 
 const faqs = [
   {
@@ -52,16 +55,35 @@ export function FAQSection() {
   return (
     <section className="py-12 lg:py-20 bg-slate-50">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 max-w-5xl">
-        <div className="text-center mb-12">
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-12"
+        >
           <h2 className="text-3xl lg:text-5xl xl:text-6xl mb-4">Frequently Asked Questions</h2>
           <p className="text-lg lg:text-xl text-muted-foreground">
             Everything you need to know about accessing and using our makerspaces
           </p>
-        </div>
+        </motion.div>
 
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-50px" }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+        >
         <Accordion type="single" collapsible className="w-full">
-          {faqs.map((faq) => (
-            <AccordionItem key={faq.id} value={`item-${faq.id}`}>
+          {faqs.map((faq, index) => (
+            <motion.div
+              key={faq.id}
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-30px" }}
+              transition={{ duration: 0.4, delay: index * 0.05 }}
+            >
+            <AccordionItem value={`item-${faq.id}`}>
               <AccordionTrigger className="text-left">
                 {faq.question}
               </AccordionTrigger>
@@ -69,8 +91,10 @@ export function FAQSection() {
                 {faq.answer}
               </AccordionContent>
             </AccordionItem>
+            </motion.div>
           ))}
         </Accordion>
+        </motion.div>
       </div>
     </section>
   );

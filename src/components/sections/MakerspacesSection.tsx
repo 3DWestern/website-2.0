@@ -1,5 +1,8 @@
+'use client';
+
 import { Cpu, Hammer, Check } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
+import { motion } from 'motion/react';
 
 const spaces = [
   {
@@ -54,16 +57,29 @@ export function MakerspacesSection() {
   return (
     <section className="py-12 lg:py-20 bg-slate-50">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 xl:px-12">
-        <div className="text-center mb-12">
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-12"
+        >
           <h2 className="text-3xl lg:text-5xl xl:text-6xl mb-4">Our Makerspaces</h2>
           <p className="text-lg lg:text-xl text-muted-foreground max-w-3xl mx-auto">
             Two fully-equipped facilities to support every stage of your creative journey
           </p>
-        </div>
+        </motion.div>
 
         <div className="space-y-12">
           {spaces.map((space, index) => (
-            <Card key={space.id} className="overflow-hidden">
+            <motion.div
+              key={space.id}
+              initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.7, delay: 0.2 }}
+            >
+            <Card className="overflow-hidden hover:shadow-xl transition-shadow duration-300">
               <div className={`grid lg:grid-cols-2 gap-8 ${index % 2 === 1 ? 'lg:grid-flow-dense' : ''}`}>
                 {/* Image */}
                 <div className={`${index % 2 === 1 ? 'lg:col-start-2' : ''}`}>
@@ -111,6 +127,7 @@ export function MakerspacesSection() {
                 </div>
               </div>
             </Card>
+            </motion.div>
           ))}
         </div>
       </div>

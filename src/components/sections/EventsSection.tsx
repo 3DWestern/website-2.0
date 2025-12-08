@@ -1,8 +1,11 @@
+'use client';
+
 import { Calendar, Clock, MapPin, Users, Lightbulb, Rocket, GraduationCap } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { koulen, krub } from '@/lib/fonts';
+import { motion } from 'motion/react';
 
 const events = [
   {
@@ -85,20 +88,33 @@ export function EventsSection() {
   return (
     <section className="py-12 lg:py-20 bg-white">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 xl:px-12">
-        <div className="text-center flex flex-col gap-2 mb-12">
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.6 }}
+          className="text-center flex flex-col gap-2 mb-12"
+        >
           <div className={`text-3xl lg:text-5xl xl:text-6xl font-bold ${koulen.className}`}>
             OUR EVENTS
           </div>
           <div className={`text-lg lg:text-xl ${krub.className}`}>
           We cultivate innovation through workshops & events. 
           </div>
-        </div>
+        </motion.div>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6 lg:gap-8">
-          {events.map((event) => {
+          {events.map((event, index) => {
             const Icon = event.icon;
             return (
-              <Card key={event.id} className="hover:shadow-lg transition-shadow">
+              <motion.div
+                key={event.id}
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+              >
+              <Card className="hover:shadow-lg transition-all hover:-translate-y-2 duration-300 h-full">
                 <CardHeader>
                   <div className="flex items-start justify-between mb-3">
                     <div className={`w-12 h-12 rounded-lg flex items-center justify-center ${categoryColors[event.category] || 'bg-slate-100'}`}>
@@ -130,15 +146,22 @@ export function EventsSection() {
                   </Button>
                 </CardContent>
               </Card>
+              </motion.div>
             );
           })}
         </div>
 
-        <div className="text-center mt-12">
-          <Button size="lg">
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.9 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.3 }}
+          className="text-center mt-12"
+        >
+          <Button size="lg" className="hover:scale-105 transition-transform">
             View All Events
           </Button>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

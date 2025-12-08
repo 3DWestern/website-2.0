@@ -1,8 +1,11 @@
+'use client';
+
 import { ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import Link from 'next/link';
+import { motion } from 'motion/react';
 
 const featuredProjects = [
   {
@@ -47,7 +50,13 @@ export function ProjectsHighlightSection() {
   return (
     <section className="py-12 lg:py-20 bg-slate-50">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 xl:px-12">
-        <div className="flex flex-col lg:flex-row items-start lg:items-end justify-between mb-12 gap-6">
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.6 }}
+          className="flex flex-col lg:flex-row items-start lg:items-end justify-between mb-12 gap-6"
+        >
           <div>
             <Badge className="mb-4">Student Work</Badge>
             <h2 className="text-3xl lg:text-5xl xl:text-6xl mb-4">Featured Projects</h2>
@@ -56,15 +65,22 @@ export function ProjectsHighlightSection() {
             </p>
           </div>
           <Link href="/gallery" className="hidden lg:block">
-            <Button variant="outline" className="gap-2">
+            <Button variant="outline" className="gap-2 hover:scale-105 transition-transform">
               View Gallery <ArrowRight size={16} />
             </Button>
           </Link>
-        </div>
+        </motion.div>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 lg:gap-8">
-          {featuredProjects.map((project) => (
-            <Card key={project.id} className="overflow-hidden hover:shadow-lg transition-shadow group">
+          {featuredProjects.map((project, index) => (
+            <motion.div
+              key={project.id}
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+            >
+            <Card className="overflow-hidden hover:shadow-lg hover:-translate-y-2 transition-all duration-300 group h-full">
               <div className="aspect-square overflow-hidden bg-slate-100">
                 <img
                   src={project.image}
@@ -92,16 +108,23 @@ export function ProjectsHighlightSection() {
                 </div>
               </CardContent>
             </Card>
+            </motion.div>
           ))}
         </div>
 
-        <div className="text-center mt-12 md:hidden">
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.9 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.3 }}
+          className="text-center mt-12 md:hidden"
+        >
           <Link href="/gallery">
-            <Button className="gap-2">
+            <Button className="gap-2 hover:scale-105 transition-transform">
               View Gallery <ArrowRight size={16} />
             </Button>
           </Link>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

@@ -23,7 +23,7 @@ export function LoadingWrapper({ children }: LoadingWrapperProps) {
       setIsLoading(false);
       // Dispatch existing event for backward compatibility
       window.dispatchEvent(new CustomEvent('loadingComplete'));
-    }, 5000);
+    }, 50000);
     return () => clearTimeout(timer);
   }, []);
 
@@ -31,12 +31,14 @@ export function LoadingWrapper({ children }: LoadingWrapperProps) {
     <LoadingContext.Provider value={{ loadingComplete: !isLoading }}>
       {/* Loading screen overlay */}
       {isLoading && animationData && (
-        <div className="fixed inset-0 z-[100] bg-white flex items-center justify-center">
-          <Lottie
-            animationData={animationData}
-            loop={false}
-            style={{ width: 300, height: 300 }}
-          />
+        <div className="z-[100] bg-white flex w-screen h-screen items-center justify-center">
+          <div className="flex items-center justify-center w-[300px] h-[300px]">
+            <Lottie
+              animationData={animationData}
+              autoplay={true}
+              style={{ width: '100%', height: '100%' }}
+            />
+          </div>
         </div>
       )}
       
