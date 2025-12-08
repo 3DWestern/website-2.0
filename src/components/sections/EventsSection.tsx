@@ -83,18 +83,18 @@ const categoryColors: Record<string, string> = {
 
 export function EventsSection() {
   return (
-    <section className="py-20 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="py-12 lg:py-20 bg-white">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 xl:px-12">
         <div className="text-center flex flex-col gap-2 mb-12">
-          <div className={`text-3xl font-bold ${koulen.className}`}>
+          <div className={`text-3xl lg:text-5xl xl:text-6xl font-bold ${koulen.className}`}>
             OUR EVENTS
           </div>
-          <div className={`text-lg ${krub.className}`}>
+          <div className={`text-lg lg:text-xl ${krub.className}`}>
           We cultivate innovation through workshops & events. 
           </div>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6 lg:gap-8">
           {events.map((event) => {
             const Icon = event.icon;
             return (

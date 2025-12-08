@@ -45,24 +45,24 @@ const featuredProjects = [
 
 export function ProjectsHighlightSection() {
   return (
-    <section className="py-20 bg-slate-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-end justify-between mb-12">
+    <section className="py-12 lg:py-20 bg-slate-50">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 xl:px-12">
+        <div className="flex flex-col lg:flex-row items-start lg:items-end justify-between mb-12 gap-6">
           <div>
             <Badge className="mb-4">Student Work</Badge>
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl mb-4">Featured Projects</h2>
-            <p className="text-xl text-muted-foreground max-w-2xl">
+            <h2 className="text-3xl lg:text-5xl xl:text-6xl mb-4">Featured Projects</h2>
+            <p className="text-lg lg:text-xl text-muted-foreground max-w-2xl">
               See what students are building in our makerspaces
             </p>
           </div>
-          <Link href="/gallery" className="hidden md:block">
+          <Link href="/gallery" className="hidden lg:block">
             <Button variant="outline" className="gap-2">
               View Gallery <ArrowRight size={16} />
             </Button>
           </Link>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 lg:gap-8">
           {featuredProjects.map((project) => (
             <Card key={project.id} className="overflow-hidden hover:shadow-lg transition-shadow group">
               <div className="aspect-square overflow-hidden bg-slate-100">

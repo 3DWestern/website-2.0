@@ -50,11 +50,11 @@ const faqs = [
 
 export function FAQSection() {
   return (
-    <section className="py-20 bg-slate-50">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="py-12 lg:py-20 bg-slate-50">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 max-w-5xl">
         <div className="text-center mb-12">
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl mb-4">Frequently Asked Questions</h2>
-          <p className="text-xl text-muted-foreground">
+          <h2 className="text-3xl lg:text-5xl xl:text-6xl mb-4">Frequently Asked Questions</h2>
+          <p className="text-lg lg:text-xl text-muted-foreground">
             Everything you need to know about accessing and using our makerspaces
           </p>
         </div>
