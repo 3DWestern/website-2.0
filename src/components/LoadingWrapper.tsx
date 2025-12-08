@@ -23,7 +23,7 @@ export function LoadingWrapper({ children }: LoadingWrapperProps) {
       setIsLoading(false);
       // Dispatch existing event for backward compatibility
       window.dispatchEvent(new CustomEvent('loadingComplete'));
-    }, 50000);
+    }, 5000);
     return () => clearTimeout(timer);
   }, []);
 
