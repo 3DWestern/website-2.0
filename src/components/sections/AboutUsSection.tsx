@@ -5,13 +5,13 @@ import { koulen, krub } from '@/lib/fonts';
 
 export function AboutUsSection() {
   return (
-    <section className="relative overflow-hidden bg-white">
-      <div className="max-w-7xl mx-auto px-4 text-center">
-          <div className={`my-6 text-3xl lg:text-4xl font-bold ${koulen.className}`}>
+    <section className="relative overflow-hidden bg-white py-12 lg:py-20">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 xl:px-12">
+          <div className={`my-6 text-3xl lg:text-5xl xl:text-6xl font-bold ${koulen.className} text-center`}>
             About Us
           </div>
 
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-6 lg:gap-8 max-w-5xl mx-auto text-base lg:text-lg">
 
             <div>
               <div className="font-bold">3D Western (3DW) is Western University&apos;s student-run organization for design, prototyping, and creative technology.</div>

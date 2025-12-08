@@ -5,18 +5,13 @@ import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { Menu, X } from 'lucide-react';
 import { useState, useEffect } from 'react';
+import { useLoading } from '@/context/LoadingContext';
 
 export function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
-  const [isLoaded, setIsLoaded] = useState(false);
   const pathname = usePathname();
-
-  // Listen for loading complete event
-  useEffect(() => {
-    const handleLoadingComplete = () => setIsLoaded(true);
-    window.addEventListener('loadingComplete', handleLoadingComplete);
-    return () => window.removeEventListener('loadingComplete', handleLoadingComplete);
-  }, []);
+  const { loadingComplete } = useLoading();
+  const isLoaded = loadingComplete;
 
   // Prevent scrolling when menu is open
   useEffect(() => {

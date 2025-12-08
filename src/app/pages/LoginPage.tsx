@@ -1,18 +1,20 @@
-import { useState } from 'react';
-import { Badge } from '../ui/badge';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '../ui/card';
-import { Button } from '../ui/button';
-import { Input } from '../ui/input';
-import { Label } from '../ui/label';
-import { Separator } from '../ui/separator';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '../ui/tabs';
+// Login page will be covered by the frontend team so we
+// Shouldn't worry about this page
+// import { useState } from 'react';
+// import { Badge } from '../ui/badge';
+// import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '../ui/card';
+// import { Button } from '../ui/button';
+// import { Input } from '../ui/input';
+// import { Label } from '../ui/label';
+// import { Separator } from '../ui/separator';
+// import { Tabs, TabsContent, TabsList, TabsTrigger } from '../ui/tabs';
 
 export function LoginPage() {
-  const [isSignUp, setIsSignUp] = useState(false);
+  // const [isSignUp, setIsSignUp] = useState(false);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-50 to-indigo-50 flex items-center justify-center py-12 px-4">
-      <div className="w-full max-w-md">
+      {/* <div className="w-full max-w-md">
         <div className="text-center mb-8">
           <div className="inline-flex items-center gap-3 mb-4">
             <div className="w-12 h-12 bg-purple-600 rounded-lg flex items-center justify-center">
@@ -163,7 +165,7 @@ export function LoginPage() {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }

@@ -52,11 +52,11 @@ const spaces = [
 
 export function MakerspacesSection() {
   return (
-    <section className="py-20 bg-slate-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="py-12 lg:py-20 bg-slate-50">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 xl:px-12">
         <div className="text-center mb-12">
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl mb-4">Our Makerspaces</h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+          <h2 className="text-3xl lg:text-5xl xl:text-6xl mb-4">Our Makerspaces</h2>
+          <p className="text-lg lg:text-xl text-muted-foreground max-w-3xl mx-auto">
             Two fully-equipped facilities to support every stage of your creative journey
           </p>
         </div>

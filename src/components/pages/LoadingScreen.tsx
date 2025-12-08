@@ -16,7 +16,7 @@ export function LoadingScreen() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
-      // Dispatch custom event when loading ends
+      // Dispatch existing event for backward compatibility
       window.dispatchEvent(new CustomEvent('loadingComplete'));
     }, 5000);
     return () => clearTimeout(timer);

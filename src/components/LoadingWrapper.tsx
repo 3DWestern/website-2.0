@@ -2,6 +2,7 @@
 
 import { useState, useEffect, ReactNode } from 'react';
 import Lottie from 'lottie-react';
+import { LoadingContext } from '@/context/LoadingContext';
 
 interface LoadingWrapperProps {
   children: ReactNode;
@@ -20,14 +21,14 @@ export function LoadingWrapper({ children }: LoadingWrapperProps) {
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
-      // Dispatch custom event when loading ends
+      // Dispatch existing event for backward compatibility
       window.dispatchEvent(new CustomEvent('loadingComplete'));
     }, 5000);
     return () => clearTimeout(timer);
   }, []);
 
   return (
-    <>
+    <LoadingContext.Provider value={{ loadingComplete: !isLoading }}>
       {/* Loading screen overlay */}
       {isLoading && animationData && (
         <div className="fixed inset-0 z-[100] bg-white flex items-center justify-center">
@@ -43,6 +44,6 @@ export function LoadingWrapper({ children }: LoadingWrapperProps) {
       <div className={isLoading ? 'invisible' : 'visible'}>
         {children}
       </div>
-    </>
+    </LoadingContext.Provider>
   );
 }
