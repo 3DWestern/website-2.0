@@ -28,8 +28,31 @@ const Model = ({ onAfterRender, onError }: { onAfterRender?: () => void; onError
 
   if (!model) return null;
 
-  // If you want to split out meshes, you can do so here, otherwise just render the scene
-  return <primitive object={model.scene} onAfterRender={onAfterRender} />;
+  // Find meshes by name
+  const meshRFDD = model.scene.getObjectByName('RFDD_0');
+  const meshEdges = model.scene.getObjectByName('RFDD_edges_0');
+
+  if (!meshRFDD || !meshEdges) return null;
+
+  return (
+    <group dispose={null} position={[2, -2, -0.25]} rotation={[-Math.PI / 2, 0, 0]}>
+      <mesh
+        geometry={meshRFDD.geometry}
+        material={meshRFDD.material}
+        scale={[1, 1, 1]}
+        position={[0, 0.13, 0.13]}
+      />
+      <mesh
+        geometry={meshEdges.geometry}
+        material={meshEdges.material}
+        scale={[1, 1, 1]}
+        position={[0, 0.13, 0.13]}
+        material-toneMapped={false}
+        material-emissiveIntensity={3.65}
+        onAfterRender={onAfterRender}
+      />
+    </group>
+  );
 };
 
 
@@ -57,7 +80,7 @@ const AssemblyViewer = () => {
     <div style={gradientBg}>
       {hasHWA && !fallback ? (
         <Canvas
-                camera={{ position: [0, -20, 60], filmOffset: 0 }}
+          camera={{ position: [0, 5, 10], filmOffset: 0 }}
           style={{ cursor: 'move' }}
           dpr={dpr}
         >
@@ -80,7 +103,7 @@ const AssemblyViewer = () => {
             enableZoom={false}
           />
           <EffectComposer enableNormalPass={false} multisampling={4}>
-            <Bloom mipmapBlur luminanceThreshold={1} />
+            <Bloom mipmapBlur luminanceThreshold={1} intensity={5} />
             <Noise opacity={0.05} />
             <ToneMapping
               adaptive
