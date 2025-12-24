@@ -1,5 +1,17 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+## Moving to pnpm 
+
+If you have npm installed, run `npm install -g pnpm` or use corepack to install pnpm: `corepack enable`.
+Then remove `node_modules` in your project and run `pnpm install`. Approve all build scripts with `pnpm approve-builds`.
+
+Then run `pnpm dev` to start the server.
+
+### pnpm commands
+- add a package: `pnpm add <packagename>`, add `-D` flag for dev dependencies 
+- remove a package: `pnpm remove <packagename>`
+- list packages: `pnpm list`
+
 ## Getting Started
 
 First, run the development server:
