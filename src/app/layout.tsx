@@ -20,9 +20,9 @@ export default function RootLayout({
       <body
         className={`antialiased`}
       >
-        {/* <LoadingWrapper> */}
+        <LoadingWrapper>
           {children}
-        {/* </LoadingWrapper> */}
+        </LoadingWrapper>
       </body>
     </html>
   );
