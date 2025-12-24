@@ -4,9 +4,16 @@ import { koulen } from '@/lib/fonts';
 import Link from 'next/link';
 import { useLoading } from '@/context/LoadingContext';
 
+
+import dynamic from 'next/dynamic';
+
 export function PhoneHeroSection() {
   const { loadingComplete } = useLoading();
   const isLoaded = loadingComplete;
+
+
+  // Dynamically import AssemblyViewer to avoid SSR issues
+  const AssemblyViewer = dynamic(() => import('@/components/AssemblyViewer'), { ssr: false });
 
   return (
     <section className="h-[98vh] bg-white overflow-hidden px-4 md:px-8 lg:px-16 xl:px-8 pt-8 relative">
@@ -14,7 +21,6 @@ export function PhoneHeroSection() {
       <div className="relative w-full h-[98%] rounded-[1.25rem] lg:rounded-[1rem] overflow-hidden">
         {/* Content area */}
         <div className="relative w-full h-full bg-gradient-to-b from-purple-800 via-indigo-900 to-black">
-          
           {/* Logo in top left */}
           <div className="absolute top-6 left-6 lg:top-12 lg:left-12">
             <div className="w-14 h-14 lg:w-20 lg:h-20 rounded-full border-2 lg:border-3 border-purple-400/60 flex items-center justify-center">
@@ -40,9 +46,12 @@ export function PhoneHeroSection() {
             </nav>
           </div>
 
+
           {/* Main content area - for 3D graphics, images, etc. */}
           <div className="absolute inset-0 flex items-center justify-center">
-            {/* Placeholder - replace with your content */}
+            <div className="w-full h-full">
+              <AssemblyViewer />
+            </div>
           </div>
 
         </div>
