@@ -1196,52 +1196,41 @@ const InfiniteMenu: FC<InfiniteMenuProps> = ({ items = [], scale = 3.0 }) => {
 	};
 
 	return (
-		<div className="relative w-full h-full">
+		<div className="relative w-full h-full overflow-y-hidden">
 			<canvas
 				id="infinite-grid-menu-canvas"
 				ref={canvasRef}
-				className="cursor-grab w-full h-full hover:scale-110 overflow-hidden relative outline-none active:cursor-grabbing"
+				className="cursor-grab w-full h-full overflow-hidden relative outline-none active:cursor-grabbing"
 			/>
 
 			{activeItem && (
-				<>
+				<div className="absolute bottom-[3.8em] left-1/2 -translate-x-1/2 z-10 flex flex-col justify-end items-center w-full">
+					{/* ^ parent grouping for overlaying on top of canvas*/}
 
-					<div
-						className={`absolute left-1/2 z-10 flex flex-row flex-wrap items-center gap-4 transition-all 
-							ease-[cubic-bezier(0.25,0.1,0.25,1.0)] bg-red-700
-    						${isMoving ? 'bottom-[-80px] opacity-0 pointer-events-none duration-[100ms] scale-0 -translate-x-1/2' 
-								: 'bottom-[3.8em] opacity-100 pointer-events-auto duration-[500ms] scale-100 -translate-x-1/2'}
-								`}
-					>
+					{ /* parent grouping div, groups the Link button and the text */}
+					<div className="flex flex-row gap-x-5 flex-wrap items-center text-white">
+						
+						{/* text div */}
+						<div className="flex flex-col items-center justify-center bg-red-700 p-2 font-bold text-center">
+
 						{/* Exec name */}
-						<h2
-							className={`select-none absolute text-white [font-size:4rem] left-[1.6em] top-1/2 
-										transform translate-x-[20%] -translate-y-1/2 transition-all ease-[cubic-bezier(0.25,0.1,0.25,1.0)]
-										${isMoving ? 'opacity-0 pointer-events-none duration-[100ms]' : 'opacity-100 pointer-events-auto duration-[500ms]'}
-									`}
-								>
-									{activeItem.title}
+						<h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl">
+							{activeItem.title}
 						</h2>
 
 						{/* Exec role */}
-						<p className={`select-none text-[1.5rem] text-white text-center max-w-[10ch]`}>{activeItem.description}</p>
+						<p className="text-md sm:text-lg md:text-xl lg:text-2xl xl:text-3xl">{activeItem.description}</p>
+						</div>
 
 						{/* Link button */}
-						<div onClick={handleButtonClick}
-							 className={`w-[60px]
-            							 h-[60px]
-										 grid
-										 place-items-center
-										 bg-[#00ffff]
-										 border-[5px]
-										 border-black
-										 rounded-full
-										 cursor-pointer`}
+						<div 
+							onClick={handleButtonClick}
+							className={`w-[60px] h-[60px] grid place-items-center bg-[#00ffff] border-[5px] border-black rounded-full cursor-pointer`}
 						>
-							<p className="select-none relative text-[#060010] top-[2px] text-[26px]">&#x2197;</p>
+							<p className="select-none relative text-[#060010] text-[26px]">&#x2197;</p>
 						</div>
 					</div>
-				</>
+				</div>
 			)}
 		</div>
 	);
