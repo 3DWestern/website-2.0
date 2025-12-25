@@ -1,6 +1,5 @@
 import { Badge } from '@/components/ui/badge';
 import { Linkedin } from 'lucide-react'; // TODO: replace this
-import Execs from "@/components/Execs";
 
 export function AboutPage() {
 	return (

@@ -699,7 +699,7 @@ class ArcballControl {
 	}
 }
 
-interface MenuItem {
+export interface MenuItem {
 	image: string;
 	link: string;
 	title: string;
@@ -1186,14 +1186,6 @@ const InfiniteMenu: FC<InfiniteMenuProps> = ({ items = [], scale = 3.0 }) => {
 		};
 	}, [items, scale]);
 
-	const handleButtonClick = () => {
-		if (!activeItem?.link) return;
-		if (activeItem.link.startsWith('http')) {
-			window.open(activeItem.link, '_blank');
-		} else {
-			console.log('Internal route:', activeItem.link);
-		}
-	};
 
 	return (
 		<div className="relative w-full h-full overflow-y-hidden">
@@ -1223,11 +1215,12 @@ const InfiniteMenu: FC<InfiniteMenuProps> = ({ items = [], scale = 3.0 }) => {
 						</div>
 
 						{/* Link button */}
-						<div 
-							onClick={handleButtonClick}
-							className={`w-[60px] h-[60px] grid place-items-center bg-[#00ffff] border-[5px] border-black rounded-full cursor-pointer`}
+						<div className={`w-[60px] h-[60px] grid place-items-center bg-[#00ffff] 
+						border-[5px] border-black rounded-full cursor-pointer`}
 						>
-							<p className="select-none relative text-[#060010] text-[26px]">&#x2197;</p>
+								<a href={`http://` + activeItem.link} target="_blank" rel="noopener noreferrer">
+								<p className="select-none relative text-[#060010] text-[26px]">&#x2197;</p>
+								</a>
 						</div>
 					</div>
 				</div>
