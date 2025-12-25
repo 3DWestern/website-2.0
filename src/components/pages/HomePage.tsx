@@ -4,16 +4,18 @@ import { ProjectsHighlightSection } from '@/components/sections/ProjectsHighligh
 import { FAQSection } from '@/components/sections/FAQSection';
 import { AboutUsSection } from '@/components/sections/AboutUsSection';
 import { PhoneHeroSection } from '@/components/sections/PhoneHeroSection';
+import { ExecSphere } from '@/components/ExecsSphere';
 
 export function HomePage() {
-  return (
-    <div>
-      <PhoneHeroSection />
-      <AboutUsSection />
-      <EventsSection />
-      <MakerspacesSection />
-      <ProjectsHighlightSection />
-      <FAQSection />
-    </div>
-  );
+	return (
+		<div>
+			<ExecSphere />
+			<PhoneHeroSection />
+			<AboutUsSection />
+			<EventsSection />
+			<MakerspacesSection />
+			<ProjectsHighlightSection />
+			<FAQSection />
+		</div>
+	);
 }
