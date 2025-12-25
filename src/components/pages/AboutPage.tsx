@@ -1,7 +1,5 @@
 import { Badge } from '@/components/ui/badge';
 import { Linkedin } from 'lucide-react'; // TODO: replace this
-import Execs from "@/components/Execs";
-import { execs, cooVps, cpoVps, ctoVps } from "@/components/pages/teamdata";
 
 export function AboutPage() {
 	return (
@@ -64,8 +62,6 @@ export function AboutPage() {
 							Passionate students leading Western's makerspace community
 						</p>
 					</div>
-
-					<Execs execs={[...execs, ...cooVps, ...cpoVps, ...ctoVps]} />
 				</div>
 			</section>
 
