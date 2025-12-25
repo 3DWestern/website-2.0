@@ -74,6 +74,7 @@ precision highp float;
 uniform sampler2D uTex;
 uniform int uItemCount;
 uniform int uAtlasSize;
+uniform int uActiveItemIndex; // passed in uniform int for current active item index 
 
 out vec4 outColor;
 
@@ -103,6 +104,23 @@ void main() {
     st = st * cellSize + cellOffset;
     
     outColor = texture(uTex, st);
+    
+    // Add highlight border for active item
+    bool isActive = (itemIndex == uActiveItemIndex); // is the item's index the active item index?
+    if (isActive) { // set the border width of the highlight around the circle
+		// NOTE: change the color styling here 
+        float dist = distance(vUvs, vec2(0.5));
+        float borderThreshold = 0.45;
+        float borderWidth = 0.05;
+        
+        if (dist > borderThreshold) {
+            // Highlight color (rgb(255, 0, 234))
+            vec3 highlightColor = vec3(255, 0, 234);
+            float borderFactor = smoothstep(borderThreshold, borderThreshold + borderWidth, dist);
+            outColor.rgb = mix(outColor.rgb, highlightColor, borderFactor * 0.8);
+        }
+    }
+    
     outColor.a *= vAlpha;
 }
 `;
@@ -722,7 +740,7 @@ class InfiniteGridMenu {
 	private tex: WebGLTexture | null = null;
 	private control!: ArcballControl;
 
-	private discLocations!: {
+	private discLocations!: { // interface typedef for discs 
 		aModelPosition: number;
 		aModelUvs: number;
 		aInstanceMatrix: number;
@@ -736,6 +754,7 @@ class InfiniteGridMenu {
 		uFrames: WebGLUniformLocation | null;
 		uItemCount: WebGLUniformLocation | null;
 		uAtlasSize: WebGLUniformLocation | null;
+		uActiveItemIndex: WebGLUniformLocation | null; // uniform int active index 
 	};
 
 	private viewportSize = vec2.create();
@@ -757,6 +776,7 @@ class InfiniteGridMenu {
 	private _frames = 0;
 
 	private movementActive = false;
+	private activeItemIndex = -1; // initialize the active index as -1 at the start 
 
 	private TARGET_FRAME_DURATION = 1000 / 60;
 	private SPHERE_RADIUS = 2;
@@ -846,7 +866,8 @@ class InfiniteGridMenu {
 			uTex: gl.getUniformLocation(this.discProgram!, 'uTex'),
 			uFrames: gl.getUniformLocation(this.discProgram!, 'uFrames'),
 			uItemCount: gl.getUniformLocation(this.discProgram!, 'uItemCount'),
-			uAtlasSize: gl.getUniformLocation(this.discProgram!, 'uAtlasSize')
+			uAtlasSize: gl.getUniformLocation(this.discProgram!, 'uAtlasSize'),
+			uActiveItemIndex: gl.getUniformLocation(this.discProgram!, 'uActiveItemIndex')
 		};
 
 		this.discGeo = new DiscGeometry(56, 1);
@@ -976,6 +997,11 @@ class InfiniteGridMenu {
 		this.smoothRotationVelocity = this.control.rotationVelocity;
 	}
 
+	/**
+	 * This function runs every frame. TS detects active item, this.activeItemIndex is updated,
+	 * then runs render(). The index 
+	 * @returns 
+	 */
 	private render(): void {
 		if (!this.gl || !this.discProgram) return;
 		const gl = this.gl;
@@ -1006,6 +1032,9 @@ class InfiniteGridMenu {
 
 		gl.uniform1i(this.discLocations.uItemCount, this.items.length);
 		gl.uniform1i(this.discLocations.uAtlasSize, this.atlasSize);
+		gl.uniform1i(this.discLocations.uActiveItemIndex, this.activeItemIndex); // sets an integer uniform
+		// in the shader; sends the active item index from TS to fragment shader to highlight the disc 
+		// indices is sent to fragment shader to compare, if it is the current active one then highlight it.
 
 		gl.uniform1f(this.discLocations.uFrames, this._frames);
 		gl.uniform1f(this.discLocations.uScaleFactor, this.scaleFactor);
@@ -1066,6 +1095,7 @@ class InfiniteGridMenu {
 		if (!this.control.isPointerDown) {
 			const nearestVertexIndex = this.findNearestVertexIndex();
 			const itemIndex = nearestVertexIndex % Math.max(1, this.items.length);
+			this.activeItemIndex = itemIndex; // set the item index to the active item index when it changes 
 			this.onActiveItemChange(itemIndex);
 			const snapDirection = vec3.normalize(vec3.create(), this.getVertexWorldPosition(nearestVertexIndex));
 			this.control.snapTargetDirection = snapDirection;
