@@ -50,23 +50,23 @@ export const items: MenuItem[] = [
 		description: "VP Education",
 	},
 	{
-		image: "/images/sabrina.webp", // TODO: Get image
+		image: "/images/sabrina.webp", 
 		link: "www.linkedin.com/in/sabrina-luo861/",
 		title: "Sabrina Luo",
 		description: "VP Marketing/Media",
 	},
-	{
+	/* {
 		image: "/images/emma.webp",
 		link: "",
 		title: "Emma Zhang",
 		description: "VP Events",
-	},
-	{
+	}, */
+	/* {
 		image: "", // TODO: Get image
 		link: "www.linkedin.com/in/kyler-see/?originalSubdomain=ca",
 		title: "Kyler See",
 		description: "VP Outreach",
-	},
+	}, */
 	{
 		image: "/images/doris-headshot.png",
 		link: "www.linkedin.com/in/doris-w-949aa7222/",
@@ -74,7 +74,7 @@ export const items: MenuItem[] = [
 		description: "VP Communications",
 	},
 	{
-		image: "/images/thomson.webp", // TODO: Get image
+		image: "/images/thomson.webp", 
 		link: "www.linkedin.com/in/thomson-lam-260b67292/",
 		title: "Thomson Lam",
 		description: "VP Development",
@@ -85,13 +85,12 @@ export const items: MenuItem[] = [
 		title: "Josh Muszka",
 		description: "VP Development",
 	},
-	{
+	/* {
 		image: "", // TODO: Get image
 		link: "www.linkedin.com/in/cadeau-hayimana-81b89b218/",
 		title: "Cadeau Hayimana",
 		description: "VP Technical Support",
-
-	},
+	}, */
 
 ];
 
