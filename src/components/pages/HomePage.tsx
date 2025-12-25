@@ -9,11 +9,11 @@ import { ExecSphere } from '@/components/ExecsSphere';
 export function HomePage() {
 	return (
 		<div>
-			<ExecSphere />
 			<PhoneHeroSection />
 			<AboutUsSection />
 			<EventsSection />
 			<MakerspacesSection />
+			<ExecSphere />
 			<ProjectsHighlightSection />
 			<FAQSection />
 		</div>

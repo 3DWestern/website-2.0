@@ -108,7 +108,8 @@ void main() {
     // Add highlight border for active item
     bool isActive = (itemIndex == uActiveItemIndex); // is the item's index the active item index?
     if (isActive) { // set the border width of the highlight around the circle
-		// NOTE: change the color styling here 
+		
+	// NOTE: change the color styling here 
         float dist = distance(vUvs, vec2(0.5));
         float borderThreshold = 0.45;
         float borderWidth = 0.05;
@@ -547,9 +548,9 @@ class ArcballControl {
 	// attempt 1
 	public autoRotate = true;
 	public autoRotateSpeed = 0.2;
-	
-	// NOTE: this line changes rotation direction: x (), y (1-> R-L, -1, L-R), z ()
-	public autoRotateAxis = vec3.fromValues(1, 0, 0); 
+
+	// NOTE: this line changes rotation direction: x (1->T-B, ->B-T), y (1-> R-L, -1, L-R), z (1-> counter clockwise, -1-> clockwise)
+	public autoRotateAxis = vec3.fromValues(1, 0, 1);
 
 	constructor(canvas: HTMLCanvasElement, updateCallback?: UpdateCallback) {
 		this.canvas = canvas;
@@ -1204,71 +1205,41 @@ const InfiniteMenu: FC<InfiniteMenuProps> = ({ items = [], scale = 3.0 }) => {
 
 			{activeItem && (
 				<>
-					<h2
-						className={`
-          select-none
-          absolute
-          text-white
-          [font-size:4rem]
-          left-[1.6em]
-          top-1/2
-          transform
-          translate-x-[20%]
-          -translate-y-1/2
-          transition-all
-          ease-[cubic-bezier(0.25,0.1,0.25,1.0)]
-          ${isMoving
-								? 'opacity-0 pointer-events-none duration-[100ms]'
-								: 'opacity-100 pointer-events-auto duration-[500ms]'
-							}
-        `}
-					>
-						{activeItem.title}
-					</h2>
-
-					<p
-						className={`
-          select-none
-          absolute
-          max-w-[10ch]
-          text-[1.5rem]
-          top-1/2
-          right-[1%]
-          transition-all
-          ease-[cubic-bezier(0.25,0.1,0.25,1.0)]
-          ${isMoving
-								? 'opacity-0 pointer-events-none duration-[100ms] translate-x-[-60%] -translate-y-1/2'
-								: 'opacity-100 pointer-events-auto duration-[500ms] translate-x-[-90%] -translate-y-1/2'
-							}
-        `}
-					>
-						{activeItem.description}
-					</p>
 
 					<div
-						onClick={handleButtonClick}
-						className={`
-          absolute
-          left-1/2
-          z-10
-          w-[60px]
-          h-[60px]
-          grid
-          place-items-center
-          bg-[#00ffff]
-          border-[5px]
-          border-black
-          rounded-full
-          cursor-pointer
-          transition-all
-          ease-[cubic-bezier(0.25,0.1,0.25,1.0)]
-          ${isMoving
-								? 'bottom-[-80px] opacity-0 pointer-events-none duration-[100ms] scale-0 -translate-x-1/2'
-								: 'bottom-[3.8em] opacity-100 pointer-events-auto duration-[500ms] scale-100 -translate-x-1/2'
-							}
-        `}
+						className={`absolute left-1/2 z-10 flex flex-row flex-wrap items-center gap-4 transition-all 
+							ease-[cubic-bezier(0.25,0.1,0.25,1.0)] bg-red-700
+    						${isMoving ? 'bottom-[-80px] opacity-0 pointer-events-none duration-[100ms] scale-0 -translate-x-1/2' 
+								: 'bottom-[3.8em] opacity-100 pointer-events-auto duration-[500ms] scale-100 -translate-x-1/2'}
+								`}
 					>
-						<p className="select-none relative text-[#060010] top-[2px] text-[26px]">&#x2197;</p>
+						{/* Exec name */}
+						<h2
+							className={`select-none absolute text-white [font-size:4rem] left-[1.6em] top-1/2 
+										transform translate-x-[20%] -translate-y-1/2 transition-all ease-[cubic-bezier(0.25,0.1,0.25,1.0)]
+										${isMoving ? 'opacity-0 pointer-events-none duration-[100ms]' : 'opacity-100 pointer-events-auto duration-[500ms]'}
+									`}
+								>
+									{activeItem.title}
+						</h2>
+
+						{/* Exec role */}
+						<p className={`select-none text-[1.5rem] text-white text-center max-w-[10ch]`}>{activeItem.description}</p>
+
+						{/* Link button */}
+						<div onClick={handleButtonClick}
+							 className={`w-[60px]
+            							 h-[60px]
+										 grid
+										 place-items-center
+										 bg-[#00ffff]
+										 border-[5px]
+										 border-black
+										 rounded-full
+										 cursor-pointer`}
+						>
+							<p className="select-none relative text-[#060010] top-[2px] text-[26px]">&#x2197;</p>
+						</div>
 					</div>
 				</>
 			)}
