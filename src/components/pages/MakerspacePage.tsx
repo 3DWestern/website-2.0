@@ -37,8 +37,8 @@ export function MakerspacePage() {
       </section>
 
       {/* <MakerspacesSection /> */}
-      {/* <TrainingSection /> */}
       <CalendarSection />
+      <TrainingSection />
 
     </div>
   );
