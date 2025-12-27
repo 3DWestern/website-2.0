@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { LoadingWrapper } from "@/components/LoadingWrapper";
+import { HomeButton } from "@/components/HomeButton";
 
 export const metadata: Metadata = {
   title: "3DW Makerspace",
@@ -15,11 +16,11 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // Use a client component to access the router
   return (
     <html lang="en" className="scroll-smooth">
-      <body
-        className={`antialiased`}
-      >
+      <body className={`antialiased`}>
+        <HomeButton />
         <LoadingWrapper>
           {children}
         </LoadingWrapper>
@@ -27,3 +28,5 @@ export default function RootLayout({
     </html>
   );
 }
+
+// HomeButton is now a client component in components/HomeButton.tsx

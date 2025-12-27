@@ -43,9 +43,9 @@ export function PhoneHeroSection() {
       {/* Navigation card - top right info, desktop only */}
           <div className={`hidden lg:block absolute top-0 right-0 lg:right-8 xl:right-16 bg-white rounded-bl-2xl rounded-br-2xl px-8 py-4 mt-0 shadow-lg transition-all duration-1000 ${isLoaded ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0'}`}>
             <nav className="flex items-center gap-6">
-              <Link href="/about" className="text-gray-700 hover:text-purple-600 transition-colors font-medium">
+              {/* <Link href="/about" className="text-gray-700 hover:text-purple-600 transition-colors font-medium">
                 About
-              </Link>
+              </Link> */}
               <Link href="/events" className="text-gray-700 hover:text-purple-600 transition-colors font-medium">
                 Events
               </Link>
@@ -55,6 +55,14 @@ export function PhoneHeroSection() {
               <Link href="/contact" className="text-gray-700 hover:text-purple-600 transition-colors font-medium">
                 Contact
               </Link>
+              <a
+                href="https://your-new-dashboard-link.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-700 hover:text-purple-600 transition-colors font-medium"
+              >
+                Dashboard
+              </a>
             </nav>
           </div>
 

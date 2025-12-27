@@ -28,7 +28,7 @@ export function Navigation() {
 	}, [isOpen]);
 
 	const navLinks = [
-		{ path: '/about', label: 'About Us' },
+		// { path: '/about', label: 'About Us' },
 		{ path: '/contact', label: 'Contact' },
 		{ path: '/makerspace', label: 'About Makerspace' },
 		{ path: '/events', label: 'Events' },
