@@ -32,10 +32,15 @@ export function Navigation() {
 		{ path: '/contact', label: 'Contact' },
 		{ path: '/makerspace', label: 'About Makerspace' },
 		{ path: '/events', label: 'Events' },
-		{ path: '/dashboard', label: 'Dashboard' },
+		{ path: 'https://your-new-dashboard-link.com', label: 'Dashboard', external: true },
 	];
 
 	const isActive = (path: string) => pathname === path;
+
+	// Hide navigation on home page
+	if (pathname === '/') {
+		return null;
+	}
 
 	return (
 		<>
@@ -52,18 +57,30 @@ export function Navigation() {
 			<div className="fixed top-0 right-0 z-50 p-3 pr-4 bg-white rounded-bl-xl hidden md:block">
 				<div className="flex items-center gap-8">
 					{navLinks.map((link) => (
-            <Link
-              key={link.path}
-              href={link.path}
-              className={`transition-colors ${
-                isActive(link.path)
-                  ? 'text-purple-600'
-                  : 'text-muted-foreground hover:text-foreground'
-              }`}
-            >
-              {link.label}
-            </Link>
-          ))}
+						link.external ? (
+							<a
+								key={link.path}
+								href={link.path}
+								target="_blank"
+								rel="noopener noreferrer"
+								className="transition-colors text-muted-foreground hover:text-foreground"
+							>
+								{link.label}
+							</a>
+						) : (
+							<Link
+								key={link.path}
+								href={link.path}
+								className={`transition-colors ${
+									isActive(link.path)
+										? 'text-purple-600'
+										: 'text-muted-foreground hover:text-foreground'
+								}`}
+							>
+								{link.label}
+							</Link>
+						)
+					))}
           {/* <Link href="/login">
             <Button>Login</Button>
           </Link>  */}
@@ -85,17 +102,30 @@ export function Navigation() {
 
 					<div className="flex flex-col items-start gap-6 pl-4 p-3">
 						{navLinks.map((link) => (
-							<Link
-								key={link.path}
-								href={link.path}
-								className={`text-5xl font-medium transition-colors ${isActive(link.path)
-										? 'text-purple-600'
-										: 'text-gray-700 hover:text-purple-600'
-									}`}
-								onClick={() => setIsOpen(false)}
-							>
-								{link.label}
-							</Link>
+							link.external ? (
+								<a
+									key={link.path}
+									href={link.path}
+									target="_blank"
+									rel="noopener noreferrer"
+									className="text-5xl font-medium transition-colors text-gray-700 hover:text-purple-600"
+									onClick={() => setIsOpen(false)}
+								>
+									{link.label}
+								</a>
+							) : (
+								<Link
+									key={link.path}
+									href={link.path}
+									className={`text-5xl font-medium transition-colors ${isActive(link.path)
+											? 'text-purple-600'
+											: 'text-gray-700 hover:text-purple-600'
+										}`}
+									onClick={() => setIsOpen(false)}
+								>
+									{link.label}
+								</Link>
+							)
 						))}
 					</div>
 				</div>
