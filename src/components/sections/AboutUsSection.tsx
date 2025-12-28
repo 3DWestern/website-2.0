@@ -87,11 +87,6 @@ interface CardProps {
 function Card({ index, title, description, detail, progress, range, targetScale }: CardProps) {
 	const containerRef = useRef<HTMLDivElement>(null);
 	const scale = useTransform(progress, range, [1, targetScale]);
-	const opacity = useTransform(
-		progress,
-		[range[0] - 0.1, range[0], range[0] + 0.15, 1],
-		[0, 1, 1, 0.3]
-	);
 
 	return (
 		<div className="h-[80vh] lg:h-screen flex items-start justify-center sticky top-20 px-4 sm:px-6 lg:px-8">
@@ -99,7 +94,6 @@ function Card({ index, title, description, detail, progress, range, targetScale 
 				ref={containerRef}
 				style={{
 					scale,
-					opacity,
 					top: `calc(5% + ${index * 15}px)`
 				}}
 				className="relative w-full max-w-4xl origin-top"
