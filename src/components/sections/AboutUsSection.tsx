@@ -3,27 +3,32 @@
 import { koulen } from '@/lib/fonts'
 import { motion, useScroll, useTransform } from "motion/react"
 import { useRef } from 'react'
+import Image from 'next/image'
 
 const content = [
 	{
 		title: "Who We Are",
 		description: "Western University's student-run organization for design, prototyping, and creative technology.",
-		detail: "We manage the university's two Makerspaces—Digital and Sabourin—on behalf of Morrissette."
+		detail: "We manage the university's two Makerspaces—Digital and Sabourin—on behalf of Morrissette.",
+		image: '/images/digital.jpg'
 	},
 	{
 		title: "What We Do",
 		description: "Across both facilities, we support every step of the creation process: from concept sketching and rapid prototyping to fabrication, testing, and idea validation.",
-		detail: "Whether you're building your first project or developing a polished prototype, our team provides guidance, training, and a place to experiment."
+		detail: "Whether you're building your first project or developing a polished prototype, our team provides guidance, training, and a place to experiment.",
+		image: '/images/sabourin.jpg'
 	},
 	{
 		title: "Our Equipment",
 		description: "Our equipment includes:",
-		detail: "3D printers, laser cutters, water cutters, Cricut machines, sewing machines, soldering stations, and Raspberry Pis—along with a growing inventory of digital fabrication and woodworking tools."
+		detail: "3D printers, laser cutters, water cutters, Cricut machines, sewing machines, soldering stations, and Raspberry Pis—along with a growing inventory of digital fabrication and woodworking tools.",
+		image: undefined
 	},
 	{
 		title: "Our Vision",
 		description: "As 3DW expands, our website and dashboard will become the central portal for accessing services, workshops, equipment bookings, and club activities.",
-		detail: "We're building a community where anyone can create, learn, and innovate—no experience required."
+		detail: "We're building a community where anyone can create, learn, and innovate—no experience required.",
+		image: undefined
 	}
 ];
 
@@ -60,6 +65,7 @@ export function AboutUsSection() {
 							title={item.title}
 							description={item.description}
 							detail={item.detail}
+							image={item.image}
 							progress={scrollYProgress}
 							range={[index * 0.25, 1]}
 							targetScale={targetScale}
@@ -79,12 +85,13 @@ interface CardProps {
 	title: string;
 	description: string;
 	detail: string;
+	image?: string;
 	progress: any;
 	range: [number, number];
 	targetScale: number;
 }
 
-function Card({ index, title, description, detail, progress, range, targetScale }: CardProps) {
+function Card({ index, title, description, detail, image, progress, range, targetScale }: CardProps) {
 	const containerRef = useRef<HTMLDivElement>(null);
 	const scale = useTransform(progress, range, [1, targetScale]);
 
@@ -98,11 +105,21 @@ function Card({ index, title, description, detail, progress, range, targetScale 
 				}}
 				className="relative w-full max-w-4xl origin-top"
 			>
-				<div className="bg-linear-to-br from-purple-50 to-indigo-50 rounded-3xl p-8 lg:p-12 shadow-xl border border-purple-100 h-[600px] flex items-start">
-					<div className="flex items-start gap-6 w-full">
-						<div className="shrink-0 w-12 h-12 lg:w-16 lg:h-16 rounded-full bg-purple-600 flex items-center justify-center">
-							<span className="text-white text-xl lg:text-2xl font-bold">{index + 1}</span>
-						</div>
+				<div className="bg-linear-to-br from-purple-50 to-indigo-50 rounded-3xl p-8 lg:p-12 shadow-xl border border-purple-100 h-[600px] flex items-start overflow-hidden">
+					<div className="flex flex-col lg:flex-row items-start gap-6 w-full">
+						{/* Optional Image */}
+						{image && (
+							<div className="relative w-full lg:w-1/3 h-48 lg:h-full shrink-0 rounded-2xl overflow-hidden">
+								<Image
+									src={image}
+									alt={title}
+									fill
+									className="object-cover"
+								/>
+							</div>
+						)}
+						
+						{/* Text Content */}
 						<div className="flex-1 space-y-4">
 							<h3 className={`text-3xl lg:text-4xl font-bold text-gray-900 ${koulen.className}`}>
 								{title}
