@@ -61,8 +61,7 @@
     "tailwind-merge": "^2.5.5",
     "three": "^0.182.0",
     "three-stdlib": "^2.36.1",
-    "vaul": "^1.1.2",
-    "website-2.0": "link:"
+    "vaul": "^1.1.2"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
