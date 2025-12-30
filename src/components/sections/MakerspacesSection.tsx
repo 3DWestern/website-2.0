@@ -59,8 +59,8 @@ export function MakerspacesSection() {
     <section className="py-12 lg:py-20 bg-slate-50">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 xl:px-12">
         <motion.div 
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
@@ -72,8 +72,8 @@ export function MakerspacesSection() {
           {spaces.map((space, index) => (
             <motion.div
               key={space.id}
-              initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.7, delay: 0.2 }}
             >
