@@ -25,13 +25,7 @@ export function CalendarSection() {
 
           <TabsContent value="digital">
             <Card>
-              <CardHeader>
-                <CardTitle>Digital Makerspace Calendar</CardTitle>
-                <CardDescription>
-                  View open hours, workshops, and reserved times for the digital makerspace
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
+              <CardContent className="p-0 p-5">
                 <div className="aspect-video bg-slate-100 rounded-lg flex items-center justify-center border-2 border-dashed">
                   {/* Google Calendar Embed */}
           <div className="flex justify-center mb-8 mt-8">

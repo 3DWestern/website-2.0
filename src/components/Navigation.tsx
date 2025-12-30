@@ -71,17 +71,16 @@ export function Navigation() {
 							<Link
 								key={link.path}
 								href={link.path}
-								className={`transition-colors ${
-									isActive(link.path)
-										? 'text-purple-600'
-										: 'text-muted-foreground hover:text-foreground'
-								}`}
+								className={`transition-colors ${isActive(link.path)
+									? 'text-purple-600'
+									: 'text-muted-foreground hover:text-foreground'
+									}`}
 							>
 								{link.label}
 							</Link>
 						)
 					))}
-          {/* <Link href="/login">
+					{/* <Link href="/login">
             <Button>Login</Button>
           </Link>  */}
 				</div>
@@ -90,16 +89,6 @@ export function Navigation() {
 			{/* Mobile Navigation - Full Screen Overlay */}
 			{isOpen && (
 				<div className="md:hidden fixed inset-0 z-40 bg-white flex flex-col items-start justify-center">
-					{/* Sewing machine icon in top left */}
-					<div className="absolute top-4 left-4">
-						<Image
-							src="/images/sewing-machine.svg"
-							alt="Sewing machine"
-							width={48}
-							height={48}
-						/>
-					</div>
-
 					<div className="flex flex-col items-start gap-6 pl-4 p-3">
 						{navLinks.map((link) => (
 							link.external ? (
@@ -118,8 +107,8 @@ export function Navigation() {
 									key={link.path}
 									href={link.path}
 									className={`text-5xl font-medium transition-colors ${isActive(link.path)
-											? 'text-purple-600'
-											: 'text-gray-700 hover:text-purple-600'
+										? 'text-purple-600'
+										: 'text-gray-700 hover:text-purple-600'
 										}`}
 									onClick={() => setIsOpen(false)}
 								>

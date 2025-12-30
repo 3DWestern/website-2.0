@@ -1,4 +1,4 @@
-import { MenuItem } from './InfiniteMenu';
+import { MenuItem } from '../InfiniteMenu';
 
 export const items: MenuItem[] = [
 	{
@@ -50,7 +50,7 @@ export const items: MenuItem[] = [
 		description: "VP Education",
 	},
 	{
-		image: "/images/sabrina.webp", 
+		image: "/images/sabrina.webp",
 		link: "www.linkedin.com/in/sabrina-luo861/",
 		title: "Sabrina Luo",
 		description: "VP Marketing/Media",
@@ -74,13 +74,13 @@ export const items: MenuItem[] = [
 		description: "VP Communications",
 	},
 	{
-		image: "/images/thomson.webp", 
+		image: "/images/thomson.webp",
 		link: "www.linkedin.com/in/thomson-lam-260b67292/",
 		title: "Thomson Lam",
 		description: "VP Development",
 	},
 	{
-		image: "/images/josh.webp", // TODO: Get image
+		image: "/images/josh.webp",
 		link: "www.linkedin.com/in/jmuszka",
 		title: "Josh Muszka",
 		description: "VP Development",
