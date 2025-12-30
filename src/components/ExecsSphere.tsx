@@ -1,5 +1,6 @@
 import InfiniteMenu from './InfiniteMenu';
 import { items } from './data/teamdata';
+import { MenuItem } from './data/teamdata';
 
 export const ExecSphere = () => {
 	return (

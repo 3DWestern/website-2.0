@@ -20,7 +20,7 @@ export const items: MenuItem[] = [
 	},
 	{
 		image: '/images/execs/justiny.webp',
-		link: 'https://twitter.com/',
+		link: 'https://www.linkedin.com/in/justin-yee8/',
 		title: 'Justin Yee',
 		description: 'Chief Product Officer'
 	},
@@ -37,7 +37,7 @@ export const items: MenuItem[] = [
 		description: "Co-VP Finance",
 	},
 	{
-		image: "/images/execs/seth.webp",
+		image: "/images/execs/seth.jpg",
 		link: "www.linkedin.com/in/s-j-evans",
 		title: "Seth Evans",
 		description: "VP Education",

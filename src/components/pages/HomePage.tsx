@@ -4,7 +4,7 @@ import { ProjectsHighlightSection } from '@/components/sections/ProjectsHighligh
 import { FAQSection } from '@/components/sections/FAQSection';
 import { AboutUsSection } from '@/components/sections/AboutUsSection';
 import { PhoneHeroSection } from '@/components/sections/PhoneHeroSection';
-import { ExecSphere } from '@/components/ExecsSphere';
+import { ExecCarousel } from '@/components/ExecCarousel';
 
 export function HomePage() {
 	return (
@@ -19,7 +19,7 @@ export function HomePage() {
 			<AboutUsSection />
 			<EventsSection />
 			<MakerspacesSection />
-			<ExecSphere />
+			<ExecCarousel />
 			<ProjectsHighlightSection />
 			<FAQSection />
 		</div>
