@@ -13,7 +13,7 @@ export function AboutUsSection() {
 					transition={{ duration: 0.5, type: "spring" }}
 					className={`my-6 text-7xl lg:text-5xl xl:text-6xl font-bold ${koulen.className} text-center`}
 				>
-					3D Western
+					3D WESTERN
 				</motion.div>
 				<div className="flex flex-col gap-6 lg:gap-8 max-w-5xl mx-auto text-base lg:text-lg">
 

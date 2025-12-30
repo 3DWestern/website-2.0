@@ -4,9 +4,10 @@ import { Calendar, Clock, MapPin, Users, Lightbulb, Rocket, GraduationCap, Troph
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useState } from 'react';
 import { allEvents } from '../data/events';
+import Link from 'next/link';
 
 const categoryColors: Record<string, string> = {
 	"Competition": "bg-purple-100 text-purple-700",
@@ -98,19 +99,10 @@ export function EventsPage() {
 						</div>
 					)}
 				</div>
-			</section>
-
-			{/* CTA */}
-			<section className="py-16 bg-white">
-				<div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-					<h2 className="text-3xl mb-4">Stay Updated</h2>
-					<p className="text-lg text-muted-foreground mb-8">
-						Want to receive notifications about new events? Sign up for our newsletter or check the calendar regularly.
-					</p>
-					<div className="flex flex-wrap gap-4 justify-center">
-						<Button size="lg">Subscribe to Updates</Button>
-						<Button size="lg" variant="outline">View Calendar</Button>
-					</div>
+				
+				<div className="flex flex-col items-center justify-center w-full py-4 mt-12">
+				<p className="text-lg font-semibold mb-4 text-center">
+					Want to organize an event?&nbsp;<Link href="/contact" className="text-purple-700 underline">Contact Us</Link> </p>
 				</div>
 			</section>
 		</div>

@@ -1,10 +1,9 @@
 import { EventsSection } from '@/components/sections/EventsSection';
 import { MakerspacesSection } from '@/components/sections/MakerspacesSection';
-import { ProjectsHighlightSection } from '@/components/sections/ProjectsHighlightSection';
 import { FAQSection } from '@/components/sections/FAQSection';
 import { AboutUsSection } from '@/components/sections/AboutUsSection';
 import { PhoneHeroSection } from '@/components/sections/PhoneHeroSection';
-import { ExecCarousel } from '@/components/ExecCarousel';
+import { ExecsSection } from '@/components/sections/ExecsSection';
 
 export function HomePage() {
 	return (
@@ -19,8 +18,7 @@ export function HomePage() {
 			<AboutUsSection />
 			<EventsSection />
 			<MakerspacesSection />
-			<ExecCarousel />
-			<ProjectsHighlightSection />
+			<ExecsSection />
 			<FAQSection />
 		</div>
 	);

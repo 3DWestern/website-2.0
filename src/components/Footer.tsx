@@ -1,76 +1,129 @@
 import { Mail, MapPin, Phone } from 'lucide-react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export function Footer() {
-	return (
-		<footer className="bg-[#F9FAFC] text-black mt-auto">
-			<div className="container mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 py-12 lg:py-16">
-				<div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 items-start">
-					{/* Left column */}
-					<div className="flex flex-col gap-8 bg-red-700">
-						<div className="flex items-center gap-3 mb-4 bg-blue-700">
-							<div className="w-10 h-10 rounded-lg flex items-center justify-center bg-white">
-								<img src="/logo.png" alt="3DWestern Logo" className="w-8 h-8 object-contain" />
-								<span className="font-bold text-lg tracking-tight">3DWestern</span>
-							</div>
-							<div className="flex flex-col">
-								<p className="text-black text-lg font-semibold max-w-md mt-2">
-									Empowering Students to Build & Create
-								</p>
-							</div>
-						</div>
-					</div>
-					{/* Right column */}
-					<div className="flex flex-col gap-8 justify-center md:items-end">
-						<ul className="space-y-3">
-							<li className="flex items-start gap-2 text-black">
-								<Mail size={20} className="mt-0.5 flex-shrink-0 text-black" />
-								<span>contact@3dwestern.ca</span>
-							</li>
-							<li className="flex items-start gap-2 text-black">
-								<MapPin size={20} className="mt-0.5 flex-shrink-0 text-black" />
-								<span>Morrissette Entrepreneurship Building, Western University</span>
-							</li>
-						</ul>
-						<div className=" border-black/20  text-center text-black w-full">
-							<p>&copy; {new Date().getFullYear()} <span className="font-bold">3DWestern</span>. All rights reserved.</p>
-							<div className="mt-2 text-sm flex flex-wrap justify-center items-center gap-2">
-								made with ❤️ by
-								<p>
-									<a
-										href="https://www.linkedin.com/in/tony-wang1604/"
-										rel="noopener noreferrer"
-										target="_blank"
-										className="underline hover:text-purple-600"
-										title="Frontend"
-									>
-										Tony Wang
-									</a>,&nbsp;
-									<a
-										href="https://www.linkedin.com/in/lucianlavric/"
-										rel="noopener noreferrer"
-										target="_blank"
-										className="underline hover:text-purple-600"
-										title="Frontend"
-									>
-										Lucian
-									</a>
-									&nbsp;&amp;&nbsp;
-									<a
-										href="https://www.linkedin.com/in/thomson-lam-260b67292/"
-										rel="noopener noreferrer"
-										target="_blank"
-										className="underline hover:text-purple-600"
-										title="Frontend"
-									>
-										Thomson
-									</a>
-								</p>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</footer>
-	);
+  return (
+    <footer className="bg-slate-950 text-slate-200 mt-auto">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 py-12 lg:py-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
+          {/* About */}
+          <div className="col-span-1 md:col-span-2">
+            <div className="flex items-center gap-3 mb-4">
+              <Image src="/logo.png" alt="3DW" width={40} height={40} />
+              <div className="flex flex-col">
+                <span className="tracking-tight font-bold">3DWestern</span>
+              </div>
+            </div>
+            <p className="text-slate-400 max-w-md">
+				Empowering Students to Build &amp; Create.	
+            </p>
+          </div>
+
+          {/* Quick Links */}
+          <div>
+            <ul className="space-y-2">
+              <li>
+                <Link href="/" className="text-slate-400 hover:text-white transition-colors">
+                  Home
+                </Link>
+              </li>
+              <li>
+                <Link href="/contact" className="text-slate-400 hover:text-white transition-colors">
+                  Contact Us
+                </Link>
+              </li>
+              <li>
+                <Link href="/events" className="text-slate-400 hover:text-white transition-colors">
+                  Events
+                </Link>
+              </li>
+              <li>
+                <Link href="/makerspace" className="text-slate-400 hover:text-white transition-colors">
+                  Makerspace Details
+                </Link>
+              </li>
+			  <li>
+			  <Link href="/dashboard" className="text-slate-400 hover:text-white transition-colors">
+                  Dashboard
+                </Link>
+			  </li>
+            </ul>
+          </div>
+
+          {/* right columns */}
+          <div className="lg:border-l lg:border-slate-700 lg:pl-8 flex flex-col sm:flex-row items-center gap-8">
+            <ul className="space-y-3">
+              <li className="flex items-start gap-2 text-slate-400">
+                <Mail size={20} className="mt-0.5 flex-shrink-0" />
+                <a href="mailto:contact@3dwestern.ca" className="hover:text-white transition-colors">contact@3dwestern.ca</a>
+              </li>
+              <li className="flex items-start gap-2 text-slate-400">
+                <MapPin size={20} className="mt-0.5 flex-shrink-0" />
+                <span>Morrissette Entrepreneurship Building, Western University</span>
+              </li>
+            </ul>
+			{/*  links for discord, instagram, and linkedin */}
+			<ul className="flex flex-row sm:flex-col sm:ml-10 gap-10">
+              <li>
+                <a 
+                  href="https://www.instagram.com/3dwestern/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 text-slate-400 hover:text-white transition-colors"
+                  aria-label="Instagram"
+                >
+                  <Image 	
+                    src="/images/Instagram.svg" 
+                    alt="Instagram" 
+                    width={30} 
+                    height={30}
+                    className="flex-shrink-0"
+                  />
+                </a>
+              </li>
+              <li>
+                <a 
+                  href="https://discord.gg/3dwestern" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 text-slate-400 hover:text-white transition-colors"
+                  aria-label="Discord"
+                >
+                  <Image 
+                    src="/images/Discord.svg" 
+                    alt="Discord" 
+                    width={30} 
+                    height={30}
+                    className="flex-shrink-0"
+                  />
+                </a>
+              </li>
+              <li>
+                <a 
+                  href="https://www.linkedin.com/company/3dwestern/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 text-slate-400 hover:text-white transition-colors"
+                  aria-label="LinkedIn"
+                >
+                  <Image 
+                    src="/images/Linkedin.svg" 
+                    alt="LinkedIn" 
+                    width={30} 
+                    height={30}
+                    className="flex-shrink-0"
+                  />
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div className="border-t border-slate-800 mt-12 pt-8 text-center text-slate-400">
+          <p>&copy; {new Date().getFullYear()} 3DW Makerspace. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+  );
 }

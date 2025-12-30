@@ -7,6 +7,7 @@ import {
 	AccordionTrigger,
 } from '@/components/ui/accordion';
 import { motion } from 'motion/react';
+import { koulen } from '@/lib/fonts';
 
 const faqs = [
 	{
@@ -62,7 +63,7 @@ export function FAQSection() {
 					transition={{ duration: 0.6 }}
 					className="text-center mb-12 sm:mb-20"
 				>
-					<h2 className="font-bold text-3xl lg:text-5xl xl:text-6xl mb-4">FAQs</h2>
+					<h2 className={`font-bold text-3xl lg:text-5xl xl:text-6xl mb-4 ${koulen.className}`}>FAQs</h2>
 				</motion.div>
 
 				<motion.div

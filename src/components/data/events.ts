@@ -13,7 +13,7 @@ export type event = {
 	featured: boolean;
 }
 
-export const allEvents: event[] = [
+export const recentEvents: event [] = [
 	{
 		id: 1,
 		title: "Pitch Competition Finals",
@@ -74,6 +74,10 @@ export const allEvents: event[] = [
 		spots: "15 spots available",
 		featured: false
 	},
+];
+
+export const allEvents: event[] = [
+
 	{
 		id: 6,
 		title: "Startup Showcase",
