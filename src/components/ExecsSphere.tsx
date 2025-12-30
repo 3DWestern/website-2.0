@@ -1,4 +1,4 @@
-import InfiniteMenu, { MenuItem } from './InfiniteMenu';
+import InfiniteMenu from './InfiniteMenu';
 import { items } from './data/teamdata';
 
 export const ExecSphere = () => {
