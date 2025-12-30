@@ -1,6 +1,6 @@
 'use client';
 import { FC, useRef, useState, useEffect, MutableRefObject } from 'react';
-// import 
+import { MenuItem } from "@/components/data/teamdata";
 import { mat4, quat, vec2, vec3 } from 'gl-matrix';
 
 
@@ -699,13 +699,6 @@ class ArcballControl {
 	}
 }
 
-export interface MenuItem {
-	image: string;
-	link: string;
-	title: string;
-	description: string;
-}
-
 type ActiveItemCallback = (index: number) => void;
 type MovementChangeCallback = (isMoving: boolean) => void;
 type InitCallback = (instance: InfiniteGridMenu) => void;
@@ -1201,26 +1194,26 @@ const InfiniteMenu: FC<InfiniteMenuProps> = ({ items = [], scale = 3.0 }) => {
 
 					{ /* parent grouping div, groups the Link button and the text */}
 					<div className="flex flex-row gap-x-5 flex-wrap items-center text-white">
-						
+
 						{/* text div */}
 						<div className="flex flex-col items-center justify-center bg-red-700 p-2 font-bold text-center">
 
-						{/* Exec name */}
-						<h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl">
-							{activeItem.title}
-						</h2>
+							{/* Exec name */}
+							<h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl">
+								{activeItem.title}
+							</h2>
 
-						{/* Exec role */}
-						<p className="text-md sm:text-lg md:text-xl lg:text-2xl xl:text-3xl">{activeItem.description}</p>
+							{/* Exec role */}
+							<p className="text-md sm:text-lg md:text-xl lg:text-2xl xl:text-3xl">{activeItem.description}</p>
 						</div>
 
 						{/* Link button */}
 						<div className={`w-[60px] h-[60px] grid place-items-center bg-[#00ffff] 
 						border-[5px] border-black rounded-full cursor-pointer`}
 						>
-								<a href={`http://` + activeItem.link} target="_blank" rel="noopener noreferrer">
+							<a href={`http://` + activeItem.link} target="_blank" rel="noopener noreferrer">
 								<p className="select-none relative text-[#060010] text-[26px]">&#x2197;</p>
-								</a>
+							</a>
 						</div>
 					</div>
 				</div>

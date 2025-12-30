@@ -2,79 +2,13 @@
 
 import { Calendar, Clock, MapPin, Users, Lightbulb, Rocket, GraduationCap } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import Link from 'next/link';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { koulen, krub } from '@/lib/fonts';
 import { motion } from 'motion/react';
+import { recentEvents } from '@/components/data/events';
 
-const events = [
-  {
-    id: 1,
-    title: "Pitch Competition Finals",
-    date: "Dec 5, 2025",
-    time: "6:00 PM - 9:00 PM",
-    location: "Morrissette Auditorium",
-    category: "Competition",
-    icon: Rocket,
-    description: "Watch students pitch their startup ideas to a panel of investors and entrepreneurs",
-    spots: "Open to all"
-  },
-  {
-    id: 2,
-    title: "Innovation Workshop Series",
-    date: "Dec 10, 2025",
-    time: "5:00 PM - 7:00 PM",
-    location: "Morrissette Building",
-    category: "Workshop",
-    icon: Lightbulb,
-    description: "Learn design thinking methodologies and rapid prototyping techniques",
-    spots: "20 spots available"
-  },
-  {
-    id: 3,
-    title: "Entrepreneur Networking Night",
-    date: "Dec 15, 2025",
-    time: "7:00 PM - 9:00 PM",
-    location: "Morrissette Lounge",
-    category: "Networking",
-    icon: Users,
-    description: "Connect with fellow student entrepreneurs, alumni founders, and local business leaders",
-    spots: "Open to all"
-  },
-  {
-    id: 4,
-    title: "3D Printing Certification",
-    date: "Dec 18, 2025",
-    time: "4:00 PM - 6:00 PM",
-    location: "Digital Makerspace",
-    category: "Training",
-    icon: GraduationCap,
-    description: "Get certified to use our 3D printers independently for your projects",
-    spots: "12 spots left"
-  },
-  {
-    id: 5,
-    title: "Product Design Sprint",
-    date: "Jan 8, 2026",
-    time: "All Day",
-    location: "Both Makerspaces",
-    category: "Workshop",
-    icon: Lightbulb,
-    description: "Intensive one-day design sprint to take an idea from concept to prototype",
-    spots: "15 spots available"
-  },
-  {
-    id: 6,
-    title: "Startup Showcase",
-    date: "Jan 15, 2026",
-    time: "6:00 PM - 10:00 PM",
-    location: "Morrissette Building",
-    category: "Showcase",
-    icon: Rocket,
-    description: "Annual exhibition of student-led ventures and innovative projects",
-    spots: "Open to all"
-  }
-];
 
 const categoryColors: Record<string, string> = {
   "Competition": "bg-purple-100 text-purple-700",
@@ -96,15 +30,12 @@ export function EventsSection() {
           className="text-center flex flex-col gap-2 mb-12"
         >
           <div className={`text-3xl lg:text-5xl xl:text-6xl font-bold ${koulen.className}`}>
-            OUR EVENTS
-          </div>
-          <div className={`text-lg lg:text-xl ${krub.className}`}>
-          We cultivate innovation through workshops & events. 
+            EVENTS HIGHLIGHTS
           </div>
         </motion.div>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6 lg:gap-8">
-          {events.map((event, index) => {
+          {recentEvents.map((event, index) => {
             const Icon = event.icon;
             return (
               <motion.div
@@ -158,9 +89,12 @@ export function EventsSection() {
           transition={{ duration: 0.5, delay: 0.3 }}
           className="text-center mt-12"
         >
-          <Button size="lg" className="hover:scale-105 transition-transform">
-            View All Events
-          </Button>
+          <Link
+            href="/events"
+            className="inline-block text-lg lg:text-xl underline-offset-4 transition-transform duration-300 hover:underline hover:scale-110"
+          >
+          View All Events
+          </Link>
         </motion.div>
       </div>
     </section>

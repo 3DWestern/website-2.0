@@ -3,6 +3,7 @@
 import { Cpu, Hammer, Check } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { motion } from 'motion/react';
+import { koulen } from '@/lib/fonts';
 
 const spaces = [
   {
@@ -64,10 +65,7 @@ export function MakerspacesSection() {
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
-          <h2 className="text-3xl lg:text-5xl xl:text-6xl mb-4">Our Makerspaces</h2>
-          <p className="text-lg lg:text-xl text-muted-foreground max-w-3xl mx-auto">
-            Two fully-equipped facilities to support every stage of your creative journey
-          </p>
+          <h2 className={`text-3xl lg:text-5xl xl:text-6xl mb-4 ${koulen.className}`}>THE MAKERSPACES</h2>
         </motion.div>
 
         <div className="space-y-12">
