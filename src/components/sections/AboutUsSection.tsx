@@ -50,7 +50,7 @@ export function AboutUsSection() {
 					transition={{ duration: 0.5, type: "spring" }}
 					className={`text-5xl lg:text-6xl xl:text-7xl font-bold ${koulen.className} text-center`}
 				>
-					3D WESTERN
+					ABOUT US
 				</motion.div>
 			</div>
 
@@ -118,7 +118,7 @@ function Card({ index, title, description, detail, image, progress, range, targe
 								/>
 							</div>
 						)}
-						
+
 						{/* Text Content */}
 						<div className="flex-1 space-y-4">
 							<h3 className={`text-3xl lg:text-4xl font-bold text-gray-900 ${koulen.className}`}>
