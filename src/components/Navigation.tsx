@@ -29,7 +29,7 @@ export function Navigation() {
 
 	const navLinks = [
 		// { path: '/about', label: 'About Us' },
-		{ path: '/contact', label: 'Contact' },
+		{ path: '/contact', label: 'Contact Us' },
 		{ path: '/makerspace', label: 'About Makerspace' },
 		{ path: '/events', label: 'Events' },
 		{ path: 'https://your-new-dashboard-link.com', label: 'Dashboard', external: true },
