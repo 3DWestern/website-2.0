@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { LoadingWrapper } from "@/components/LoadingWrapper";
 import { HomeButton } from "@/components/HomeButton";
+import { Navigation } from "@/components/Navigation";
 
 // global metadata for SEO, can be overridden by specific individual pages
 export const metadata: Metadata = {
@@ -66,6 +67,7 @@ export default function RootLayout({
 		<html lang="en" className="scroll-smooth">
 			<body className={`antialiased`}>
 				<HomeButton />
+				<Navigation />
 				<LoadingWrapper>
 					{children}
 				</LoadingWrapper>

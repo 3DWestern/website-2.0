@@ -1,7 +1,6 @@
 'use client';
 
 import { koulen } from '@/lib/fonts';
-import Link from 'next/link';
 import { useLoading } from '@/context/LoadingContext';
 
 
@@ -40,31 +39,6 @@ export function PhoneHeroSection() {
 
         </div>
       </div>
-      {/* Navigation card - top right info, desktop only */}
-          <div className={`hidden lg:block absolute top-0 right-0 lg:right-8 xl:right-16 bg-white rounded-bl-2xl rounded-br-2xl px-8 py-4 mt-0 shadow-lg transition-all duration-1000 ${isLoaded ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0'}`}>
-            <nav className="flex items-center gap-6">
-              {/* <Link href="/about" className="text-gray-700 hover:text-purple-600 transition-colors font-medium">
-                About
-              </Link> */}
-              <Link href="/events" className="text-gray-700 hover:text-purple-600 transition-colors font-medium">
-                Events
-              </Link>
-              <Link href="/makerspace" className="text-gray-700 hover:text-purple-600 transition-colors font-medium">
-                Makerspace
-              </Link>
-              <Link href="/contact" className="text-gray-700 hover:text-purple-600 transition-colors font-medium">
-                Contact
-              </Link>
-              <a
-                href="https://your-new-dashboard-link.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-gray-700 hover:text-purple-600 transition-colors font-medium"
-              >
-                Dashboard
-              </a>
-            </nav>
-          </div>
 
       {/* Bottom left info - blends with white background, only top-right corner rounded */}
       <div className={`absolute bottom-2 left-0 lg:left-8 xl:left-16 bg-white rounded-tr-2xl lg:rounded-tl-2xl pl-10 pr-8 py-6 lg:px-12 lg:py-8 transition-all duration-1000 ${isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'}`}>
