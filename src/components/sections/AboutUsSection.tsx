@@ -42,7 +42,7 @@ export function AboutUsSection() {
 	return (
 		<section ref={containerRef} className="relative bg-white">
 			{/* Header */}
-			<div className="sticky top-0 z-10 bg-white/80 backdrop-blur-sm py-6 lg:py-20">
+			<div className="sticky top-0 z-10 bg-white/80 backdrop-blur-sm py-4 lg:py-10">
 				<motion.div
 					initial={{ opacity: 0, scale: 1.5, y: 20 }}
 					whileInView={{ opacity: 1, scale: 1, y: 0 }}
@@ -96,20 +96,20 @@ function Card({ index, title, description, detail, image, progress, range, targe
 	const scale = useTransform(progress, range, [1, targetScale]);
 
 	return (
-		<div className="h-[80vh] lg:h-screen flex items-start justify-center sticky top-20 px-4 sm:px-6 lg:px-8">
+		<div className="h-[80vh] w-screen lg:h-screen flex items-start justify-center sticky top-20 px-4 sm:px-6 lg:px-8">
 			<motion.div
 				ref={containerRef}
 				style={{
 					scale,
 					top: `calc(5% + ${index * 15}px)`
 				}}
-				className="relative w-full max-w-4xl origin-top"
+				className="relative w-full sm:w-4/5 origin-top"
 			>
 				<div className="bg-linear-to-br from-purple-50 to-indigo-50 rounded-3xl p-8 lg:p-12 shadow-xl border border-purple-100 h-[600px] flex items-start overflow-hidden">
 					<div className="flex flex-col lg:flex-row items-start gap-6 w-full">
 						{/* Optional Image */}
 						{image && (
-							<div className="relative w-full lg:w-1/3 h-48 lg:h-full shrink-0 rounded-2xl overflow-hidden">
+							<div className="z-100 relative w-full lg:w-1/3 h-48 lg:h-full shrink-0 rounded-2xl overflow-hidden">
 								<Image
 									src={image}
 									alt={title}
