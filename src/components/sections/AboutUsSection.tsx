@@ -5,6 +5,7 @@ import { motion, useScroll, useTransform } from "motion/react"
 import { useRef } from 'react'
 import Image from 'next/image'
 
+// TOOD: adjust sizing of images over md screens 
 const content = [
 	{
 		title: "Who We Are",
@@ -106,21 +107,9 @@ function Card({ index, title, description, detail, image, progress, range, targe
 				className="relative w-full sm:w-4/5 origin-top"
 			>
 				<div className="bg-linear-to-br from-purple-50 to-indigo-50 rounded-3xl p-8 lg:p-12 shadow-xl border border-purple-100 h-[600px] flex items-start overflow-hidden">
-					<div className="flex flex-col lg:flex-row items-start gap-6 w-full">
-						{/* Optional Image */}
-						{image && (
-							<div className="z-100 relative w-full lg:w-1/3 h-48 lg:h-full shrink-0 rounded-2xl overflow-hidden">
-								<Image
-									src={image}
-									alt={title}
-									fill
-									className="object-cover"
-								/>
-							</div>
-						)}
-
-						{/* Text Content */}
-						<div className="flex-1 space-y-4">
+					<div className="flex flex-col items-start gap-6 w-full">
+						{/* Text Content (first on md+, below image on mobile) */}
+						<div className="order-2 md:order-1 flex-1 space-y-4 w-full">
 							<h3 className={`text-3xl lg:text-4xl font-bold text-gray-900 ${koulen.className}`}>
 								{title}
 							</h3>
@@ -131,6 +120,18 @@ function Card({ index, title, description, detail, image, progress, range, targe
 								{detail}
 							</p>
 						</div>
+
+						{/* Optional Image (first on mobile, below text on md+) */}
+						{image && (
+							<div className="order-1 md:order-2 relative w-full h-48 md:h-56 lg:h-72 shrink-0 rounded-2xl overflow-hidden">
+								<Image
+									src={image}
+									alt={title}
+									fill
+									className="object-cover"
+								/>
+							</div>
+						)}
 					</div>
 				</div>
 			</motion.div>
