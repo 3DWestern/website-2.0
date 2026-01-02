@@ -48,7 +48,7 @@ export function AboutUsSection() {
 					whileInView={{ opacity: 1, scale: 1, y: 0 }}
 					viewport={{ once: true }}
 					transition={{ duration: 0.5, type: "spring" }}
-					className={`text-5xl lg:text-6xl xl:text-7xl font-bold ${koulen.className} text-center`}
+					className={`text-3xl lg:text-5xl xl:text-6xl font-bold ${koulen.className} text-center`}
 				>
 					ABOUT US
 				</motion.div>
@@ -75,7 +75,7 @@ export function AboutUsSection() {
 			</div>
 
 			{/* Spacer for scroll effect */}
-			<div className="h-[40vh] lg:h-screen" />
+			<div className="h-[40vh]" />
 		</section>
 	);
 }
