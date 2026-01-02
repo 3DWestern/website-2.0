@@ -29,7 +29,7 @@ export function Navigation() {
 
 	const navLinks = [
 		// { path: '/about', label: 'About Us' },
-		{ path: '/contact', label: 'Contact' },
+		{ path: '/contact', label: 'Contact Us' },
 		{ path: '/makerspace', label: 'About Makerspace' },
 		{ path: '/events', label: 'Events' },
 		{ path: 'https://your-new-dashboard-link.com', label: 'Dashboard', external: true },
@@ -37,16 +37,11 @@ export function Navigation() {
 
 	const isActive = (path: string) => pathname === path;
 
-	// Hide navigation on home page
-	if (pathname === '/') {
-		return null;
-	}
-
 	return (
 		<>
 			{/* Mobile menu button - fixed position */}
 			<button
-				className={`md:hidden fixed top-0 right-0 z-50 p-3 pr-4 bg-white rounded-bl-xl transition-all duration-1000 ${isLoaded ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0'}`}
+				className={`sm:hidden fixed top-0 right-0 z-100 p-3 pr-4 bg-white rounded-bl-xl transition-all duration-1000 ${isLoaded ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0'}`}
 				onClick={() => setIsOpen(!isOpen)}
 				aria-label="Toggle menu"
 			>
@@ -54,7 +49,7 @@ export function Navigation() {
 			</button>
 
 			{/* Desktop Navigation */}
-			<div className="fixed top-0 right-0 z-50 p-3 pr-4 bg-white rounded-bl-xl hidden md:block">
+			<div className="fixed top-0 right-0 z-100 p-3 pr-4 bg-white rounded-bl-xl hidden md:block">
 				<div className="flex items-center gap-8">
 					{navLinks.map((link) => (
 						link.external ? (
