@@ -19,7 +19,7 @@ function Scene() {
       <pointLight position={[10, 10, 10]} intensity={1} />
       <OrbitControls 
         enablePan={true} 
-        enableZoom={true} 
+        enableZoom={false} 
         enableRotate={true}
         maxPolarAngle={Math.PI / 2}
       />
@@ -75,19 +75,21 @@ const Model = ({ onError }: { onError?: () => void }) => {
   console.log('[Model] Rendering group with meshes');
 
   return (
-    <group ref={groupRef} dispose={null} position={[2, -2, -0.25]} rotation={[-Math.PI / 2, 0, 0]}>
-      <mesh
-        geometry={meshRFDD.geometry}
-        material={meshRFDD.material}
-        scale={[1, 1, 1]}
-        position={[0, 0.13, 0.13]}
-      />
-      <mesh
-        geometry={meshEdges.geometry}
-        material={edgesMaterial}
-        scale={[1, 1, 1]}
-        position={[0, 0.13, 0.13]}
-      />
+    <group position={[2, -2, -0.25]} rotation={[-Math.PI / 2, 0, 0]}>
+      <group ref={groupRef} dispose={null}>
+        <mesh
+          geometry={meshRFDD.geometry}
+          material={meshRFDD.material}
+          scale={[1, 1, 1]}
+          position={[0, 0.13, 0.13]}
+        />
+        <mesh
+          geometry={meshEdges.geometry}
+          material={edgesMaterial}
+          scale={[1, 1, 1]}
+          position={[0, 0.13, 0.13]}
+        />
+      </group>
     </group>
   );
 };
