@@ -1,4 +1,4 @@
-import { Calendar, Clock } from 'lucide-react';
+import { Calendar } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
@@ -25,7 +25,7 @@ export function CalendarSection() {
 
           <TabsContent value="digital">
             <Card>
-              <CardContent className="p-0 p-5">
+              <CardContent className="p-5">
                   
                   
                   {/* digital makerspace calendar  */}
@@ -54,13 +54,7 @@ export function CalendarSection() {
 
           <TabsContent value="sabourin">
             <Card>
-              <CardHeader>
-                <CardTitle>Sabourin Makerspace Calendar</CardTitle>
-                <CardDescription>
-                  View open hours, workshops, and reserved times for the woodworking makerspace
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
+              <CardContent className="p-5">
 
                 {/* saboruin calendar */ }
                 <div className="aspect-video bg-slate-100 rounded-lg flex items-center justify-center border-2 border-dashed">

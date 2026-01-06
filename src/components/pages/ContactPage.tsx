@@ -130,9 +130,17 @@ export function ContactPage() {
 										/>
 									</div>
 
-									<Button type="submit" className="w-full" size="lg" disabled={isSubmitting}>
-										{isSubmitting ? 'Sending...' : 'Send Message'}
-									</Button>
+									<div className="flex justify-center mt-6">
+										<Button
+											type="submit"
+											form="contact-form"
+											className="hover:bg-purple-50 hover:text-purple-700"
+											size="lg"
+											disabled={isSubmitting}
+										>
+											{isSubmitting ? 'Sending...' : 'Send Message'}
+										</Button>
+									</div>
 
 									{result && (
 										<p className="text-sm text-muted-foreground text-center">{result}</p>
@@ -195,7 +203,7 @@ export function ContactPage() {
 						Check out our FAQ section - you might find the answer you're looking for!
 					</p>
 					<a href="/#faq">
-						<Button size="lg" variant="outline">
+						<Button size="lg" variant="outline" className="hover:bg-purple-50 hover:text-purple-700">
 							View FAQs
 						</Button>
 					</a>
