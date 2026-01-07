@@ -7,13 +7,13 @@ import { useState, useEffect } from 'react';
 import { X } from 'lucide-react';
 import dynamic from 'next/dynamic';
 
-const AssemblyViewer = dynamic(() => import('@/components/AssemblyViewer'), { 
+const AssemblyViewer = dynamic(() => import('@/components/AssemblyViewer'), {
 	ssr: false
 });
 
 export function PhoneHeroSection() {
 	console.log('[PhoneHeroSection] Component render');
-	
+
 	const { loadingComplete } = useLoading();
 	const isLoaded = loadingComplete;
 	const [disclaimerVisible, setDisclaimerVisible] = useState(true);
@@ -34,7 +34,7 @@ export function PhoneHeroSection() {
 				{disclaimerVisible && (
 					<div className="absolute top-12 left-1/2 -translate-x-1/2 w-[95%] lg:w-max max-w-5xl bg-purple-700 text-white py-3 px-12 rounded-lg text-center text-base font-medium z-10">
 						<div className="relative">
-							Accessing the makerspace: Western students require training on OWL (<a href="https://owl.uwo.ca/" target="_blank" rel="noopener noreferrer" className="underline font-semibold">access here</a>). Organizations: <a href="mailto:contact@3dwestern.ca" className="underline font-semibold">Contact us</a>.
+							Accessing the makerspace: Level 1 training required (<a href="https://westernu.brightspace.com/d2l/le/discovery/view/course/151344" target="_blank" rel="noopener noreferrer" className="underline font-semibold">access here</a>). Organizations: <a href="mailto:contact@3dwestern.ca" className="underline font-semibold">Contact us</a>.
 							<button
 								onClick={() => setDisclaimerVisible(false)}
 								className="absolute right-[-2.5rem] top-1/2 -translate-y-1/2"
@@ -49,7 +49,7 @@ export function PhoneHeroSection() {
 				<div className="relative w-full h-[98%] rounded-[1.25rem] lg:rounded-[1rem] overflow-hidden">
 					{/* Content area */}
 					<div className="absolute inset-0 bg-gradient-to-b from-purple-800 via-indigo-900 to-black">
-						
+
 						{/* Main content area - for 3D graphics, images, etc. */}
 						<div className="absolute inset-0">
 							{isLoaded && <AssemblyViewer />}
