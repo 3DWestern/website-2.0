@@ -31,7 +31,7 @@ export function EventsSection() {
 					className="text-center flex flex-col gap-2 mb-12"
 				>
 					<div className={`text-3xl lg:text-5xl xl:text-6xl font-bold py-4 ${koulen.className}`}>
-						EVENTS HIGHLIGHTS
+						UPCOMING EVENTS
 					</div>
 				</motion.div>
 

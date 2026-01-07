@@ -23,13 +23,13 @@ const content = [
 		title: "Our Equipment",
 		description: "Our equipment includes:",
 		detail: "3D printers, laser cutters, water cutters, Cricut machines, sewing machines, soldering stations, and Raspberry Pis—along with a growing inventory of digital fabrication and woodworking tools.",
-		image: undefined
+		image: '/images/equipment.jpg'
 	},
 	{
 		title: "Our Vision",
 		description: "As 3DW expands, our website and dashboard will become the central portal for accessing services, workshops, equipment bookings, and club activities.",
 		detail: "We're building a community where anyone can create, learn, and innovate—no experience required.",
-		image: undefined
+		image: '/images/vision.jpg'
 	}
 ];
 
@@ -123,7 +123,7 @@ function Card({ index, title, description, detail, image, progress, range, targe
 
 						{/* Optional Image (first on mobile, below text on md+) */}
 						{image && (
-							<div className="order-1 md:order-2 relative w-full h-48 md:h-100 shrink-0 rounded-2xl overflow-hidden">
+							<div className="order-1 md:order-2 relative w-full h-48 md:h-120 md:mt-10 shrink-0 rounded-2xl overflow-hidden">
 								<Image
 									src={image}
 									alt={title}
