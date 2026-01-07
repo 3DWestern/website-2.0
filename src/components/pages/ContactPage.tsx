@@ -1,6 +1,5 @@
 'use client'; 
 import { useState } from 'react';
-import { Mail, Building2, Users, HelpCircle, Heart } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -24,7 +23,7 @@ export function ContactPage() {
 
 		const form = event.currentTarget;
 		const formData = new FormData(form);
-		formData.set('access_key', 'c17259f1-ba6f-48b4-84a7-38ccd02e546f'); // client-side key for web3forms.com
+		formData.set('access_key', 'fc11578d-569b-460c-891d-31af60b82f6c'); // client-side key for web3forms.com
 
 		try {
 			const response = await fetch('https://api.web3forms.com/submit', {
@@ -133,7 +132,6 @@ export function ContactPage() {
 									<div className="flex justify-center mt-6">
 										<Button
 											type="submit"
-											form="contact-form"
 											className="hover:bg-purple-50 hover:text-purple-700"
 											size="lg"
 											disabled={isSubmitting}
