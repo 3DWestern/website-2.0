@@ -59,7 +59,7 @@ export function Navigation() {
 								href={link.path}
 								target="_blank"
 								rel="noopener noreferrer"
-								className="transition-colors text-muted-foreground hover:text-foreground"
+								className="inline-block transition-colors transition-transform text-muted-foreground hover:text-foreground hover:scale-110 hover:font-semibold duration-300"
 							>
 								{link.label}
 							</a>
@@ -69,7 +69,7 @@ export function Navigation() {
 								href={link.path}
 								className={`transition-colors ${isActive(link.path)
 									? 'text-purple-600'
-									: 'text-muted-foreground hover:text-foreground'
+									: 'text-muted-foreground hover:text-foreground hover:scale-110 hover:font-semibold transition-transform inline-block duration-300'
 									}`}
 							>
 								{link.label}
@@ -93,7 +93,7 @@ export function Navigation() {
 									href={link.path}
 									target="_blank"
 									rel="noopener noreferrer"
-									className="text-5xl font-medium transition-colors text-gray-700 hover:text-purple-600"
+									className="inline-block text-5xl font-medium transition-colors transition-transform text-gray-700 hover:text-purple-600 hover:scale-110 hover:font-semibold duration-300"
 									onClick={() => setIsOpen(false)}
 								>
 									{link.label}
@@ -104,7 +104,7 @@ export function Navigation() {
 									href={link.path}
 									className={`text-5xl font-medium transition-colors ${isActive(link.path)
 										? 'text-purple-600'
-										: 'text-gray-700 hover:text-purple-600'
+										: 'text-gray-700 hover:text-purple-600 hover:scale-110 hover:font-semibold transition-transform inline-block duration-300'
 										}`}
 									onClick={() => setIsOpen(false)}
 								>

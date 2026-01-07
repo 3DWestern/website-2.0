@@ -32,7 +32,7 @@ export function PhoneHeroSection() {
 		<section className="h-[98vh] bg-white overflow-hidden relative">
 			<div className="absolute inset-0 px-4 md:px-8 lg:px-16 xl:px-8 pt-8">
 				{disclaimerVisible && (
-					<div className="absolute top-12 left-1/2 -translate-x-1/2 w-[95%] lg:w-max max-w-5xl bg-purple-700 text-white py-3 px-12 rounded-lg text-center text-base font-medium z-10">
+					<div className="absolute top-24 left-1/2 -translate-x-1/2 w-[95%] lg:w-max max-w-5xl bg-purple-700 text-white py-3 px-12 rounded-lg text-center text-base font-medium z-10">
 						<div className="relative">
 							Accessing the makerspace: Level 1 training required (<a href="https://westernu.brightspace.com/d2l/le/discovery/view/course/151344" target="_blank" rel="noopener noreferrer" className="underline font-semibold">access here</a>). Organizations: <a href="mailto:contact@3dwestern.ca" className="underline font-semibold">Contact us</a>.
 							<button

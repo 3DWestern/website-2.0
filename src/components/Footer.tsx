@@ -24,27 +24,27 @@ export function Footer() {
           <div>
             <ul className="space-y-2">
               <li>
-                <Link href="/" className="text-slate-400 hover:text-white transition-colors">
+                <Link href="/" className="text-slate-400 hover:text-white transition-colors hover:scale-110 hover:font-bold">
                   Home
                 </Link>
               </li>
               <li>
-                <Link href="/contact" className="text-slate-400 hover:text-white transition-colors">
+                <Link href="/contact" className="text-slate-400 hover:text-white transition-colors hover:scale-110 hover:font-bold">
                   Contact Us
                 </Link>
               </li>
               <li>
-                <Link href="/events" className="text-slate-400 hover:text-white transition-colors">
+                <Link href="/events" className="text-slate-400 hover:text-white transition-colors hover:scale-110 hover:font-bold">
                   Events
                 </Link>
               </li>
               <li>
-                <Link href="/makerspace" className="text-slate-400 hover:text-white transition-colors">
+                <Link href="/makerspace" className="text-slate-400 hover:text-white transition-colors hover:scale-110 hover:font-bold">
                   Makerspace Details
                 </Link>
               </li>
 			  <li>
-			  <Link href="/dashboard" className="text-slate-400 hover:text-white transition-colors">
+			  <Link href="/dashboard" className="text-slate-400 hover:text-white transition-colors hover:scale-110 hover:font-bold">
                   Dashboard
                 </Link>
 			  </li>
@@ -70,7 +70,7 @@ export function Footer() {
                   href="https://www.instagram.com/3dwestern/" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 text-slate-400 hover:text-white transition-colors"
+                  className="flex items-center gap-2 text-slate-400 hover:text-white transition-colors hover:scale-110 hover:font-bold"
                   aria-label="Instagram"
                 >
                   <Image 	
@@ -87,7 +87,7 @@ export function Footer() {
                   href="https://discord.gg/3dwestern" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 text-slate-400 hover:text-white transition-colors"
+                  className="flex items-center gap-2 text-slate-400 hover:text-white transition-colors hover:scale-110 hover:font-bold"
                   aria-label="Discord"
                 >
                   <Image 
@@ -104,7 +104,7 @@ export function Footer() {
                   href="https://www.linkedin.com/company/3dwestern/" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 text-slate-400 hover:text-white transition-colors"
+                  className="flex items-center gap-2 text-slate-400 hover:text-white transition-colors hover:scale-110 hover:font-bold"
                   aria-label="LinkedIn"
                 >
                   <Image 
