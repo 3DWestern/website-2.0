@@ -15,7 +15,6 @@ export function SlidingCarousel({ items }: { items: MenuItem[] }) {
 	const carouselRef = useRef<HTMLDivElement>(null);
 	const animationRef = useRef<number | null>(null);
 
-	// Auto-scroll functionality
 	const autoScroll = useCallback(() => {
 		if (isPaused || isDragging || !carouselRef.current) return;
 
