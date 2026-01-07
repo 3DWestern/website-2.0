@@ -1,4 +1,4 @@
-import { Calendar, Clock } from 'lucide-react';
+import { Calendar } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
@@ -25,13 +25,13 @@ export function CalendarSection() {
 
           <TabsContent value="digital">
             <Card>
-              <CardContent className="p-0 p-5">
+              <CardContent className="p-5">
                   
                   
                   {/* digital makerspace calendar  */}
           <div className="aspect-video bg-slate-100 rounded-lg flex items-center justify-center border-2 border-dashed">
             <iframe
-              src="https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=America%2FToronto&showPrint=0&mode=WEEK&src=NDY0NDkxYzcxOWU5MTUwNWRkOWUxNTVkZmJmYmUyZGVmYTM5N2QxMTI0OWFhYjI5MjFlN2JmNWQwNzdmMTZmMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=NzRkNzk1ODgzZTRjODU0NjcwNGE2ZmM4ZDFlNzVhZWQ4ZWNhNGUyMDdjMjMyYzdkZjhlOWFkY2ZhZTE2ZWU2ZUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=MmEzNmVlMzYwYWIwMjRjMWVjMTI1ZWM0ODQyNDY5NGQwODIwMWUzZTExNWRkYWI5MDFlMTliZDNlNjAzNDg1YUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=ZmZlYTA5NGU5YWU3MWE2NDdmODdjZGJjMjJkNTQ1NzcxOGVjMmFkYTFkYjE5ZDJjZmQ0MDZkY2YxYmVlOTNlYUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=ZDMxODI5OTI1ZTRmYTM5M2E4YzUyOWU5YzFmZjg3YTdiMjkzNDAxOTdiNjI4MzEzZGJiZWMwZWRkOWIzZDliMEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=ZDZlY2E5NmQ4YjNmODE5N2E4YjQ5YWFiM2RkNTFkOGVhZmY4MGRjYTg0ZDA4ZGRiMWEwNmNmMjVjM2MwMzk0NUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=MTE1NjM5MmRkNDE0MjY4YzI4MGY3Zjg4N2RkNTU1NDNiNDIyMTVmYmQ0NGU0M2QzNDM5ODg3NzFkOTJkYThiYUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=ZmU1NzEyYjA1YTZlMzFhYjgzNWQ3ZjRkMGM4YTAwYTJhN2JkMTc0OGYyNzYwMmE0NTcwOWMxYzllMmM0ZjAwY0Bncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=NTRhYTkwNmVhYjRiNWEyZGU2NGFhYWZkMGFiOWFhNWM4Mzg1ODRlMzFlYTAzOTJjNzRlOGZhNWFiZmNiZjQ5ZkBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=NWY0NTA5YzdlNzdiN2NlN2M5NmFjY2E1ZDVhMjU2NzljNTBhM2EzNDJjMTRkZjc2NmQ0NWM1ZDA3OTNjYWQyY0Bncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=YmIyMTYyNzI1YzlmZWIyNDEwMGI1OTg4ZTljYTg4NDc1YjM0Yjg4NWE4ZmNlOGIxNGRhYjUzNzkyM2Y5MjViMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=OGYzYWIwNDAwOTc3MWExYTI5YzMwMDkyNWRlOTBiOTk4MWUyNWQ0NWJkY2ZkMGQ0M2EwZWU3YjUzNWMwZjc1N0Bncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=M2Y5YzlhMjA0NDY3MjkyZDk1OTdlZWQxNWI5ODExNDE2NGM3YjAyNDNiYWUyZTI0MDAxZGIxOGY5NWQ2YjRkNUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%23009688&color=%23d50000&color=%23ef6c00&color=%23b39ddb&color=%23a2c5fd&color=%23e67c73&color=%23fda4b8&color=%234285f4&color=%238e24aa&color=%23f6bf26&color=%23f6bf26&color=%23f6bf26&color=%234285f4"
+              src="https://calendar.google.com/calendar/embed?src=195d4999e6906278ce183970e2cf265b0a470d9a35e20e80ac2bd15d5f6f783a%40group.calendar.google.com&ctz=America%2FToronto&mode=WEEK"
               style={{ borderWidth: 'solid 1px #777', width: '100%', height: '100%' }}
               width="1000"
               height="600"
@@ -54,18 +54,12 @@ export function CalendarSection() {
 
           <TabsContent value="sabourin">
             <Card>
-              <CardHeader>
-                <CardTitle>Sabourin Makerspace Calendar</CardTitle>
-                <CardDescription>
-                  View open hours, workshops, and reserved times for the woodworking makerspace
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
+              <CardContent className="p-5">
 
                 {/* saboruin calendar */ }
                 <div className="aspect-video bg-slate-100 rounded-lg flex items-center justify-center border-2 border-dashed">
                   <iframe
-                    src="https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=America%2FToronto&showPrint=0&showCalendars=0&src=NzRkNzk1ODgzZTRjODU0NjcwNGE2ZmM4ZDFlNzVhZWQ4ZWNhNGUyMDdjMjMyYzdkZjhlOWFkY2ZhZTE2ZWU2ZUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%23d50000"
+                    src="https://calendar.google.com/calendar/embed?src=6975d8476dd6da2953a2d7544ffbe7f08758862eef0fb7bea801de5eee887f4f%40group.calendar.google.com&ctz=America%2FToronto"
                     style={{ border: 'solid 1px #777', width: '100%', height: '100%' }}
                     width="1000"
                     height="600"

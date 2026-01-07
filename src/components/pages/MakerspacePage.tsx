@@ -13,7 +13,7 @@ export function MakerspacePage() {
 					<ul className="space-y-1">
 						<li>
 							For Western students: Accessing the makerspace requires training on OWL, which you can access{' '}
-							<a href="https://owl.uwo.ca/" target="_blank" rel="noopener noreferrer" className="underline font-semibold">here</a>.
+							<a href="https://westernu.brightspace.com/d2l/le/discovery/view/course/151344" target="_blank" rel="noopener noreferrer" className="underline font-semibold">here</a>.
 						</li>
 						<li>
 							Are you an organization looking to use the makerspace?{' '}

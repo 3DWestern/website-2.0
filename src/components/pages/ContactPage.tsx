@@ -1,3 +1,5 @@
+'use client'; 
+import { useState } from 'react';
 import { Mail, Building2, Users, HelpCircle, Heart } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
@@ -8,7 +10,44 @@ import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { koulen } from '@/lib/fonts';
 
+
 export function ContactPage() {
+
+	const [result, setResult] = useState<string>('');
+	const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+	const [inquiryType, setInquiryType] = useState<string>('');
+
+	const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+		event.preventDefault();
+		setIsSubmitting(true);
+		setResult('');
+
+		const form = event.currentTarget;
+		const formData = new FormData(form);
+		formData.set('access_key', 'c17259f1-ba6f-48b4-84a7-38ccd02e546f'); // client-side key for web3forms.com
+
+		try {
+			const response = await fetch('https://api.web3forms.com/submit', {
+				method: 'POST',
+				body: formData,
+			});
+
+			const data = await response.json();
+			if (response.ok && data?.success) {
+				setResult("Success! We'll get back to you soon.");
+				form.reset();
+				setInquiryType('');
+			} else {
+				setResult('Error submitting form. Please try again.');
+			}
+		} catch {
+			setResult('Error submitting form. Please try again.');
+		} finally {
+			setIsSubmitting(false);
+		}
+	};
+
+
 	return (
 		<div className="min-h-screen">
 			{/* Header */}
@@ -37,26 +76,29 @@ export function ContactPage() {
 								<CardTitle>*We will get back to you within 1-2 business days.</CardTitle>
 							</CardHeader>
 							<CardContent>
-								<form className="space-y-6">
+								<form className="space-y-6" onSubmit={onSubmit}>
+									{/* Radix Select isn't a native form control, so mirror its value into a hidden input */}
+									<input type="hidden" name="inquiryType" value={inquiryType} />
+
 									<div className="grid md:grid-cols-2 gap-4">
 										<div className="space-y-2">
 											<Label htmlFor="firstName">First Name</Label>
-											<Input id="firstName" placeholder="John" />
+											<Input id="firstName" name="firstName" placeholder="John" required />
 										</div>
 										<div className="space-y-2">
 											<Label htmlFor="lastName">Last Name</Label>
-											<Input id="lastName" placeholder="Doe" />
+											<Input id="lastName" name="lastName" placeholder="Doe" required />
 										</div>
 									</div>
 
 									<div className="space-y-2">
 										<Label htmlFor="email">Email</Label>
-										<Input id="email" type="email" placeholder="john.doe@uwo.ca" />
+										<Input id="email" name="email" type="email" placeholder="john.doe@uwo.ca" required />
 									</div>
 
 									<div className="space-y-2">
 										<Label htmlFor="inquiryType">Inquiry Type</Label>
-										<Select>
+										<Select value={inquiryType} onValueChange={setInquiryType}>
 											<SelectTrigger
 												id="inquiryType"
 												className="bg-white"
@@ -74,21 +116,35 @@ export function ContactPage() {
 
 									<div className="space-y-2">
 										<Label htmlFor="subject">Subject</Label>
-										<Input id="subject" placeholder="Brief description of your inquiry" />
+										<Input id="subject" name="subject" placeholder="Brief description of your inquiry" required />
 									</div>
 
 									<div className="space-y-2">
 										<Label htmlFor="message">Message</Label>
 										<Textarea
 											id="message"
+											name="message"
 											placeholder="Tell us more about your inquiry..."
 											rows={6}
+											required
 										/>
 									</div>
 
-									<Button type="submit" className="w-full" size="lg">
-										Send Message
-									</Button>
+									<div className="flex justify-center mt-6">
+										<Button
+											type="submit"
+											form="contact-form"
+											className="hover:bg-purple-50 hover:text-purple-700"
+											size="lg"
+											disabled={isSubmitting}
+										>
+											{isSubmitting ? 'Sending...' : 'Send Message'}
+										</Button>
+									</div>
+
+									{result && (
+										<p className="text-sm text-muted-foreground text-center">{result}</p>
+									)}
 								</form>
 							</CardContent>
 						</Card>
@@ -147,7 +203,7 @@ export function ContactPage() {
 						Check out our FAQ section - you might find the answer you're looking for!
 					</p>
 					<a href="/#faq">
-						<Button size="lg" variant="outline">
+						<Button size="lg" variant="outline" className="hover:bg-purple-50 hover:text-purple-700">
 							View FAQs
 						</Button>
 					</a>
