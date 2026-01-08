@@ -29,7 +29,7 @@ export function Navigation() {
 	const navLinks = [
 		// { path: '/about', label: 'About Us' },
 		{ path: '/contact', label: 'Contact Us' },
-		{ path: '/makerspace', label: 'About Makerspace' },
+		{ path: '/makerspace', label: 'Availability' },
 		{ path: 'https://westernu.brightspace.com/d2l/le/discovery/view/course/151344', label: 'Training', external: true },
 		{ path: '/events', label: 'Events' },
 		// { path: 'https://your-new-dashboard-link.com', label: 'Dashboard', external: true }, // NOTE: removed this for now until the dashboard is up.

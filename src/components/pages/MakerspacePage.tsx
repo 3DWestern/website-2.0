@@ -1,13 +1,16 @@
 // import { TrainingSection } from '@/components/sections/TrainingSection';
+
+import { koulen } from '@/lib/fonts';
 import { CalendarSection } from '@/components/sections/CalendarSection';
 
 
 export function MakerspacePage() {
 	return (
 		<div className="min-h-screen">
-			<section className="w-full bg-purple-700 text-white py-4 px-2 text-center text-base font-medium">
-				<div className="max-w-5xl mx-auto">
-					<h2 className="text-lg sm:text-xl md:text-2xl font-bold mb-1">Accessing the Makerspace</h2>
+			{/* Header */}
+			<section className="bg-gradient-to-br from-purple-50 to-indigo-50 py-16">
+				<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+					<h1 className={`font-bold text-3xl sm:text-4xl lg:text-5xl mb-4 ${koulen.className}`}>Accessing the Makerspaces</h1>
 					<ul className="space-y-1">
 						<li>
 							For Western students: Accessing the makerspace requires training on OWL, which you can access{' '}
@@ -18,8 +21,16 @@ export function MakerspacePage() {
 							<a href="mailto:contact@3dwestern.ca" className="underline font-semibold">Contact us</a>.
 						</li>
 					</ul>
+
 				</div>
 			</section>
+
+
+			{/*			<section className="w-full bg-purple-700 text-white py-4 px-2 text-center text-base font-medium">
+				<div className="max-w-5xl mx-auto">
+					<h2 className="text-lg sm:text-xl md:text-2xl font-bold mb-1">Accessing the Makerspace</h2>
+				</div>
+			</section> */}
 
 			{/* Header NOTE: commented out chatted header 
 			<section className="bg-gradient-to-br from-purple-50 to-indigo-50 py-16">

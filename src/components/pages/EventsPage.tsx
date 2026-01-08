@@ -1,12 +1,12 @@
 'use client';
 
 import { useState } from 'react';
-import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { pastEvents, event } from '../data/events';
 import Link from 'next/link';
 import { EventCard } from '../EventCard';
 import { EventModal } from '../EventModal';
+import { koulen } from "@/lib/fonts";
 
 export function EventsPage() {
 	const [selectedCategory, setSelectedCategory] = useState('all');
@@ -29,8 +29,7 @@ export function EventsPage() {
 			{/* Header */}
 			<section className="bg-gradient-to-br from-purple-50 to-indigo-50 py-16">
 				<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-					<Badge className="mb-4">Events & Programs</Badge>
-					<h1 className="text-3xl sm:text-4xl lg:text-5xl mb-4">Our Events</h1>
+					<h1 className={`text-3xl sm:text-4xl lg:text-5xl mb-4 ${koulen.className}`}>Our Events</h1>
 					<p className="text-xl text-muted-foreground max-w-2xl">
 						We organize workshops, competitions, training sessions, and networking opportunities to fuel your entrepreneurial journey.
 					</p>
