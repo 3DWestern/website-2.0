@@ -48,6 +48,15 @@ export function EventModal({ event, isOpen, onClose }: EventModalProps) {
 					<DialogClose asChild>
 						<Button variant="outline">Back</Button>
 					</DialogClose>
+					{event.url && (
+						<Button asChild>
+							<a href={event.url} target="_blank"
+								className="px-4 rounded-lg border border-black"
+								rel="noopener noreferrer">
+								Register
+							</a>
+						</Button>
+					)}
 				</DialogFooter>
 			</DialogContent>
 		</Dialog>

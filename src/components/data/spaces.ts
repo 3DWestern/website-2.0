@@ -1,16 +1,13 @@
-import { Cpu, Hammer } from 'lucide-react';
 
 export const spaces = [
 	{
 		id: 1,
 		name: "Digital Makerspace",
-		icon: Cpu,
-		description: "High-tech equipment for digital fabrication and prototyping",
-		primaryUse: "Digital manufacturing, rapid prototyping, and electronic projects",
+		description: "High-tech equipment for digital fabrication and prototyping.",
 		image: "/images/dmaker.jpg",
 		alt: "Morrissette Digital Makerspace",
 		tools: [
-			"3D Printers (FDM & Resin)",
+			"3D Printers (FDM)",
 			"Laser Cutters",
 			"Water Jet Cutter",
 			"Electronics Workbench",
@@ -28,9 +25,7 @@ export const spaces = [
 	{
 		id: 2,
 		name: "Sabourin Makerspace",
-		icon: Hammer,
-		description: "Traditional and modern woodworking equipment for building physical projects",
-		primaryUse: "Woodworking, furniture building, and physical construction",
+		description: "Traditional and modern woodworking equipment for building physical projects.",
 		image: "/images/smaker.jpg",
 		alt: "Morrissette Sabourin Makerspace",
 		tools: [
