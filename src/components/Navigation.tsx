@@ -5,6 +5,7 @@ import { usePathname } from 'next/navigation';
 import { Menu, X } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { useLoading } from '@/context/LoadingContext';
+import { LandingButton } from '@/components/LandingButton';
 
 export function Navigation() {
 	const [isOpen, setIsOpen] = useState(false);
@@ -84,6 +85,9 @@ export function Navigation() {
 			{/* Mobile Navigation - Full Screen Overlay */}
 			{isOpen && (
 				<div className="md:hidden fixed inset-0 z-40 bg-white flex flex-col items-start justify-center">
+					<div className="z-50 absolute top-4 left-4">
+						<LandingButton isMobile={true} />
+					</div>
 					<div className="flex flex-col items-start gap-6 pl-4 p-3">
 						{navLinks.map((link) => (
 							link.external ? (

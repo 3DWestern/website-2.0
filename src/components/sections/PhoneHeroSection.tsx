@@ -46,7 +46,7 @@ export function PhoneHeroSection() {
 				)}
 				{/* Content container with rounded corners - 98% height */}
 				<div className="relative w-full h-[98%]">
-					<LandingButton />
+					<LandingButton isMobile={false} />
 					<div className="relative w-full h-full rounded-[1.25rem] lg:rounded-[1rem] overflow-hidden">
 						{/* Content area */}
 						<div className="absolute inset-0 bg-gradient-to-b from-purple-800 via-indigo-900 to-black">
