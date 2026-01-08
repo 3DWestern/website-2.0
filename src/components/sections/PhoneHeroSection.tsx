@@ -1,7 +1,5 @@
 'use client';
 
-import { koulen } from '@/lib/fonts';
-import Link from 'next/link';
 import { useLoading } from '@/context/LoadingContext';
 import { useState, useEffect } from 'react';
 import { X } from 'lucide-react';
@@ -22,7 +20,7 @@ export function PhoneHeroSection() {
 		console.log('[PhoneHeroSection] Component mounted');
 		console.log('[PhoneHeroSection] loadingComplete:', loadingComplete);
 		return () => console.log('[PhoneHeroSection] Component unmounted');
-	}, []);
+	}, [loadingComplete]);
 
 	useEffect(() => {
 		console.log('[PhoneHeroSection] loadingComplete changed to:', loadingComplete);

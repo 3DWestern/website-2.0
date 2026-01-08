@@ -700,7 +700,6 @@ class ArcballControl {
 }
 
 type ActiveItemCallback = (index: number) => void;
-type MovementChangeCallback = (isMoving: boolean) => void;
 type InitCallback = (instance: InfiniteGridMenu) => void;
 
 interface Camera {
@@ -797,7 +796,6 @@ class InfiniteGridMenu {
 		private canvas: HTMLCanvasElement,
 		private items: MenuItem[],
 		private onActiveItemChange: ActiveItemCallback,
-		private onMovementChange: MovementChangeCallback,
 		onInit?: InitCallback,
 		scale: number = 1.0
 	) {
@@ -1083,7 +1081,6 @@ class InfiniteGridMenu {
 
 		if (isMoving !== this.movementActive) {
 			this.movementActive = isMoving;
-			this.onMovementChange(isMoving);
 		}
 
 		if (!this.control.isPointerDown) {
@@ -1142,7 +1139,6 @@ interface InfiniteMenuProps {
 const InfiniteMenu: FC<InfiniteMenuProps> = ({ items = [], scale = 3.0 }) => {
 	const canvasRef = useRef<HTMLCanvasElement | null>(null) as MutableRefObject<HTMLCanvasElement | null>;
 	const [activeItem, setActiveItem] = useState<MenuItem | null>(null);
-	const [isMoving, setIsMoving] = useState<boolean>(false);
 
 	useEffect(() => {
 		const canvas = canvasRef.current;
@@ -1159,7 +1155,6 @@ const InfiniteMenu: FC<InfiniteMenuProps> = ({ items = [], scale = 3.0 }) => {
 				canvas,
 				items.length ? items : defaultItems,
 				handleActiveItem,
-				setIsMoving,
 				sk => sk.run(),
 				scale
 			);

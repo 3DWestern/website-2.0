@@ -1,14 +1,14 @@
 'use client'; 
 import { useState } from 'react';
-import { Mail, Building2, Users, HelpCircle, Heart } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { koulen } from '@/lib/fonts';
+import Link from 'next/link';
 
 
 export function ContactPage() {
@@ -24,7 +24,7 @@ export function ContactPage() {
 
 		const form = event.currentTarget;
 		const formData = new FormData(form);
-		formData.set('access_key', 'c17259f1-ba6f-48b4-84a7-38ccd02e546f'); // client-side key for web3forms.com
+		formData.set('access_key', 'fc11578d-569b-460c-891d-31af60b82f6c'); // client-side key for web3forms.com
 
 		try {
 			const response = await fetch('https://api.web3forms.com/submit', {
@@ -34,7 +34,7 @@ export function ContactPage() {
 
 			const data = await response.json();
 			if (response.ok && data?.success) {
-				setResult("Success! We'll get back to you soon.");
+				setResult("Success! We&apos;ll get back to you soon.");
 				form.reset();
 				setInquiryType('');
 			} else {
@@ -56,7 +56,7 @@ export function ContactPage() {
 					<Badge className="mb-4">Get In Touch</Badge>
 					<h1 className={`font-bold text-3xl sm:text-4xl lg:text-5xl mb-4 ${koulen.className}`}>Contact Us</h1>
 					<p className="text-xl text-muted-foreground max-w-2xl">
-						Have questions? Want to collaborate? We'd love to hear from you.
+						Have questions? Want to collaborate? We&apos;d love to hear from you.
 					</p>
 				</div>
 			</section>
@@ -133,7 +133,6 @@ export function ContactPage() {
 									<div className="flex justify-center mt-6">
 										<Button
 											type="submit"
-											form="contact-form"
 											className="hover:bg-purple-50 hover:text-purple-700"
 											size="lg"
 											disabled={isSubmitting}
@@ -200,13 +199,13 @@ export function ContactPage() {
 				<div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
 					<h2 className="text-3xl mb-4">Have a Quick Question?</h2>
 					<p className="text-lg text-muted-foreground mb-8">
-						Check out our FAQ section - you might find the answer you're looking for!
+						Check out our FAQ section - you might find the answer you&apos;re looking for!
 					</p>
-					<a href="/#faq">
+					<Link href="/#faq">
 						<Button size="lg" variant="outline" className="hover:bg-purple-50 hover:text-purple-700">
 							View FAQs
 						</Button>
-					</a>
+					</Link>
 				</div>
 			</section>
 		</div>

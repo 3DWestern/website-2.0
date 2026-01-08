@@ -1,9 +1,9 @@
 "use client";
 
-import { Canvas, useThree, useFrame } from '@react-three/fiber';
-import { OrbitControls, useGLTF, PerformanceMonitor } from '@react-three/drei';
+import { Canvas, useFrame } from '@react-three/fiber';
+import { OrbitControls, useGLTF } from '@react-three/drei';
 import { EffectComposer, Bloom, Noise, ToneMapping } from '@react-three/postprocessing';
-import React, { useState, Suspense } from 'react';
+import React, { Suspense } from 'react';
 import { GLTF } from 'three-stdlib';
 import * as THREE from 'three';
 import { Mesh } from 'three';
@@ -35,7 +35,7 @@ function Scene() {
   );
 }
 
-const Model = ({ onError }: { onError?: () => void }) => {
+const Model = () => {
   console.log('[Model] Component rendering...');
   
   const gltf = useGLTF('/animations/assembly.glb') as GLTF;
@@ -174,8 +174,8 @@ const gradientBg = {
 const AssemblyViewer = () => {
   console.log('[AssemblyViewer] Component render');
   
-  const [dpr, setDpr] = useState(1.25);
-  const [fallback, setFallback] = useState(false);
+  const dpr = 1.25;
+  const fallback = false;
 
   console.log('[AssemblyViewer] State:', { dpr, fallback });
 

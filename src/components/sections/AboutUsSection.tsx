@@ -1,37 +1,10 @@
 'use client';
 
 import { koulen } from '@/lib/fonts'
-import { motion, useScroll, useTransform } from "motion/react"
-import { useRef } from 'react'
-import Image from 'next/image'
-
-// TOOD: adjust sizing of images over md screens 
-const content = [
-	{
-		title: "Who We Are",
-		description: "Western University's student-run organization for design, prototyping, and creative technology.",
-		detail: "We manage the university's two Makerspaces—Digital and Sabourin—on behalf of Morrissette.",
-		image: '/images/digital.jpg'
-	},
-	{
-		title: "What We Do",
-		description: "Across both facilities, we support every step of the creation process: from concept sketching and rapid prototyping to fabrication, testing, and idea validation.",
-		detail: "Whether you're building your first project or developing a polished prototype, our team provides guidance, training, and a place to experiment.",
-		image: '/images/sabourin.jpg'
-	},
-	{
-		title: "Our Equipment",
-		description: "Our equipment includes:",
-		detail: "3D printers, laser cutters, water cutters, Cricut machines, sewing machines, soldering stations, and Raspberry Pis—along with a growing inventory of digital fabrication and woodworking tools.",
-		image: undefined
-	},
-	{
-		title: "Our Vision",
-		description: "As 3DW expands, our website and dashboard will become the central portal for accessing services, workshops, equipment bookings, and club activities.",
-		detail: "We're building a community where anyone can create, learn, and innovate—no experience required.",
-		image: undefined
-	}
-];
+import { motion, useScroll, useTransform, type MotionValue } from "motion/react"
+import { useRef } from 'react';
+import { content } from '@/components/data/landing';
+import Image from 'next/image';
 
 export function AboutUsSection() {
 	const containerRef = useRef<HTMLDivElement>(null);
@@ -76,7 +49,7 @@ export function AboutUsSection() {
 			</div>
 
 			{/* Spacer for scroll effect */}
-			<div className="h-[40vh]" />
+			<div className="sm:h-[20-vh]" />
 		</section>
 	);
 }
@@ -87,7 +60,7 @@ interface CardProps {
 	description: string;
 	detail: string;
 	image?: string;
-	progress: any;
+	progress: MotionValue<number>;
 	range: [number, number];
 	targetScale: number;
 }
@@ -106,7 +79,7 @@ function Card({ index, title, description, detail, image, progress, range, targe
 				}}
 				className="relative w-full sm:w-4/5 origin-top"
 			>
-				<div className="bg-linear-to-br from-purple-50 to-indigo-50 rounded-3xl p-8 lg:p-12 shadow-xl border border-purple-100 h-[600px] flex items-start overflow-hidden">
+				<div className="bg-linear-to-br from-purple-50 to-indigo-50 rounded-3xl p-8 lg:p-12 shadow-xl border border-purple-100 min-h-[50vh] sm:h-[60vh] md:h-[80vh] flex items-start overflow-hidden">
 					<div className="flex flex-col items-start gap-6 w-full">
 						{/* Text Content (first on md+, below image on mobile) */}
 						<div className="order-2 md:order-1 flex-1 space-y-4 w-full">
@@ -123,7 +96,7 @@ function Card({ index, title, description, detail, image, progress, range, targe
 
 						{/* Optional Image (first on mobile, below text on md+) */}
 						{image && (
-							<div className="order-1 md:order-2 relative w-full h-48 md:h-56 lg:h-72 shrink-0 rounded-2xl overflow-hidden">
+							<div className="order-1 md:order-2 relative w-full h-48 md:h-120 md:mt-10 shrink-0 rounded-2xl overflow-hidden">
 								<Image
 									src={image}
 									alt={title}

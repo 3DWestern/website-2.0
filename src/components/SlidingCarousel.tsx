@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import type { MenuItem } from '@/components/data/teamdata';
 import { koulen } from '@/lib/fonts';
@@ -15,25 +15,24 @@ export function SlidingCarousel({ items }: { items: MenuItem[] }) {
 	const carouselRef = useRef<HTMLDivElement>(null);
 	const animationRef = useRef<number | null>(null);
 
-	// Auto-scroll functionality
-	const autoScroll = useCallback(() => {
-		if (isPaused || isDragging || !carouselRef.current) return;
-
-		const carousel = carouselRef.current;
-		const scrollAmount = 1; // Pixels to scroll per frame
-		const maxScroll = carousel.scrollWidth - carousel.clientWidth;
-
-		if (carousel.scrollLeft >= maxScroll - 1) {
-			// Reset to start for infinite loop
-			carousel.scrollLeft = 0;
-		} else {
-			carousel.scrollLeft += scrollAmount;
-		}
-
-		animationRef.current = requestAnimationFrame(autoScroll);
-	}, [isPaused, isDragging]);
-
 	useEffect(() => {
+		const autoScroll = () => {
+			if (isPaused || isDragging || !carouselRef.current) return;
+	
+			const carousel = carouselRef.current;
+			const scrollAmount = 1; // Pixels to scroll per frame
+			const maxScroll = carousel.scrollWidth - carousel.clientWidth;
+	
+			if (carousel.scrollLeft >= maxScroll - 1) {
+				// Reset to start for infinite loop
+				carousel.scrollLeft = 0;
+			} else {
+				carousel.scrollLeft += scrollAmount;
+			}
+	
+			animationRef.current = requestAnimationFrame(autoScroll);
+		};
+
 		if (!isPaused && !isDragging) {
 			animationRef.current = requestAnimationFrame(autoScroll);
 		}
@@ -43,7 +42,7 @@ export function SlidingCarousel({ items }: { items: MenuItem[] }) {
 				cancelAnimationFrame(animationRef.current);
 			}
 		};
-	}, [autoScroll, isPaused, isDragging]);
+	}, [isPaused, isDragging]);
 
 	// Mouse drag handlers
 	const handleMouseDown = (e: React.MouseEvent) => {
@@ -185,11 +184,6 @@ export function SlidingCarousel({ items }: { items: MenuItem[] }) {
 				</div>
 			</div>
 
-			<style jsx>{`
-				.scrollbar-hide::-webkit-scrollbar {
-					display: none;
-				}
-			`}</style>
 		</>
 	);
 }

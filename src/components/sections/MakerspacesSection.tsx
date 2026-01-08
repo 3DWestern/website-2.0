@@ -1,61 +1,10 @@
 'use client';
-
-import { Cpu, Hammer, Check } from 'lucide-react';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
+import { Check } from 'lucide-react';
+import { Card } from '@/components/ui/card';
 import { motion } from 'motion/react';
 import { koulen } from '@/lib/fonts';
 import Image from "next/image";
-
-const spaces = [
-	{
-		id: 1,
-		name: "Digital Makerspace",
-		icon: Cpu,
-		description: "High-tech equipment for digital fabrication and prototyping",
-		primaryUse: "Digital manufacturing, rapid prototyping, and electronic projects",
-		image: "/images/dmaker.jpg",
-		alt: "Morrissette Digital Makerspace",
-		tools: [
-			"3D Printers (FDM & Resin)",
-			"Laser Cutters",
-			"Water Jet Cutter",
-			"Electronics Workbench",
-			"Soldering Stations",
-			"CAD Workstations"
-		],
-		projects: [
-			"Product prototypes",
-			"Custom enclosures",
-			"PCB design and assembly",
-			"Architectural models",
-			"Art installations"
-		]
-	},
-	{
-		id: 2,
-		name: "Sabourin Makerspace",
-		icon: Hammer,
-		description: "Traditional and modern woodworking equipment for building physical projects",
-		primaryUse: "Woodworking, furniture building, and physical construction",
-		image: "/images/smaker.jpg",
-		alt: "Morrissette Sabourin Makerspace",
-		tools: [
-			"Table Saw",
-			"Band Saw",
-			"CNC Router",
-			"Drill Press",
-			"Sanders & Planers",
-			"Hand Tools"
-		],
-		projects: [
-			"Custom furniture",
-			"Wooden prototypes",
-			"Display pieces",
-			"Storage solutions",
-			"Product mockups"
-		]
-	}
-];
+import { spaces } from "@/components/data/spaces";
 
 export function MakerspacesSection() {
 	return (
@@ -96,21 +45,14 @@ export function MakerspacesSection() {
 
 									{/* Content */}
 									<div className="p-8 flex flex-col justify-center">
-										<div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4">
-											<space.icon size={24} className="text-purple-600" />
-										</div>
 
-										<h3 className="text-3xl mb-3">{space.name}</h3>
+										<h3 className="text-2xl sm:text-3xl mb-3 font-bold">{space.name}</h3>
 										<p className="text-lg text-muted-foreground mb-4">{space.description}</p>
 
-										<div className="mb-6">
-											<h4 className="mb-2">Primary Use</h4>
-											<p className="text-muted-foreground">{space.primaryUse}</p>
-										</div>
 
 										<div className="grid md:grid-cols-2 gap-6">
 											<div>
-												<h4 className="mb-3">Available Equipment</h4>
+												<h4 className="mb-3 font-semibold">Available Equipment:</h4>
 												<ul className="space-y-2">
 													{space.tools.map((tool) => (
 														<li key={tool} className="flex items-start gap-2 text-sm text-muted-foreground">
@@ -122,7 +64,7 @@ export function MakerspacesSection() {
 											</div>
 
 											<div>
-												<h4 className="mb-3">Project Examples</h4>
+												<h4 className="mb-3 font-semibold">Project Examples:</h4>
 												<ul className="space-y-2">
 													{space.projects.map((project) => (
 														<li key={project} className="flex items-start gap-2 text-sm text-muted-foreground">

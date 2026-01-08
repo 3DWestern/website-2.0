@@ -1,7 +1,6 @@
 'use client';
 
 import Link from 'next/link';
-import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { Menu, X } from 'lucide-react';
 import { useState, useEffect } from 'react';
@@ -33,7 +32,7 @@ export function Navigation() {
 		{ path: '/makerspace', label: 'About Makerspace' },
 		{ path: 'https://westernu.brightspace.com/d2l/le/discovery/view/course/151344', label: 'Training', external: true },
 		{ path: '/events', label: 'Events' },
-		{ path: 'https://your-new-dashboard-link.com', label: 'Dashboard', external: true },
+		// { path: 'https://your-new-dashboard-link.com', label: 'Dashboard', external: true }, // NOTE: removed this for now until the dashboard is up.
 	];
 
 	const isActive = (path: string) => pathname === path;

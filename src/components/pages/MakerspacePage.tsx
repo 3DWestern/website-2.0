@@ -1,5 +1,3 @@
-import { Badge } from '@/components/ui/badge';
-import { MakerspacesSection } from '@/components/sections/MakerspacesSection';
 // import { TrainingSection } from '@/components/sections/TrainingSection';
 import { CalendarSection } from '@/components/sections/CalendarSection';
 
