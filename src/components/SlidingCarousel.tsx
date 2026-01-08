@@ -184,11 +184,6 @@ export function SlidingCarousel({ items }: { items: MenuItem[] }) {
 				</div>
 			</div>
 
-			<style jsx>{`
-				.scrollbar-hide::-webkit-scrollbar {
-					display: none;
-				}
-			`}</style>
 		</>
 	);
 }

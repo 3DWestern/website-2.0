@@ -60,3 +60,7 @@ canvas {
   height: 100% !important;
   display: block !important;
 }
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}

@@ -49,7 +49,7 @@ export function AboutUsSection() {
 			</div>
 
 			{/* Spacer for scroll effect */}
-			<div className="h-[40vh]" />
+			<div className="sm:h-[20-vh]" />
 		</section>
 	);
 }
@@ -79,7 +79,7 @@ function Card({ index, title, description, detail, image, progress, range, targe
 				}}
 				className="relative w-full sm:w-4/5 origin-top"
 			>
-				<div className="bg-linear-to-br from-purple-50 to-indigo-50 rounded-3xl p-8 lg:p-12 shadow-xl border border-purple-100 h-[50vh] sm:h-[60vh] md:h-[80vh] flex items-start overflow-hidden">
+				<div className="bg-linear-to-br from-purple-50 to-indigo-50 rounded-3xl p-8 lg:p-12 shadow-xl border border-purple-100 min-h-[50vh] sm:h-[60vh] md:h-[80vh] flex items-start overflow-hidden">
 					<div className="flex flex-col items-start gap-6 w-full">
 						{/* Text Content (first on md+, below image on mobile) */}
 						<div className="order-2 md:order-1 flex-1 space-y-4 w-full">
