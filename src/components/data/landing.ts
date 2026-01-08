@@ -14,7 +14,7 @@ export const content = [
 	{
 		title: "Our Equipment",
 		description: "We provide a diverse suite of equipment for creational use.",
-		detail: "Our equipment includes 3D printers, laser cutters, water cutters, Cricut machines, sewing machines, and soldering stations, along with a growing inventory of digital fabrication and woodworking tools.",
+		detail: "Our equipment includes 3D printers, laser cutters, water cutters, Cricut machines, sewing machines, and soldering stations, along with a growing inventory of digital fabrication and woodworking tools. Students can access our equipment in the Sabourin Makerspace after completing Level 1 training on OWL.",
 		image: '/images/equipment.jpg'
 	},
 	{
