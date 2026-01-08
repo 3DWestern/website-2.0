@@ -50,8 +50,8 @@ export function Navigation() {
 			</button>
 
 			{/* Desktop Navigation */}
-			<div className="fixed top-0 right-0 z-100 p-3 pr-4 bg-white rounded-bl-xl hidden md:block">
-				<div className="flex items-center gap-8">
+			<div className="fixed top-0 right-0 z-100 p-6 bg-white rounded-bl-xl hidden md:block">
+				<div className="mx-auto flex items-center gap-8">
 					{navLinks.map((link) => (
 						link.external ? (
 							<a
@@ -59,7 +59,7 @@ export function Navigation() {
 								href={link.path}
 								target="_blank"
 								rel="noopener noreferrer"
-								className="inline-block transition-colors transition-transform text-muted-foreground hover:text-foreground hover:scale-110 hover:font-semibold duration-300"
+								className="inline-block text-muted-foreground text-black hover:text-black/50 font-bold"
 							>
 								{link.label}
 							</a>
@@ -68,8 +68,8 @@ export function Navigation() {
 								key={link.path}
 								href={link.path}
 								className={`transition-colors ${isActive(link.path)
-									? 'text-purple-600'
-									: 'text-muted-foreground hover:text-foreground hover:scale-110 hover:font-semibold transition-transform inline-block duration-300'
+									? 'text-purple-600 font-bold'
+									: 'inline-block text-muted-foreground text-black hover:text-black/50 font-bold'
 									}`}
 							>
 								{link.label}
