@@ -43,11 +43,11 @@ export function Footer() {
 									Makerspace Details
 								</Link>
 							</li>
-							<li>
+							{/*<li>
 								<Link href="/dashboard" className="text-slate-400 hover:text-white transition-colors hover:scale-110 hover:font-bold">
 									Dashboard
 								</Link>
-							</li>
+							</li>*/}
 						</ul>
 					</div>
 
@@ -120,9 +120,9 @@ export function Footer() {
 					</div>
 				</div>
 
-				<div className="border-t border-slate-800 mt-12 pt-8 text-center text-slate-400">
+				{/*				<div className="border-t border-slate-800 mt-12 pt-8 text-center text-slate-400">
 					<p>&copy; {new Date().getFullYear()} 3DW Makerspace. All rights reserved.</p>
-				</div>
+				</div> */}
 			</div>
 		</footer>
 	);
