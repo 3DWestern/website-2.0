@@ -60,7 +60,7 @@ export function ContactPage() {
 			</section>
 
 			{/* Inquiry Types */}
-			<section className="py-20 bg-white w-screen">
+			<section className="py-20 bg-white">
 				<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 					<div className="text-center mb-12">
 						<h2 className="font-bold text-2xl sm:text-3xl lg:text-4xl mb-4">How Can We Help?</h2>
