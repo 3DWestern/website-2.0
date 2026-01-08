@@ -30,9 +30,9 @@ export function EventsPage() {
 			<section className="bg-gradient-to-br from-purple-50 to-indigo-50 py-16">
 				<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 					<Badge className="mb-4">Events & Programs</Badge>
-					<h1 className="text-3xl sm:text-4xl lg:text-5xl mb-4">Morrissette Events</h1>
+					<h1 className="text-3xl sm:text-4xl lg:text-5xl mb-4">Our Events</h1>
 					<p className="text-xl text-muted-foreground max-w-2xl">
-						Workshops, competitions, training sessions, and networking opportunities to fuel your entrepreneurial journey
+						We organize workshops, competitions, training sessions, and networking opportunities to fuel your entrepreneurial journey.
 					</p>
 				</div>
 			</section>
@@ -43,13 +43,10 @@ export function EventsPage() {
 					<h2 className="text-3xl mb-8">All Events</h2>
 
 					<Tabs value={selectedCategory} onValueChange={setSelectedCategory} className="mb-8">
-						<TabsList>
-							<TabsTrigger value="all">All Events</TabsTrigger>
-							<TabsTrigger value="competition">Competitions</TabsTrigger>
-							<TabsTrigger value="workshop">Workshops</TabsTrigger>
-							<TabsTrigger value="training">Training</TabsTrigger>
-							<TabsTrigger value="networking">Networking</TabsTrigger>
-							<TabsTrigger value="showcase">Showcase</TabsTrigger>
+						<TabsList className="flex flex-row space-x-4">
+							<TabsTrigger value="all" className="px-2">All Events</TabsTrigger>
+							<TabsTrigger value="competition" className="px-2">Competitions</TabsTrigger>
+							<TabsTrigger value="workshop" className="px-2">Workshops</TabsTrigger>
 						</TabsList>
 					</Tabs>
 
