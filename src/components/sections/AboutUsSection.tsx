@@ -96,7 +96,7 @@ function Card({ index, title, description, detail, image, progress, range, targe
 
 						{/* Optional Image (first on mobile, below text on md+) */}
 						{image && (
-							<div className="order-1 md:order-2 relative w-full h-48 md:h-120 md:mt-10 shrink-0 rounded-2xl overflow-hidden">
+							<div className="order-1 md:order-2 relative w-full h-48 md:h-110 md:mt-10 shrink-0 rounded-2xl overflow-hidden">
 								<Image
 									src={image}
 									alt={title}
