@@ -4,6 +4,7 @@ import { useLoading } from '@/context/LoadingContext';
 import { useState, useEffect } from 'react';
 import { X } from 'lucide-react';
 import dynamic from 'next/dynamic';
+import { LandingButton } from "@/components/LandingButton";
 
 const AssemblyViewer = dynamic(() => import('@/components/AssemblyViewer'), {
 	ssr: false
@@ -44,13 +45,16 @@ export function PhoneHeroSection() {
 					</div>
 				)}
 				{/* Content container with rounded corners - 98% height */}
-				<div className="relative w-full h-[98%] rounded-[1.25rem] lg:rounded-[1rem] overflow-hidden">
-					{/* Content area */}
-					<div className="absolute inset-0 bg-gradient-to-b from-purple-800 via-indigo-900 to-black">
+				<div className="relative w-full h-[98%]">
+					<LandingButton />
+					<div className="relative w-full h-full rounded-[1.25rem] lg:rounded-[1rem] overflow-hidden">
+						{/* Content area */}
+						<div className="absolute inset-0 bg-gradient-to-b from-purple-800 via-indigo-900 to-black">
 
-						{/* Main content area - for 3D graphics, images, etc. */}
-						<div className="absolute inset-0">
-							{isLoaded && <AssemblyViewer />}
+							{/* Main content area - for 3D graphics, images, etc. */}
+							<div className="absolute inset-0">
+								{isLoaded && <AssemblyViewer />}
+							</div>
 						</div>
 					</div>
 				</div>
