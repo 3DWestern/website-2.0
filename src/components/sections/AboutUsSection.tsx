@@ -1,7 +1,7 @@
 'use client';
 
 import { koulen } from '@/lib/fonts'
-import { motion, useScroll, useTransform } from "motion/react"
+import { motion, useScroll, useTransform, type MotionValue } from "motion/react"
 import { useRef } from 'react';
 import { content } from '@/components/data/landing';
 import Image from 'next/image';
@@ -60,7 +60,7 @@ interface CardProps {
 	description: string;
 	detail: string;
 	image?: string;
-	progress: any;
+	progress: MotionValue<number>;
 	range: [number, number];
 	targetScale: number;
 }

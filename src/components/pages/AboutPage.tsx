@@ -1,5 +1,5 @@
 import { Badge } from '@/components/ui/badge';
-import { Linkedin } from 'lucide-react'; // TODO: replace this
+
 
 export function AboutPage() {
 	return (
@@ -24,7 +24,7 @@ export function AboutPage() {
 							<div className="space-y-4 text-lg text-muted-foreground">
 								<p>
 									3DW is a student-run organization partnering with Morrissette Entrepreneurship
-									to manage and operate Western University's premier makerspaces. We've evolved
+									to manage and operate Western University&apos;s premier makerspaces. We&apos;ve evolved
 									from a 3D printing club into the central hub for product design and creation
 									on campus.
 								</p>
@@ -59,7 +59,7 @@ export function AboutPage() {
 					<div className="text-center mb-12">
 						<h1 className="text-3xl sm:text-4xl lg:text-5xl mb-4 font-bold">Meet Our Team</h1>
 						<p className="text-xl text-muted-foreground">
-							Passionate students leading Western's makerspace community
+							Passionate students leading Western&apos;s makerspace community
 						</p>
 					</div>
 				</div>
@@ -72,12 +72,12 @@ export function AboutPage() {
 					<h2 className="text-2xl sm:text-3xl lg:text-4xl mb-6">Morrissette Entrepreneurship</h2>
 					<p className="text-lg text-muted-foreground mb-8">
 						Through our collaboration with Morrissette Entrepreneurship, 3DW has evolved into
-						the student organization responsible for managing Western's makerspaces. This
+						the student organization responsible for managing Western&apos;s makerspaces. This
 						partnership enables us to provide comprehensive support for student innovation,
 						from initial ideation through prototype development and beyond.
 					</p>
 					<p className="text-lg text-muted-foreground">
-						Together, we're creating an ecosystem where students can develop entrepreneurial
+						Together, we&apos;re creating an ecosystem where students can develop entrepreneurial
 						skills, validate their ideas, and build real products that make an impact.
 					</p>
 				</div>

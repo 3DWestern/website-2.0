@@ -359,7 +359,7 @@ export function DashboardPage() {
             <Card>
               <CardHeader>
                 <CardTitle>My Registered Events</CardTitle>
-                <CardDescription>Workshops and events you're attending</CardDescription>
+                <CardDescription>Workshops and events you&apos;re attending</CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="p-4 border rounded-lg">

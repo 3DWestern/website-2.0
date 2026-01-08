@@ -2,6 +2,7 @@ import { Calendar, Clock, MapPin, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import Image from 'next/image';
 
 // NOTE: this is not used.
 const workshops = [
@@ -53,10 +54,12 @@ export function WorkshopsSection() {
 					{workshops.map((workshop) => (
 						<Card key={workshop.id} className="overflow-hidden hover:shadow-lg transition-shadow">
 							<div className="aspect-video overflow-hidden bg-slate-100">
-								<img
+							<Image
 									src={workshop.image}
 									alt={workshop.title}
 									className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+									width={1080}
+									height={720}
 								/>
 							</div>
 							<CardHeader>
