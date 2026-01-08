@@ -5,6 +5,7 @@ import { usePathname } from 'next/navigation';
 import { Menu, X } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { useLoading } from '@/context/LoadingContext';
+import { LandingButton } from '@/components/LandingButton';
 
 export function Navigation() {
 	const [isOpen, setIsOpen] = useState(false);
@@ -29,7 +30,7 @@ export function Navigation() {
 	const navLinks = [
 		// { path: '/about', label: 'About Us' },
 		{ path: '/contact', label: 'Contact Us' },
-		{ path: '/makerspace', label: 'About Makerspace' },
+		{ path: '/makerspace', label: 'Availability' },
 		{ path: 'https://westernu.brightspace.com/d2l/le/discovery/view/course/151344', label: 'Training', external: true },
 		{ path: '/events', label: 'Events' },
 		// { path: 'https://your-new-dashboard-link.com', label: 'Dashboard', external: true }, // NOTE: removed this for now until the dashboard is up.
@@ -49,8 +50,8 @@ export function Navigation() {
 			</button>
 
 			{/* Desktop Navigation */}
-			<div className="fixed top-0 right-0 z-100 p-3 pr-4 bg-white rounded-bl-xl hidden md:block">
-				<div className="flex items-center gap-8">
+			<div className="fixed top-0 right-0 z-100 p-6 bg-white rounded-bl-xl hidden md:block">
+				<div className="mx-auto flex items-center gap-8">
 					{navLinks.map((link) => (
 						link.external ? (
 							<a
@@ -58,7 +59,7 @@ export function Navigation() {
 								href={link.path}
 								target="_blank"
 								rel="noopener noreferrer"
-								className="inline-block transition-colors transition-transform text-muted-foreground hover:text-foreground hover:scale-110 hover:font-semibold duration-300"
+								className="inline-block text-muted-foreground text-black hover:text-black/50 font-bold"
 							>
 								{link.label}
 							</a>
@@ -67,8 +68,8 @@ export function Navigation() {
 								key={link.path}
 								href={link.path}
 								className={`transition-colors ${isActive(link.path)
-									? 'text-purple-600'
-									: 'text-muted-foreground hover:text-foreground hover:scale-110 hover:font-semibold transition-transform inline-block duration-300'
+									? 'text-purple-600 font-bold'
+									: 'inline-block text-muted-foreground text-black hover:text-black/50 font-bold'
 									}`}
 							>
 								{link.label}
@@ -84,6 +85,9 @@ export function Navigation() {
 			{/* Mobile Navigation - Full Screen Overlay */}
 			{isOpen && (
 				<div className="md:hidden fixed inset-0 z-40 bg-white flex flex-col items-start justify-center">
+					<div className="z-50 absolute top-4 left-4">
+						<LandingButton isMobile={true} />
+					</div>
 					<div className="flex flex-col items-start gap-6 pl-4 p-3">
 						{navLinks.map((link) => (
 							link.external ? (

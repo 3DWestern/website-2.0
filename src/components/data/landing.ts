@@ -1,11 +1,5 @@
 export const content = [
 	{
-		title: "Who We Are",
-		description: "Western University's student-run organization for design, prototyping, and creative technology.",
-		detail: "We manage the the Sabourin and Digital Makerspaces on behalf of Morrissette.",
-		image: '/images/digital.jpg'
-	},
-	{
 		title: "What We Do",
 		detail: "Across both facilities, we support every step of the creation process, from concept sketching and rapid prototyping to manufacturing fabrication, testing, and idea validation. We offer walk-ins for using the Sabourin Makerspace for woodworking and job ordering through our (coming soon!) dashboard for 3D prints, CNC, laser and water jet cutting.",
 		description: "Whether you're building your first project or developing a polished prototype, our team will provide guidance, training, and a place to experiment.",

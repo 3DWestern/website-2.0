@@ -26,9 +26,9 @@ export const metadata: Metadata = {
 		type: "website",
 	},
 	icons: {
-		icon: '/logo.png',
-		shortcut: '/favicon.ico', // TODO: replace with new logo.png if needed; otherwise stick to favicon
-		apple: '/favicon.ico',
+		icon: '/logo.ico',
+		shortcut: '/logo.ico', // TODO: replace with new logo.png if needed; otherwise stick to favicon
+		apple: '/logo.ico',
 	},
 	robots: {
 		index: true,

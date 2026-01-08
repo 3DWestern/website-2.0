@@ -1,6 +1,5 @@
-'use client'; 
+'use client';
 import { useState } from 'react';
-import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -53,7 +52,6 @@ export function ContactPage() {
 			{/* Header */}
 			<section className="bg-gradient-to-br from-purple-50 to-indigo-50 py-16">
 				<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-					<Badge className="mb-4">Get In Touch</Badge>
 					<h1 className={`font-bold text-3xl sm:text-4xl lg:text-5xl mb-4 ${koulen.className}`}>Contact Us</h1>
 					<p className="text-xl text-muted-foreground max-w-2xl">
 						Have questions? Want to collaborate? We&apos;d love to hear from you.
@@ -62,7 +60,7 @@ export function ContactPage() {
 			</section>
 
 			{/* Inquiry Types */}
-			<section className="py-20 bg-white w-screen">
+			<section className="py-20 bg-white">
 				<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 					<div className="text-center mb-12">
 						<h2 className="font-bold text-2xl sm:text-3xl lg:text-4xl mb-4">How Can We Help?</h2>

@@ -18,6 +18,7 @@ export function Footer() {
 						<p className="text-slate-400 max-w-md">
 							Empowering Students to Build &amp; Create.
 						</p>
+						<a href="/documents/3DW_ToS.pdf" className="underline text-slate-400 max-w-md">Terms of Service</a>
 					</div>
 
 					{/* Quick Links */}
@@ -34,13 +35,18 @@ export function Footer() {
 								</Link>
 							</li>
 							<li>
-								<Link href="/events" className="text-slate-400 hover:text-white transition-colors hover:scale-110 hover:font-bold">
-									Events
+								<Link href="/makerspace" className="text-slate-400 hover:text-white transition-colors hover:scale-110 hover:font-bold">
+									Availability
 								</Link>
 							</li>
 							<li>
-								<Link href="/makerspace" className="text-slate-400 hover:text-white transition-colors hover:scale-110 hover:font-bold">
-									Makerspace Details
+								<Link href="https://westernu.brightspace.com/d2l/le/discovery/view/course/151344" className="text-slate-400 hover:text-white transition-colors hover:scale-110 hover:font-bold">
+									Training
+								</Link>
+							</li>
+							<li>
+								<Link href="/events" className="text-slate-400 hover:text-white transition-colors hover:scale-110 hover:font-bold">
+									Events
 								</Link>
 							</li>
 							{/*<li>
@@ -60,10 +66,10 @@ export function Footer() {
 							</li>
 							<li className="flex items-start gap-2 text-slate-400">
 								<MapPin size={20} className="mt-0.5 flex-shrink-0" />
-								<span>Morrissette Entrepreneurship Building, Western University</span>
+								<span>Ronald D. Schmeichel Building for Entrepreneurship and Innovation, Western University</span>
 							</li>
 						</ul>
-						{/*  links for discord, instagram, and linkedin */}
+						{/*  links for instagram and linkedin */}
 						<ul className="flex flex-row sm:flex-col sm:ml-10 gap-10">
 							<li>
 								<a
@@ -84,24 +90,7 @@ export function Footer() {
 							</li>
 							<li>
 								<a
-									href="https://discord.gg/3dwestern"
-									target="_blank"
-									rel="noopener noreferrer"
-									className="flex items-center gap-2 text-slate-400 hover:text-white transition-colors hover:scale-110 hover:font-bold"
-									aria-label="Discord"
-								>
-									<Image
-										src="/images/Discord.svg"
-										alt="Discord"
-										width={30}
-										height={30}
-										className="flex-shrink-0"
-									/>
-								</a>
-							</li>
-							<li>
-								<a
-									href="https://www.linkedin.com/company/3dwestern/"
+									href="https://www.linkedin.com/company/3d-western/"
 									target="_blank"
 									rel="noopener noreferrer"
 									className="flex items-center gap-2 text-slate-400 hover:text-white transition-colors hover:scale-110 hover:font-bold"
