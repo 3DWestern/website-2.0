@@ -19,17 +19,17 @@ export function CalendarSection() {
 
 				<Tabs defaultValue="digital" className="w-full">
 					<TabsList className="grid w-full max-w-md mx-auto grid-cols-2 mb-8">
-						<TabsTrigger value="digital">Digital Makerspace</TabsTrigger>
-						<TabsTrigger value="sabourin">Sabourin Makerspace</TabsTrigger>
+						<TabsTrigger value="digital" className="mr-5 sm:mr-0 text-sm sm:text-lg">Digital Makerspace</TabsTrigger>
+						<TabsTrigger value="sabourin" className="text-sm sm:text-lg">Sabourin Makerspace</TabsTrigger>
 					</TabsList>
 
 					<TabsContent value="digital">
-						<Card className="h-screen">
+						<Card>
 							<CardContent className="p-5 h-full w-full">
 
 
 								{/* digital makerspace calendar  */}
-								<div className="h-4/5 w-full aspect-video bg-slate-100 rounded-lg flex items-center justify-center border-2 border-dashed">
+								<div className="h-[400px] sm:h-screen w-full bg-slate-100 rounded-lg flex items-center justify-center sm:border-2 sm:border-dashed">
 									<iframe
 										src="https://calendar.google.com/calendar/embed?src=195d4999e6906278ce183970e2cf265b0a470d9a35e20e80ac2bd15d5f6f783a%40group.calendar.google.com&ctz=America%2FToronto&mode=WEEK"
 										style={{ borderWidth: 'solid 1px #777', width: '100%', height: '100%' }}
@@ -57,10 +57,10 @@ export function CalendarSection() {
 							<CardContent className="p-5">
 
 								{/* saboruin calendar */}
-								<div className="aspect-video bg-slate-100 rounded-lg flex items-center justify-center border-2 border-dashed">
+								<div className="h-[400px] sm:h-screen w-full bg-slate-100 rounded-lg flex items-center justify-center sm:border-2 sm:border-dashed">
 									<iframe
 										src="https://calendar.google.com/calendar/embed?src=6975d8476dd6da2953a2d7544ffbe7f08758862eef0fb7bea801de5eee887f4f%40group.calendar.google.com&ctz=America%2FToronto"
-										style={{ border: 'solid 1px #777', width: '100%', height: '100%' }}
+										style={{ borderWidth: 'solid 1px #777', width: '100%', height: '100%' }}
 										width="1000"
 										height="600"
 										title="Sabourin Makerspace Google Calendar"
