@@ -1,7 +1,7 @@
 "use client";
 
-import { Canvas, useFrame } from '@react-three/fiber';
-import { OrbitControls, useGLTF } from '@react-three/drei';
+import { Canvas } from '@react-three/fiber';
+import { OrbitControls, useGLTF, PerformanceMonitor, Preload } from '@react-three/drei';
 import { EffectComposer, Bloom, Noise, ToneMapping } from '@react-three/postprocessing';
 import React, { Suspense } from 'react';
 import { GLTF } from 'three-stdlib';
@@ -12,12 +12,18 @@ import { Mesh } from 'three';
 useGLTF.preload('/animations/assembly.glb');
 
 // Main scene component with lighting and controls
-function Scene() {
+function Scene({ enableEffects = true, onDprChange }: { enableEffects?: boolean; onDprChange?: (fn: (dpr: number) => number) => void }) {
   return (
     <>
+      <PerformanceMonitor
+        onIncline={() => onDprChange?.((dpr) => Math.min(dpr + 0.25, 1.5))}
+        onDecline={() => onDprChange?.((dpr) => Math.max(dpr - 0.25, 0.75))}
+      />
       <ambientLight intensity={0.5} />
       <pointLight position={[10, 10, 10]} intensity={1} />
       <OrbitControls 
+        autoRotate
+        autoRotateSpeed={0.5}
         enablePan={false} 
         enableZoom={false} 
         enableRotate={true}
@@ -25,12 +31,26 @@ function Scene() {
       />
       <Suspense fallback={null}>
         <Model />
+        <Preload all />
       </Suspense>
-      <EffectComposer>
-        <Bloom luminanceThreshold={0.2} luminanceSmoothing={0.9} intensity={1.5} />
-        <Noise opacity={0.02} />
-        <ToneMapping />
-      </EffectComposer>
+      {enableEffects && (
+        <EffectComposer enableNormalPass={false} multisampling={4}>
+          <Bloom 
+            mipmapBlur
+            luminanceThreshold={0.6}
+            intensity={1.2}
+          />
+          <Noise opacity={0.05} />
+          <ToneMapping
+            adaptive
+            resolution={256}
+            middleGrey={0.4}
+            maxLuminance={16.0}
+            averageLuminance={1.0}
+            adaptationRate={1.0}
+          />
+        </EffectComposer>
+      )}
     </>
   );
 }
@@ -53,19 +73,12 @@ const Model = () => {
     const mat = (meshEdges.material as THREE.Material).clone() as THREE.MeshStandardMaterial;
     mat.toneMapped = false;
     if ('emissiveIntensity' in mat) {
-      mat.emissiveIntensity = 3.65;
+      mat.emissiveIntensity = 5.0;
     }
     return mat;
   }, [meshEdges?.material]);
 
   const groupRef = React.useRef<THREE.Group>(null);
-
-  // Slow rotation animation
-  useFrame((state, delta) => {
-    if (groupRef.current) {
-      groupRef.current.rotation.z += delta * 0.15;
-    }
-  });
 
   if (!meshRFDD || !meshEdges || !edgesMaterial) {
     console.warn('[Model] Missing meshes or material, returning null');
@@ -174,14 +187,34 @@ const gradientBg = {
 const AssemblyViewer = () => {
   console.log('[AssemblyViewer] Component render');
   
-  const dpr = 1.25;
+  // Adaptive pixel ratio based on device - managed by PerformanceMonitor
+  const [dpr, setDpr] = React.useState(() => 
+    typeof window !== 'undefined' 
+      ? Math.min(window.devicePixelRatio, 1.25)
+      : 1
+  );
   const fallback = false;
 
   console.log('[AssemblyViewer] State:', { dpr, fallback });
 
-  // Hardware acceleration check (optional, simplified)
+  // Hardware acceleration check and performance detection
   const hasHWA = typeof window !== 'undefined';
-  console.log('[AssemblyViewer] Hardware acceleration:', hasHWA);
+  const [enableEffects, setEnableEffects] = React.useState(true);
+  
+  React.useEffect(() => {
+    // Detect low-end devices and disable effects
+    if (typeof window !== 'undefined') {
+      const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+      const hasLimitedMemory = 'deviceMemory' in navigator && (navigator as { deviceMemory?: number }).deviceMemory && (navigator as { deviceMemory: number }).deviceMemory < 4;
+      
+      if (isMobile || hasLimitedMemory) {
+        setEnableEffects(false);
+        console.log('[AssemblyViewer] Performance mode enabled - effects disabled');
+      }
+    }
+  }, []);
+  
+  console.log('[AssemblyViewer] Hardware acceleration:', hasHWA, 'Effects enabled:', enableEffects);
 
   React.useEffect(() => {
     console.log('[AssemblyViewer] Component mounted');
@@ -215,7 +248,6 @@ const AssemblyViewer = () => {
     return () => console.log('[AssemblyViewer] Component unmounted');
   }, []);
 
-
   
   return (
     <div style={{ position: 'absolute', inset: 0, borderRadius: '1rem', backgroundImage: gradientBg.backgroundImage }}>
@@ -224,8 +256,14 @@ const AssemblyViewer = () => {
           <Canvas
             style={{ width: '100%', height: '100%', display: 'block' }}
             camera={{ position: [0, 0, 12], fov: 75 }}
-            gl={{ preserveDrawingBuffer: true }}
-            resize={{ scroll: false, debounce: 0 }}
+            dpr={dpr} // Use adaptive pixel ratio
+            gl={{ 
+              preserveDrawingBuffer: true,
+              antialias: false, // Disable AA for better performance, post-processing handles it
+              powerPreference: 'high-performance' // Request high-performance GPU
+            }}
+            frameloop="demand" // Only render when needed (not on every frame)
+            resize={{ scroll: false, debounce: 100 }}
             onCreated={(state) => {
               console.log('[AssemblyViewer] Canvas created!', state);
               const parent = state.gl.domElement.parentElement;
@@ -235,9 +273,11 @@ const AssemblyViewer = () => {
                 console.log('[AssemblyViewer] Setting size to:', width, height);
                 state.gl.setSize(width, height);
               }
+              // Switch back to always render for animation
+              state.setFrameloop('always');
             }}
           >
-            <Scene />
+            <Scene enableEffects={enableEffects} onDprChange={(fn) => setDpr(fn)} />
           </Canvas>
         </div>
       ) : (
