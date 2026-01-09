@@ -50,7 +50,7 @@ export function Navigation() {
 			</button>
 
 			{/* Desktop Navigation */}
-			<div className="fixed top-0 right-0 z-100 p-6 bg-white rounded-bl-xl hidden md:block">
+			<div className="fixed top-0 right-0 z-100 md:p-4 lg:p-6 bg-white rounded-bl-xl hidden md:block">
 				<div className="mx-auto flex items-center gap-8">
 					{navLinks.map((link) => (
 						link.external ? (
