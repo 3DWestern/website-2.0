@@ -10,8 +10,8 @@ export default function BigTextSection() {
 				<motion.h1
 					initial={{ opacity: 0, y: -50 }}
 					whileInView={{ opacity: 1, y: 0 }}
-					transition={{ duration: 0.5 }}
-					className={`text-5xl sm:text-7xl md:text-9xl ${koulen.className}`}
+					transition={{ duration: 1.0 }}
+					className={`text-5xl sm:text-7xl md:text-9xl bg-gradient-to-b from-purple-500 to-purple-800 text-transparent bg-clip-text ${koulen.className}`}
 				>
 					3D WESTERN
 				</motion.h1>
@@ -42,8 +42,8 @@ export default function BigTextSection() {
 					transition={{ duration: 0.5, delay: 0.6 }}
 					className="w-full text-center"
 				>
-					<p className={`text-4xl sm:text-6xl md:text-8xl font-bold ${koulen.className}`}>{bigstats.projects}</p>
-					<span className="text-xl sm:text-2xl md:text-3xl">Projects Made</span>
+					<p className={`text-4xl sm:text-6xl md:text-8xl font-bold bg-gradient-to-r from-black via-purple-500 to-black text-transparent bg-clip-text ${koulen.className}`}>{bigstats.projects}</p>
+					<span className={`font-bold text-xl sm:text-2xl md:text-3xl text-purple-900 ${koulen.className}`}>Projects Made</span>
 				</motion.div>
 				<motion.div
 					initial={{ opacity: 0, y: 50 }}
@@ -51,8 +51,8 @@ export default function BigTextSection() {
 					transition={{ duration: 0.5, delay: 0.8 }}
 					className="w-full text-center"
 				>
-					<p className={`text-4xl sm:text-6xl md:text-8xl font-bold ${koulen.className}`}>{bigstats.events}</p>
-					<span className="text-xl sm:text-2xl md:text-3xl">Events Held</span>
+					<p className={`text-4xl sm:text-6xl md:text-8xl font-bold bg-gradient-to-r from-black via-purple-500 to-black text-transparent bg-clip-text ${koulen.className}`}>{bigstats.events}</p>
+					<span className={`font-bold text-xl sm:text-2xl md:text-3xl text-purple-900 ${koulen.className}`}>Events Held</span>
 				</motion.div>
 				<motion.div
 					initial={{ opacity: 0, y: 50 }}
@@ -60,8 +60,8 @@ export default function BigTextSection() {
 					transition={{ duration: 0.5, delay: 1 }}
 					className="w-full text-center"
 				>
-					<p className={`text-4xl sm:text-6xl md:text-8xl font-bold ${koulen.className}`}>{bigstats.visits}</p>
-					<span className="text-xl sm:text-2xl md:text-3xl">Active Visits</span>
+					<p className={`text-4xl sm:text-6xl md:text-8xl font-bold bg-gradient-to-r from-black via-purple-500 to-black text-transparent bg-clip-text ${koulen.className}`}>{bigstats.visits}</p>
+					<span className={`font-bold text-xl sm:text-2xl md:text-3xl text-purple-900 ${koulen.className}`}>Active Visits</span>
 				</motion.div>
 			</div>
 		</section>
