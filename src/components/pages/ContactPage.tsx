@@ -68,7 +68,7 @@ export function ContactPage() {
 
 
 					{/* Contact Form */}
-					<div className="w-3/5 mx-auto">
+					<div className="w-full sm:w-3/5 mx-auto">
 						<Card>
 							<CardHeader>
 								<CardTitle>*We will get back to you within 1-2 business days.</CardTitle>
