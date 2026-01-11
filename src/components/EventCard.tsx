@@ -21,6 +21,7 @@ export function EventCard({ event, onCardClick }: EventCardProps) {
 				src={event.image}
 				alt={event.alt}
 				fill
+				sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
 				className="object-cover transition-transform duration-300 ease-in-out group-hover:scale-105"
 			/>
 			<div className="absolute inset-0 bg-black opacity-50 z-10" />

@@ -1,6 +1,50 @@
-import { Calendar } from 'lucide-react';
+'use client';
+
+import { useState } from 'react';
+import { Calendar, AlertCircle } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+
+function CalendarEmbed({
+	src,
+	title
+}: {
+	src: string;
+	title: string;
+}) {
+	const [hasError, setHasError] = useState(false);
+
+	return (
+		<div className="h-[400px] sm:h-screen w-full bg-slate-100 rounded-lg flex items-center justify-center sm:border-2 sm:border-dashed relative">
+			{hasError ? (
+				<div className="flex flex-col items-center justify-center text-center p-6">
+					<AlertCircle className="w-12 h-12 text-amber-500 mb-4" />
+					<h4 className="text-lg font-semibold mb-2">Calendar Unavailable</h4>
+					<p className="text-muted-foreground max-w-md">
+						The calendar requires sign-in to view. Please check the typical hours below or{' '}
+						<a
+							href="mailto:contact@3dwestern.ca"
+							className="text-purple-600 hover:underline"
+						>
+							contact us
+						</a>{' '}
+						for specific availability.
+					</p>
+				</div>
+			) : (
+				<iframe
+					src={src}
+					style={{ borderWidth: 'solid 1px #777', width: '100%', height: '100%' }}
+					width="1000"
+					height="600"
+					title={title}
+					allowFullScreen
+					onError={() => setHasError(true)}
+				/>
+			)}
+		</div>
+	);
+}
 
 export function CalendarSection() {
 	return (
@@ -29,16 +73,10 @@ export function CalendarSection() {
 
 
 								{/* digital makerspace calendar  */}
-								<div className="h-[400px] sm:h-screen w-full bg-slate-100 rounded-lg flex items-center justify-center sm:border-2 sm:border-dashed">
-									<iframe
-										src="https://calendar.google.com/calendar/embed?src=195d4999e6906278ce183970e2cf265b0a470d9a35e20e80ac2bd15d5f6f783a%40group.calendar.google.com&ctz=America%2FToronto&mode=WEEK"
-										style={{ borderWidth: 'solid 1px #777', width: '100%', height: '100%' }}
-										width="1000"
-										height="600"
-										title="Makerspace Google Calendar"
-										allowFullScreen
-									></iframe>
-								</div>
+								<CalendarEmbed
+									src="https://calendar.google.com/calendar/embed?src=195d4999e6906278ce183970e2cf265b0a470d9a35e20e80ac2bd15d5f6f783a%40group.calendar.google.com&ctz=America%2FToronto&mode=WEEK"
+									title="Digital Makerspace Google Calendar"
+								/>
 
 								<div className="my-4 p-4 bg-purple-50 rounded-lg">
 									<h4 className="mb-2">Typical Open Hours</h4>
@@ -56,17 +94,11 @@ export function CalendarSection() {
 						<Card>
 							<CardContent className="p-5">
 
-								{/* saboruin calendar */}
-								<div className="h-[400px] sm:h-screen w-full bg-slate-100 rounded-lg flex items-center justify-center sm:border-2 sm:border-dashed">
-									<iframe
-										src="https://calendar.google.com/calendar/embed?src=6975d8476dd6da2953a2d7544ffbe7f08758862eef0fb7bea801de5eee887f4f%40group.calendar.google.com&ctz=America%2FToronto"
-										style={{ borderWidth: 'solid 1px #777', width: '100%', height: '100%' }}
-										width="1000"
-										height="600"
-										title="Sabourin Makerspace Google Calendar"
-										allowFullScreen
-									/>
-								</div>
+								{/* sabourin calendar */}
+								<CalendarEmbed
+									src="https://calendar.google.com/calendar/embed?src=6975d8476dd6da2953a2d7544ffbe7f08758862eef0fb7bea801de5eee887f4f%40group.calendar.google.com&ctz=America%2FToronto"
+									title="Sabourin Makerspace Google Calendar"
+								/>
 
 								<div className="mt-6 p-4 bg-purple-50 rounded-lg">
 									<h4 className="mb-2">Typical Open Hours</h4>
