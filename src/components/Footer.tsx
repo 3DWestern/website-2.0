@@ -85,6 +85,7 @@ export function Footer() {
 										width={30}
 										height={30}
 										className="flex-shrink-0"
+										style={{ width: 30, height: 30 }}
 									/>
 								</a>
 							</li>
@@ -102,6 +103,7 @@ export function Footer() {
 										width={30}
 										height={30}
 										className="flex-shrink-0"
+										style={{ width: 30, height: 30 }}
 									/>
 								</a>
 							</li>
