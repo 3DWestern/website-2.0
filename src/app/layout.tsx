@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { LoadingWrapper } from "@/components/LoadingWrapper";
-import { HomeButton } from "@/components/HomeButton";
+import { inter, spaceGrotesk } from "@/lib/fonts";
+import { MenuProvider } from "@/context/MenuContext";
 
 // global metadata for SEO, can be overridden by specific individual pages
 export const metadata: Metadata = {
@@ -61,18 +62,16 @@ export default function RootLayout({
 }: Readonly<{
 	children: React.ReactNode;
 }>) {
-	// Use a client component to access the router
 	return (
-		<html lang="en" className="scroll-smooth">
-			<body className={`antialiased`}>
-				<HomeButton />
-				<LoadingWrapper>
-					{children}
-				</LoadingWrapper>
+		<html lang="en" className={`scroll-smooth ${inter.variable} ${spaceGrotesk.variable}`}>
+			<body className={`${inter.className} antialiased`}>
+				<MenuProvider>
+					<LoadingWrapper>
+						{children}
+					</LoadingWrapper>
+				</MenuProvider>
 			</body>
 		</html>
 	);
 }
-
-// HomeButton is now a client component in components/HomeButton.tsx
 
