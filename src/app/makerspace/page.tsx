@@ -1,3 +1,5 @@
+'use client';
+
 import { MakerspacePage } from '@/components/pages/MakerspacePage';
 import { HorizontalNav } from '@/components/HorizontalNav';
 import { Footer } from '@/components/Footer';

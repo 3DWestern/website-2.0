@@ -1,3 +1,5 @@
+'use client';
+
 import { EventsPage } from '@/components/pages/EventsPage';
 import { HorizontalNav } from '@/components/HorizontalNav';
 import { Footer } from '@/components/Footer';

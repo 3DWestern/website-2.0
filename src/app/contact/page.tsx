@@ -1,3 +1,5 @@
+'use client';
+
 import { ContactPage } from '@/components/pages/ContactPage';
 import { HorizontalNav } from '@/components/HorizontalNav';
 import { Footer } from '@/components/Footer';
