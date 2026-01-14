@@ -3,13 +3,13 @@ import BigTextSection from '@/components/sections/BigTextSection';
 import { MakerspacesSection } from '@/components/sections/MakerspacesSection';
 import { FAQSection } from '@/components/sections/FAQSection';
 import { AboutUsSection } from '@/components/sections/AboutUsSection';
-import { PhoneHeroSection } from '@/components/sections/PhoneHeroSection';
+import { MorissetteModel } from '@/components/sections/MorissetteModel';
 import { ExecsSection } from '@/components/sections/ExecsSection';
 
 export function HomePage() {
 	return (
 		<div>
-			<PhoneHeroSection />
+			<MorissetteModel />
 			<BigTextSection />
 			<AboutUsSection />
 			<EventsSection />

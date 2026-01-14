@@ -57,7 +57,7 @@ function Scene({ enableEffects = true, onDprChange }: { enableEffects?: boolean;
 
 const Model = () => {
   console.log('[Model] Component rendering...');
-  
+
   const gltf = useGLTF('/animations/assembly.glb') as GLTF;
   console.log('[Model] GLTF loaded via useGLTF hook:', gltf);
 

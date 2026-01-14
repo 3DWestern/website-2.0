@@ -27,16 +27,32 @@ export function LoadingWrapper({ children }: LoadingWrapperProps) {
 		return () => clearTimeout(timer);
 	}, []);
 
+	useEffect(() => {
+		// Prevent scrolling while loading
+		if (isLoading) {
+			document.body.style.overflow = 'hidden';
+		} else {
+			document.body.style.overflow = '';
+		}
+
+		// Cleanup: restore scrolling on unmount
+		return () => {
+			document.body.style.overflow = '';
+		};
+	}, [isLoading]);
+
 	return (
 		<LoadingContext.Provider value={{ loadingComplete: !isLoading }}>
 			{/* Loading screen overlay */}
-			{isLoading && animationData && (
+			{isLoading && (
 				<div className="fixed inset-0 z-[100] bg-black flex items-center justify-center">
-					<Lottie
-						animationData={animationData}
-						loop={false}
-						style={{ width: 300, height: 300 }}
-					/>
+					{animationData ? (
+						<Lottie
+							animationData={animationData}
+							loop={false}
+							style={{ width: 300, height: 300 }}
+						/>
+					) : null}
 				</div>
 			)}
 
