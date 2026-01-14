@@ -36,8 +36,8 @@ export function PhoneHeroSection() {
 							Accessing the makerspace: Level 1 training required (<a href="https://westernu.brightspace.com/d2l/le/discovery/view/course/151344" target="_blank" rel="noopener noreferrer" className="underline font-semibold">access here</a>).
 							<button
 								onClick={() => setDisclaimerVisible(false)}
-								className="absolute right-[-2.5rem] top-1/2 -translate-y-1/2"
-								aria-label="Dismiss"
+								className="absolute right-[-2.5rem] top-1/2 -translate-y-1/2 p-2 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-full hover:bg-white/20 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-purple-700 transition-colors"
+								aria-label="Dismiss notification"
 							>
 								<X className="w-6 h-6" />
 							</button>

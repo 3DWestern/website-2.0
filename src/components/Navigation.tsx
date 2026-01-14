@@ -42,7 +42,7 @@ export function Navigation() {
 		<>
 			{/* Mobile menu button - fixed position */}
 			<button
-				className={`sm:hidden fixed top-0 right-0 z-100 p-3 pr-4 bg-white rounded-bl-xl transition-all duration-1000 ${isLoaded ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0'}`}
+				className={`md:hidden fixed top-0 right-0 z-100 p-4 min-w-[44px] min-h-[44px] bg-white rounded-bl-xl transition-all duration-1000 ${isLoaded ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0'}`}
 				onClick={() => setIsOpen(!isOpen)}
 				aria-label="Toggle menu"
 			>
