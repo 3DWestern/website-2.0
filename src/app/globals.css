@@ -16,7 +16,6 @@ body {
   background: #ffffff;
   color: #000000;
   font-family: var(--font-inter), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  overflow-x: hidden;
 }
 
 /* Typography Scale */

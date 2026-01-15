@@ -61,9 +61,9 @@ export function HorizontalNav({
 		<>
 			{/* Desktop Navigation */}
 			<nav
-				className={`hidden lg:block ${isHeroOnly ? 'absolute' : 'fixed'} top-6 left-1/2 -translate-x-1/2 z-50 w-[85%] max-w-5xl`}
+				className={`hidden lg:block ${isHeroOnly ? 'absolute' : 'fixed'} top-6 left-1/2 -translate-x-1/2 z-50 ${isHeroOnly ? 'w-[80%]' : 'w-[85%]'} max-w-5xl`}
 			>
-				<div className={`${navStyles.bg} ${navStyles.backdrop} border ${navStyles.border} rounded-full ${navStyles.shadow} px-12 py-5`}>
+				<div className={`${navStyles.bg} ${navStyles.backdrop} border ${navStyles.border} rounded-full ${navStyles.shadow} ${isHeroOnly ? 'px-6 lg:px-10' : 'px-12'} py-5`}>
 					<div className="flex items-center justify-between">
 						{/* Left - Navigation Links */}
 						<div className="flex items-center gap-12">
@@ -142,7 +142,7 @@ export function HorizontalNav({
 			{/* Mobile Navigation */}
 			<div className="lg:hidden">
 				{/* Mobile Header with Logo and Menu Button */}
-				<div className={`${isHeroOnly ? 'absolute' : 'fixed'} top-4 left-4 right-4 z-50 ${navStyles.bg} ${navStyles.backdrop} border ${navStyles.border} rounded-full ${navStyles.shadow}`}>
+				<div className={`${isHeroOnly ? 'absolute' : 'fixed'} top-4 ${isHeroOnly ? 'left-2 right-2 max-w-[calc(100%-1rem)] mx-auto' : 'left-4 right-4'} z-50 ${navStyles.bg} ${navStyles.backdrop} border ${navStyles.border} rounded-full ${navStyles.shadow}`}>
 					<div className="flex items-center justify-between px-4 py-3">
 						<Link href="/" className="w-10 h-10 relative bg-white rounded-full p-1.5">
 							<Image

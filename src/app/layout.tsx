@@ -64,7 +64,7 @@ export default function RootLayout({
 }>) {
 	// Use a client component to access the router
 	return (
-		<html lang="en" className="scroll-smooth">
+		<html lang="en" className="scroll-smooth overflow-x-hidden">
 			<body className="antialiased">
 				<MenuProvider>
 					<HomeButton />
