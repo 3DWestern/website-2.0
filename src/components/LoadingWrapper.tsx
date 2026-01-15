@@ -46,14 +46,23 @@ export function LoadingWrapper({ children }: LoadingWrapperProps) {
 	useEffect(() => {
 		// Prevent scrolling while loading
 		if (isLoading) {
+			document.documentElement.style.overflow = 'hidden';
 			document.body.style.overflow = 'hidden';
+			document.body.style.position = 'fixed';
+			document.body.style.width = '100%';
 		} else {
+			document.documentElement.style.overflow = '';
 			document.body.style.overflow = '';
+			document.body.style.position = '';
+			document.body.style.width = '';
 		}
 
 		// Cleanup: restore scrolling on unmount
 		return () => {
+			document.documentElement.style.overflow = '';
 			document.body.style.overflow = '';
+			document.body.style.position = '';
+			document.body.style.width = '';
 		};
 	}, [isLoading]);
 
