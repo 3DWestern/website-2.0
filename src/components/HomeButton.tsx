@@ -6,7 +6,7 @@ import Image from "next/image";
 
 export function HomeButton() {
 	const pathname = usePathname();
-	if (pathname === "/") return null;
+	if (pathname !== "/") return null;
 	return (
 		<Link
 			href="/"

@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { LoadingWrapper } from "@/components/LoadingWrapper";
-import { HomeButton } from "@/components/HomeButton";
 import { MenuProvider } from "@/context/MenuContext";
 
 // global metadata for SEO, can be overridden by specific individual pages
@@ -67,7 +66,6 @@ export default function RootLayout({
 		<html lang="en" className="scroll-smooth overflow-x-hidden">
 			<body className="antialiased">
 				<MenuProvider>
-					<HomeButton />
 					<LoadingWrapper>
 						{children}
 					</LoadingWrapper>
