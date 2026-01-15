@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { pastEvents, event } from '../data/events';
+import { pastEvents, Event } from '../data/events';
 import Link from 'next/link';
 import { EventCard } from '../EventCard';
 import { EventModal } from '../EventModal';
@@ -11,9 +11,9 @@ import { motion } from 'framer-motion';
 
 export function EventsPage() {
 	const [selectedCategory, setSelectedCategory] = useState('all');
-	const [selectedEvent, setSelectedEvent] = useState<event | null>(null);
+	const [selectedEvent, setSelectedEvent] = useState<Event | null>(null);
 
-	const openModal = (event: event) => {
+	const openModal = (event: Event) => {
 		setSelectedEvent(event);
 	};
 
@@ -26,7 +26,7 @@ export function EventsPage() {
 		: pastEvents.filter(e => e.category.toLowerCase() === selectedCategory);
 
 	return (
-		<div className="min-h-screen pt-[88px]">
+		<main className="min-h-screen pt-[88px]">
 			{/* Header */}
 			<section className="bg-white py-16">
 				<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -81,6 +81,6 @@ export function EventsPage() {
 				</div>
 			</section>
 			<EventModal event={selectedEvent} isOpen={!!selectedEvent} onClose={closeModal} />
-		</div>
+		</main>
 	);
 }

@@ -3,7 +3,7 @@ import { bigstats } from "@/components/data/bigtext";
 import { koulen } from "@/lib/fonts";
 import { motion } from "motion/react";
 
-export default function BigTextSection() {
+export function BigTextSection() {
 	return (
 		<section className="flex w-screen min-h-screen flex-col items-center text-center py-20 gap-y-20">
 			<div className="mx-auto flex flex-col items-center justify-center gap-y-10 sm:gap-y-20">

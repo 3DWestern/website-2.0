@@ -1,7 +1,5 @@
 'use client';
 
-// import { TrainingSection } from '@/components/sections/TrainingSection';
-
 import { koulen } from '@/lib/fonts';
 import { CalendarSection } from '@/components/sections/CalendarSection';
 import { motion } from 'framer-motion';
@@ -9,7 +7,7 @@ import { motion } from 'framer-motion';
 
 export function MakerspacePage() {
 	return (
-		<div className="min-h-screen pt-[88px]">
+		<main className="min-h-screen pt-[88px]">
 			{/* Header */}
 			<section className="bg-white py-16">
 				<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -40,29 +38,7 @@ export function MakerspacePage() {
 				</div>
 			</section>
 
-
-			{/*			<section className="w-full bg-purple-700 text-white py-4 px-2 text-center text-base font-medium">
-				<div className="max-w-5xl mx-auto">
-					<h2 className="text-lg sm:text-xl md:text-2xl font-bold mb-1">Accessing the Makerspace</h2>
-				</div>
-			</section> */}
-
-			{/* Header NOTE: commented out chatted header 
-			<section className="bg-gradient-to-br from-purple-50 to-indigo-50 py-16">
-				<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-					<Badge className="mb-4">Facilities</Badge>
-					<h1 className="text-3xl sm:text-4xl lg:text-5xl mb-4">About Our Makerspaces</h1>
-
-					<p className="text-xl text-muted-foreground max-w-2xl">
-						Explore our state-of-the-art facilities, available equipment, training programs, and booking options
-					</p>
-				</div>
-			</section> */ }
-
-			{/* <MakerspacesSection /> */}
 			<CalendarSection />
-			{/* <TrainingSection /> */}
-
-		</div>
+		</main>
 	);
 }

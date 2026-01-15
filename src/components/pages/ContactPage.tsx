@@ -12,7 +12,6 @@ import { motion } from 'framer-motion';
 
 
 export function ContactPage() {
-
 	const [result, setResult] = useState<string>('');
 	const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 	const [inquiryType, setInquiryType] = useState<string>('');
@@ -49,7 +48,7 @@ export function ContactPage() {
 
 
 	return (
-		<div className="min-h-screen pt-[88px]">
+		<main className="min-h-screen pt-[88px]">
 			{/* Header */}
 			<section className="bg-white py-16">
 				<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -219,6 +218,6 @@ export function ContactPage() {
 					</Link>
 				</div>
 			</section>
-		</div>
+		</main>
 	);
 }

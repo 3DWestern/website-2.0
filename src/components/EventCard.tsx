@@ -2,12 +2,12 @@
 'use client';
 
 import { Card } from '@/components/ui/card';
-import { event } from '@/components/data/events';
+import { Event } from '@/components/data/events';
 import Image from 'next/image';
 
 interface EventCardProps {
-	event: event;
-	onCardClick: (event: event) => void;
+	event: Event;
+	onCardClick: (event: Event) => void;
 }
 
 export function EventCard({ event, onCardClick }: EventCardProps) {

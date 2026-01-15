@@ -7,12 +7,12 @@ import { koulen } from '@/lib/fonts';
 import { highlightEvents } from '@/components/data/events';
 import { EventCard } from '../EventCard';
 import { EventModal } from '../EventModal';
-import { event } from '@/components/data/events';
+import { Event } from '@/components/data/events';
 
 export function EventsSection() {
-	const [selectedEvent, setSelectedEvent] = useState<event | null>(null);
+	const [selectedEvent, setSelectedEvent] = useState<Event | null>(null);
 
-	const openModal = (event: event) => {
+	const openModal = (event: Event) => {
 		setSelectedEvent(event);
 	};
 
