@@ -80,9 +80,9 @@ export function MorissetteModel() {
 
   return (
     <section className="h-[98vh] bg-white overflow-hidden relative">
-      <div className="absolute inset-0 px-4 md:px-8 lg:px-16 xl:px-8 pt-8">
+      <div className="absolute inset-0 pt-8">
         {/* Content container with rounded corners - 98% height */}
-        <div className="relative w-full h-[98%]">
+        <div className="relative w-full h-[98%] px-4 md:px-8 lg:px-16 xl:px-8">
           <div className="relative w-full h-full rounded-[1.25rem] lg:rounded-2xl overflow-hidden">
             {/* Gradient background for 3D model scene */}
             <div className="absolute inset-0 bg-gradient-to-b from-purple-800 via-indigo-900 to-black">
@@ -93,7 +93,7 @@ export function MorissetteModel() {
               <AnimatePresence>
                 {disclaimerVisible && !isScrolled && !isMenuOpen && (
                   <motion.div
-                    className="absolute left-1/2 -translate-x-1/2 w-[90%] lg:w-max max-w-4xl bg-purple-700 text-white py-3 px-10 rounded-xl text-center text-sm font-medium z-40"
+                    className="absolute left-1/2 -translate-x-1/2 w-[85%] lg:w-max max-w-4xl bg-purple-700 text-white py-3 px-6 lg:px-10 rounded-xl text-center text-sm font-medium z-40"
                     variants={toastVariants}
                     initial="hidden"
                     animate={disclaimerAnimating ? "visible" : "hidden"}
