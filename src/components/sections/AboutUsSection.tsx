@@ -70,7 +70,7 @@ function Card({ index, title, description, detail, image, progress, range, targe
 	const scale = useTransform(progress, range, [1, targetScale]);
 
 	return (
-		<div className="min-h-[80vh] w-full lg:h-screen flex items-start justify-center sticky top-20 px-4 sm:px-6 lg:px-8">
+		<div className="min-h-[80vh] w-screen lg:h-screen flex items-start justify-center sticky top-20 px-4 sm:px-6 lg:px-8">
 			<motion.div
 				ref={containerRef}
 				style={{

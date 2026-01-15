@@ -70,7 +70,7 @@ export function Footer() {
 							</li>
 						</ul>
 						{/*  links for instagram and linkedin */}
-						<ul className="flex flex-row sm:flex-col sm:ml-10 gap-4 sm:gap-10">
+						<ul className="flex flex-row sm:flex-col sm:ml-10 gap-10">
 							<li>
 								<a
 									href="https://www.instagram.com/3dwestern/"
