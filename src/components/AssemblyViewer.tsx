@@ -21,12 +21,12 @@ function Scene({ enableEffects = true, onDprChange }: { enableEffects?: boolean;
       />
       <ambientLight intensity={0.5} />
       <pointLight position={[10, 10, 10]} intensity={1} />
-      <OrbitControls 
+      <OrbitControls
         autoRotate
         autoRotateSpeed={0.5}
-        enablePan={false} 
-        enableZoom={false} 
-        enableRotate={true}
+        enablePan={false}
+        enableZoom={false}
+        enableRotate={false}
         maxPolarAngle={Math.PI / 2}
       />
       <Suspense fallback={null}>
