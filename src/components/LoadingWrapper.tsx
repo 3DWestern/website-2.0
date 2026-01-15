@@ -44,26 +44,81 @@ export function LoadingWrapper({ children }: LoadingWrapperProps) {
 	}, []);
 
 	useEffect(() => {
-		// Prevent scrolling while loading
 		if (isLoading) {
+			// Save current scroll position
+			const scrollY = window.scrollY;
+
+			// Apply CSS-based scroll prevention
 			document.documentElement.style.overflow = 'hidden';
+			document.documentElement.style.height = '100vh';
 			document.body.style.overflow = 'hidden';
 			document.body.style.position = 'fixed';
+			document.body.style.top = `-${scrollY}px`;
+			document.body.style.left = '0';
+			document.body.style.right = '0';
 			document.body.style.width = '100%';
-		} else {
-			document.documentElement.style.overflow = '';
-			document.body.style.overflow = '';
-			document.body.style.position = '';
-			document.body.style.width = '';
-		}
 
-		// Cleanup: restore scrolling on unmount
-		return () => {
+			// Remove scroll-smooth class from html element
+			const htmlElement = document.documentElement;
+			const hadScrollSmooth = htmlElement.classList.contains('scroll-smooth');
+			if (hadScrollSmooth) {
+				htmlElement.classList.remove('scroll-smooth');
+				htmlElement.dataset.hadScrollSmooth = 'true';
+			}
+
+			// Prevent scroll events
+			const preventScroll = (e: Event) => {
+				e.preventDefault();
+				e.stopPropagation();
+				return false;
+			};
+
+			const preventKeyScroll = (e: KeyboardEvent) => {
+				// Prevent Page Up, Page Down, arrow keys, spacebar
+				if ([32, 33, 34, 35, 36, 37, 38, 39, 40].includes(e.keyCode)) {
+					e.preventDefault();
+					return false;
+				}
+			};
+
+			// Add event listeners with passive: false to enable preventDefault
+			window.addEventListener('wheel', preventScroll, { passive: false });
+			window.addEventListener('touchmove', preventScroll, { passive: false });
+			window.addEventListener('keydown', preventKeyScroll, { passive: false });
+
+			// Cleanup function
+			return () => {
+				// Remove event listeners
+				window.removeEventListener('wheel', preventScroll);
+				window.removeEventListener('touchmove', preventScroll);
+				window.removeEventListener('keydown', preventKeyScroll);
+			};
+		} else {
+			// Restore scroll position
+			const scrollY = document.body.style.top;
+
+			// Restore CSS properties
 			document.documentElement.style.overflow = '';
+			document.documentElement.style.height = '';
 			document.body.style.overflow = '';
 			document.body.style.position = '';
+			document.body.style.top = '';
+			document.body.style.left = '';
+			document.body.style.right = '';
 			document.body.style.width = '';
-		};
+
+			// Restore scroll-smooth class if it was present
+			const htmlElement = document.documentElement;
+			if (htmlElement.dataset.hadScrollSmooth === 'true') {
+				htmlElement.classList.add('scroll-smooth');
+				delete htmlElement.dataset.hadScrollSmooth;
+			}
+
+			// Restore scroll position
+			if (scrollY) {
+				window.scrollTo(0, parseInt(scrollY || '0') * -1);
+			}
+		}
 	}, [isLoading]);
 
 	return (
