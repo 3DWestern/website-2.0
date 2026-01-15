@@ -4,18 +4,34 @@ import { useState, useEffect, ReactNode } from 'react';
 import Lottie from 'lottie-react';
 import { LoadingContext } from '@/context/LoadingContext';
 
+type AnimationData = Record<string, unknown>;
+
 interface LoadingWrapperProps {
 	children: ReactNode;
 }
 
 export function LoadingWrapper({ children }: LoadingWrapperProps) {
-	const [animationData, setAnimationData] = useState(null);
+	const [animationData, setAnimationData] = useState<AnimationData | null>(null);
 	const [isLoading, setIsLoading] = useState(true);
 
 	useEffect(() => {
-		fetch('/animations/loading.json')
-			.then(res => res.json())
-			.then(data => setAnimationData(data));
+		const abortController = new AbortController();
+
+		fetch('/animations/loading.json', { signal: abortController.signal })
+			.then(res => {
+				if (!res.ok) {
+					throw new Error('Failed to load animation');
+				}
+				return res.json();
+			})
+			.then((data: AnimationData) => setAnimationData(data))
+			.catch(error => {
+				if (error.name !== 'AbortError') {
+					console.error('Failed to load loading animation:', error);
+				}
+			});
+
+		return () => abortController.abort();
 	}, []);
 
 	useEffect(() => {

@@ -13,8 +13,6 @@ const AssemblyViewer = dynamic(() => import("@/components/AssemblyViewer"), {
 });
 
 export function MorissetteModel() {
-  console.log("[MorissetteModel] Component render");
-
   const { loadingComplete } = useLoading();
   const isLoaded = loadingComplete;
   const { isMenuOpen } = useMenu();
@@ -132,49 +130,10 @@ export function MorissetteModel() {
           </div>
         </div>
 
-        {/* Bottom left info - blends with white background, with location map */}
+        {/* Bottom left info - blends with white background */}
         <div
           className={`absolute bottom-2 left-0 bg-white rounded-tr-2xl lg:rounded-tl-2xl p-6 lg:p-8 transition-all duration-1000 ${isLoaded ? "translate-y-0 opacity-100" : "translate-y-full opacity-0"}`}
-        >
-          <div className="flex gap-6 items-start">
-            {/* Text info */}
-            {/* <div>
-              <p className="text-gray-900 font-semibold text-lg lg:text-2xl">
-                3D Western{" "}
-                <span className="text-gray-500 font-normal">
-                  / Student Makerspace
-                </span>
-                <span className="hidden lg:inline text-gray-500 font-normal">
-                  {" "}
-                  /{" "}
-                </span>
-                <span className="block lg:inline text-gray-400 text-base lg:text-lg">
-                  Western University / London, ON
-                </span>
-              </p>
-            </div> */}
-
-            {/* Map bento - desktop only */}
-            {/* <div className="hidden lg:block flex-shrink-0">
-              <a
-                href="https://www.google.com/maps/place/Western+University/@43.009544,-81.273901,15z"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-shadow"
-                aria-label="View Morrissette Institute location on Google Maps"
-              >
-                <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2918.7778!2d-81.2739!3d43.0095!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x882eee4aa7848457%3A0x307ca725cc79e92e!2sWestern%20University!5e0!3m2!1sen!2sca!4v1234567890"
-                  width="180"
-                  height="140"
-                  style={{ border: 0 }}
-                  loading="lazy"
-                  title="Morrissette Institute Location"
-                />
-              </a>
-            </div> */}
-          </div>
-        </div>
+        />
       </div>
     </section>
   );

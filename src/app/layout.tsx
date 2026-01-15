@@ -65,7 +65,7 @@ export default function RootLayout({
 	// Use a client component to access the router
 	return (
 		<html lang="en" className="scroll-smooth">
-			<body className={`antialiased`}>
+			<body className="antialiased">
 				<MenuProvider>
 					<HomeButton />
 					<LoadingWrapper>
@@ -76,6 +76,3 @@ export default function RootLayout({
 		</html>
 	);
 }
-
-// HomeButton is now a client component in components/HomeButton.tsx
-

@@ -6,11 +6,11 @@ import { Footer } from '@/components/Footer';
 
 export default function Contact() {
   return (
-    <div className="min-h-screen flex flex-col">
+    <main className="min-h-screen flex flex-col">
       <HorizontalNav variant="dark" />
       <ContactPage />
       <Footer />
-    </div>
+    </main>
   );
 }
 

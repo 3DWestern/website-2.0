@@ -6,11 +6,11 @@ import { Footer } from '@/components/Footer';
 
 export default function Events() {
   return (
-    <div className="min-h-screen flex flex-col">
+    <main className="min-h-screen flex flex-col">
       <HorizontalNav variant="dark" />
       <EventsPage />
       <Footer />
-    </div>
+    </main>
   );
 }
 
