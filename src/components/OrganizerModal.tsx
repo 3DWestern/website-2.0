@@ -1,4 +1,5 @@
 'use client';
+'use no memo';
 
 import { X, Globe, Github, Linkedin } from 'lucide-react';
 import {

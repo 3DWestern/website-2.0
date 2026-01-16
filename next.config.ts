@@ -2,7 +2,7 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   /* config options here */
-  // reactCompiler: true, // Disabled - incompatible with react-fast-marquee
+  reactCompiler: true,
 };
 
 export default nextConfig;
