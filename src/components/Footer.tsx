@@ -1,6 +1,7 @@
 import { Mail, MapPin } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { koulen } from '@/lib/fonts';
 
 export function Footer() {
 	return (
@@ -12,7 +13,7 @@ export function Footer() {
 						<div className="flex items-center gap-3 mb-4">
 							<Image src="/logo.png" alt="3DW" width={40} height={40} />
 							<div className="flex flex-col">
-								<span className="tracking-tight font-bold">3D Western</span>
+								<span className={`tracking-tight font-bold ${koulen.className}`}>3D Western</span>
 							</div>
 						</div>
 						<p className="text-slate-600 max-w-md">
