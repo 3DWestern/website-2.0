@@ -22,15 +22,13 @@ export function AboutUsSection() {
 					<Card
 						key={index}
 						index={index}
+						isLast={index === content.length - 1}
 						title={item.title}
 						description={item.description}
 						detail={item.detail}
 						image={item.image}
 					/>
 				))}
-
-				{/* Spacer INSIDE container for last card sticky effect */}
-				<div className="h-[25vh] sm:h-[30vh]" />
 			</div>
 		</section>
 	);
@@ -38,19 +36,20 @@ export function AboutUsSection() {
 
 interface CardProps {
 	index: number;
+	isLast: boolean;
 	title: string;
 	description: string;
 	detail: string;
 	image?: string;
 }
 
-function Card({ index, title, description, detail, image }: CardProps) {
+function Card({ index, isLast, title, description, detail, image }: CardProps) {
 	return (
 		<div
-			className="min-h-[80vh] lg:h-screen w-full flex items-start justify-center sticky px-4 sm:px-6 lg:px-8"
+			className={`min-h-[80vh] lg:h-screen w-full flex items-start justify-center px-4 sm:px-6 lg:px-8 ${!isLast ? 'sticky' : ''}`}
 			style={{
 				zIndex: 10 + index,
-				top: `calc(6rem + ${index * 3}rem)`
+				...(!isLast && { top: `calc(6rem + ${index * 3}rem)` })
 			}}
 		>
 			<div className="relative w-full sm:w-4/5 origin-top">
