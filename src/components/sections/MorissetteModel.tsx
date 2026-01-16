@@ -101,7 +101,10 @@ export function MorissetteModel() {
         <div className="relative w-full h-[98%] px-4 md:px-8 lg:px-16 xl:px-8">
           <div className="relative w-full h-full rounded-[1.25rem] lg:rounded-2xl overflow-hidden">
             {/* Gradient background for 3D model scene */}
-            <div className="absolute inset-0 bg-gradient-to-b from-purple-800 via-indigo-900 to-black">
+            <div
+              className="absolute inset-0 bg-gradient-to-b from-purple-800 via-indigo-900 to-black"
+              onClick={disclaimerVisible ? handleDismiss : undefined}
+            >
               {/* NAVBAR - Now inside canvas container */}
               <HorizontalNav isHeroOnly={true} variant="light" />
 
@@ -114,6 +117,7 @@ export function MorissetteModel() {
                     initial="hidden"
                     animate={disclaimerAnimating ? "visible" : "hidden"}
                     exit="exit"
+                    onClick={(e) => e.stopPropagation()}
                   >
                     <div className="relative pr-10">
                       Accessing the makerspace: Level 1 training required (
