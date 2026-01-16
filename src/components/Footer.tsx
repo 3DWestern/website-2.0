@@ -15,42 +15,42 @@ export function Footer() {
 								<span className="tracking-tight font-bold">3D Western</span>
 							</div>
 						</div>
-						<p className="text-slate-400 max-w-md">
+						<p className="text-slate-200 max-w-md">
 							Empowering Students to Build &amp; Create.
 						</p>
-						<a href="/documents/3DW_ToS.pdf" className="underline text-slate-400 max-w-md">Terms of Service</a>
+						<a href="/documents/3DW_ToS.pdf" className="underline text-slate-200 max-w-md">Terms of Service</a>
 					</div>
 
 					{/* Quick Links */}
 					<div>
 						<ul className="space-y-2">
 							<li>
-								<Link href="/" className="text-slate-400 hover:text-white transition-colors hover:scale-110 hover:font-bold">
+								<Link href="/" className="text-slate-200 hover:text-white hover:translate-x-1 transition-all">
 									Home
 								</Link>
 							</li>
 							<li>
-								<Link href="/contact" className="text-slate-400 hover:text-white transition-colors hover:scale-110 hover:font-bold">
+								<Link href="/contact" className="text-slate-200 hover:text-white hover:translate-x-1 transition-all">
 									Contact Us
 								</Link>
 							</li>
 							<li>
-								<Link href="/makerspace" className="text-slate-400 hover:text-white transition-colors hover:scale-110 hover:font-bold">
+								<Link href="/makerspace" className="text-slate-200 hover:text-white hover:translate-x-1 transition-all">
 									Availability
 								</Link>
 							</li>
 							<li>
-								<Link href="https://westernu.brightspace.com/d2l/le/discovery/view/course/151344" className="text-slate-400 hover:text-white transition-colors hover:scale-110 hover:font-bold">
+								<Link href="https://westernu.brightspace.com/d2l/le/discovery/view/course/151344" className="text-slate-200 hover:text-white hover:translate-x-1 transition-all">
 									Training
 								</Link>
 							</li>
 							<li>
-								<Link href="/events" className="text-slate-400 hover:text-white transition-colors hover:scale-110 hover:font-bold">
+								<Link href="/events" className="text-slate-200 hover:text-white hover:translate-x-1 transition-all">
 									Events
 								</Link>
 							</li>
 							{/*<li>
-								<Link href="/dashboard" className="text-slate-400 hover:text-white transition-colors hover:scale-110 hover:font-bold">
+								<Link href="/dashboard" className="text-slate-200 hover:text-white hover:translate-x-1 transition-all">
 									Dashboard
 								</Link>
 							</li>*/}
@@ -60,11 +60,11 @@ export function Footer() {
 					{/* right columns */}
 					<div className="lg:border-l lg:border-purple-800 lg:pl-8 flex flex-col sm:flex-row items-center gap-8">
 						<ul className="space-y-3">
-							<li className="flex items-start gap-2 text-slate-400">
+							<li className="flex items-start gap-2 text-slate-200">
 								<Mail size={20} className="mt-0.5 flex-shrink-0" />
 								<a href="mailto:contact@3dwestern.ca" className="hover:text-white transition-colors">contact@3dwestern.ca</a>
 							</li>
-							<li className="flex items-start gap-2 text-slate-400">
+							<li className="flex items-start gap-2 text-slate-200">
 								<MapPin size={20} className="mt-0.5 flex-shrink-0" />
 								<span>Ronald D. Schmeichel Building for Entrepreneurship and Innovation, Western University</span>
 							</li>
@@ -76,7 +76,7 @@ export function Footer() {
 									href="https://www.instagram.com/3dwestern/"
 									target="_blank"
 									rel="noopener noreferrer"
-									className="flex items-center gap-2 text-slate-400 hover:text-white transition-colors hover:scale-110 hover:font-bold"
+									className="flex items-center justify-center p-2 text-slate-200 hover:text-white transition-colors"
 									aria-label="Instagram"
 								>
 									<Image
@@ -93,7 +93,7 @@ export function Footer() {
 									href="https://www.linkedin.com/company/3d-western/"
 									target="_blank"
 									rel="noopener noreferrer"
-									className="flex items-center gap-2 text-slate-400 hover:text-white transition-colors hover:scale-110 hover:font-bold"
+									className="flex items-center justify-center p-2 text-slate-200 hover:text-white transition-colors"
 									aria-label="LinkedIn"
 								>
 									<Image
@@ -109,7 +109,7 @@ export function Footer() {
 					</div>
 				</div>
 
-				<div className="border-t border-purple-800 mt-12 pt-8 text-center text-slate-400">
+				<div className="border-t border-purple-800 mt-12 pt-8 text-center text-slate-200">
 					<p>
 						Made by{' '}
 						<a
