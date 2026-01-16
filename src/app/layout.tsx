@@ -17,10 +17,10 @@ export const metadata: Metadata = {
 		siteName: "3D Western",
 		images: [
 			{
-				url: "https://3dwestern.ca/banner.png",
+				url: "https://3dwestern.ca/preview.png",
 				width: 1200,
 				height: 630,
-				alt: "3D Western: Western University's Official 3D Printing Club",
+				alt: "3D Western: Build Create Maker Space",
 			},
 		],
 		locale: "en_US",
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
 		description: "Western University's Official 3D Printing Club",
 		images: [
 			{
-				url: "https://3dwestern.ca/banner.png",
+				url: "https://3dwestern.ca/preview.png",
 				width: 1200,
 				height: 630,
 				alt: "3D Western: Western University's Official 3D Printing Club",
