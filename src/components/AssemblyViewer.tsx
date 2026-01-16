@@ -118,81 +118,12 @@ const Model = ({ onModelReady }: ModelProps) => {
   );
 };
 
-// Old implementation with manual loading - commented out
-/*
-const ModelOld = ({ onAfterRender, onError }: { onAfterRender?: () => void; onError?: () => void }) => {
-  const [model, setModel] = useState<GLTF>();
-
-  console.log('[Model] Component render, model state:', model ? 'loaded' : 'null');
-
-  React.useEffect(() => {
-    console.log('[Model] useEffect triggered - starting model load');
-    const loadModel = async () => {
-      try {
-        console.log('[Model] Loading model from /animations/assembly.glb');
-        const gltf = await new GLTFLoader().loadAsync('/animations/assembly.glb');
-        setModel(gltf);
-        console.log("[Model] Model loaded successfully", gltf);
-      } catch (err) {
-        onError && onError();
-        console.error("[Model] Error loading model:", err);
-      }
-    };
-    loadModel();
-  }, [onError]);
-
-  if (!model) {
-    console.log('[Model] Returning null - model not loaded yet');
-    return null;
-  }
-
-  // Find meshes by name
-  const meshRFDD = model.scene.getObjectByName('RFDD_0') as Mesh;
-  const meshEdges = model.scene.getObjectByName('RFDD_edges_0') as Mesh;
-
-  console.log('[Model] Meshes found:', { meshRFDD: !!meshRFDD, meshEdges: !!meshEdges });
-
-  if (!meshRFDD || !meshEdges) {
-    console.warn('[Model] Missing meshes, returning null');
-    return null;
-  }
-
-  console.log('[Model] Rendering group with meshes');
-
-  return (
-    <group dispose={null} position={[2, -2, -0.25]} rotation={[-Math.PI / 2, 0, 0]}>
-      <mesh
-        geometry={meshRFDD.geometry}
-        material={meshRFDD.material}
-        scale={[1, 1, 1]}
-        position={[0, 0.13, 0.13]}
-      />
-      <mesh
-        geometry={meshEdges.geometry}
-        material={meshEdges.material}
-        scale={[1, 1, 1]}
-        position={[0, 0.13, 0.13]}
-        material-toneMapped={false}
-        material-emissiveIntensity={3.65}
-        onAfterRender={onAfterRender}
-      />
-    </group>
-  );
-};
-*/
-
-const gradientBg = {
-  width: '100%',
-  height: '100%',
-  position: 'relative' as const,
-  borderRadius: '1rem',
-  backgroundImage:
-    'radial-gradient(circle closest-corner at 25% 60%, rgba(238, 39, 39, 0.25), rgba(255, 255, 255, 0)), ' +
-    'radial-gradient(circle farthest-side at 71% 16%, rgba(154, 39, 238, 0.15), rgba(255, 255, 255, 0) 35%), ' +
-    'radial-gradient(circle closest-corner at 32% 38%, rgba(238, 164, 39, 0.1), rgba(255, 255, 255, 0) 76%), ' +
-    'radial-gradient(circle farthest-side at 69% 81%, rgba(255, 0, 48, 0.1), rgba(255, 255, 255, 0) 76%), ' +
-    'linear-gradient(#202124, #202124)',
-};
+const GRADIENT_BG_IMAGE =
+  'radial-gradient(circle closest-corner at 25% 60%, rgba(238, 39, 39, 0.25), rgba(255, 255, 255, 0)), ' +
+  'radial-gradient(circle farthest-side at 71% 16%, rgba(154, 39, 238, 0.15), rgba(255, 255, 255, 0) 35%), ' +
+  'radial-gradient(circle closest-corner at 32% 38%, rgba(238, 164, 39, 0.1), rgba(255, 255, 255, 0) 76%), ' +
+  'radial-gradient(circle farthest-side at 69% 81%, rgba(255, 0, 48, 0.1), rgba(255, 255, 255, 0) 76%), ' +
+  'linear-gradient(#202124, #202124)';
 
 
 interface AssemblyViewerProps {
@@ -231,43 +162,8 @@ const AssemblyViewer = ({ onModelReady }: AssemblyViewerProps) => {
 
   // console.log('[AssemblyViewer] Hardware acceleration:', hasHWA, 'Effects enabled:', enableEffects);
 
-  React.useEffect(() => {
-    // console.log('[AssemblyViewer] Component mounted');
-    
-    // Check if Canvas is rendering
-    setTimeout(() => {
-      const canvas = document.querySelector('canvas');
-      // console.log('[AssemblyViewer] Canvas element:', canvas);
-      if (canvas) {
-        // console.log('[AssemblyViewer] Canvas dimensions:', canvas.width, 'x', canvas.height);
-        // console.log('[AssemblyViewer] Canvas client dimensions:', canvas.clientWidth, 'x', canvas.clientHeight);
-        
-        // Check parent dimensions
-        let parent = canvas.parentElement;
-        let depth = 0;
-        while (parent && depth < 5) {
-          const computed = window.getComputedStyle(parent);
-          /*
-          console.log(`[AssemblyViewer] Parent ${depth}:`, {
-            tag: parent.tagName,
-            class: parent.className,
-            width: computed.width,
-            height: computed.height,
-            position: computed.position
-          });
-          */
-          parent = parent.parentElement;
-          depth++;
-        }
-      }
-    }, 100);
-
-    return () => {}; // console.log('[AssemblyViewer] Component unmounted');
-  }, []);
-
-  
   return (
-    <div style={{ position: 'absolute', inset: 0, borderRadius: '1rem', backgroundImage: gradientBg.backgroundImage }}>
+    <div style={{ position: 'absolute', inset: 0, borderRadius: '1rem', backgroundImage: GRADIENT_BG_IMAGE }}>
       {hasHWA && !fallback ? (
         <div style={{ position: 'absolute', inset: 0, pointerEvents: 'none' }}>
           <Canvas

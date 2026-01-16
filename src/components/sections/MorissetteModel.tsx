@@ -1,7 +1,7 @@
 "use client";
 
 import { useLoading } from "@/context/LoadingContext";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { X, ChevronDown } from "lucide-react";
 import dynamic from "next/dynamic";
 import { HorizontalNav } from "@/components/HorizontalNav";
@@ -94,6 +94,8 @@ export function MorissetteModel() {
     setTimeout(() => setDisclaimerVisible(false), ANIMATION_DELAYS.TOAST_DISMISS);
   };
 
+  const handleModelReady = useCallback(() => setModelReady(true), [setModelReady]);
+
   return (
     <section className="h-[98vh] bg-white relative">
       <div className="absolute inset-0 pt-8">
@@ -144,7 +146,7 @@ export function MorissetteModel() {
 
               {/* 3D Canvas - Always rendered so model can preload during loading animation */}
               <div className="absolute inset-0 z-1" style={{ pointerEvents: 'none' }}>
-                <AssemblyViewer onModelReady={() => setModelReady(true)} />
+                <AssemblyViewer onModelReady={handleModelReady} />
               </div>
 
               {/* Scroll Indicator */}
