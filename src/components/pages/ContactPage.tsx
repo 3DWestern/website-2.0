@@ -9,6 +9,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { koulen } from '@/lib/fonts';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
+import { Loader2 } from 'lucide-react';
 
 
 export function ContactPage() {
@@ -92,22 +93,30 @@ export function ContactPage() {
 
 									<div className="grid md:grid-cols-2 gap-4">
 										<div className="space-y-2">
-											<Label htmlFor="firstName">First Name</Label>
+											<Label htmlFor="firstName">
+												First Name <span className="text-red-500" aria-label="required">*</span>
+											</Label>
 											<Input id="firstName" name="firstName" placeholder="John" required />
 										</div>
 										<div className="space-y-2">
-											<Label htmlFor="lastName">Last Name</Label>
+											<Label htmlFor="lastName">
+												Last Name <span className="text-red-500" aria-label="required">*</span>
+											</Label>
 											<Input id="lastName" name="lastName" placeholder="Doe" required />
 										</div>
 									</div>
 
 									<div className="space-y-2">
-										<Label htmlFor="email">Email</Label>
+										<Label htmlFor="email">
+										Email <span className="text-red-500" aria-label="required">*</span>
+									</Label>
 										<Input id="email" name="email" type="email" placeholder="john.doe@uwo.ca" required />
 									</div>
 
 									<div className="space-y-2">
-										<Label htmlFor="inquiryType">Inquiry Type</Label>
+										<Label htmlFor="inquiryType">
+										Inquiry Type <span className="text-red-500" aria-label="required">*</span>
+									</Label>
 										<Select value={inquiryType} onValueChange={setInquiryType}>
 											<SelectTrigger
 												id="inquiryType"
@@ -125,12 +134,16 @@ export function ContactPage() {
 									</div>
 
 									<div className="space-y-2">
-										<Label htmlFor="subject">Subject</Label>
+										<Label htmlFor="subject">
+										Subject <span className="text-red-500" aria-label="required">*</span>
+									</Label>
 										<Input id="subject" name="subject" placeholder="Brief description of your inquiry" required />
 									</div>
 
 									<div className="space-y-2">
-										<Label htmlFor="message">Message</Label>
+										<Label htmlFor="message">
+										Message <span className="text-red-500" aria-label="required">*</span>
+									</Label>
 										<Textarea
 											id="message"
 											name="message"
@@ -147,12 +160,21 @@ export function ContactPage() {
 											size="lg"
 											disabled={isSubmitting}
 										>
-											{isSubmitting ? 'Sending...' : 'Send Message'}
+											{isSubmitting ? (
+												<>
+													<Loader2 className="mr-2 h-4 w-4 animate-spin" />
+													Sending...
+												</>
+											) : (
+												'Send Message'
+											)}
 										</Button>
 									</div>
 
 									{result && (
-										<p className="text-sm text-muted-foreground text-center">{result}</p>
+										<div role="status" aria-live="polite" className="text-sm text-muted-foreground text-center">
+											{result}
+										</div>
 									)}
 								</form>
 							</CardContent>

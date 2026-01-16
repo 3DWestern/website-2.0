@@ -26,8 +26,8 @@ export function EventCard({ event, onCardClick }: EventCardProps) {
 			/>
 			<div className="absolute inset-0 bg-black opacity-50 z-10" />
 			<div className="relative p-6 flex flex-col justify-end h-full text-white z-20">
-				<h3 className="text-2xl font-bold">{event.title}</h3>
-				<p className="text-sm">{event.date}</p>
+				<h3 className="text-2xl font-bold drop-shadow-lg">{event.title}</h3>
+				<p className="text-sm drop-shadow-md">{event.date}</p>
 			</div>
 		</Card>
 	);
