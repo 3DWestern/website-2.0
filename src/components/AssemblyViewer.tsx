@@ -56,16 +56,16 @@ function Scene({ enableEffects = true, onDprChange }: { enableEffects?: boolean;
 }
 
 const Model = () => {
-  console.log('[Model] Component rendering...');
+  // console.log('[Model] Component rendering...');
 
   const gltf = useGLTF('/animations/assembly.glb') as GLTF;
-  console.log('[Model] GLTF loaded via useGLTF hook:', gltf);
+  // console.log('[Model] GLTF loaded via useGLTF hook:', gltf);
 
   // Find meshes by name
   const meshRFDD = gltf.scene.getObjectByName('RFDD_0') as Mesh;
   const meshEdges = gltf.scene.getObjectByName('RFDD_edges_0') as Mesh;
 
-  console.log('[Model] Meshes found:', { meshRFDD: !!meshRFDD, meshEdges: !!meshEdges });
+  // console.log('[Model] Meshes found:', { meshRFDD: !!meshRFDD, meshEdges: !!meshEdges });
 
   // Clone and enhance the edges material for bloom effect
   const edgesMaterial = React.useMemo(() => {
@@ -85,7 +85,7 @@ const Model = () => {
     return null;
   }
 
-  console.log('[Model] Rendering group with meshes');
+  // console.log('[Model] Rendering group with meshes');
 
   return (
     <group position={[2, -2, -0.25]} rotation={[-Math.PI / 2, 0, 0]}>
@@ -185,7 +185,7 @@ const gradientBg = {
 
 
 const AssemblyViewer = () => {
-  console.log('[AssemblyViewer] Component render');
+  // console.log('[AssemblyViewer] Component render');
   
   // Adaptive pixel ratio based on device - managed by PerformanceMonitor
   const [dpr, setDpr] = React.useState(() => 
@@ -195,7 +195,7 @@ const AssemblyViewer = () => {
   );
   const fallback = false;
 
-  console.log('[AssemblyViewer] State:', { dpr, fallback });
+  // console.log('[AssemblyViewer] State:', { dpr, fallback });
 
   // Hardware acceleration check and performance detection
   const hasHWA = typeof window !== 'undefined';
@@ -209,29 +209,30 @@ const AssemblyViewer = () => {
       
       if (isMobile || hasLimitedMemory) {
         setEnableEffects(false);
-        console.log('[AssemblyViewer] Performance mode enabled - effects disabled');
+        // console.log('[AssemblyViewer] Performance mode enabled - effects disabled');
       }
     }
   }, []);
-  
-  console.log('[AssemblyViewer] Hardware acceleration:', hasHWA, 'Effects enabled:', enableEffects);
+
+  // console.log('[AssemblyViewer] Hardware acceleration:', hasHWA, 'Effects enabled:', enableEffects);
 
   React.useEffect(() => {
-    console.log('[AssemblyViewer] Component mounted');
+    // console.log('[AssemblyViewer] Component mounted');
     
     // Check if Canvas is rendering
     setTimeout(() => {
       const canvas = document.querySelector('canvas');
-      console.log('[AssemblyViewer] Canvas element:', canvas);
+      // console.log('[AssemblyViewer] Canvas element:', canvas);
       if (canvas) {
-        console.log('[AssemblyViewer] Canvas dimensions:', canvas.width, 'x', canvas.height);
-        console.log('[AssemblyViewer] Canvas client dimensions:', canvas.clientWidth, 'x', canvas.clientHeight);
+        // console.log('[AssemblyViewer] Canvas dimensions:', canvas.width, 'x', canvas.height);
+        // console.log('[AssemblyViewer] Canvas client dimensions:', canvas.clientWidth, 'x', canvas.clientHeight);
         
         // Check parent dimensions
         let parent = canvas.parentElement;
         let depth = 0;
         while (parent && depth < 5) {
           const computed = window.getComputedStyle(parent);
+          /*
           console.log(`[AssemblyViewer] Parent ${depth}:`, {
             tag: parent.tagName,
             class: parent.className,
@@ -239,13 +240,14 @@ const AssemblyViewer = () => {
             height: computed.height,
             position: computed.position
           });
+          */
           parent = parent.parentElement;
           depth++;
         }
       }
     }, 100);
-    
-    return () => console.log('[AssemblyViewer] Component unmounted');
+
+    return () => {}; // console.log('[AssemblyViewer] Component unmounted');
   }, []);
 
   
@@ -265,12 +267,12 @@ const AssemblyViewer = () => {
             frameloop="demand" // Only render when needed (not on every frame)
             resize={{ scroll: false, debounce: 100 }}
             onCreated={(state) => {
-              console.log('[AssemblyViewer] Canvas created!', state);
+              // console.log('[AssemblyViewer] Canvas created!', state);
               const parent = state.gl.domElement.parentElement;
               if (parent) {
                 const width = parent.clientWidth;
                 const height = parent.clientHeight;
-                console.log('[AssemblyViewer] Setting size to:', width, height);
+                // console.log('[AssemblyViewer] Setting size to:', width, height);
                 state.gl.setSize(width, height);
               }
               // Switch back to always render for animation
