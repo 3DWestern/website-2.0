@@ -7,6 +7,18 @@ import { Menu, X } from 'lucide-react';
 import { useEffect } from 'react';
 import { useMenu } from '@/context/MenuContext';
 
+// Prevent scrolling via wheel, touch, and keyboard events
+const preventDefault = (e: Event) => {
+	e.preventDefault();
+};
+
+const preventKeyScroll = (e: KeyboardEvent) => {
+	const scrollKeys = [32, 33, 34, 35, 36, 37, 38, 39, 40]; // space, page up/down, home, end, arrows
+	if (scrollKeys.includes(e.keyCode)) {
+		e.preventDefault();
+	}
+};
+
 export function HorizontalNav({
 	isHeroOnly = false,
 	variant = 'dark'
@@ -20,14 +32,39 @@ export function HorizontalNav({
 	// Prevent scrolling when menu is open
 	useEffect(() => {
 		if (isMenuOpen) {
-			document.body.style.overflow = 'hidden';
-		} else {
-			document.body.style.overflow = '';
-		}
+			// Store current scroll position
+			const scrollY = window.scrollY;
 
-		return () => {
-			document.body.style.overflow = '';
-		};
+			// CSS-based scroll prevention
+			document.documentElement.style.overflow = 'hidden';
+			document.body.style.overflow = 'hidden';
+			document.body.style.position = 'fixed';
+			document.body.style.top = `-${scrollY}px`;
+			document.body.style.width = '100%';
+
+			// Event-based scroll prevention
+			window.addEventListener('wheel', preventDefault, { passive: false });
+			window.addEventListener('touchmove', preventDefault, { passive: false });
+			window.addEventListener('keydown', preventKeyScroll, { passive: false });
+
+			// Cleanup function
+			return () => {
+				// Restore CSS
+				document.documentElement.style.overflow = '';
+				document.body.style.overflow = '';
+				document.body.style.position = '';
+				document.body.style.top = '';
+				document.body.style.width = '';
+
+				// Remove event listeners
+				window.removeEventListener('wheel', preventDefault);
+				window.removeEventListener('touchmove', preventDefault);
+				window.removeEventListener('keydown', preventKeyScroll);
+
+				// Restore scroll position
+				window.scrollTo(0, scrollY);
+			};
+		}
 	}, [isMenuOpen]);
 
 	const navLinks = [
