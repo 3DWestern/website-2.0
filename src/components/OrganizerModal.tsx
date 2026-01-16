@@ -1,10 +1,8 @@
 'use client';
 
-import Image from 'next/image';
 import { X, Globe, Github, Linkedin } from 'lucide-react';
 import {
 	Dialog,
-	DialogContent,
 	DialogPortal,
 	DialogOverlay,
 } from '@/components/ui/dialog';
