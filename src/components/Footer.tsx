@@ -4,7 +4,7 @@ import Image from 'next/image';
 
 export function Footer() {
 	return (
-		<footer className="bg-slate-950 text-slate-200 mt-auto">
+		<footer className="bg-gradient-to-b from-purple-950 to-indigo-950 text-slate-200 mt-auto">
 			<div className="container mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 py-12 lg:py-16">
 				<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
 					{/* About */}
@@ -58,7 +58,7 @@ export function Footer() {
 					</div>
 
 					{/* right columns */}
-					<div className="lg:border-l lg:border-slate-700 lg:pl-8 flex flex-col sm:flex-row items-center gap-8">
+					<div className="lg:border-l lg:border-purple-800 lg:pl-8 flex flex-col sm:flex-row items-center gap-8">
 						<ul className="space-y-3">
 							<li className="flex items-start gap-2 text-slate-400">
 								<Mail size={20} className="mt-0.5 flex-shrink-0" />
@@ -70,7 +70,7 @@ export function Footer() {
 							</li>
 						</ul>
 						{/*  links for instagram and linkedin */}
-						<ul className="flex flex-row sm:flex-col sm:ml-10 gap-10">
+						<ul className="flex flex-row sm:flex-col sm:ml-10 gap-4 sm:gap-10">
 							<li>
 								<a
 									href="https://www.instagram.com/3dwestern/"
@@ -109,9 +109,19 @@ export function Footer() {
 					</div>
 				</div>
 
-				{/*				<div className="border-t border-slate-800 mt-12 pt-8 text-center text-slate-400">
-					<p>&copy; {new Date().getFullYear()} 3DW Makerspace. All rights reserved.</p>
-				</div> */}
+				<div className="border-t border-purple-800 mt-12 pt-8 text-center text-slate-400">
+					<p>
+						Made by{' '}
+						<a
+							href="https://linkedin.com/in/lucianlavric"
+							target="_blank"
+							rel="noopener noreferrer"
+							className="text-purple-400 hover:text-purple-300 transition-colors underline font-medium"
+						>
+							Luka
+						</a>
+					</p>
+				</div>
 			</div>
 		</footer>
 	);

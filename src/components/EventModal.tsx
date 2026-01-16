@@ -11,11 +11,11 @@ import {
 	DialogClose,
 } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
-import { event } from '@/components/data/events';
+import { Event } from '@/components/data/events';
 import { Calendar, Clock, MapPin } from 'lucide-react';
 
 interface EventModalProps {
-	event: event | null;
+	event: Event | null;
 	isOpen: boolean;
 	onClose: () => void;
 }

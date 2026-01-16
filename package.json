@@ -2,6 +2,9 @@
   "name": "website-2.0",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": ">=20.20.0"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -44,6 +47,7 @@
     "clsx": "^2.1.1",
     "cmdk": "^1.1.1",
     "embla-carousel-react": "^8.6.0",
+    "framer-motion": "^12.26.2",
     "gl-matrix": "^3.4.4",
     "input-otp": "^1.4.2",
     "lottie-react": "^2.4.1",
@@ -52,7 +56,7 @@
     "next": "16.0.10",
     "next-themes": "^0.4.6",
     "react": "^19.2.3",
-    "react-day-picker": "^8.10.1",
+    "react-day-picker": "^9.13.0",
     "react-dom": "^19.2.3",
     "react-hook-form": "^7.55.0",
     "react-parallax-tilt": "^1.7.315",
@@ -68,8 +72,8 @@
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
-    "@types/react": "^18.3.0",
-    "@types/react-dom": "^18.3.0",
+    "@types/react": "^19.2.8",
+    "@types/react-dom": "^19.2.3",
     "autoprefixer": "^10.4.22",
     "babel-plugin-react-compiler": "1.0.0",
     "baseline-browser-mapping": "^2.9.3",

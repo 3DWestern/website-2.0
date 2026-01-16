@@ -6,10 +6,10 @@ import * as THREE from 'three';
 import { useEffect } from 'react';
 
 function TestMesh() {
-  console.log('[TestMesh] Rendering mesh component');
+  // console.log('[TestMesh] Rendering mesh component');
   
   useEffect(() => {
-    console.log('[TestMesh] Mesh mounted!');
+    // console.log('[TestMesh] Mesh mounted!');
   }, []);
   
   return (
@@ -24,7 +24,7 @@ function TestMesh() {
 }
 
 export function TestCanvas() {
-  console.log('[TestCanvas] Rendering');
+  // console.log('[TestCanvas] Rendering');
   
   return (
     <div style={{ width: '400px', height: '400px', background: 'black', position: 'relative' }}>
@@ -33,8 +33,8 @@ export function TestCanvas() {
         camera={{ position: [0, 0, 5], fov: 75 }}
         resize={{ scroll: false, debounce: 0 }}
         onCreated={(state) => {
-          console.log('[TestCanvas] Canvas created!', state);
-          console.log('[TestCanvas] GL size:', state.gl.getSize(new THREE.Vector2()));
+          // console.log('[TestCanvas] Canvas created!', state);
+          // console.log('[TestCanvas] GL size:', state.gl.getSize(new THREE.Vector2()));
           // Force resize to parent dimensions
           state.gl.setSize(400, 400);
         }}

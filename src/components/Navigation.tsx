@@ -42,7 +42,7 @@ export function Navigation() {
 		<>
 			{/* Mobile menu button - fixed position */}
 			<button
-				className={`sm:hidden fixed top-0 right-0 z-100 p-3 pr-4 bg-white rounded-bl-xl transition-all duration-1000 ${isLoaded ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0'}`}
+				className={`sm:hidden fixed top-0 right-0 z-50 p-3 pr-4 bg-white rounded-bl-xl transition-all duration-1000 ${isLoaded ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0'}`}
 				onClick={() => setIsOpen(!isOpen)}
 				aria-label="Toggle menu"
 			>
@@ -50,7 +50,7 @@ export function Navigation() {
 			</button>
 
 			{/* Desktop Navigation */}
-			<div className="fixed top-0 right-0 z-100 md:p-4 lg:p-6 bg-white rounded-bl-xl hidden md:block">
+			<div className="fixed top-0 right-0 z-50 md:p-4 lg:p-6 bg-white rounded-bl-xl hidden md:block">
 				<div className="mx-auto flex items-center gap-8">
 					{navLinks.map((link) => (
 						link.external ? (

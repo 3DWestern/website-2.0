@@ -3,9 +3,9 @@ import { bigstats } from "@/components/data/bigtext";
 import { koulen } from "@/lib/fonts";
 import { motion } from "motion/react";
 
-export default function BigTextSection() {
+export function BigTextSection() {
 	return (
-		<section className="flex w-screen min-h-screen flex-col items-center text-center py-20 gap-y-20">
+		<section className="flex w-full min-h-screen flex-col items-center text-center py-20 gap-y-20">
 			<div className="mx-auto flex flex-col items-center justify-center gap-y-10 sm:gap-y-20">
 				<motion.h1
 					initial={{ opacity: 0, y: -50 }}
@@ -35,7 +35,7 @@ export default function BigTextSection() {
 				</div>
 			</div>
 
-			<div className="w-full flex flex-row items-center justify-center gap-y-10">
+			<div className="w-full flex flex-col md:flex-row items-center justify-center gap-6 md:gap-10">
 				<motion.div
 					initial={{ opacity: 0, y: 50 }}
 					whileInView={{ opacity: 1, y: 0 }}

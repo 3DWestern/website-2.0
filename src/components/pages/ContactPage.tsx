@@ -8,10 +8,10 @@ import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { koulen } from '@/lib/fonts';
 import Link from 'next/link';
+import { motion } from 'framer-motion';
 
 
 export function ContactPage() {
-
 	const [result, setResult] = useState<string>('');
 	const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 	const [inquiryType, setInquiryType] = useState<string>('');
@@ -48,14 +48,26 @@ export function ContactPage() {
 
 
 	return (
-		<div className="min-h-screen">
+		<main className="min-h-screen pt-[88px]">
 			{/* Header */}
-			<section className="bg-gradient-to-br from-purple-50 to-indigo-50 py-16">
+			<section className="bg-white py-16">
 				<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-					<h1 className={`font-bold text-3xl sm:text-4xl lg:text-5xl mb-4 ${koulen.className}`}>Contact Us</h1>
-					<p className="text-xl text-muted-foreground max-w-2xl">
+					<motion.h1
+						initial={{ opacity: 0, y: 20 }}
+						animate={{ opacity: 1, y: 0 }}
+						transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+						className={`font-bold text-3xl sm:text-4xl lg:text-5xl mb-4 ${koulen.className}`}
+					>
+						Contact Us
+					</motion.h1>
+					<motion.p
+						initial={{ opacity: 0, y: 20 }}
+						animate={{ opacity: 1, y: 0 }}
+						transition={{ duration: 0.6, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+						className="text-xl text-muted-foreground max-w-2xl"
+					>
 						Have questions? Want to collaborate? We&apos;d love to hear from you.
-					</p>
+					</motion.p>
 				</div>
 			</section>
 
@@ -206,6 +218,6 @@ export function ContactPage() {
 					</Link>
 				</div>
 			</section>
-		</div>
+		</main>
 	);
 }

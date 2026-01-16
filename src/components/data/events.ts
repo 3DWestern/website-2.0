@@ -1,4 +1,4 @@
-export type event = {
+export type Event = {
 	id: number;
 	title: string;
 	date: string;
@@ -11,7 +11,7 @@ export type event = {
 	url?: string;
 }
 
-export const highlightEvents: event[] = [
+export const highlightEvents: Event[] = [
 	{
 		id: 1,
 		title: "Mystery Bucket Challenge",
@@ -87,7 +87,7 @@ export const highlightEvents: event[] = [
 	},
 ];
 
-export const pastEvents: event[] = [
+export const pastEvents: Event[] = [
 	{
 		id: 1,
 		title: "Mystery Bucket Challenge",

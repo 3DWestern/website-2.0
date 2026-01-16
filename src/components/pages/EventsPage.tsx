@@ -2,17 +2,18 @@
 
 import { useState } from 'react';
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { pastEvents, event } from '../data/events';
+import { pastEvents, Event } from '../data/events';
 import Link from 'next/link';
 import { EventCard } from '../EventCard';
 import { EventModal } from '../EventModal';
 import { koulen } from "@/lib/fonts";
+import { motion } from 'framer-motion';
 
 export function EventsPage() {
 	const [selectedCategory, setSelectedCategory] = useState('all');
-	const [selectedEvent, setSelectedEvent] = useState<event | null>(null);
+	const [selectedEvent, setSelectedEvent] = useState<Event | null>(null);
 
-	const openModal = (event: event) => {
+	const openModal = (event: Event) => {
 		setSelectedEvent(event);
 	};
 
@@ -25,14 +26,26 @@ export function EventsPage() {
 		: pastEvents.filter(e => e.category.toLowerCase() === selectedCategory);
 
 	return (
-		<div className="min-h-screen">
+		<main className="min-h-screen pt-[88px]">
 			{/* Header */}
-			<section className="bg-gradient-to-br from-purple-50 to-indigo-50 py-16">
+			<section className="bg-white py-16">
 				<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-					<h1 className={`text-3xl sm:text-4xl lg:text-5xl mb-4 ${koulen.className}`}>Our Events</h1>
-					<p className="text-xl text-muted-foreground max-w-2xl">
+					<motion.h1
+						initial={{ opacity: 0, y: 20 }}
+						animate={{ opacity: 1, y: 0 }}
+						transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+						className={`text-3xl sm:text-4xl lg:text-5xl mb-4 ${koulen.className}`}
+					>
+						Our Events
+					</motion.h1>
+					<motion.p
+						initial={{ opacity: 0, y: 20 }}
+						animate={{ opacity: 1, y: 0 }}
+						transition={{ duration: 0.6, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+						className="text-xl text-muted-foreground max-w-2xl"
+					>
 						We organize workshops, competitions, training sessions, and networking opportunities to fuel your entrepreneurial journey.
-					</p>
+					</motion.p>
 				</div>
 			</section>
 
@@ -68,6 +81,6 @@ export function EventsPage() {
 				</div>
 			</section>
 			<EventModal event={selectedEvent} isOpen={!!selectedEvent} onClose={closeModal} />
-		</div>
+		</main>
 	);
 }

@@ -36,6 +36,10 @@ yarn-error.log*
 # dev
 .cursor
 
+# claude code
+.claude
+.playwright-mcp
+
 # vercel
 .vercel
 

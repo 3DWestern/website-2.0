@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import { usePathname } from "next/navigation";
 import Link from "next/link";
@@ -12,40 +12,33 @@ export function LandingButton({ isMobile }: { isMobile: boolean }) {
 		isMobile ? (
 			<Link
 				href="/"
-				style={{
-					position: 'relative',
-					display: 'block',
-					textDecoration: 'none',
-					width: 48,
-					height: 48
-				}}
+				className="relative block no-underline w-12 h-12"
 				aria-label="Home"
 			>
 				<Image
 					src="/logo.png"
 					alt="Home"
 					fill
-					style={{ objectFit: 'cover' }}
+					sizes="48px"
+					className="object-cover"
 					priority
 				/>
 			</Link>
 		) : (
-			<>
-				<Link
-					href="/"
-					className="hidden sm:block fixed top-10 left-12 z-50 bg-white border border-gray-200 shadow-md rounded-full p-2 hover:bg-purple-50 transition-colors flex items-center justify-center transition-transform duration-200 transform hover:scale-110"
-					style={{ textDecoration: 'none', width: 48, height: 48 }}
-					aria-label="Home"
-				>
-					<Image
-						src="/logo.png"
-						alt="Home"
-						fill
-						style={{ objectFit: 'cover' }}
-						priority
-					/>
-				</Link>
-			</>
+			<Link
+				href="/"
+				className="hidden sm:flex fixed top-10 left-12 z-50 bg-white border border-gray-200 shadow-md rounded-full p-2 hover:bg-purple-50 transition-all items-center justify-center duration-200 hover:scale-110 no-underline w-12 h-12"
+				aria-label="Home"
+			>
+				<Image
+					src="/logo.png"
+					alt="Home"
+					fill
+					sizes="48px"
+					className="object-cover"
+					priority
+				/>
+			</Link>
 		)
 	);
 }
