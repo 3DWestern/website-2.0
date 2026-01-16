@@ -12,7 +12,11 @@ interface LoadingWrapperProps {
 
 export function LoadingWrapper({ children }: LoadingWrapperProps) {
 	const [animationData, setAnimationData] = useState<AnimationData | null>(null);
-	const [isLoading, setIsLoading] = useState(true);
+	const [animationDone, setAnimationDone] = useState(false);
+	const [modelReady, setModelReady] = useState(false);
+
+	// Loading is complete when BOTH animation has finished AND model is ready
+	const isLoading = !(animationDone && modelReady);
 
 	useEffect(() => {
 		const abortController = new AbortController();
@@ -34,14 +38,20 @@ export function LoadingWrapper({ children }: LoadingWrapperProps) {
 		return () => abortController.abort();
 	}, []);
 
+	// Minimum animation duration timer
 	useEffect(() => {
 		const timer = setTimeout(() => {
-			setIsLoading(false);
-			// Dispatch existing event for backward compatibility
-			window.dispatchEvent(new CustomEvent('loadingComplete'));
+			setAnimationDone(true);
 		}, 5000);
 		return () => clearTimeout(timer);
 	}, []);
+
+	// Dispatch event when loading actually completes
+	useEffect(() => {
+		if (!isLoading) {
+			window.dispatchEvent(new CustomEvent('loadingComplete'));
+		}
+	}, [isLoading]);
 
 	useEffect(() => {
 		if (isLoading) {
@@ -122,7 +132,7 @@ export function LoadingWrapper({ children }: LoadingWrapperProps) {
 	}, [isLoading]);
 
 	return (
-		<LoadingContext.Provider value={{ loadingComplete: !isLoading }}>
+		<LoadingContext.Provider value={{ loadingComplete: !isLoading, modelReady, setModelReady }}>
 			{/* Loading screen overlay */}
 			{isLoading && (
 				<div className="fixed inset-0 z-[100] bg-black flex items-center justify-center">

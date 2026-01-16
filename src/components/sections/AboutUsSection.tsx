@@ -8,7 +8,7 @@ export function AboutUsSection() {
 	return (
 		<section className="relative bg-white">
 			{/* Header */}
-			<div className="sticky top-0 z-10 bg-white/80 backdrop-blur-sm py-4 lg:py-10">
+			<div className="sticky top-0 z-10 bg-white/80 backdrop-blur-sm py-8 lg:py-6">
 				<div
 					className={`text-3xl lg:text-5xl xl:text-6xl font-bold ${koulen.className} text-center`}
 				>

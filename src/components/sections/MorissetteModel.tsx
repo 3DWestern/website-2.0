@@ -1,7 +1,7 @@
 "use client";
 
 import { useLoading } from "@/context/LoadingContext";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { X, ChevronDown } from "lucide-react";
 import dynamic from "next/dynamic";
 import { HorizontalNav } from "@/components/HorizontalNav";
@@ -48,7 +48,7 @@ const ANIMATION_DELAYS = {
 } as const;
 
 export function MorissetteModel() {
-  const { loadingComplete } = useLoading();
+  const { loadingComplete, setModelReady } = useLoading();
   const { isMenuOpen } = useMenu();
   const [disclaimerVisible, setDisclaimerVisible] = useState(true);
   const [disclaimerAnimating, setDisclaimerAnimating] = useState(false);
@@ -94,6 +94,8 @@ export function MorissetteModel() {
     setTimeout(() => setDisclaimerVisible(false), ANIMATION_DELAYS.TOAST_DISMISS);
   };
 
+  const handleModelReady = useCallback(() => setModelReady(true), [setModelReady]);
+
   return (
     <section className="h-[98vh] bg-white relative">
       <div className="absolute inset-0 pt-8">
@@ -101,7 +103,10 @@ export function MorissetteModel() {
         <div className="relative w-full h-[98%] px-4 md:px-8 lg:px-16 xl:px-8">
           <div className="relative w-full h-full rounded-[1.25rem] lg:rounded-2xl overflow-hidden">
             {/* Gradient background for 3D model scene */}
-            <div className="absolute inset-0 bg-gradient-to-b from-purple-800 via-indigo-900 to-black">
+            <div
+              className="absolute inset-0 bg-gradient-to-b from-purple-800 via-indigo-900 to-black"
+              onClick={disclaimerVisible ? handleDismiss : undefined}
+            >
               {/* NAVBAR - Now inside canvas container */}
               <HorizontalNav isHeroOnly={true} variant="light" />
 
@@ -114,6 +119,7 @@ export function MorissetteModel() {
                     initial="hidden"
                     animate={disclaimerAnimating ? "visible" : "hidden"}
                     exit="exit"
+                    onClick={(e) => e.stopPropagation()}
                   >
                     <div className="relative pr-10">
                       Accessing the makerspace: Level 1 training required (
@@ -128,7 +134,7 @@ export function MorissetteModel() {
                       ).
                       <button
                         onClick={handleDismiss}
-                        className="absolute right-0 top-1/2 -translate-y-1/2 hover:opacity-80 transition-opacity"
+                        className="absolute right-0 top-1/2 -translate-y-1/2 hover:opacity-80 transition-opacity cursor-pointer"
                         aria-label="Dismiss"
                       >
                         <X className="w-5 h-5" />
@@ -138,9 +144,9 @@ export function MorissetteModel() {
                 )}
               </AnimatePresence>
 
-              {/* 3D Canvas */}
+              {/* 3D Canvas - Always rendered so model can preload during loading animation */}
               <div className="absolute inset-0 z-1" style={{ pointerEvents: 'none' }}>
-                {loadingComplete && <AssemblyViewer />}
+                <AssemblyViewer onModelReady={handleModelReady} />
               </div>
 
               {/* Scroll Indicator */}
