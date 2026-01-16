@@ -119,7 +119,7 @@ export function Footer() {
 							rel="noopener noreferrer"
 							className="text-purple-400 hover:text-purple-300 transition-colors underline font-medium"
 						>
-							Luka
+							Luka :3
 						</a>
 					</p>
 				</div>
