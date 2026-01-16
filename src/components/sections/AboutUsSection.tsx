@@ -8,7 +8,7 @@ export function AboutUsSection() {
 	return (
 		<section className="relative bg-white">
 			{/* Header */}
-			<div className="sticky top-0 z-10 bg-white/80 backdrop-blur-sm py-4 lg:py-10">
+			<div className="sticky top-0 z-10 bg-white/80 backdrop-blur-sm py-2 lg:py-6">
 				<div
 					className={`text-3xl lg:text-5xl xl:text-6xl font-bold ${koulen.className} text-center`}
 				>
@@ -22,7 +22,6 @@ export function AboutUsSection() {
 					<Card
 						key={index}
 						index={index}
-						isLast={index === content.length - 1}
 						title={item.title}
 						description={item.description}
 						detail={item.detail}
@@ -30,29 +29,30 @@ export function AboutUsSection() {
 					/>
 				))}
 			</div>
+
+			{/* Spacer for scroll effect */}
+			<div className="sm:h-[20vh]" />
 		</section>
 	);
 }
 
 interface CardProps {
 	index: number;
-	isLast: boolean;
 	title: string;
 	description: string;
 	detail: string;
 	image?: string;
 }
 
-function Card({ index, isLast, title, description, detail, image }: CardProps) {
+function Card({ index, title, description, detail, image }: CardProps) {
 	return (
-		<div
-			className={`min-h-[80vh] lg:h-screen w-full flex items-start justify-center px-4 sm:px-6 lg:px-8 ${!isLast ? 'sticky' : ''}`}
-			style={{
-				zIndex: 10 + index,
-				...(!isLast && { top: `calc(6rem + ${index * 3}rem)` })
-			}}
-		>
-			<div className="relative w-full sm:w-4/5 origin-top">
+		<div className="min-h-[80vh] lg:h-screen w-full flex items-start justify-center sticky top-20 px-4 sm:px-6 lg:px-8">
+			<div
+				style={{
+					top: `calc(5% + ${index * 15}px)`
+				}}
+				className="relative w-full sm:w-4/5 origin-top"
+			>
 				<div className="bg-gradient-to-br from-purple-50 to-indigo-50 rounded-3xl p-8 lg:p-12 shadow-xl border border-purple-100 flex items-start overflow-hidden">
 					<div className="flex flex-col items-start gap-6 w-full">
 						{/* Text Content (first on md+, below image on mobile) */}
