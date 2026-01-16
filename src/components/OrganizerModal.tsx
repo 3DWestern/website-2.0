@@ -1,7 +1,7 @@
 'use client';
 'use no memo';
 
-import { X, Globe, Github, Linkedin } from 'lucide-react';
+import { X, Globe, GithubIcon, LinkedinIcon } from 'lucide-react';
 import {
 	Dialog,
 	DialogPortal,
@@ -131,7 +131,7 @@ export function OrganizerModal({
 														className="rounded-full p-2 text-zinc-400 transition-all hover:bg-purple-500/20 hover:text-purple-400 focus:outline-none focus:ring-2 focus:ring-purple-500"
 														aria-label={`Visit ${name}'s GitHub`}
 													>
-														<Github className="h-5 w-5" />
+														<GithubIcon className="h-5 w-5" />
 													</a>
 												</TooltipTrigger>
 												<TooltipContent className="bg-zinc-900 border-purple-500/30 text-white">GitHub</TooltipContent>
@@ -147,7 +147,7 @@ export function OrganizerModal({
 														className="rounded-full p-2 text-zinc-400 transition-all hover:bg-purple-500/20 hover:text-purple-400 focus:outline-none focus:ring-2 focus:ring-purple-500"
 														aria-label={`Visit ${name}'s LinkedIn`}
 													>
-														<Linkedin className="h-5 w-5" />
+														<LinkedinIcon className="h-5 w-5" />
 													</a>
 												</TooltipTrigger>
 												<TooltipContent className="bg-zinc-900 border-purple-500/30 text-white">LinkedIn</TooltipContent>
