@@ -39,11 +39,14 @@ export function FAQSection() {
 								viewport={{ once: true, margin: "-30px" }}
 								transition={{ duration: 0.4, delay: index * 0.05 }}
 							>
-								<AccordionItem value={`item-${faq.id}`}>
-									<AccordionTrigger className="text-md sm:text-lg md:text-xl text-left">
+								<AccordionItem
+									value={`item-${faq.id}`}
+									className="border-l-2 border-transparent hover:border-slate-300 transition-colors data-[state=open]:bg-slate-50 data-[state=open]:border-purple-500"
+								>
+									<AccordionTrigger className="text-md sm:text-lg md:text-xl text-left transition-colors hover:text-slate-700 data-[state=open]:text-purple-700 data-[state=open]:font-semibold">
 										{faq.question}
 									</AccordionTrigger>
-									<AccordionContent className="text-sm md:text-md lg:text-lg text-muted-foreground">
+									<AccordionContent className="text-sm md:text-md lg:text-lg text-muted-foreground pl-4">
 										{faq.answer}
 									</AccordionContent>
 								</AccordionItem>
