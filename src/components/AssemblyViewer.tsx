@@ -3,7 +3,7 @@
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls, useGLTF, PerformanceMonitor, Preload } from '@react-three/drei';
 import { EffectComposer, Bloom, Noise, ToneMapping } from '@react-three/postprocessing';
-import React, { Suspense } from 'react';
+import React, { Suspense, useRef } from 'react';
 import { GLTF } from 'three-stdlib';
 import * as THREE from 'three';
 import { Mesh } from 'three';
@@ -12,7 +12,7 @@ import { Mesh } from 'three';
 useGLTF.preload('/animations/assembly.glb');
 
 // Main scene component with lighting and controls
-function Scene({ enableEffects = true, onDprChange }: { enableEffects?: boolean; onDprChange?: (fn: (dpr: number) => number) => void }) {
+function Scene({ enableEffects = true, onDprChange, onModelReady }: { enableEffects?: boolean; onDprChange?: (fn: (dpr: number) => number) => void; onModelReady?: () => void }) {
   return (
     <>
       <PerformanceMonitor
@@ -30,7 +30,7 @@ function Scene({ enableEffects = true, onDprChange }: { enableEffects?: boolean;
         maxPolarAngle={Math.PI / 2}
       />
       <Suspense fallback={null}>
-        <Model />
+        <Model onModelReady={onModelReady} />
         <Preload all />
       </Suspense>
       {enableEffects && (
@@ -55,8 +55,13 @@ function Scene({ enableEffects = true, onDprChange }: { enableEffects?: boolean;
   );
 }
 
-const Model = () => {
+interface ModelProps {
+  onModelReady?: () => void;
+}
+
+const Model = ({ onModelReady }: ModelProps) => {
   // console.log('[Model] Component rendering...');
+  const hasSignaledReady = useRef(false);
 
   const gltf = useGLTF('/animations/assembly.glb') as GLTF;
   // console.log('[Model] GLTF loaded via useGLTF hook:', gltf);
@@ -95,6 +100,12 @@ const Model = () => {
           material={meshRFDD.material}
           scale={[1, 1, 1]}
           position={[0, 0.13, 0.13]}
+          onAfterRender={() => {
+            if (!hasSignaledReady.current && onModelReady) {
+              hasSignaledReady.current = true;
+              onModelReady();
+            }
+          }}
         />
         <mesh
           geometry={meshEdges.geometry}
@@ -184,12 +195,16 @@ const gradientBg = {
 };
 
 
-const AssemblyViewer = () => {
+interface AssemblyViewerProps {
+  onModelReady?: () => void;
+}
+
+const AssemblyViewer = ({ onModelReady }: AssemblyViewerProps) => {
   // console.log('[AssemblyViewer] Component render');
-  
+
   // Adaptive pixel ratio based on device - managed by PerformanceMonitor
-  const [dpr, setDpr] = React.useState(() => 
-    typeof window !== 'undefined' 
+  const [dpr, setDpr] = React.useState(() =>
+    typeof window !== 'undefined'
       ? Math.min(window.devicePixelRatio, 1.25)
       : 1
   );
@@ -279,7 +294,7 @@ const AssemblyViewer = () => {
               state.setFrameloop('always');
             }}
           >
-            <Scene enableEffects={enableEffects} onDprChange={(fn) => setDpr(fn)} />
+            <Scene enableEffects={enableEffects} onDprChange={(fn) => setDpr(fn)} onModelReady={onModelReady} />
           </Canvas>
         </div>
       ) : (

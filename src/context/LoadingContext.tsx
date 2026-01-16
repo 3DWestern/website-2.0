@@ -2,6 +2,8 @@ import { createContext, useContext } from 'react';
 
 interface LoadingContextType {
   loadingComplete: boolean;
+  modelReady: boolean;
+  setModelReady: (ready: boolean) => void;
 }
 
 export const LoadingContext = createContext<LoadingContextType | undefined>(undefined);

@@ -48,7 +48,7 @@ const ANIMATION_DELAYS = {
 } as const;
 
 export function MorissetteModel() {
-  const { loadingComplete } = useLoading();
+  const { loadingComplete, setModelReady } = useLoading();
   const { isMenuOpen } = useMenu();
   const [disclaimerVisible, setDisclaimerVisible] = useState(true);
   const [disclaimerAnimating, setDisclaimerAnimating] = useState(false);
@@ -138,9 +138,9 @@ export function MorissetteModel() {
                 )}
               </AnimatePresence>
 
-              {/* 3D Canvas */}
+              {/* 3D Canvas - Always rendered so model can preload during loading animation */}
               <div className="absolute inset-0 z-1" style={{ pointerEvents: 'none' }}>
-                {loadingComplete && <AssemblyViewer />}
+                <AssemblyViewer onModelReady={() => setModelReady(true)} />
               </div>
 
               {/* Scroll Indicator */}
