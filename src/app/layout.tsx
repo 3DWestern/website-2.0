@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { LoadingWrapper } from "@/components/LoadingWrapper";
 import { MenuProvider } from "@/context/MenuContext";
+import { inter, spaceGrotesk } from "@/lib/fonts";
 
 // global metadata for SEO, can be overridden by specific individual pages
 export const metadata: Metadata = {
@@ -63,7 +64,7 @@ export default function RootLayout({
 }>) {
 	// Use a client component to access the router
 	return (
-		<html lang="en" className="scroll-smooth overflow-x-hidden">
+		<html lang="en" className={`scroll-smooth overflow-x-hidden ${inter.variable} ${spaceGrotesk.variable}`}>
 			<body className="antialiased">
 				<MenuProvider>
 					<LoadingWrapper>
