@@ -59,7 +59,7 @@ export function SlidingCarousel({ items }: { items: MenuItem[] }) {
 							<TooltipTrigger asChild>
 								<button
 									onClick={() => handleOrganizerClick(exec)}
-									className="mx-4 sm:mx-5 lg:mx-6 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 rounded-full transition-transform hover:scale-110"
+									className="mx-4 sm:mx-5 lg:mx-6 cursor-pointer focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 rounded-full transition-transform hover:scale-110"
 									aria-label={`View ${exec.name}'s profile`}
 								>
 									<div className="relative w-20 h-20 sm:w-28 sm:h-28 lg:w-32 lg:h-32 rounded-full overflow-hidden border-3 border-purple-200 hover:border-purple-500 transition-colors shadow-md">
