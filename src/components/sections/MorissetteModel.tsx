@@ -132,7 +132,7 @@ export function MorissetteModel() {
                       ).
                       <button
                         onClick={handleDismiss}
-                        className="absolute right-0 top-1/2 -translate-y-1/2 hover:opacity-80 transition-opacity"
+                        className="cursor-pointer absolute right-0 top-1/2 -translate-y-1/2 hover:opacity-80 transition-opacity"
                         aria-label="Dismiss"
                       >
                         <X className="w-5 h-5" />
