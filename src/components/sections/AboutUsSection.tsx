@@ -28,10 +28,10 @@ export function AboutUsSection() {
 						image={item.image}
 					/>
 				))}
-			</div>
 
-			{/* Spacer for scroll effect */}
-			<div className="h-[50vh] sm:h-[60vh]" />
+				{/* Spacer INSIDE container for last card sticky effect */}
+				<div className="h-[50vh] sm:h-[60vh]" />
+			</div>
 		</section>
 	);
 }
