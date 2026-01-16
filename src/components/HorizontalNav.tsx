@@ -101,6 +101,7 @@ export function HorizontalNav({
 									src="/logo.png"
 									alt="3D Western Logo"
 									fill
+									sizes="(max-width: 1024px) 40px, 56px"
 									style={{ objectFit: 'contain' }}
 									priority
 								/>
@@ -149,6 +150,7 @@ export function HorizontalNav({
 								src="/logo.png"
 								alt="3D Western Logo"
 								fill
+								sizes="(max-width: 1024px) 40px, 56px"
 								style={{ objectFit: 'contain' }}
 								priority
 							/>

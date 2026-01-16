@@ -75,6 +75,7 @@ function Card({ index, title, description, detail, image }: CardProps) {
 									src={image}
 									alt={title}
 									fill
+									sizes="(max-width: 768px) 100vw, 40vw"
 									className="object-cover"
 								/>
 							</div>

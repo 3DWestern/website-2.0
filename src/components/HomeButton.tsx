@@ -17,6 +17,7 @@ export function HomeButton() {
 				src="/logo.png"
 				alt="Home"
 				fill
+				sizes="48px"
 				className="object-cover"
 				priority
 			/>

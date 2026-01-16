@@ -19,6 +19,7 @@ export function LandingButton({ isMobile }: { isMobile: boolean }) {
 					src="/logo.png"
 					alt="Home"
 					fill
+					sizes="48px"
 					className="object-cover"
 					priority
 				/>
@@ -33,6 +34,7 @@ export function LandingButton({ isMobile }: { isMobile: boolean }) {
 					src="/logo.png"
 					alt="Home"
 					fill
+					sizes="48px"
 					className="object-cover"
 					priority
 				/>
