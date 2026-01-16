@@ -1,96 +1,109 @@
 export interface MenuItem {
 	image: string;
-	link: string;
-	title: string;
-	description: string;
+	name: string;
+	role: string;
+	description?: string;
+	emoji?: string;
+	linkedin?: string;
+	github?: string;
+	website?: string;
 }
 
 export const items: MenuItem[] = [
 	{
 		image: '/images/execs/troy.webp',
-		link: 'www.linkedin.com/in/troyleishman/',
-		title: 'Troy Leishman',
-		description: 'President'
+		name: 'Troy Leishman',
+		role: 'President',
+		description: 'Leading the team with vision and energy',
+		emoji: '🦌',
+		linkedin: 'www.linkedin.com/in/troyleishman/',
 	},
 	{
 		image: '/images/execs/johaan.webp',
-		link: 'www.linkedin.com/in/johaan-khan-3889611a9/',
-		title: 'Johaan Khan',
-		description: 'Chief Operating Officer'
+		name: 'Johaan Khan',
+		role: 'Chief Operating Officer',
+		description: 'Keeping operations running smoothly',
+		emoji: '⚡',
+		linkedin: 'www.linkedin.com/in/johaan-khan-3889611a9/',
 	},
 	{
 		image: '/images/execs/justiny.webp',
-		link: 'https://www.linkedin.com/in/justin-yee8/',
-		title: 'Justin Yee',
-		description: 'Chief Product Officer'
+		name: 'Justin Yee',
+		role: 'Chief Product Officer',
+		description: 'Shaping the product experience',
+		emoji: '🚀',
+		linkedin: 'https://www.linkedin.com/in/justin-yee8/',
 	},
 	{
 		image: '/images/execs/justin.webp',
-		link: 'www.linkedin.com/in/zhangjinliu/',
-		title: 'Justin Liu',
-		description: 'Chief Product Officer'
+		name: 'Justin Liu',
+		role: 'Chief Product Officer',
+		description: 'Building amazing products',
+		emoji: '💡',
+		linkedin: 'www.linkedin.com/in/zhangjinliu/',
 	},
 	{
 		image: "/images/execs/kevin.webp",
-		link: "www.linkedin.com/in/kevin--shang/",
-		title: "Kevin Shang",
-		description: "Co-VP Finance",
+		name: "Kevin Shang",
+		role: "Co-VP Finance",
+		description: 'Managing the numbers',
+		emoji: '💰',
+		linkedin: "www.linkedin.com/in/kevin--shang/",
 	},
 	{
 		image: "/images/execs/seth.jpg",
-		link: "www.linkedin.com/in/s-j-evans",
-		title: "Seth Evans",
-		description: "VP Education",
+		name: "Seth Evans",
+		role: "VP Education",
+		description: 'Spreading knowledge',
+		emoji: '📚',
+		linkedin: "www.linkedin.com/in/s-j-evans",
 	},
 	{
 		image: "/images/execs/sabrina.webp",
-		link: "www.linkedin.com/in/sabrina-luo861/",
-		title: "Sabrina Luo",
-		description: "VP Marketing/Media",
+		name: "Sabrina Luo",
+		role: "VP Marketing/Media",
+		description: 'Creating engaging content',
+		emoji: '🎨',
+		linkedin: "www.linkedin.com/in/sabrina-luo861/",
 	},
 	{
 		image: "/images/execs/emma.webp",
-		link: "https://www.linkedin.com/in/emma-zhang-z/",
-		title: "Emma Zhang",
-		description: "VP Events"
+		name: "Emma Zhang",
+		role: "VP Events",
+		description: 'Organizing memorable experiences',
+		emoji: '🎉',
+		linkedin: "https://www.linkedin.com/in/emma-zhang-z/",
 	},
 	{
-
 		image: "/images/execs/thomson.webp",
-		link: "www.linkedin.com/in/thomson-lam-260b67292/",
-		title: "Thomson Lam",
-		description: "VP Development",
+		name: "Thomson Lam",
+		role: "VP Development",
+		description: 'Building the tech',
+		emoji: '💻',
+		linkedin: "www.linkedin.com/in/thomson-lam-260b67292/",
 	},
 	{
 		image: "/images/execs/josh.webp",
-		link: "www.linkedin.com/in/jmuszka",
-		title: "Josh Muszka",
-		description: "VP Development",
+		name: "Josh Muszka",
+		role: "VP Development",
+		description: 'Coding the future',
+		emoji: '🔧',
+		linkedin: "www.linkedin.com/in/jmuszka",
 	},
 	{
 		image: "/images/execs/cadeau.webp",
-		link: "www.linkedin.com/in/cadeau-hayimana-81b89b218/",
-		title: "Cadeau Hayimana",
-		description: "VP Technical Support",
+		name: "Cadeau Hayimana",
+		role: "VP Technical Support",
+		description: 'Supporting the team',
+		emoji: '🛠️',
+		linkedin: "www.linkedin.com/in/cadeau-hayimana-81b89b218/",
 	},
-	{
-		image: "/images/execs/sabrina.webp",
-		link: "www.linkedin.com/in/sabrina-luo861/",
-		title: "Sabrina Luo",
-		description: "VP Marketing/Media",
-	},
-	/* {
-		title: "Kyler See",
-		description: "VP Outreach",
-		src: "", // TODO: Get image
-		alt: "Kyler See, VP Outreach",
-		url: "www.linkedin.com/in/kyler-see/?originalSubdomain=ca",
-		bgColor: "bg-purple-500",
-	}, */
 	{
 		image: "/images/execs/doris-headshot.png",
-		link: "www.linkedin.com/in/doris-w-949aa7222/",
-		title: "Doris Wang",
-		description: "VP Communications",
+		name: "Doris Wang",
+		role: "VP Communications",
+		description: 'Connecting with the community',
+		emoji: '💬',
+		linkedin: "www.linkedin.com/in/doris-w-949aa7222/",
 	},
 ]	
