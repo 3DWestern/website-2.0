@@ -254,9 +254,9 @@ const AssemblyViewer = () => {
   return (
     <div style={{ position: 'absolute', inset: 0, borderRadius: '1rem', backgroundImage: gradientBg.backgroundImage }}>
       {hasHWA && !fallback ? (
-        <div style={{ position: 'absolute', inset: 0 }}>
+        <div style={{ position: 'absolute', inset: 0, pointerEvents: 'none' }}>
           <Canvas
-            style={{ width: '100%', height: '100%', display: 'block' }}
+            style={{ width: '100%', height: '100%', display: 'block', pointerEvents: 'none' }}
             camera={{ position: [0, 0, 12], fov: 75 }}
             dpr={dpr} // Use adaptive pixel ratio
             gl={{ 
