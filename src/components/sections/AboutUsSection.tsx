@@ -46,13 +46,14 @@ interface CardProps {
 
 function Card({ index, title, description, detail, image }: CardProps) {
 	return (
-		<div className="min-h-[80vh] lg:h-screen w-full flex items-start justify-center sticky top-20 px-4 sm:px-6 lg:px-8">
-			<div
-				style={{
-					top: `calc(5% + ${index * 15}px)`
-				}}
-				className="relative w-full sm:w-4/5 origin-top"
-			>
+		<div
+			className="min-h-[80vh] lg:h-screen w-full flex items-start justify-center sticky px-4 sm:px-6 lg:px-8"
+			style={{
+				zIndex: 10 + index,
+				top: `calc(6rem + ${index * 1.5}rem)`
+			}}
+		>
+			<div className="relative w-full sm:w-4/5 origin-top">
 				<div className="bg-gradient-to-br from-purple-50 to-indigo-50 rounded-3xl p-8 lg:p-12 shadow-xl border border-purple-100 flex items-start overflow-hidden">
 					<div className="flex flex-col items-start gap-6 w-full">
 						{/* Text Content (first on md+, below image on mobile) */}
