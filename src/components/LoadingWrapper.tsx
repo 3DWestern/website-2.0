@@ -147,7 +147,7 @@ export function LoadingWrapper({ children }: LoadingWrapperProps) {
 			)}
 
 			{/* Content - hidden until loading completes */}
-			<div className={isLoading ? 'invisible' : 'visible'}>
+			<div data-loading={isLoading ? "true" : undefined}>
 				{children}
 			</div>
 		</LoadingContext.Provider>

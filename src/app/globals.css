@@ -74,6 +74,12 @@ html {
   background-color: white;
 }
 
+/* Hide content until loading completes - prevents flash on refresh */
+[data-loading="true"] {
+  opacity: 0;
+  visibility: hidden;
+}
+
 /* Entrance animations after loading screen */
 @keyframes slide-up {
   0% {
