@@ -30,7 +30,7 @@ export function AboutUsSection() {
 				))}
 
 				{/* Spacer INSIDE container for last card sticky effect */}
-				<div className="h-[50vh] sm:h-[60vh]" />
+				<div className="h-[25vh] sm:h-[30vh]" />
 			</div>
 		</section>
 	);
