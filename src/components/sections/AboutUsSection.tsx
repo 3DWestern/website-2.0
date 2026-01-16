@@ -31,7 +31,7 @@ export function AboutUsSection() {
 			</div>
 
 			{/* Spacer for scroll effect */}
-			<div className="sm:h-[20vh]" />
+			<div className="h-[50vh] sm:h-[60vh]" />
 		</section>
 	);
 }
