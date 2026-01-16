@@ -50,7 +50,7 @@ function Card({ index, title, description, detail, image }: CardProps) {
 			className="min-h-[80vh] lg:h-screen w-full flex items-start justify-center sticky px-4 sm:px-6 lg:px-8"
 			style={{
 				zIndex: 10 + index,
-				top: `calc(6rem + ${index * 1.5}rem)`
+				top: `calc(6rem + ${index * 3}rem)`
 			}}
 		>
 			<div className="relative w-full sm:w-4/5 origin-top">
