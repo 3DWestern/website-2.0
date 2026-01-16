@@ -2,7 +2,7 @@
 
 import { useLoading } from "@/context/LoadingContext";
 import { useState, useEffect } from "react";
-import { X } from "lucide-react";
+import { X, ChevronDown } from "lucide-react";
 import dynamic from "next/dynamic";
 import { HorizontalNav } from "@/components/HorizontalNav";
 import { motion, AnimatePresence } from "framer-motion";
@@ -44,6 +44,7 @@ const ANIMATION_DELAYS = {
   TOAST_APPEAR: 500,
   TOAST_DISMISS: 500,
   SCROLL_THRESHOLD: 50,
+  SCROLL_INDICATOR_DELAY: 3000, // 3 seconds
 } as const;
 
 export function MorissetteModel() {
@@ -52,6 +53,7 @@ export function MorissetteModel() {
   const [disclaimerVisible, setDisclaimerVisible] = useState(true);
   const [disclaimerAnimating, setDisclaimerAnimating] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [scrollIndicatorVisible, setScrollIndicatorVisible] = useState(false);
 
   // Trigger toast animation after loading completes
   useEffect(() => {
@@ -76,6 +78,16 @@ export function MorissetteModel() {
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  // Show scroll indicator after 3 seconds of page load
+  useEffect(() => {
+    if (loadingComplete && !isScrolled) {
+      const timer = setTimeout(() => {
+        setScrollIndicatorVisible(true);
+      }, ANIMATION_DELAYS.SCROLL_INDICATOR_DELAY);
+      return () => clearTimeout(timer);
+    }
+  }, [loadingComplete, isScrolled]);
 
   const handleDismiss = () => {
     setDisclaimerAnimating(false);
@@ -130,6 +142,31 @@ export function MorissetteModel() {
               <div className="absolute inset-0 z-1" style={{ pointerEvents: 'none' }}>
                 {loadingComplete && <AssemblyViewer />}
               </div>
+
+              {/* Scroll Indicator */}
+              <AnimatePresence>
+                {scrollIndicatorVisible && !isScrolled && !isMenuOpen && (
+                  <motion.div
+                    className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center"
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{
+                      opacity: 1,
+                      y: [0, 10, 0],
+                      transition: {
+                        opacity: { duration: 0.5, ease: "easeOut" },
+                        y: {
+                          duration: 1.5,
+                          repeat: Infinity,
+                          ease: "easeInOut",
+                        },
+                      },
+                    }}
+                    exit={{ opacity: 0, y: -10, transition: { duration: 0.3 } }}
+                  >
+                    <ChevronDown className="w-8 h-8 text-white opacity-60" />
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
           </div>
         </div>
