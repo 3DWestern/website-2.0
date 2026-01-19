@@ -7,6 +7,8 @@ import dynamic from "next/dynamic";
 import { HorizontalNav } from "@/components/HorizontalNav";
 import { motion, AnimatePresence } from "framer-motion";
 import { useMenu } from "@/context/MenuContext";
+import { koulen } from "@/lib/fonts";
+import { useIsMobile } from "@/components/ui/use-mobile";
 
 const AssemblyViewer = dynamic(() => import("@/components/AssemblyViewer"), {
   ssr: false,
@@ -44,21 +46,27 @@ const ANIMATION_DELAYS = {
   TOAST_APPEAR: 500,
   TOAST_DISMISS: 500,
   SCROLL_THRESHOLD: 50,
-  SCROLL_INDICATOR_DELAY: 3000, // 3 seconds
+  WESTERN_TEXT_DURATION: 5000, // 5 seconds
+  SCROLL_INDICATOR_DELAY: 500, // Short delay after text fades
 } as const;
 
 export function MorissetteModel() {
   const { loadingComplete, setModelReady } = useLoading();
   const { isMenuOpen } = useMenu();
+  const isMobile = useIsMobile();
   const [disclaimerVisible, setDisclaimerVisible] = useState(true);
   const [disclaimerAnimating, setDisclaimerAnimating] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [westernTextVisible, setWesternTextVisible] = useState(true);
   const [scrollIndicatorVisible, setScrollIndicatorVisible] = useState(false);
 
   // Trigger toast animation after loading completes
   useEffect(() => {
     if (loadingComplete && disclaimerVisible) {
-      const timer = setTimeout(() => setDisclaimerAnimating(true), ANIMATION_DELAYS.TOAST_APPEAR);
+      const timer = setTimeout(
+        () => setDisclaimerAnimating(true),
+        ANIMATION_DELAYS.TOAST_APPEAR,
+      );
       return () => clearTimeout(timer);
     }
   }, [loadingComplete, disclaimerVisible]);
@@ -79,28 +87,44 @@ export function MorissetteModel() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Show scroll indicator after 3 seconds of page load
+  // Show western text first, then fade it out after 5 seconds and show scroll indicator
   useEffect(() => {
     if (loadingComplete && !isScrolled) {
-      const timer = setTimeout(() => {
+      // After 5 seconds, hide western text
+      const westernTextTimer = setTimeout(() => {
+        setWesternTextVisible(false);
+      }, ANIMATION_DELAYS.WESTERN_TEXT_DURATION);
+
+      // Show scroll indicator shortly after western text starts fading
+      const scrollIndicatorTimer = setTimeout(() => {
         setScrollIndicatorVisible(true);
-      }, ANIMATION_DELAYS.SCROLL_INDICATOR_DELAY);
-      return () => clearTimeout(timer);
+      }, ANIMATION_DELAYS.WESTERN_TEXT_DURATION + ANIMATION_DELAYS.SCROLL_INDICATOR_DELAY);
+
+      return () => {
+        clearTimeout(westernTextTimer);
+        clearTimeout(scrollIndicatorTimer);
+      };
     }
   }, [loadingComplete, isScrolled]);
 
   const handleDismiss = () => {
     setDisclaimerAnimating(false);
-    setTimeout(() => setDisclaimerVisible(false), ANIMATION_DELAYS.TOAST_DISMISS);
+    setTimeout(
+      () => setDisclaimerVisible(false),
+      ANIMATION_DELAYS.TOAST_DISMISS,
+    );
   };
 
-  const handleModelReady = useCallback(() => setModelReady(true), [setModelReady]);
+  const handleModelReady = useCallback(
+    () => setModelReady(true),
+    [setModelReady],
+  );
 
   return (
-    <section className="h-[98vh] bg-white relative">
+    <section className="h-[90vh] md:h-[98vh] bg-white relative">
       <div className="absolute inset-0 pt-8">
-        {/* Content container with rounded corners - 98% height */}
-        <div className="relative w-full h-[98%] px-4 md:px-8 lg:px-16 xl:px-8">
+        {/* Content container with rounded corners */}
+        <div className="relative w-full h-[96%] md:h-[98%] px-4 md:px-8 lg:px-16 xl:px-8">
           <div className="relative w-full h-full rounded-[1.25rem] lg:rounded-2xl overflow-hidden">
             {/* Gradient background for 3D model scene */}
             <div
@@ -145,33 +169,85 @@ export function MorissetteModel() {
               </AnimatePresence>
 
               {/* 3D Canvas - Always rendered so model can preload during loading animation */}
-              <div className="absolute inset-0 z-1" style={{ pointerEvents: 'none' }}>
+              <div
+                className="absolute inset-0 z-1"
+                style={{ pointerEvents: "none" }}
+              >
                 <AssemblyViewer onModelReady={handleModelReady} />
               </div>
 
+              {/* 3D Western Text - shows first, then fades to scroll indicator */}
+              <AnimatePresence>
+                {loadingComplete &&
+                  westernTextVisible &&
+                  !isScrolled &&
+                  !isMenuOpen && (
+                    <motion.div
+                      className="absolute bottom-12 sm:bottom-6 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center"
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{
+                        opacity: 0,
+                        y: -10,
+                        transition: { duration: 0.5 },
+                      }}
+                      transition={{ duration: 0.5 }}
+                    >
+                      <h1
+                        className={`text-lg sm:text-2xl md:text-5xl text-purple-400 whitespace-nowrap ${koulen.className}`}
+                        style={{
+                          textShadow:
+                            "0 0 20px rgba(168, 85, 247, 0.6), 0 0 40px rgba(168, 85, 247, 0.4), 0 2px 4px rgba(0, 0, 0, 0.5)",
+                        }}
+                      >
+                        3D WESTERN
+                      </h1>
+                    </motion.div>
+                  )}
+              </AnimatePresence>
+
               {/* Scroll Indicator */}
               <AnimatePresence>
-                {scrollIndicatorVisible && !isScrolled && !isMenuOpen && (
-                  <motion.div
-                    className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center"
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{
-                      opacity: 1,
-                      y: [0, 10, 0],
-                      transition: {
-                        opacity: { duration: 0.5, ease: "easeOut" },
-                        y: {
-                          duration: 1.5,
-                          repeat: Infinity,
-                          ease: "easeInOut",
+                {scrollIndicatorVisible &&
+                  !isScrolled &&
+                  !isMenuOpen &&
+                  (isMobile ? (
+                    // Simple static indicator for mobile - no animation loop
+                    <motion.div
+                      className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <ChevronDown className="w-8 h-8 text-white opacity-60" />
+                    </motion.div>
+                  ) : (
+                    // Bouncing animation for desktop
+                    <motion.div
+                      className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center"
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{
+                        opacity: 1,
+                        y: [0, 10, 0],
+                        transition: {
+                          opacity: { duration: 0.5, ease: "easeOut" },
+                          y: {
+                            duration: 1.5,
+                            repeat: Infinity,
+                            ease: "easeInOut",
+                          },
                         },
-                      },
-                    }}
-                    exit={{ opacity: 0, y: -10, transition: { duration: 0.3 } }}
-                  >
-                    <ChevronDown className="w-8 h-8 text-white opacity-60" />
-                  </motion.div>
-                )}
+                      }}
+                      exit={{
+                        opacity: 0,
+                        y: -10,
+                        transition: { duration: 0.3 },
+                      }}
+                    >
+                      <ChevronDown className="w-8 h-8 text-white opacity-60" />
+                    </motion.div>
+                  ))}
               </AnimatePresence>
             </div>
           </div>
