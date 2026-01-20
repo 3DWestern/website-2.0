@@ -121,6 +121,15 @@ export function Footer() {
 						>
 							Luka :3
 						</a>
+						{' '}and{' '}
+						<a
+							href="https://www.linkedin.com/in/thomson-lam-260b67292/"
+							target="_blank"
+							rel="noopener noreferrer"
+							className="text-purple-400 hover:text-purple-300 transition-colors underline font-medium"
+						>
+							Thomson
+						</a>
 					</p>
 				</div>
 			</div>

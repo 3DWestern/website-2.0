@@ -3,7 +3,7 @@
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls, useGLTF, PerformanceMonitor, Preload } from '@react-three/drei';
 import { EffectComposer, Bloom, Noise, ToneMapping } from '@react-three/postprocessing';
-import React, { Suspense, useRef } from 'react';
+import React, { Suspense, useRef, useState } from 'react';
 import { GLTF } from 'three-stdlib';
 import * as THREE from 'three';
 import { Mesh } from 'three';
@@ -12,7 +12,13 @@ import { Mesh } from 'three';
 useGLTF.preload('/animations/assembly.glb');
 
 // Main scene component with lighting and controls
-function Scene({ enableEffects = true, onDprChange, onModelReady }: { enableEffects?: boolean; onDprChange?: (fn: (dpr: number) => number) => void; onModelReady?: () => void }) {
+function Scene({
+  onDprChange,
+  onModelReady,
+}: {
+  onDprChange?: (fn: (dpr: number) => number) => void;
+  onModelReady?: () => void;
+}) {
   return (
     <>
       <PerformanceMonitor
@@ -33,24 +39,18 @@ function Scene({ enableEffects = true, onDprChange, onModelReady }: { enableEffe
         <Model onModelReady={onModelReady} />
         <Preload all />
       </Suspense>
-      {enableEffects && (
-        <EffectComposer enableNormalPass={false} multisampling={4}>
-          <Bloom 
-            mipmapBlur
-            luminanceThreshold={0.6}
-            intensity={1.2}
-          />
-          <Noise opacity={0.05} />
-          <ToneMapping
-            adaptive
-            resolution={256}
-            middleGrey={0.4}
-            maxLuminance={16.0}
-            averageLuminance={1.0}
-            adaptationRate={1.0}
-          />
-        </EffectComposer>
-      )}
+      <EffectComposer enableNormalPass={false} multisampling={4}>
+        <Bloom mipmapBlur luminanceThreshold={0.6} intensity={1.2} />
+        <Noise opacity={0.05} />
+        <ToneMapping
+          adaptive
+          resolution={256}
+          middleGrey={0.4}
+          maxLuminance={16.0}
+          averageLuminance={1.0}
+          adaptationRate={1.0}
+        />
+      </EffectComposer>
     </>
   );
 }
@@ -131,36 +131,30 @@ interface AssemblyViewerProps {
 }
 
 const AssemblyViewer = ({ onModelReady }: AssemblyViewerProps) => {
-  // console.log('[AssemblyViewer] Component render');
+  const [dpr, setDpr] = useState(1.25);
+  const [fallback, setFallback] = useState(false);
 
-  // Adaptive pixel ratio based on device - managed by PerformanceMonitor
-  const [dpr, setDpr] = React.useState(() =>
-    typeof window !== 'undefined'
-      ? Math.min(window.devicePixelRatio, 1.25)
-      : 1
-  );
-  const fallback = false;
+  // Hardware acceleration check (computed once)
+  const [hasHWA] = useState(() => {
+    if (typeof window === 'undefined') return true;
+    const test = (force: boolean) => {
+      if (typeof OffscreenCanvas === 'undefined') return '';
+      const canvas = new OffscreenCanvas(200, 200);
+      const ctx = canvas.getContext('2d', { willReadFrequently: force });
+      if (!ctx) return '';
+      ctx.moveTo(0, 0);
+      ctx.lineTo(120, 121);
+      ctx.stroke();
+      return ctx.getImageData(0, 0, 200, 200).data.join();
+    };
 
-  // console.log('[AssemblyViewer] State:', { dpr, fallback });
+    const isVendorApple = navigator.vendor?.indexOf('Apple') > -1;
+    const isNotCriOS = navigator.userAgent?.indexOf('CriOS') === -1;
+    const isNotFxiOS = navigator.userAgent?.indexOf('FxiOS') === -1;
+    const isSafari = isVendorApple && isNotCriOS && isNotFxiOS;
 
-  // Hardware acceleration check and performance detection
-  const hasHWA = typeof window !== 'undefined';
-  const [enableEffects, setEnableEffects] = React.useState(true);
-  
-  React.useEffect(() => {
-    // Detect low-end devices and disable effects
-    if (typeof window !== 'undefined') {
-      const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-      const hasLimitedMemory = 'deviceMemory' in navigator && (navigator as { deviceMemory?: number }).deviceMemory && (navigator as { deviceMemory: number }).deviceMemory < 4;
-      
-      if (isMobile || hasLimitedMemory) {
-        setEnableEffects(false);
-        // console.log('[AssemblyViewer] Performance mode enabled - effects disabled');
-      }
-    }
-  }, []);
-
-  // console.log('[AssemblyViewer] Hardware acceleration:', hasHWA, 'Effects enabled:', enableEffects);
+    return isSafari || test(true) !== test(false);
+  });
 
   return (
     <div style={{ position: 'absolute', inset: 0, borderRadius: '1rem', backgroundImage: GRADIENT_BG_IMAGE }}>
@@ -169,28 +163,17 @@ const AssemblyViewer = ({ onModelReady }: AssemblyViewerProps) => {
           <Canvas
             style={{ width: '100%', height: '100%', display: 'block', pointerEvents: 'none' }}
             camera={{ position: [0, 0, 12], fov: 75 }}
-            dpr={dpr} // Use adaptive pixel ratio
-            gl={{ 
+            dpr={dpr}
+            gl={{
               preserveDrawingBuffer: true,
-              antialias: false, // Disable AA for better performance, post-processing handles it
-              powerPreference: 'high-performance' // Request high-performance GPU
-            }}
-            frameloop="demand" // Only render when needed (not on every frame)
-            resize={{ scroll: false, debounce: 100 }}
-            onCreated={(state) => {
-              // console.log('[AssemblyViewer] Canvas created!', state);
-              const parent = state.gl.domElement.parentElement;
-              if (parent) {
-                const width = parent.clientWidth;
-                const height = parent.clientHeight;
-                // console.log('[AssemblyViewer] Setting size to:', width, height);
-                state.gl.setSize(width, height);
-              }
-              // Switch back to always render for animation
-              state.setFrameloop('always');
+              antialias: false,
+              powerPreference: 'high-performance'
             }}
           >
-            <Scene enableEffects={enableEffects} onDprChange={(fn) => setDpr(fn)} onModelReady={onModelReady} />
+            <Scene
+              onDprChange={(fn) => setDpr(fn)}
+              onModelReady={onModelReady}
+            />
           </Canvas>
         </div>
       ) : (
