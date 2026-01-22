@@ -3,6 +3,7 @@
 import { useState, useEffect, ReactNode } from 'react';
 import Lottie from 'lottie-react';
 import { LoadingContext } from '@/context/LoadingContext';
+import { usePathname } from 'next/navigation';
 
 type AnimationData = Record<string, unknown>;
 
@@ -11,9 +12,10 @@ interface LoadingWrapperProps {
 }
 
 export function LoadingWrapper({ children }: LoadingWrapperProps) {
+	const pathname = usePathname();
 	const [animationData, setAnimationData] = useState<AnimationData | null>(null);
 	const [animationDone, setAnimationDone] = useState(false);
-	const [modelReady, setModelReady] = useState(false);
+	const [modelReady, setModelReady] = useState(pathname !== '/');
 
 	// Loading is complete when BOTH animation has finished AND model is ready
 	const isLoading = !(animationDone && modelReady);
