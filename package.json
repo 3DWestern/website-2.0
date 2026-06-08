@@ -10,7 +10,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "seedcms": "tsx -r tsconfig-paths/register -r ./src/cms/scripts/env.ts src/cms/scripts/seed.ts"
   },
   "dependencies": {
     "@payloadcms/db-postgres": "^3.85.0",
@@ -50,6 +51,7 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "cmdk": "^1.1.1",
+    "dotenv": "^17.4.2",
     "embla-carousel-react": "^8.6.0",
     "framer-motion": "^12.26.2",
     "gl-matrix": "^3.4.4",
@@ -89,6 +91,8 @@
     "eslint-config-next": "16.0.3",
     "postcss": "^8.4.49",
     "tailwindcss": "^4",
+    "tsconfig-paths": "^4.2.0",
+    "tsx": "^4.22.4",
     "typescript": "^5"
   }
 }
