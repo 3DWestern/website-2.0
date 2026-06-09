@@ -17,6 +17,7 @@ export type Showcase = {
 };
 
 export type Sponsor = {
+  id: number;
   name: string;
   logo: string;
   alt: string;
