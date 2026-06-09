@@ -67,10 +67,11 @@ export interface Config {
   };
   blocks: {};
   collections: {
-    showcases: Showcase;
+    blogs: Blog;
     projects: Project;
     'team-members': TeamMember;
     events: Event;
+    sponsors: Sponsor;
     'payload-kv': PayloadKv;
     users: User;
     'payload-locked-documents': PayloadLockedDocument;
@@ -79,10 +80,11 @@ export interface Config {
   };
   collectionsJoins: {};
   collectionsSelect: {
-    showcases: ShowcasesSelect<false> | ShowcasesSelect<true>;
+    blogs: BlogsSelect<false> | BlogsSelect<true>;
     projects: ProjectsSelect<false> | ProjectsSelect<true>;
     'team-members': TeamMembersSelect<false> | TeamMembersSelect<true>;
     events: EventsSelect<false> | EventsSelect<true>;
+    sponsors: SponsorsSelect<false> | SponsorsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
@@ -125,9 +127,9 @@ export interface UserAuthOperations {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "showcases".
+ * via the `definition` "blogs".
  */
-export interface Showcase {
+export interface Blog {
   id: number;
   title: string;
   author: string;
@@ -136,7 +138,7 @@ export interface Showcase {
   date: string;
   tags?:
     | {
-        tag: string;
+        tag?: string | null;
         id?: string | null;
       }[]
     | null;
@@ -193,6 +195,19 @@ export interface Event {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "sponsors".
+ */
+export interface Sponsor {
+  id: number;
+  name: string;
+  logo: string;
+  alt: string;
+  website?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -241,8 +256,8 @@ export interface PayloadLockedDocument {
   id: number;
   document?:
     | ({
-        relationTo: 'showcases';
-        value: number | Showcase;
+        relationTo: 'blogs';
+        value: number | Blog;
       } | null)
     | ({
         relationTo: 'projects';
@@ -255,6 +270,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'events';
         value: number | Event;
+      } | null)
+    | ({
+        relationTo: 'sponsors';
+        value: number | Sponsor;
       } | null)
     | ({
         relationTo: 'users';
@@ -304,9 +323,9 @@ export interface PayloadMigration {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "showcases_select".
+ * via the `definition` "blogs_select".
  */
-export interface ShowcasesSelect<T extends boolean = true> {
+export interface BlogsSelect<T extends boolean = true> {
   title?: T;
   author?: T;
   image?: T;
@@ -363,6 +382,18 @@ export interface EventsSelect<T extends boolean = true> {
   category?: T;
   description?: T;
   url?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "sponsors_select".
+ */
+export interface SponsorsSelect<T extends boolean = true> {
+  name?: T;
+  logo?: T;
+  alt?: T;
+  website?: T;
   updatedAt?: T;
   createdAt?: T;
 }

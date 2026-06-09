@@ -1,11 +1,7 @@
 import payload from "payload";
 import config from "../../../payload.config";
 import { highlightEvents, pastEvents } from "../../components/data/events";
-
-const parseDate = (dateStr: string) => {
-  const cleaned = dateStr.replace(/(\d+)(st|nd|rd|th)/, "$1");
-  return new Date(cleaned).toISOString();
-};
+import { parseDate } from "./utils";
 
 export const eventSeed = async () => {
   await payload.init({ config });

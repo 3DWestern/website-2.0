@@ -1,7 +1,7 @@
 import type { CollectionConfig } from "payload";
 
 export const Blogs: CollectionConfig = {
-  slug: "showcases",
+  slug: "blogs",
   fields: [
     { name: "title", type: "text", required: true },
     { name: "author", type: "text", required: true },
@@ -11,7 +11,7 @@ export const Blogs: CollectionConfig = {
     {
       name: "tags",
       type: "array",
-      fields: [{ name: "tag", type: "text", required: true }],
+      fields: [{ name: "tag", type: "text" }],
     },
   ],
 };

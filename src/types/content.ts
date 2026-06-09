@@ -15,3 +15,10 @@ export type Showcase = {
   image: string;
   alt: string;
 };
+
+export type Sponsor = {
+  name: string;
+  logo: string;
+  alt: string;
+  website?: string;
+};
