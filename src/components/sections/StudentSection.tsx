@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { koulen } from '@/lib/fonts';
 import { spotlights } from '@/components/data/spotlights';
-import { SpotlightCard } from '@/components/SpotlightCard';
+import { SpotlightCard } from '@/components/content/SpotlightCard';
 
 export function StudentSection() {
 	const [current, setCurrent] = useState(0);

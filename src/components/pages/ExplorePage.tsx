@@ -3,6 +3,8 @@ import { koulen } from "@/lib/fonts";
 import { motion } from 'framer-motion';
 import { AnnouncementsSection } from '@/components/sections/AnnouncementsSection';
 import { StudentSection } from "../sections/StudentSection";
+import ProjectsSection from "../sections/ProjectsSection";
+import { TeamSection } from "../sections/TeamSection";
 
 
 export function ExplorePage() {
@@ -30,7 +32,10 @@ export function ExplorePage() {
 				</div>
 			</section>
             <AnnouncementsSection />
+			<ProjectsSection />
             <StudentSection />
+			<TeamSection />
+			
         </main>
     )
 }

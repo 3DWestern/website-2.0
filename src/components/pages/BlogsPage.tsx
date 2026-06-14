@@ -3,7 +3,7 @@
 import { koulen } from "@/lib/fonts";
 import { motion } from 'framer-motion';
 import { blogPosts } from '../data/blogs';
-import { BlogCard } from '../BlogCard';
+import { BlogCard } from '../content/BlogCard';
 
 export function BlogsPage() {
 	return (

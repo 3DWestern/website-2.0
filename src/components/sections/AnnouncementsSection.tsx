@@ -4,7 +4,7 @@ import { useRef, useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { koulen } from '@/lib/fonts';
 import { announcements } from '@/components/data/announcements';
-import { AnnouncementCard } from '@/components/AnnouncementCard';
+import { AnnouncementCard } from '@/components/content/AnnouncementCard';
 
 const INITIAL_COUNT = 3;
 const LOAD_MORE_COUNT = 3;
