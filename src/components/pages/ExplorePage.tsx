@@ -5,6 +5,7 @@ import { AnnouncementsSection } from '@/components/sections/AnnouncementsSection
 import { StudentSection } from "../sections/StudentSection";
 import ProjectsSection from "../sections/ProjectsSection";
 import { TeamSection } from "../sections/TeamSection";
+import { SponsorSection } from "../sections/SponsorSection";
 
 
 export function ExplorePage() {
@@ -35,6 +36,7 @@ export function ExplorePage() {
 			<ProjectsSection />
             <StudentSection />
 			<TeamSection />
+			<SponsorSection />
 			
         </main>
     )
