@@ -2,15 +2,19 @@ import { buildConfig } from "payload";
 import { lexicalEditor } from "@payloadcms/richtext-lexical";
 import sharp from "sharp";
 import { postgresAdapter } from "@payloadcms/db-postgres";
-import { Blogs } from "./src/cms/collections/Blogs";
-import { Projects } from "./src/cms/collections/Projects";
-import { TeamMembers } from "./src/cms/collections/TeamMembers";
-import { Events } from "./src/cms/collections/Events";
-import { Sponsors } from "./src/cms/collections/Sponsors";
+import {
+  Blogs,
+  Sponsors,
+  Events,
+  TeamMembers,
+  Projects,
+  Authors,
+  Users,
+} from "@/cms/collections";
 
 export default buildConfig({
-  editor: lexicalEditor(),
-  collections: [Blogs, Projects, TeamMembers, Events, Sponsors],
+  editor: lexicalEditor({}),
+  collections: [Blogs, Users, Projects, TeamMembers, Events, Sponsors, Authors],
   secret: process.env.PAYLOAD_SECRET || "",
   db: postgresAdapter({
     pool: {

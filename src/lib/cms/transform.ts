@@ -1,6 +1,6 @@
 import type { Event } from "@/components/data/events";
 import { MenuItem } from "@/components/data/teamdata";
-import { BlogPost, Showcase, Sponsor } from "@/types/content";
+import { BlogPost, Showcase, Sponsor, Author } from "@/types/content";
 
 // Get the ordinal identifier for the day
 const getOrdinal = (day: number) => {
@@ -67,18 +67,42 @@ export const transformSponsors = (docs: any[]): Sponsor[] => {
 export const transformBlog = (doc: any): BlogPost => {
   return {
     id: doc.id,
+    slug: doc.slug,
     title: doc.title,
-    author: doc.author,
-    image: doc.image,
-    alt: doc.alt,
-    date: formatDate(doc.date),
-    tags: doc.tags,
+    excerpt: doc.excerpt,
+    // author may come back as just an ID (string/number) if not populated,
+    // or as a full Author object if fetched with depth >= 1
+    author:
+      typeof doc.author === "object" && doc.author !== null
+        ? {
+            id: doc.author.id,
+            name: doc.author.name,
+            avatar: doc.author.avatar,
+          }
+        : doc.author, // fallback: unpopulated, just the raw ID
+    date: doc.date,
+    readingTime: doc.readingTime,
+    coverImage: doc.coverImage,
+    tags: doc.tags?.map((t: { tag: string }) => t.tag),
+    content: doc.content,
   };
 };
 
 // transform an entire payload doc to blog objects
 export const transformBlogs = (docs: any[]): BlogPost[] => {
   return transformDocs<BlogPost>(docs, transformBlog);
+};
+
+export const transformAuthor = (doc: any): Author => {
+  return {
+    id: doc.id,
+    name: doc.name,
+    avatar: doc.avatar,
+  };
+};
+
+export const transformAuthors = (docs: any[]): Author[] => {
+  return transformDocs<Author>(docs, transformAuthor);
 };
 
 // transform ONE payload doc object into a showcase object

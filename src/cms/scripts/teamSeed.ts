@@ -1,10 +1,7 @@
-import payload from "payload";
-import config from "../../../payload.config";
+import { Payload } from "payload";
 import { items } from "../../components/data/teamdata";
 
-export const teamSeed = async () => {
-  await payload.init({ config });
-
+export const teamSeed = async (payload: Payload) => {
   for (const member of items) {
     await payload.create({
       collection: "team-members",

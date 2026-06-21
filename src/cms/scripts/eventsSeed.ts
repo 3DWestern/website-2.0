@@ -1,11 +1,8 @@
-import payload from "payload";
-import config from "../../../payload.config";
+import { Payload } from "payload";
 import { highlightEvents, pastEvents } from "../../components/data/events";
 import { parseDate } from "./utils";
 
-export const eventSeed = async () => {
-  await payload.init({ config });
-
+export const eventSeed = async (payload: Payload) => {
   for (const event of [...highlightEvents, ...pastEvents]) {
     await payload.create({
       collection: "events",

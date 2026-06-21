@@ -1,22 +1,39 @@
-import payload from "payload";
-import config from "../../../payload.config";
+import { Payload } from "payload";
 import { sampleBlogs } from "../static-data/blogs";
-import { parseDate } from "./utils";
 
-export const blogsSeed = async () => {
-  await payload.init({ config });
-
+export const blogsSeed = async (payload: Payload) => {
   for (const blog of sampleBlogs) {
+    // Delete the existing post (if any) so we always seed fresh data
+    const existing = await payload.find({
+      collection: "blogs",
+      where: { slug: { equals: blog.slug } },
+    });
+
+    for (const doc of existing.docs) {
+      await payload.delete({ collection: "blogs", id: doc.id });
+      console.log(`Deleted existing post: ${blog.slug}`);
+    }
+
+    const authors = await payload.find({ collection: "authors", limit: 10 });
+    const author = authors.docs.find((a) => a.name === blog.author.name);
+    if (!author) throw new Error("No authors found — seed authors first");
+
     await payload.create({
       collection: "blogs",
       data: {
         title: blog.title,
-        author: blog.author,
-        image: blog.image,
-        alt: blog.alt,
-        date: parseDate(blog.date),
-        tags: blog.tags.map((tag) => ({ tag })),
-      },
+        slug: blog.slug,
+        excerpt: blog.excerpt,
+        author: author.id,
+        date: blog.date,
+        readingTime: blog.readingTime,
+        coverImage: blog.coverImage,
+        tags: blog.tags?.map((tag) => ({ tag })),
+        content: blog.content,
+        _status: "published",
+      } as any,
     });
+
+    console.log(`Seeded: ${blog.slug}`);
   }
 };

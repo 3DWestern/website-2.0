@@ -1,10 +1,7 @@
-import payload from "payload";
-import config from "../../../payload.config";
+import { Payload } from "payload";
 import { sampleProjects } from "../static-data/projects";
 
-export const projectsSeed = async () => {
-  await payload.init({ config });
-
+export const projectsSeed = async (payload: Payload) => {
   for (const project of sampleProjects) {
     await payload.create({
       collection: "projects",

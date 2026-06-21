@@ -11,7 +11,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "seedcms": "tsx -r tsconfig-paths/register -r ./src/cms/scripts/env.ts src/cms/scripts/seed.ts"
+    "seedcms": "tsx -r tsconfig-paths/register -r ./src/cms/scripts/env.ts src/cms/scripts/seed.ts",
+    "testfetch": "tsx -r tsconfig-paths/register -r ./src/cms/scripts/env.ts src/cms/scripts/testFetch.ts"
   },
   "dependencies": {
     "@payloadcms/db-postgres": "^3.85.0",

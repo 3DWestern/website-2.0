@@ -1,10 +1,7 @@
-import payload from "payload";
-import config from "../../../payload.config";
+import { Payload } from "payload";
 import { sampleSponsors } from "../static-data/sponsors";
 
-export const sponsorsSeed = async () => {
-  await payload.init({ config });
-
+export const sponsorsSeed = async (payload: Payload) => {
   for (const sponsor of sampleSponsors) {
     await payload.create({
       collection: "sponsors",
