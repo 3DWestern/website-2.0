@@ -28,7 +28,7 @@ export const getBlogPosts = async ({
   limit?: number;
   page: number;
   category?: string;
-  tags: string[];
+  tags?: string[];
 }) => {
   // Static fallback — skips Payload/network entirely when CMS is disabled
   if (!CMSEnabled()) return sampleBlogs;
@@ -37,6 +37,7 @@ export const getBlogPosts = async ({
   const params = new URLSearchParams();
   if (limit) params.set("limit", String(limit));
   if (page) params.set("page", String(page));
+  params.set("depth", "1"); // populates author
 
   const result = await cmsClient.get(`/api/blogs?${params.toString()}`);
 

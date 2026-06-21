@@ -80,7 +80,7 @@ export const transformBlog = (doc: any): BlogPost => {
             avatar: doc.author.avatar,
           }
         : doc.author, // fallback: unpopulated, just the raw ID
-    date: doc.date,
+    date: formatDate(doc.date),
     readingTime: doc.readingTime,
     coverImage: doc.coverImage,
     tags: doc.tags?.map((t: { tag: string }) => t.tag),

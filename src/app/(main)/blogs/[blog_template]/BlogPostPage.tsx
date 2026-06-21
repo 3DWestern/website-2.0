@@ -4,9 +4,12 @@
 
 import { koulen } from "@/lib/fonts";
 import { motion } from "framer-motion";
+import { RichText } from "@payloadcms/richtext-lexical/react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowLeft, Clock, Calendar } from "lucide-react";
+import type { BlogPost } from "@/types/content";
+import { notFound } from "next/navigation";
 
 // ---------------------------------------------------------------------------
 // Content block types
@@ -28,46 +31,6 @@ export type ContentBlock =
   | { type: "heading"; level: 2 | 3; text: string }
   | { type: "code"; text: string; language?: string }
   | { type: "image"; url: string; alt?: string; caption?: string };
-
-// ---------------------------------------------------------------------------
-// BlogPost type
-// ---------------------------------------------------------------------------
-export type BlogPost = {
-  id: string;
-  slug: string;
-  title: string;
-  /** One-sentence summary shown below the title and used in meta tags */
-  excerpt?: string;
-  /** ISO 8601 date string — Payload stores this as a date field */
-  publishedAt: string;
-  /** Minutes to read — derive this in a Payload beforeChange hook */
-  readingTime?: number;
-  /** Hero image — Payload upload field */
-  coverImage?: {
-    url: string;
-    alt?: string;
-  };
-  /** Relationship field pointing at an Authors collection */
-  author?: {
-    name: string;
-    avatar?: { url: string; alt?: string };
-  };
-  /** Array of plain strings — Payload array or select field */
-  tags?: string[];
-  /**
-   * The main article body.
-   *
-   * In Payload you'll define this as a `richText` field using the Lexical
-   * editor. When you fetch the post you can either:
-   *   a) render it server-side with Payload's JSX converter → pass HTML string
-   *   b) keep it as Lexical JSON and render with <RichText data={content} />
-   *
-   * For now it's typed as ContentBlock[] so the mock renders without any
-   * Payload dependency. Swap the type (and the renderer below) when you
-   * connect the CMS.
-   */
-  content: ContentBlock[];
-};
 
 // ---------------------------------------------------------------------------
 // Renders a single content block
@@ -127,17 +90,12 @@ function Block({ block }: { block: ContentBlock }) {
 // Page component
 // ---------------------------------------------------------------------------
 interface BlogPostPageProps {
-  post: BlogPost;
+  post: BlogPost | null;
   slug: string;
 }
 
 export function BlogPostPage({ post }: BlogPostPageProps) {
-  const formattedDate = new Date(post.publishedAt).toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
-
+  if (!post) notFound();
   return (
     <main className="min-h-screen">
       {/* ── Header ── */}
@@ -180,7 +138,7 @@ export function BlogPostPage({ post }: BlogPostPageProps) {
               <div className="flex items-center gap-2">
                 {post.author.avatar && (
                   <Image
-                    src="/images/execs/thomson.webp"
+                    src={post.author.avatar.url}
                     alt={post.author.avatar.alt ?? post.author.name}
                     width={28}
                     height={28}
@@ -195,7 +153,7 @@ export function BlogPostPage({ post }: BlogPostPageProps) {
 
             <div className="flex items-center gap-1.5">
               <Calendar className="w-4 h-4" />
-              <time dateTime={post.publishedAt}>{formattedDate}</time>
+              <time>{post.date}</time>
             </div>
 
             {post.readingTime && (
@@ -211,16 +169,14 @@ export function BlogPostPage({ post }: BlogPostPageProps) {
       {/* ── Cover image ── */}
       {post.coverImage && (
         <div className="bg-slate-100">
-          <div className="max-w-5xl mx-auto">
-            <div className="relative w-full aspect-[16/7] overflow-hidden">
-              <Image
-                src="/"
-                alt={post.coverImage.alt ?? post.title}
-                fill
-                className="object-cover"
-                priority
-              />
-            </div>
+          <div className="relative w-full aspect-21/9 max-h-[400px] overflow-hidden">
+            <Image
+              src={post.coverImage.url}
+              alt={post.coverImage.alt ?? post.title}
+              fill
+              className="object-cover"
+              priority
+            />
           </div>
         </div>
       )}
@@ -240,9 +196,7 @@ export function BlogPostPage({ post }: BlogPostPageProps) {
             )}
 
             <article>
-              {post.content.map((block, i) => (
-                <Block key={i} block={block} />
-              ))}
+              <RichText data={post.content} />
             </article>
           </motion.div>
         </div>
