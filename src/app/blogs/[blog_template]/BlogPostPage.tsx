@@ -145,7 +145,7 @@ export function BlogPostPage({ post }: BlogPostPageProps) {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-8">
             <Link
-              href="/blog"
+              href="/blogs"
               className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
             >
               <ArrowLeft className="w-4 h-4" />
@@ -180,7 +180,7 @@ export function BlogPostPage({ post }: BlogPostPageProps) {
               <div className="flex items-center gap-2">
                 {post.author.avatar && (
                   <Image
-                    src="/"
+                    src="/images/execs/thomson.webp"
                     alt={post.author.avatar.alt ?? post.author.name}
                     width={28}
                     height={28}

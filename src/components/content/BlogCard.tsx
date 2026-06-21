@@ -2,62 +2,150 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
+import { Clock, ArrowUpRight } from 'lucide-react';
 import { BlogPost } from '@/components/data/blogs';
 
 interface BlogCardProps {
 	post: BlogPost;
 }
 
+// ---------------------------------------------------------------------------
+// Loaded card
+// ---------------------------------------------------------------------------
+
 export function BlogCard({ post }: BlogCardProps) {
 	return (
-		<article className="flex flex-col sm:flex-row gap-6 bg-white rounded-xl border border-slate-100 shadow-sm hover:shadow-md transition-shadow duration-300 overflow-hidden">
+		<article
+			data-testid="blog-card"
+			className="group flex flex-col sm:flex-row bg-white rounded-xl border border-slate-100 shadow-sm hover:shadow-md transition-shadow duration-300 overflow-hidden"
+		>
 			{/* Thumbnail */}
-			<div className="relative w-full sm:w-72 shrink-0 min-h-[220px] sm:min-h-0">
+			<Link
+				href={post.href}
+				className="relative block w-full sm:w-72 shrink-0 min-h-[220px] sm:min-h-0 overflow-hidden"
+				tabIndex={-1}
+				aria-hidden="true"
+			>
 				<Image
 					src={post.image}
 					alt={post.alt}
 					fill
 					sizes="(max-width: 640px) 100vw, 288px"
-					className="object-cover"
+					className="object-cover transition-transform duration-500 group-hover:scale-105"
 				/>
-			</div>
+			</Link>
 
 			{/* Content */}
-			<div className="flex flex-col justify-center gap-3 py-6 pr-6 pl-6 sm:pl-0">
-				{/* Date */}
-				<span className="text-xs text-slate-400">{post.date}</span>
+			<div className="flex flex-col justify-center gap-3 p-6">
+				{/* Category + date + reading time */}
+				<div className="flex flex-wrap items-center gap-3">
+					<span className="text-xs font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full bg-slate-100 text-slate-600">
+						{post.category}
+					</span>
+					<span className="text-xs text-slate-400">{post.date}</span>
+					{post.readingTime && (
+						<span className="flex items-center gap-1 text-xs text-slate-400">
+							<Clock className="w-3 h-3" />
+							{post.readingTime} min
+						</span>
+					)}
+				</div>
 
 				{/* Title */}
-				<h3 className="text-2xl font-bold leading-tight text-slate-900">
-					{post.title}
+				<h3 className="text-xl sm:text-2xl font-bold leading-tight text-slate-900">
+					<Link
+						href={post.href}
+						className="hover:text-slate-600 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-400 rounded"
+					>
+						{post.title}
+					</Link>
 				</h3>
 
-				{/* Text */}
-				<p className="text-sm text-slate-500 leading-relaxed line-clamp-4">
+				{/* Excerpt */}
+				<p className="text-sm text-slate-500 leading-relaxed line-clamp-3">
 					{post.excerpt}
 				</p>
 
-				{/* CTA */}
-				<Link
-					href={post.href}
-					className="inline-flex items-center gap-1 text-sm font-semibold underline underline-offset-2 text-slate-800 hover:text-slate-600 transition-colors w-fit mt-1"
-				>
-					Read Post
-					<svg
-						xmlns="http://www.w3.org/2000/svg"
-						viewBox="0 0 20 20"
-						fill="currentColor"
-						className="w-4 h-4"
-						aria-hidden="true"
+				{/* Author + CTA */}
+				<div className="flex items-center justify-between mt-1">
+					{post.author && (
+						<div className="flex items-center gap-2">
+							{post.author.avatar && (
+								<div className="relative w-7 h-7 rounded-full overflow-hidden ring-1 ring-slate-200 shrink-0">
+									<Image
+										src={post.author.avatar.url}
+										alt={post.author.avatar.alt ?? post.author.name}
+										fill
+										className="object-cover"
+									/>
+								</div>
+							)}
+							{post.author.slug ? (
+								<Link
+									href={`/team/${post.author.slug}`}
+									className="text-xs font-medium text-slate-700 hover:text-slate-500 transition-colors"
+								>
+									{post.author.name}
+								</Link>
+							) : (
+								<span className="text-xs font-medium text-slate-700">
+									{post.author.name}
+								</span>
+							)}
+						</div>
+					)}
+
+					<Link
+						href={post.href}
+						className="inline-flex items-center gap-1 text-sm font-semibold underline underline-offset-2 text-slate-800 hover:text-slate-600 transition-colors ml-auto"
+						aria-label={`Read post: ${post.title}`}
 					>
-						<path
-							fillRule="evenodd"
-							d="M5.22 14.78a.75.75 0 0 1 0-1.06L11.44 7.5H6.75a.75.75 0 0 1 0-1.5h6.5a.75.75 0 0 1 .75.75v6.5a.75.75 0 0 1-1.5 0V8.56l-6.22 6.22a.75.75 0 0 1-1.06 0Z"
-							clipRule="evenodd"
-						/>
-					</svg>
-				</Link>
+						Read Post
+						<ArrowUpRight className="w-4 h-4" />
+					</Link>
+				</div>
 			</div>
 		</article>
+	);
+}
+
+// ---------------------------------------------------------------------------
+// Skeleton — shown while posts are loading (e.g. future CMS fetch)
+// ---------------------------------------------------------------------------
+
+export function BlogCardSkeleton() {
+	return (
+		<div
+			data-testid="blog-card-skeleton"
+			className="flex flex-col sm:flex-row bg-white rounded-xl border border-slate-100 shadow-sm overflow-hidden animate-pulse"
+			aria-hidden="true"
+		>
+			{/* Thumbnail placeholder */}
+			<div className="w-full sm:w-72 shrink-0 min-h-[220px] sm:min-h-0 bg-slate-200" />
+
+			{/* Content placeholder */}
+			<div className="flex flex-col justify-center gap-4 p-6 w-full">
+				<div className="flex gap-3">
+					<div className="h-5 w-20 rounded-full bg-slate-200" />
+					<div className="h-5 w-24 rounded bg-slate-100" />
+				</div>
+				<div className="space-y-2">
+					<div className="h-6 w-3/4 rounded bg-slate-200" />
+					<div className="h-6 w-1/2 rounded bg-slate-200" />
+				</div>
+				<div className="space-y-1.5">
+					<div className="h-4 w-full rounded bg-slate-100" />
+					<div className="h-4 w-full rounded bg-slate-100" />
+					<div className="h-4 w-2/3 rounded bg-slate-100" />
+				</div>
+				<div className="flex justify-between items-center mt-1">
+					<div className="flex items-center gap-2">
+						<div className="w-7 h-7 rounded-full bg-slate-200" />
+						<div className="h-4 w-20 rounded bg-slate-100" />
+					</div>
+					<div className="h-4 w-20 rounded bg-slate-200" />
+				</div>
+			</div>
+		</div>
 	);
 }

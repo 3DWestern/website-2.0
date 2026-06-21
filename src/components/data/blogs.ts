@@ -1,62 +1,188 @@
-export interface BlogPost {
-	id: string;
-	title: string;
-	excerpt: string;
-	date: string;
-	image: string;
-	alt: string;
-	href: string;
-}
+export type BlogPost = {
+  id: string;
+  slug: string;
+  title: string;
+  excerpt: string;
+  /** Human-readable date e.g. "March 12, 2025" */
+  date: string;
+  /** ISO 8601 — used for <time dateTime> */
+  publishedAt: string;
+  readingTime?: number;
+  image: string;
+  alt: string;
+  href: string;
+  /** Used by the category filter pills on /blog */
+  category: string;
+  tags?: string[];
+  author?: {
+    name: string;
+    /** Links to /team/[slug] — wire up when team pages exist */
+    slug?: string;
+    avatar?: { url: string; alt?: string };
+  };
+  coverImage?: {
+    url: string;
+    alt?: string;
+  };
+};
 
 export const blogPosts: BlogPost[] = [
-	{
-		id: '1',
-		title: 'MyCase, Transforming Legal Practice',
-		excerpt:
-			'Our commitment to providing value extends beyond the features of our products or services. We believe in fostering long-term partnerships by ensuring that our pricing plans fit every stage of growth. Many legal professionals find it difficult to accurately keep track of all case-related time, which often results in billable time slipping through the cracks.',
-		date: '22 Dec 2023',
-		image: '/images/blog/placeholder-1.jpg',
-		alt: 'Legal professionals in a meeting discussing case management',
-		href: '/blog/mycase-transforming-legal-practice',
-	},
-	{
-		id: '2',
-		title: 'The Future of AI in Entrepreneurship',
-		excerpt:
-			'Artificial intelligence is rapidly reshaping how entrepreneurs build, scale, and operate their businesses. From automated customer support to intelligent market analysis, the tools available today would have seemed like science fiction a decade ago. We explore what this means for the next generation of founders.',
-		date: '15 Jan 2024',
-		image: '/images/blog/placeholder-2.jpg',
-		alt: 'Entrepreneur working with AI tools on a laptop',
-		href: '/blog/future-of-ai-in-entrepreneurship',
-	},
-	{
-		id: '3',
-		title: 'Building a Strong Startup Culture from Day One',
-		excerpt:
-			'Culture is not something you can bolt on later — it is built in every early hiring decision, every team ritual, and every value trade-off you make under pressure. This guide walks through the principles our most successful alumni used to create cultures that scaled with them.',
-		date: '03 Feb 2024',
-		image: '/images/blog/placeholder-3.jpg',
-		alt: 'Startup team collaborating around a whiteboard',
-		href: '/blog/building-startup-culture',
-	},
-	{
-		id: '4',
-		title: 'How to Nail Your First Pitch to Investors',
-		excerpt:
-			'Getting in front of investors is hard enough — fumbling the pitch when you are there is a costly mistake. Drawing on feedback from real VCs and angel investors, we break down the anatomy of a compelling pitch deck and the storytelling techniques that turn curiosity into commitment.',
-		date: '20 Feb 2024',
-		image: '/images/blog/placeholder-4.jpg',
-		alt: 'Founder presenting a pitch deck to a panel of investors',
-		href: '/blog/nail-your-first-pitch',
-	},
-	{
-		id: '5',
-		title: 'Lessons Learned from Our First Hackathon',
-		excerpt:
-			'Last month we ran our inaugural 48-hour hackathon and the results blew us away. Teams tackled problems in healthcare, climate tech, and fintech — and three projects have already moved into formal incubation. Here is what we learned about running a great hackathon and what we will do differently next time.',
-		date: '10 Mar 2024',
-		image: '/images/blog/placeholder-5.jpg',
-		alt: 'Participants coding late at night during the hackathon',
-		href: '/blog/lessons-from-first-hackathon',
-	},
+  {
+    id: "1",
+    slug: "getting-started-with-3d-printing",
+    title: "Getting Started with 3D Printing",
+    excerpt:
+      "Everything you need to know to go from zero to your first successful print, including filament selection, slicer settings, and bed leveling tips.",
+    date: "March 12, 2025",
+    publishedAt: "2025-03-12T10:00:00Z",
+    readingTime: 6,
+    image:
+      "/images/smaker.jpg",
+    alt: "3D printer in action",
+    href: "/blogs/getting-started-with-3d-printing",
+    category: "Tutorials",
+    tags: ["beginner", "FDM", "PLA"],
+    author: {
+      name: "Jane Doe",
+      slug: "jane-doe",
+      avatar: { url: "/images/execs/thomson.webp", alt: "Jane Doe" },
+    },
+    coverImage: {
+      url: "/images/smaker.jpg",
+      alt: "3D printer in action",
+    },
+  },
+  {
+    id: "2",
+    slug: "resin-vs-fdm-which-is-right-for-you",
+    title: "Resin vs FDM: Which Is Right for You?",
+    excerpt:
+      "A head-to-head comparison of SLA resin printers and FDM filament printers covering cost, detail quality, post-processing, and ideal use cases.",
+    date: "April 1, 2025",
+    publishedAt: "2025-04-01T09:00:00Z",
+    readingTime: 8,
+    image:
+      "/images/smaker.jpg",
+    alt: "Resin and FDM prints side by side",
+    href: "/blogs/resin-vs-fdm-which-is-right-for-you",
+    category: "Guides",
+    tags: ["resin", "FDM", "comparison"],
+    author: {
+      name: "Alex Kim",
+      slug: "alex-kim",
+      avatar: { url: "/images/execs/thomson.webp", alt: "Alex Kim" },
+    },
+    coverImage: {
+      url: "/images/smaker.jpg",
+      alt: "Resin and FDM prints side by side",
+    },
+  },
+  {
+    id: "3",
+    slug: "design-for-3d-print-in-fusion-360",
+    title: "Design for 3D Print in Fusion 360",
+    excerpt:
+      "Learn the key principles of designing parts that actually print well — wall thickness, overhangs, tolerances, and how to add supports in Fusion 360.",
+    date: "April 18, 2025",
+    publishedAt: "2025-04-18T14:00:00Z",
+    readingTime: 10,
+    image:
+      "/images/smaker.jpg",
+    alt: "Fusion 360 CAD model on screen",
+    href: "/blogs/design-for-3d-print-in-fusion-360",
+    category: "Tutorials",
+    tags: ["CAD", "Fusion 360", "design"],
+    author: {
+      name: "Maria Santos",
+      slug: "maria-santos",
+      avatar: { url: "/images/execs/thomson.webp", alt: "Maria Santos" },
+    },
+    coverImage: {
+      url: "/images/smaker.jpg",
+      alt: "Fusion 360 CAD model on screen",
+    },
+  },
+  {
+    id: "4",
+    slug: "club-recap-spring-showcase-2025",
+    title: "Club Recap: Spring Showcase 2025",
+    excerpt:
+      "A look back at our biggest showcase yet — over 40 members, 80+ projects, and a whole lot of PLA dust. See the highlights and award winners.",
+    date: "May 2, 2025",
+    publishedAt: "2025-05-02T16:00:00Z",
+    readingTime: 4,
+    image:
+      "/images/smaker.jpg",
+    alt: "Students at a 3D printing showcase",
+    href: "/blogs/club-recap-spring-showcase-2025",
+    category: "News",
+    tags: ["showcase", "event", "recap"],
+    author: {
+      name: "Sam Patel",
+      slug: "sam-patel",
+      avatar: { url: "/images/execs/thomson.webp", alt: "Sam Patel" },
+    },
+    coverImage: {
+      url: "/images/smaker.jpg",
+      alt: "Students at a 3D printing showcase",
+    },
+  },
+  {
+    id: "5",
+    slug: "slicer-settings-that-actually-matter",
+    title: "The Slicer Settings That Actually Matter",
+    excerpt:
+      "Most guides overwhelm you with every setting. This one covers only the six that have the biggest impact on print quality, speed, and reliability.",
+    date: "May 20, 2025",
+    publishedAt: "2025-05-20T11:00:00Z",
+    readingTime: 7,
+    image:
+      "/images/smaker.jpg",
+    alt: "Slicer software on a laptop",
+    href: "/blogs/slicer-settings-that-actually-matter",
+    category: "Guides",
+    tags: ["slicer", "Cura", "settings"],
+    author: {
+      name: "Jane Doe",
+      slug: "jane-doe",
+      avatar: { url: "/images/execs/thomson.webp", alt: "Jane Doe" },
+    },
+    coverImage: {
+      url: "/images/smaker.jpg",
+      alt: "Slicer software on a laptop",
+    },
+  },
+  {
+    id: "6",
+    slug: "intro-to-multi-material-printing",
+    title: "Intro to Multi-Material Printing",
+    excerpt:
+      "Multi-filament systems like the Bambu AMS open up a new world of colour and material combos. Here is what you need to know before diving in.",
+    date: "June 5, 2025",
+    publishedAt: "2025-06-05T09:30:00Z",
+    readingTime: 9,
+    image:
+      "/images/smaker.jpg",
+    alt: "Multi-colour 3D printed model",
+    href: "/blogs/intro-to-multi-material-printing",
+    category: "Tutorials",
+    tags: ["multi-material", "Bambu", "AMS"],
+    author: {
+      name: "Alex Kim",
+      slug: "alex-kim",
+      avatar: { url: "/images/execs/thomson.webp", alt: "Alex Kim" },
+    },
+    coverImage: {
+      url: "/images/smaker.jpg",
+      alt: "Multi-colour 3D printed model",
+    },
+  },
 ];
+
+/** All unique categories for the filter pills — derived from the post data */
+export const ALL_CATEGORIES = [
+  "All",
+  ...Array.from(new Set(blogPosts.map((p) => p.category))).sort(),
+] as const;
+
+export type Category = (typeof ALL_CATEGORIES)[number];
