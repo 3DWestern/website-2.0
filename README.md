@@ -1,6 +1,6 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Moving to pnpm 
+## Moving to pnpm
 
 If you have npm installed, run `npm install -g pnpm` or use corepack to install pnpm: `corepack enable`.
 Then remove `node_modules` in your project and run `pnpm install`. Approve all build scripts with `pnpm approve-builds`.
@@ -8,7 +8,8 @@ Then remove `node_modules` in your project and run `pnpm install`. Approve all b
 Then run `pnpm dev` to start the server.
 
 ### pnpm commands
-- add a package: `pnpm add <packagename>`, add `-D` flag for dev dependencies 
+
+- add a package: `pnpm add <packagename>`, add `-D` flag for dev dependencies
 - remove a package: `pnpm remove <packagename>`
 - list packages: `pnpm list`
 
@@ -46,3 +47,50 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+## CMS Setup (Payload)
+
+### Prerequisites
+
+- Node.js 18+
+- A PostgreSQL database (Already set up with Supabase)
+
+### Environment Variables
+
+Copy `.env.example` to `.env` and fill in the values:
+
+```env
+PAYLOAD_SECRET=your-secret-key
+CMS_DATABASE_URI=your-postgres-connection-string
+CMS_ENABLED=true
+```
+
+### Starting Payload
+
+```bash
+pnpm dev
+```
+
+Payload admin panel will be available at `http://localhost:3000/admin`.
+On first run you will be prompted to create an admin user.
+
+### Seeding the Database
+
+The database has already been seeded with initial data. You only need to run the seed script if the database has been reset:
+
+```bash
+pnpm seed
+
+```
+
+### Running Without a Database
+
+Set `CMS_ENABLED=false` in your `.env` to run the frontend using static fallback data
+
+### Collections
+
+- **Events** — club events
+- **Blogs** — blog posts
+- **Projects** — showcase projects
+- **Team Members** — team member profiles
+- **Sponsors** — sponsors
