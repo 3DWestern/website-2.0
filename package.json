@@ -12,7 +12,8 @@
     "start": "next start",
     "lint": "eslint",
     "seedcms": "tsx -r tsconfig-paths/register -r ./src/cms/scripts/env.ts src/cms/scripts/seed.ts",
-    "testfetch": "tsx -r tsconfig-paths/register -r ./src/cms/scripts/env.ts src/cms/scripts/testFetch.ts"
+    "testfetch": "tsx -r tsconfig-paths/register -r ./src/cms/scripts/env.ts src/cms/scripts/testFetch.ts",
+    "test": "vitest"
   },
   "dependencies": {
     "@payloadcms/db-postgres": "^3.85.0",
@@ -52,8 +53,8 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "cmdk": "^1.1.1",
-    "embla-carousel-auto-scroll": "^8.6.0",
     "dotenv": "^17.4.2",
+    "embla-carousel-auto-scroll": "^8.6.0",
     "embla-carousel-react": "^8.6.0",
     "framer-motion": "^12.26.2",
     "gl-matrix": "^3.4.4",
@@ -86,15 +87,18 @@
     "@types/node": "^20",
     "@types/react": "^19.2.8",
     "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^6.0.2",
     "autoprefixer": "^10.4.22",
     "babel-plugin-react-compiler": "1.0.0",
     "baseline-browser-mapping": "^2.9.3",
     "eslint": "^9",
     "eslint-config-next": "16.0.3",
+    "msw": "^2.14.6",
     "postcss": "^8.4.49",
     "tailwindcss": "^4",
     "tsconfig-paths": "^4.2.0",
     "tsx": "^4.22.4",
-    "typescript": "^5"
+    "typescript": "^5",
+    "vitest": "^4.1.9"
   }
 }
