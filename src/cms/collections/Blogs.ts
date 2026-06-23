@@ -36,7 +36,13 @@ export const Blogs: CollectionConfig = {
         { name: "alt", type: "text" },
       ],
     },
-    { name: "tags", type: "array", fields: [{ name: "tag", type: "text" }] },
+    {
+      name: "tags",
+      type: "relationship",
+      relationTo: "tags",
+      hasMany: true,
+      maxRows: 3,
+    },
     { name: "content", type: "richText", required: true },
   ],
 };

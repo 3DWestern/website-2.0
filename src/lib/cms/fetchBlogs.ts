@@ -48,7 +48,7 @@ export const getBlogPosts = async ({
   // with the requested list. Done here (not via Payload query) for simplicity.
   if (tags) {
     filteredResult = filteredResult.filter((post) =>
-      post.tags?.some((t) => tags.includes(t)),
+      post.tags?.some((t) => tags.includes(t.title)),
     );
   }
 

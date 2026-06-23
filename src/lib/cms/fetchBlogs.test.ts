@@ -10,6 +10,7 @@ describe("getBlogPosts", () => {
     });
     expect(posts.length).toBeGreaterThan(0);
     expect(posts[0]).toHaveProperty("slug");
+    console.log(posts[0]);
   });
 });
 

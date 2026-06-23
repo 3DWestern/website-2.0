@@ -115,10 +115,10 @@ export function BlogPostPage({ post }: BlogPostPageProps) {
             <div className="flex flex-wrap gap-2 mb-4">
               {post.tags.map((tag) => (
                 <span
-                  key={tag}
+                  key={tag.id + tag.title}
                   className="text-xs font-medium px-2.5 py-1 rounded-full bg-slate-100 text-slate-600 uppercase tracking-wide"
                 >
-                  {tag}
+                  {tag.title}
                 </span>
               ))}
             </div>

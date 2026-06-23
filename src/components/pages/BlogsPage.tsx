@@ -7,15 +7,16 @@ import { koulen } from "@/lib/fonts";
 import { ALL_CATEGORIES } from "../data/blogs";
 import type { Category } from "../data/blogs";
 import { BlogGrid } from "../content/BlogGrid";
-import { BlogPost } from "@/types/content";
+import { BlogPost, Tag } from "@/types/content";
 
 const PAGE_SIZE = 4;
 
 type BlogsPageProps = {
   posts: BlogPost[];
+  tags: Tag[];
 };
 
-export function BlogsPage({ posts }: BlogsPageProps) {
+export function BlogsPage({ posts, tags }: BlogsPageProps) {
   const searchId = useId();
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState<Category>("All");
@@ -36,12 +37,13 @@ export function BlogsPage({ posts }: BlogsPageProps) {
   const filtered = useMemo(() => {
     const q = search.toLowerCase().trim();
     return blogPosts.filter((p) => {
-      const matchesCategory = category === "All" || p.tags?.[0] === category;
+      const matchesCategory =
+        category === "All" || p.tags?.some((tag) => tag.title === category);
       const matchesSearch =
         !q ||
         p.title.toLowerCase().includes(q) ||
         p.excerpt?.toLowerCase().includes(q) ||
-        p.tags?.some((t) => t.toLowerCase().includes(q));
+        p.tags?.some((t) => t.title.toLowerCase().includes(q));
       return matchesCategory && matchesSearch;
     });
   }, [search, category]);
@@ -114,21 +116,21 @@ export function BlogsPage({ posts }: BlogsPageProps) {
               aria-label="Filter by category"
               className="flex flex-wrap gap-2"
             >
-              {ALL_CATEGORIES.map((cat) => (
+              {tags.map((tag) => (
                 <button
-                  key={cat}
-                  onClick={() => handleCategory(cat as Category)}
-                  aria-pressed={category === cat}
+                  key={tag.id}
+                  onClick={() => handleCategory(tag.title)}
+                  aria-pressed={category === tag.title}
                   className={`px-3.5 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wide
 									            transition-colors focus-visible:outline-none focus-visible:ring-2
 									            focus-visible:ring-slate-400
 									            ${
-                                category === cat
+                                category === tag.title
                                   ? "bg-slate-900 text-white"
                                   : "bg-slate-100 text-slate-600 hover:bg-slate-200"
                               }`}
                 >
-                  {cat}
+                  {tag.title}
                 </button>
               ))}
             </div>
@@ -164,4 +166,3 @@ export function BlogsPage({ posts }: BlogsPageProps) {
     </main>
   );
 }
-

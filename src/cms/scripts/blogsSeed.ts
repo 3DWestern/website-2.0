@@ -8,15 +8,10 @@ export const blogsSeed = async (payload: Payload) => {
       collection: "blogs",
       where: { slug: { equals: blog.slug } },
     });
-
     for (const doc of existing.docs) {
       await payload.delete({ collection: "blogs", id: doc.id });
       console.log(`Deleted existing post: ${blog.slug}`);
     }
-
-    const authors = await payload.find({ collection: "authors", limit: 10 });
-    const author = authors.docs.find((a) => a.name === blog.author.name);
-    if (!author) throw new Error("No authors found — seed authors first");
 
     await payload.create({
       collection: "blogs",
@@ -24,16 +19,15 @@ export const blogsSeed = async (payload: Payload) => {
         title: blog.title,
         slug: blog.slug,
         excerpt: blog.excerpt,
-        author: author.id,
+        author: blog.author,
         date: blog.date,
         readingTime: blog.readingTime,
         coverImage: blog.coverImage,
-        tags: blog.tags?.map((tag) => ({ tag })),
+        tags: blog.tags,
         content: blog.content,
         _status: "published",
       } as any,
     });
-
     console.log(`Seeded: ${blog.slug}`);
   }
 };
