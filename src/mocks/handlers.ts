@@ -1,77 +1,82 @@
 import { http, HttpResponse } from "msw";
+import { sampleTags } from "@/cms/static-data/tags";
+import { sampleAuthors } from "@/cms/static-data/authors";
+import { sampleBlogs } from "@/cms/static-data/blogs";
 
 export const handlers = [
-  http.get("http://localhost:3000/api/blogs", () => {
+  http.get("http://localhost:3000/api/tags", ({ request }) => {
+    const url = new URL(request.url);
+    const idParam = url.searchParams.get("where[id][in]");
+
+    let tags = sampleTags;
+
+    // Filter by IDs if provided
+    if (idParam) {
+      const ids = idParam.split(",").map(Number);
+      tags = sampleTags.filter((tag) => ids.includes(tag.id));
+    }
+
     return HttpResponse.json({
-      docs: [
-        {
-          id: 10,
-          title: "Recap: Our Spring Hackathon Was a Blast",
-          slug: "club-hackathon-recap",
-          excerpt:
-            "Over 40 students built 12 projects in 24 hours. Here's a look back at what we made.",
-          author: {
-            id: 1,
-            name: "Jane Doe",
-            avatar: {
-              url: "/images/avatar.webp",
-              alt: "Jane Doe",
-            },
-            updatedAt: "2026-06-21T20:06:12.407Z",
-            createdAt: "2026-06-21T20:06:12.407Z",
-          },
-          date: "2025-05-25T16:45:00.000Z",
-          readingTime: 4,
-          coverImage: {
-            url: "/images/workshop1.webp",
-            alt: "Students collaborating around laptops",
-          },
-          tags: [
-            {
-              id: 5,
-              title: "Community",
-              description: "Community events and engagement",
-            },
-          ],
-          content: {
-            root: {
-              type: "root",
-              format: "",
-              indent: 0,
-              version: 1,
-              children: [
-                {
-                  type: "paragraph",
-                  format: "",
-                  indent: 0,
-                  version: 1,
-                  children: [
-                    {
-                      mode: "normal",
-                      text: "From late-night debugging to final demos, this year's hackathon brought out some incredible ideas.",
-                      type: "text",
-                      style: "",
-                      detail: 0,
-                      format: 0,
-                      version: 1,
-                    },
-                  ],
-                  direction: "ltr",
-                  textFormat: 0,
-                },
-              ],
-              direction: "ltr",
-            },
-          },
-          updatedAt: "2026-06-21T21:18:00.926Z",
-          createdAt: "2026-06-21T21:17:00.133Z",
-          _status: "published",
-        },
-      ],
-      totalDocs: 1,
+      docs: tags,
+      totalDocs: tags.length,
       limit: 10,
       page: 1,
       totalPages: 1,
+    });
+  }),
+
+  // Get authors by IDs
+  http.get("http://localhost:3000/api/authors", ({ request }) => {
+    const url = new URL(request.url);
+    const idParam = url.searchParams.get("where[id][in]");
+
+    let authors = sampleAuthors;
+
+    // Filter by IDs if provided
+    if (idParam) {
+      const ids = idParam.split(",").map(Number);
+      authors = sampleAuthors.filter((author) => ids.includes(author.id));
+    }
+
+    return HttpResponse.json({
+      docs: authors,
+      totalDocs: authors.length,
+      limit: 10,
+      page: 1,
+      totalPages: 1,
+    });
+  }),
+  http.get("http://localhost:3000/api/blogs", ({ request }) => {
+    const url = new URL(request.url);
+    const slugParam = url.searchParams.get("where[slug][equals]");
+    const idsParam = url.searchParams.get("where[id][in]");
+
+    let blogs = sampleBlogs;
+
+    // Filter by slug
+    if (slugParam) {
+      blogs = sampleBlogs.filter((blog) => blog.slug === slugParam);
+    }
+
+    // Filter by IDs
+    if (idsParam) {
+      const ids = idsParam.split(",").map(Number);
+      blogs = sampleBlogs.filter((blog) => ids.includes(Number(blog.id)));
+    }
+
+    const deepBlogs = blogs.map((blog) => ({
+      ...blog,
+      tags: (blog.tags as unknown as number[])
+        ?.map((tagID) => sampleTags.find((sTag) => sTag.id === tagID))
+        .filter((tag) => tag !== undefined),
+    }));
+
+    return HttpResponse.json({
+      docs: deepBlogs,
+      totalDocs: blogs.length,
+      limit: 10,
+      page: 1,
+      totalPages: Math.ceil(blogs.length / 10),
     });
   }),
 ];

@@ -3,7 +3,23 @@ import type { CollectionConfig } from "payload";
 export const Blogs: CollectionConfig = {
   slug: "blogs",
   versions: {
-    drafts: true,
+    drafts: {
+      autosave: {
+        interval: 1000,
+      },
+    },
+  },
+  admin: {
+    preview: ({ slug }) => {
+      const encodedParams = new URLSearchParams({
+        slug: `${slug as string}`,
+        collection: "blogs",
+        path: `/blogs/${slug}`,
+        previewSecret: process.env.PREVIEW_SECRET || "",
+      });
+
+      return `/preview?${encodedParams.toString()}`;
+    },
   },
   access: {
     read: ({ req }) => {
