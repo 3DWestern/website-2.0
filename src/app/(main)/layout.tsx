@@ -3,6 +3,7 @@ import "./globals.css";
 import { LoadingWrapper } from "@/components/LoadingWrapper";
 import { MenuProvider } from "@/context/MenuContext";
 import { inter, spaceGrotesk } from "@/lib/fonts";
+import { setupMocks } from "@/lib/setup-mocks.server";
 
 // global metadata for SEO, can be overridden by specific individual pages
 export const metadata: Metadata = {
@@ -63,6 +64,8 @@ export const metadata: Metadata = {
     //	creator: "@yourTwitterHandle", // optional
   },
 };
+
+setupMocks(); // setup mocks if CMS environment flag is off
 
 export default function RootLayout({
   children,

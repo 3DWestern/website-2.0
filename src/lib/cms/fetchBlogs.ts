@@ -1,7 +1,5 @@
 import { cmsClient } from "./cmsClient";
 import { transformBlog, transformBlogs } from "./transform";
-import { sampleBlogs } from "@/cms/static-data/blogs";
-import { CMSEnabled } from "./utils";
 import { URLSearchParams } from "url";
 import { draftMode } from "next/headers";
 
@@ -30,9 +28,6 @@ export const getBlogPosts = async ({
   page: number;
   tags?: string[];
 }) => {
-  // Static fallback — skips Payload/network entirely when CMS is disabled
-  if (!CMSEnabled()) return sampleBlogs;
-
   // Build query string for Payload's REST API
   const params = new URLSearchParams();
   if (limit) params.set("limit", String(limit));
@@ -67,9 +62,6 @@ export const getBlogPosts = async ({
  *          Callers should treat `null` as "not found" and trigger a 404.
  */
 export const getPostBySlug = async (slug: string) => {
-  if (!CMSEnabled())
-    return sampleBlogs.find((post) => post.slug === slug) ?? null;
-
   const dm = await draftMode();
 
   const params = new URLSearchParams({

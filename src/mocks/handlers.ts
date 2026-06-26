@@ -2,6 +2,7 @@ import { http, HttpResponse } from "msw";
 import { sampleTags } from "@/cms/static-data/tags";
 import { sampleAuthors } from "@/cms/static-data/authors";
 import { sampleBlogs } from "@/cms/static-data/blogs";
+import { Author } from "@/types/content";
 
 export const handlers = [
   http.get("http://localhost:3000/api/tags", ({ request }) => {
@@ -64,11 +65,18 @@ export const handlers = [
       blogs = sampleBlogs.filter((blog) => ids.includes(Number(blog.id)));
     }
 
-    const deepBlogs = blogs.map((blog) => ({
+    let deepBlogs = blogs.map((blog) => ({
       ...blog,
       tags: (blog.tags as unknown as number[])
         ?.map((tagID) => sampleTags.find((sTag) => sTag.id === tagID))
         .filter((tag) => tag !== undefined),
+    }));
+
+    deepBlogs = deepBlogs.map((blog) => ({
+      ...blog,
+      author: sampleAuthors.find(
+        (author) => author.id === (blog.author as unknown as number),
+      ) as Author,
     }));
 
     return HttpResponse.json({
