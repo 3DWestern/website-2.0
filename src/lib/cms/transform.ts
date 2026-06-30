@@ -1,6 +1,6 @@
 import type { Event } from "@/components/data/events";
 import { MenuItem } from "@/components/data/teamdata";
-import { BlogPost, Showcase, Sponsor, Author } from "@/types/content";
+import { BlogPost, Showcase, Sponsor, Author, Tag } from "@/types/content";
 
 // Get the ordinal identifier for the day
 const getOrdinal = (day: number) => {
@@ -83,7 +83,13 @@ export const transformBlog = (doc: any): BlogPost => {
     date: formatDate(doc.date),
     readingTime: doc.readingTime,
     coverImage: doc.coverImage,
-    tags: doc.tags?.map((t: { tag: string }) => t.tag),
+    tags:
+      doc.tags?.length && typeof doc.tags[0] === "object"
+        ? (doc.tags as Tag[]).map((tag) => ({
+            title: tag.title,
+            description: tag.description ?? undefined,
+          }))
+        : doc.tags,
     content: doc.content,
   };
 };
@@ -138,6 +144,18 @@ export const transformTeamMember = (doc: any): MenuItem => {
 // transform an entire payload doc to team member objects
 export const transformTeamMembers = (docs: any[]): MenuItem[] => {
   return transformDocs<MenuItem>(docs, transformTeamMember);
+};
+
+export const transformTag = (doc: any): Tag => {
+  return {
+    id: doc.id,
+    title: doc.title,
+    description: doc.description ?? undefined,
+  };
+};
+
+export const transformTags = (docs: any): Tag[] => {
+  return transformDocs<Tag>(docs, transformTag);
 };
 
 // Transform an entire payload doc to a generic typed object

@@ -1,7 +1,13 @@
 import type { DefaultTypedEditorState } from "@payloadcms/richtext-lexical";
 
+export type Tag = {
+  id: number;
+  title: string;
+  description?: string;
+};
+
 export type Author = {
-  id: string;
+  id: number;
   name: string;
   avatar: {
     url: string;
@@ -27,7 +33,7 @@ export type BlogPost = {
   /** Relationship field pointing at an Authors collection */
   author: Author;
   /** Array of plain strings — Payload array or select field */
-  tags?: string[];
+  tags?: Tag[];
   /** The main article body.
    * richText type from payload, read docs for more info
    * Includes all DEFAULT features offered by payload

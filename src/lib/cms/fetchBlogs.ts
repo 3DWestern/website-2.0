@@ -1,7 +1,7 @@
 import { cmsClient } from "./cmsClient";
 import { transformBlog, transformBlogs } from "./transform";
-import { sampleBlogs } from "@/cms/static-data/blogs";
-import { CMSEnabled } from "./utils";
+import { URLSearchParams } from "url";
+import { draftMode } from "next/headers";
 
 /**
  * Fetches a paginated, filterable list of blog posts.
@@ -22,17 +22,12 @@ import { CMSEnabled } from "./utils";
 export const getBlogPosts = async ({
   limit,
   page,
-  category,
   tags,
 }: {
   limit?: number;
   page: number;
-  category?: string;
   tags?: string[];
 }) => {
-  // Static fallback — skips Payload/network entirely when CMS is disabled
-  if (!CMSEnabled()) return sampleBlogs;
-
   // Build query string for Payload's REST API
   const params = new URLSearchParams();
   if (limit) params.set("limit", String(limit));
@@ -46,9 +41,9 @@ export const getBlogPosts = async ({
 
   // Client-side tag filter: keep posts that share at least one tag
   // with the requested list. Done here (not via Payload query) for simplicity.
-  if (tags) {
-    filteredResult = filteredResult.filter((post) =>
-      post.tags?.some((t) => tags.includes(t)),
+  if (tags && tags.length > 0) {
+    filteredResult = filteredResult.filter((blog) =>
+      blog.tags?.some((t) => tags.includes(t.title)),
     );
   }
 
@@ -67,8 +62,18 @@ export const getBlogPosts = async ({
  *          Callers should treat `null` as "not found" and trigger a 404.
  */
 export const getPostBySlug = async (slug: string) => {
-  if (!CMSEnabled())
-    return sampleBlogs.find((post) => post.slug === slug) ?? null;
-  const result = await cmsClient.get(`/api/blogs?where[slug][equals]=${slug}`);
+  const dm = await draftMode();
+
+  const params = new URLSearchParams({
+    "where[slug][equals]": slug,
+    depth: "2",
+  });
+
+  if (dm.isEnabled) {
+    params.set("draft", "true");
+  }
+
+  const result = await cmsClient.get(`/api/blogs?${params}`);
+  console.log(result);
   return result.docs[0] ? transformBlog(result.docs[0]) : null;
 };

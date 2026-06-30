@@ -69,6 +69,7 @@ export interface Config {
   collections: {
     blogs: Blog;
     users: User;
+    tags: Tag;
     projects: Project;
     'team-members': TeamMember;
     events: Event;
@@ -83,6 +84,7 @@ export interface Config {
   collectionsSelect: {
     blogs: BlogsSelect<false> | BlogsSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
+    tags: TagsSelect<false> | TagsSelect<true>;
     projects: ProjectsSelect<false> | ProjectsSelect<true>;
     'team-members': TeamMembersSelect<false> | TeamMembersSelect<true>;
     events: EventsSelect<false> | EventsSelect<true>;
@@ -143,12 +145,7 @@ export interface Blog {
     url: string;
     alt?: string | null;
   };
-  tags?:
-    | {
-        tag?: string | null;
-        id?: string | null;
-      }[]
-    | null;
+  tags?: (number | Tag)[] | null;
   content: {
     root: {
       type: string;
@@ -179,6 +176,17 @@ export interface Author {
     url: string;
     alt: string;
   };
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "tags".
+ */
+export interface Tag {
+  id: number;
+  title: string;
+  description?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -302,6 +310,10 @@ export interface PayloadLockedDocument {
         value: number | User;
       } | null)
     | ({
+        relationTo: 'tags';
+        value: number | Tag;
+      } | null)
+    | ({
         relationTo: 'projects';
         value: number | Project;
       } | null)
@@ -380,12 +392,7 @@ export interface BlogsSelect<T extends boolean = true> {
         url?: T;
         alt?: T;
       };
-  tags?:
-    | T
-    | {
-        tag?: T;
-        id?: T;
-      };
+  tags?: T;
   content?: T;
   updatedAt?: T;
   createdAt?: T;
@@ -413,6 +420,16 @@ export interface UsersSelect<T extends boolean = true> {
         createdAt?: T;
         expiresAt?: T;
       };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "tags_select".
+ */
+export interface TagsSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

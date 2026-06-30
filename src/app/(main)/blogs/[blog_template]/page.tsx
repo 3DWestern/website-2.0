@@ -1,5 +1,3 @@
-
-
 import { getPostBySlug } from "@/lib/cms/fetchBlogs";
 import { BlogPostPage } from "./BlogPostPage";
 import { blogPostMeta } from "@/lib/blogMeta";
@@ -7,21 +5,23 @@ import { blogPostMeta } from "@/lib/blogMeta";
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ blog_template: string }>;
 }) {
-  const { slug } = await params;
-  const post = await getPostBySlug(slug);
+  const { blog_template } = await params;
+  const post = await getPostBySlug(blog_template);
   return blogPostMeta(post);
 }
 
 const Blog = async ({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ blog_template: string }>;
 }) => {
-  const { slug } = await params;
-  const post = await getPostBySlug(slug);
-  return <BlogPostPage post={post} slug={slug} />;
+  const { blog_template } = await params;
+
+  const post = await getPostBySlug(blog_template);
+
+  return <BlogPostPage post={post} slug={blog_template} />;
 };
 
 export default Blog;

@@ -39,9 +39,17 @@ export function BlogCard({ post }: BlogCardProps) {
       <div className=" flex flex-col w-full justify-center gap-3 p-6">
         {/* Category + date + reading time */}
         <div className="flex flex-wrap items-center gap-3">
-          <span className="text-xs font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full bg-slate-100 text-slate-600">
-            Category {/* TODO category vs tags */}
-          </span>
+          {post.tags?.map((tag) => {
+            return (
+              <span
+                key={tag.id + tag.title}
+                className="text-xs font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full bg-slate-100 text-slate-600"
+              >
+                {tag.title}
+              </span>
+            );
+          })}
+
           <span className="text-xs text-slate-400">{post.date}</span>
           {post.readingTime && (
             <span className="flex items-center gap-1 text-xs text-slate-400">
@@ -153,4 +161,3 @@ export function BlogCardSkeleton() {
     </div>
   );
 }
-

@@ -6,6 +6,7 @@ import { sponsorsSeed } from "./sponsorsSeed";
 import { blogsSeed } from "./blogsSeed";
 import { projectsSeed } from "./projectsSeed";
 import { authorsSeed } from "./authorsSeed";
+import { tagsSeed } from "./tagsSeed";
 
 const seed = async () => {
   const payload = await getPayload({ config });
@@ -14,6 +15,7 @@ const seed = async () => {
   await eventSeed(payload);
   await sponsorsSeed(payload);
   await authorsSeed(payload); // MUST RUN BEFORE BLOGS
+  await tagsSeed(payload);
   await blogsSeed(payload);
   await projectsSeed(payload);
   process.exit(0);

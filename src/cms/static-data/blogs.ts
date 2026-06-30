@@ -7,20 +7,14 @@ export const sampleBlogs: BlogPost[] = [
     title: "Getting Started with Next.js 15",
     excerpt:
       "A practical walkthrough of the new features in Next.js 15 and how to migrate your existing projects.",
-    author: {
-      name: "Jane Doe",
-      avatar: {
-        url: "/images/avatar.webp",
-        alt: "Jane Doe",
-      },
-    },
+    author: 1,
     date: "2025-03-12T10:00:00.000Z",
     readingTime: 6,
     coverImage: {
       url: "/images/workshop3.webp",
       alt: "Code on a screen",
     },
-    tags: ["Next.js", "React", "Web Dev"],
+    tags: [1],
     content: {
       root: {
         type: "root",
@@ -58,20 +52,14 @@ export const sampleBlogs: BlogPost[] = [
     title: "A Gentle Introduction to TypeScript Generics",
     excerpt:
       "Generics can feel intimidating at first. Here's a beginner-friendly breakdown with real examples.",
-    author: {
-      name: "Marcus Lee",
-      avatar: {
-        url: "/images/avatar.webp",
-        alt: "Marcus Lee",
-      },
-    },
+    author: 2,
     date: "2025-04-02T14:30:00.000Z",
     readingTime: 8,
     coverImage: {
       url: "/images/workshop1.webp",
       alt: "Laptop with code editor open",
     },
-    tags: ["TypeScript", "Web Dev", "Tutorial"],
+    tags: [2],
     content: {
       root: {
         type: "root",
@@ -109,20 +97,14 @@ export const sampleBlogs: BlogPost[] = [
     title: "Designing Accessible Forms That Don't Suck",
     excerpt:
       "Accessibility shouldn't be an afterthought. Practical tips for building forms everyone can use.",
-    author: {
-      name: "Priya Nair",
-      avatar: {
-        url: "/images/avatar.webp",
-        alt: "Priya Nair",
-      },
-    },
+    author: 3,
     date: "2025-04-20T09:15:00.000Z",
     readingTime: 5,
     coverImage: {
       url: "/images/workshop2.webp",
       alt: "Wireframe sketches of a form on paper",
     },
-    tags: ["Accessibility", "UX", "Design"],
+    tags: [3],
     content: {
       root: {
         type: "root",
@@ -160,20 +142,14 @@ export const sampleBlogs: BlogPost[] = [
     title: "Postgres vs Mongo: Picking a Database for Your CMS",
     excerpt:
       "We weighed the tradeoffs between relational and document databases before settling on Postgres.",
-    author: {
-      name: "Sam Okafor",
-      avatar: {
-        url: "/images/avatar.webp",
-        alt: "Sam Okafor",
-      },
-    },
+    author: 4,
     date: "2025-05-08T11:00:00.000Z",
     readingTime: 7,
     coverImage: {
       url: "/images/workshop3.webp",
       alt: "Database schema diagram on a whiteboard",
     },
-    tags: ["Databases", "Backend", "Payload"],
+    tags: [4],
     content: {
       root: {
         type: "root",
@@ -211,20 +187,14 @@ export const sampleBlogs: BlogPost[] = [
     title: "Recap: Our Spring Hackathon Was a Blast",
     excerpt:
       "Over 40 students built 12 projects in 24 hours. Here's a look back at what we made.",
-    author: {
-      name: "Jane Doe",
-      avatar: {
-        url: "/images/avatar.webp",
-        alt: "Jane Doe",
-      },
-    },
+    author: 1,
     date: "2025-05-25T16:45:00.000Z",
     readingTime: 4,
     coverImage: {
       url: "/images/workshop1.webp",
       alt: "Students collaborating around laptops",
     },
-    tags: ["Events", "Community", "Hackathon"],
+    tags: [5],
     content: {
       root: {
         type: "root",

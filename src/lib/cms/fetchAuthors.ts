@@ -5,7 +5,7 @@ import { CMSEnabled } from "./utils";
 import { Author } from "@/types/content";
 import { URLSearchParams } from "url";
 
-export const getAuthorsByIds = async (ids: string[]): Promise<Author[]> => {
+export const getAuthorsByIds = async (ids: number[]): Promise<Author[]> => {
   if (!CMSEnabled)
     return sampleAuthors.filter((author) => ids.includes(author.id));
 

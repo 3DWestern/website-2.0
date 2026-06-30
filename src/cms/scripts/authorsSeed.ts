@@ -3,10 +3,9 @@ import { sampleAuthors } from "../static-data/authors";
 
 export const authorsSeed = async (payload: Payload) => {
   for (const author of sampleAuthors) {
-    const { id, ...authorData } = author;
     await payload.create({
       collection: "authors",
-      data: authorData,
+      data: author,
     });
   }
 };

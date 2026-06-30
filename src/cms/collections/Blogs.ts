@@ -3,7 +3,23 @@ import type { CollectionConfig } from "payload";
 export const Blogs: CollectionConfig = {
   slug: "blogs",
   versions: {
-    drafts: true,
+    drafts: {
+      autosave: {
+        interval: 1000,
+      },
+    },
+  },
+  admin: {
+    preview: ({ slug }) => {
+      const encodedParams = new URLSearchParams({
+        slug: `${slug as string}`,
+        collection: "blogs",
+        path: `/blogs/${slug}`,
+        previewSecret: process.env.PREVIEW_SECRET || "",
+      });
+
+      return `/preview?${encodedParams.toString()}`;
+    },
   },
   access: {
     read: ({ req }) => {
@@ -36,7 +52,13 @@ export const Blogs: CollectionConfig = {
         { name: "alt", type: "text" },
       ],
     },
-    { name: "tags", type: "array", fields: [{ name: "tag", type: "text" }] },
+    {
+      name: "tags",
+      type: "relationship",
+      relationTo: "tags",
+      hasMany: true,
+      maxRows: 3,
+    },
     { name: "content", type: "richText", required: true },
   ],
 };
