@@ -37,7 +37,8 @@ export function blogIndexMeta(): Metadata {
 }
 
 /** Meta for an individual /blogs/[slug] article */
-export function blogPostMeta(post: BlogPost): Metadata {
+export function blogPostMeta(post: BlogPost | null): Metadata {
+  if (!post) return {};
   const title = `${post.title} — ${SITE_NAME}`;
   const description = post.excerpt ?? `Read "${post.title}" on the 3D Western blog.`;
   const url = `${SITE_URL}/blogs/${post.slug}`;
