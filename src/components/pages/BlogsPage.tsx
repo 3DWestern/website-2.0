@@ -20,9 +20,8 @@ export function BlogsPage({ posts }: BlogsPageProps) {
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState<Category>("All");
   const [page, setPage] = useState(1);
-  const [blogPosts, setBlogPosts] = useState<BlogPost[]>(posts);
+  const [blogPosts] = useState<BlogPost[]>(posts);
 
-  // Reset to page 1 whenever filters change
   const handleSearch = (value: string) => {
     setSearch(value);
     setPage(1);
@@ -32,7 +31,6 @@ export function BlogsPage({ posts }: BlogsPageProps) {
     setPage(1);
   };
 
-  // Filter + search
   const filtered = useMemo(() => {
     const q = search.toLowerCase().trim();
     return blogPosts.filter((p) => {
@@ -44,15 +42,14 @@ export function BlogsPage({ posts }: BlogsPageProps) {
         p.tags?.some((t) => t.toLowerCase().includes(q));
       return matchesCategory && matchesSearch;
     });
-  }, [search, category]);
+  }, [search, category, blogPosts]);
 
-  // Paginate
   const visible = filtered.slice(0, page * PAGE_SIZE);
   const hasMore = visible.length < filtered.length;
 
   return (
     <main className="min-h-screen pt-[88px]">
-      {/* ── Header ── */}
+      {/* Header */}
       <section className="bg-white py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.h1
@@ -74,11 +71,10 @@ export function BlogsPage({ posts }: BlogsPageProps) {
         </div>
       </section>
 
-      {/* ── Filter bar ── */}
+      {/* Filter bar */}
       <section className="bg-white border-t border-slate-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
-            {/* Search input */}
             <div className="relative w-full sm:w-72">
               <label htmlFor={searchId} className="sr-only">
                 Search posts
@@ -94,8 +90,8 @@ export function BlogsPage({ posts }: BlogsPageProps) {
                 value={search}
                 onChange={(e) => handleSearch(e.target.value)}
                 className="w-full pl-9 pr-9 py-2 text-sm rounded-lg border border-slate-200 bg-white
-								           placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-400
-								           focus:border-transparent transition"
+                           placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-400
+                           focus:border-transparent transition"
               />
               {search && (
                 <button
@@ -108,24 +104,18 @@ export function BlogsPage({ posts }: BlogsPageProps) {
               )}
             </div>
 
-            {/* Category pills */}
-            <div
-              role="group"
-              aria-label="Filter by category"
-              className="flex flex-wrap gap-2"
-            >
+            <div role="group" aria-label="Filter by category" className="flex flex-wrap gap-2">
               {ALL_CATEGORIES.map((cat) => (
                 <button
                   key={cat}
                   onClick={() => handleCategory(cat as Category)}
                   aria-pressed={category === cat}
                   className={`px-3.5 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wide
-									            transition-colors focus-visible:outline-none focus-visible:ring-2
-									            focus-visible:ring-slate-400
-									            ${
-                                category === cat
-                                  ? "bg-slate-900 text-white"
-                                  : "bg-slate-100 text-slate-600 hover:bg-slate-200"
+                              transition-colors focus-visible:outline-none focus-visible:ring-2
+                              focus-visible:ring-slate-400
+                              ${category === cat
+                                ? "bg-slate-900 text-white"
+                                : "bg-slate-100 text-slate-600 hover:bg-slate-200"
                               }`}
                 >
                   {cat}
@@ -133,27 +123,25 @@ export function BlogsPage({ posts }: BlogsPageProps) {
               ))}
             </div>
 
-            {/* Result count */}
-            <span className="ml-auto text-xs text-slate-400 whitespace-nowrap setBlogPostshidden sm:block">
+            {/* FIXED: removed "setBlogPostshidden" typo, now just "hidden" */}
+            <span className="ml-auto text-xs text-slate-400 whitespace-nowrap hidden sm:block">
               {filtered.length} {filtered.length === 1 ? "post" : "posts"}
             </span>
           </div>
         </div>
       </section>
 
-      {/* ── Post list ── */}
+      {/* Post list */}
       <section className="py-16 bg-slate-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <BlogGrid posts={visible} />
-
-          {/* Load more */}
           {hasMore && (
             <div className="mt-12 flex justify-center">
               <button
                 onClick={() => setPage((p) => p + 1)}
                 className="px-8 py-3 rounded-lg bg-slate-900 text-white text-sm font-semibold
-								           hover:bg-slate-700 active:scale-95 transition-all focus-visible:outline-none
-								           focus-visible:ring-2 focus-visible:ring-slate-400"
+                           hover:bg-slate-700 active:scale-95 transition-all focus-visible:outline-none
+                           focus-visible:ring-2 focus-visible:ring-slate-400"
               >
                 Load more posts
               </button>
@@ -164,4 +152,3 @@ export function BlogsPage({ posts }: BlogsPageProps) {
     </main>
   );
 }
-

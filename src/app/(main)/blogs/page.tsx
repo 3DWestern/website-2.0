@@ -3,6 +3,9 @@ import { HorizontalNav } from "@/components/HorizontalNav";
 import { Footer } from "@/components/Footer";
 import { getBlogPosts } from "@/lib/cms/fetchBlogs";
 import { BlogPost } from "@/types/content";
+import { blogIndexMeta } from "@/lib/blogMeta";
+
+export function generateMetadata() { return blogIndexMeta(); }
 
 export default async function Blogs() {
   const posts: BlogPost[] = await getBlogPosts({
