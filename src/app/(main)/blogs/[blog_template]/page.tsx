@@ -19,6 +19,8 @@ const Blog = async ({
 }) => {
   const { blog_template } = await params;
 
+  console.log("blog value:", blog); // ← Add this
+
   const post = await getPostBySlug(blog_template);
 
   return <BlogPostPage post={post} slug={blog_template} />;
