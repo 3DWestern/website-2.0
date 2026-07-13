@@ -4,7 +4,6 @@ import { useId, useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import { Search, X } from "lucide-react";
 import { koulen } from "@/lib/fonts";
-import { ALL_CATEGORIES } from "../data/blogs";
 import type { Category } from "../data/blogs";
 import { BlogGrid } from "../content/BlogGrid";
 import { BlogPost, Tag } from "@/types/content";

@@ -65,8 +65,6 @@ export const metadata: Metadata = {
   },
 };
 
-setupMocks(); // setup mocks if CMS environment flag is off
-
 export default function RootLayout({
   children,
 }: Readonly<{
