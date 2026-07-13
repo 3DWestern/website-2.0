@@ -74,6 +74,5 @@ export const getPostBySlug = async (slug: string) => {
   }
 
   const result = await cmsClient.get(`/api/blogs?${params}`);
-  console.log(result);
   return result.docs[0] ? transformBlog(result.docs[0]) : null;
 };

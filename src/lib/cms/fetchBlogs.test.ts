@@ -31,7 +31,6 @@ describe("getBlogPosts with Community tag", () => {
       limit: 10,
       tags: ["Community"],
     });
-    console.log(posts[0].tags);
     expect(posts.length).toEqual(1);
     expect(posts[0].tags?.[0]).toHaveProperty("title", "Community");
   });
