@@ -85,15 +85,13 @@ export function BlogsPage({ posts, tags }: BlogsPageProps) {
                 className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none"
                 aria-hidden="true"
               />
-              <input
+               <input
                 id={searchId}
                 type="text"
                 placeholder="Search posts…"
                 value={search}
                 onChange={(e) => handleSearch(e.target.value)}
-                className="w-full pl-9 pr-9 py-2 text-sm rounded-lg border border-slate-200 bg-white
-                           placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-400
-                           focus:border-transparent transition"
+                className="w-full pl-9 pr-9 py-2 text-sm rounded-lg border border-slate-200 bg-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:border-transparent transition"
               />
               {search && (
                 <button
@@ -131,7 +129,6 @@ export function BlogsPage({ posts, tags }: BlogsPageProps) {
               ))}
             </div>
 
-            {/* FIXED: removed "setBlogPostshidden" typo, now just "hidden" */}
             <span className="ml-auto text-xs text-slate-400 whitespace-nowrap hidden sm:block">
               {filtered.length} {filtered.length === 1 ? "post" : "posts"}
             </span>
@@ -147,9 +144,7 @@ export function BlogsPage({ posts, tags }: BlogsPageProps) {
             <div className="mt-12 flex justify-center">
               <button
                 onClick={() => setPage((p) => p + 1)}
-                className="px-8 py-3 rounded-lg bg-slate-900 text-white text-sm font-semibold
-                           hover:bg-slate-700 active:scale-95 transition-all focus-visible:outline-none
-                           focus-visible:ring-2 focus-visible:ring-slate-400"
+                className="px-8 py-3 rounded-lg bg-slate-900 text-white text-sm font-semibold hover:bg-slate-700 active:scale-95 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-400"
               >
                 Load more posts
               </button>
