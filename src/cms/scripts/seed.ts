@@ -10,7 +10,6 @@ import { tagsSeed } from "./tagsSeed";
 
 const seed = async () => {
   const payload = await getPayload({ config });
-
   await teamSeed(payload);
   await eventSeed(payload);
   await sponsorsSeed(payload);

@@ -1,5 +1,6 @@
 import { Payload } from "payload";
 import { sampleBlogs } from "../static-data/blogs";
+import { Blog } from "../../../payload-types";
 
 export const blogsSeed = async (payload: Payload) => {
   for (const blog of sampleBlogs) {
@@ -26,7 +27,7 @@ export const blogsSeed = async (payload: Payload) => {
         tags: blog.tags,
         content: blog.content,
         _status: "published",
-      } as any,
+      } as Blog,
     });
     console.log(`Seeded: ${blog.slug}`);
   }

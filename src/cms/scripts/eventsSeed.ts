@@ -1,22 +1,14 @@
 import { Payload } from "payload";
-import { highlightEvents, pastEvents } from "../../components/data/events";
-import { parseDate } from "./utils";
+import { sampleEvents } from "@/cms/static-data/events";
 
 export const eventSeed = async (payload: Payload) => {
-  for (const event of [...highlightEvents, ...pastEvents]) {
+  for (const event of sampleEvents) {
     await payload.create({
       collection: "events",
       data: {
-        title: event.title,
-        date: parseDate(event.date),
-        time: event.time,
-        image: event.image,
-        alt: event.alt,
-        location: event.location,
-        category: event.category,
-        description: event.description,
-        url: event.url,
+        ...event,
       },
     });
+    console.log(`Seeded: ${event.title}`);
   }
 };

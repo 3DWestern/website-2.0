@@ -253,14 +253,37 @@ export interface TeamMember {
 export interface Event {
   id: number;
   title: string;
-  date: string;
-  time: string;
-  image: string;
-  alt: string;
-  location: string;
-  category: string;
   description: string;
+  schedule: {
+    date: string;
+    startTime: string;
+    endTime: string;
+  };
+  location: string;
+  image: {
+    src: string;
+    alt: string;
+  };
   url?: string | null;
+  categories: ('workshop' | 'social' | 'meeting' | 'holiday' | 'other')[];
+  recurrence?: {
+    isRecurring?: boolean | null;
+    frequency?: ('daily' | 'weekly' | 'monthly' | 'yearly') | null;
+    /**
+     * Repeat every N days/weeks/months/years
+     */
+    interval?: number | null;
+    endsOn?: string | null;
+  };
+  rsvp?: {
+    enabled?: boolean | null;
+    capacity?: number | null;
+    rsvpCount?: number | null;
+  };
+  /**
+   * Set to 'cancelled' manually when needed. Upcoming/ongoing/past are otherwise recalculated from schedule dates at fetch time.
+   */
+  status: 'upcoming' | 'ongoing' | 'past' | 'cancelled';
   updatedAt: string;
   createdAt: string;
 }
@@ -465,14 +488,39 @@ export interface TeamMembersSelect<T extends boolean = true> {
  */
 export interface EventsSelect<T extends boolean = true> {
   title?: T;
-  date?: T;
-  time?: T;
-  image?: T;
-  alt?: T;
-  location?: T;
-  category?: T;
   description?: T;
+  schedule?:
+    | T
+    | {
+        date?: T;
+        startTime?: T;
+        endTime?: T;
+      };
+  location?: T;
+  image?:
+    | T
+    | {
+        src?: T;
+        alt?: T;
+      };
   url?: T;
+  categories?: T;
+  recurrence?:
+    | T
+    | {
+        isRecurring?: T;
+        frequency?: T;
+        interval?: T;
+        endsOn?: T;
+      };
+  rsvp?:
+    | T
+    | {
+        enabled?: T;
+        capacity?: T;
+        rsvpCount?: T;
+      };
+  status?: T;
   updatedAt?: T;
   createdAt?: T;
 }

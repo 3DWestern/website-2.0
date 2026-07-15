@@ -5,7 +5,7 @@
 // Run with: npx jest blog.integration
 
 import React from "react";
-import { render, screen, fireEvent, within } from "@testing-library/react";
+import { render, screen, within } from "@testing-library/react";
 import { BlogGrid } from "@/components/content/BlogGrid";
 import { BlogCard } from "@/components/content/BlogCard";
 import type { BlogPost } from "@/types/content";
@@ -21,19 +21,35 @@ jest.mock("next/image", () => ({
 
 jest.mock("next/link", () => ({
   __esModule: true,
-  default: ({ href, children, ...rest }: { href: string; children: React.ReactNode; [key: string]: unknown }) => (
-    <a href={href} {...rest}>{children}</a>
+  default: ({
+    href,
+    children,
+    ...rest
+  }: {
+    href: string;
+    children: React.ReactNode;
+    [key: string]: unknown;
+  }) => (
+    <a href={href} {...rest}>
+      {children}
+    </a>
   ),
 }));
 
 // Framer Motion animations would time out in tests — replace with plain divs
 jest.mock("framer-motion", () => ({
   motion: {
-    div: ({ children, ...rest }: { children: React.ReactNode; [key: string]: unknown }) => (
-      <div {...rest}>{children}</div>
-    ),
+    div: ({
+      children,
+      ...rest
+    }: {
+      children: React.ReactNode;
+      [key: string]: unknown;
+    }) => <div {...rest}>{children}</div>,
   },
-  AnimatePresence: ({ children }: { children: React.ReactNode }) => <>{children}</>,
+  AnimatePresence: ({ children }: { children: React.ReactNode }) => (
+    <>{children}</>
+  ),
 }));
 
 // ─── Test data ────────────────────────────────────────────────────────────────
@@ -47,7 +63,11 @@ const POSTS: BlogPost[] = [
     date: "March 12, 2025",
     readingTime: 6,
     coverImage: { url: "/images/post1.jpg", alt: "3D printer" },
-    author: { id: "a1", name: "Jane Doe", avatar: { url: "/images/av1.jpg", alt: "Jane" } },
+    author: {
+      id: "a1",
+      name: "Jane Doe",
+      avatar: { url: "/images/av1.jpg", alt: "Jane" },
+    },
     tags: ["Tutorials", "beginner"],
     content: {} as never,
   },
@@ -59,7 +79,11 @@ const POSTS: BlogPost[] = [
     date: "April 1, 2025",
     readingTime: 8,
     coverImage: { url: "/images/post2.jpg", alt: "Resin printer" },
-    author: { id: "a2", name: "Alex Kim", avatar: { url: "/images/av2.jpg", alt: "Alex" } },
+    author: {
+      id: "a2",
+      name: "Alex Kim",
+      avatar: { url: "/images/av2.jpg", alt: "Alex" },
+    },
     tags: ["Guides", "resin"],
     content: {} as never,
   },
@@ -71,7 +95,11 @@ const POSTS: BlogPost[] = [
     date: "May 2, 2025",
     readingTime: 4,
     coverImage: { url: "/images/post3.jpg", alt: "Showcase" },
-    author: { id: "a3", name: "Sam Patel", avatar: { url: "/images/av3.jpg", alt: "Sam" } },
+    author: {
+      id: "a3",
+      name: "Sam Patel",
+      avatar: { url: "/images/av3.jpg", alt: "Sam" },
+    },
     tags: ["News", "event"],
     content: {} as never,
   },
@@ -88,9 +116,13 @@ describe("BlogGrid — rendering", () => {
   it("renders post titles in the correct order", () => {
     render(<BlogGrid posts={POSTS} />);
     const cards = screen.getAllByTestId("blog-card");
-    expect(within(cards[0]).getByText("Getting Started with 3D Printing")).toBeInTheDocument();
+    expect(
+      within(cards[0]).getByText("Getting Started with 3D Printing"),
+    ).toBeInTheDocument();
     expect(within(cards[1]).getByText("Resin vs FDM")).toBeInTheDocument();
-    expect(within(cards[2]).getByText("Club Recap: Spring Showcase")).toBeInTheDocument();
+    expect(
+      within(cards[2]).getByText("Club Recap: Spring Showcase"),
+    ).toBeInTheDocument();
   });
 
   it("shows skeleton placeholders when isLoading is true", () => {
@@ -101,9 +133,7 @@ describe("BlogGrid — rendering", () => {
 
   it("shows the empty-state message when there are no posts", () => {
     render(<BlogGrid posts={[]} />);
-    expect(
-      screen.getByText(/no posts match your search/i)
-    ).toBeInTheDocument();
+    expect(screen.getByText(/no posts match your search/i)).toBeInTheDocument();
   });
 
   it("shows a custom empty message when provided", () => {
@@ -122,13 +152,17 @@ describe("BlogGrid — rendering", () => {
 describe("BlogCard — navigation links", () => {
   it("Read Post CTA links to /blogs/[slug]", () => {
     render(<BlogCard post={POSTS[0]} />);
-    const cta = screen.getByRole("link", { name: /read post: getting started with 3d printing/i });
+    const cta = screen.getByRole("link", {
+      name: /read post: getting started with 3d printing/i,
+    });
     expect(cta).toHaveAttribute("href", "/blogs/getting-started");
   });
 
   it("title link also navigates to the correct article", () => {
     render(<BlogCard post={POSTS[0]} />);
-    const titleLink = screen.getByRole("link", { name: "Getting Started with 3D Printing" });
+    const titleLink = screen.getByRole("link", {
+      name: "Getting Started with 3D Printing",
+    });
     expect(titleLink).toHaveAttribute("href", "/blogs/getting-started");
   });
 
@@ -222,6 +256,9 @@ describe("Blog listing — filter and search logic", () => {
     const filtered = filterPosts(POSTS, "Tutorials", "");
     render(<BlogGrid posts={filtered} />);
     expect(screen.getAllByTestId("blog-card")).toHaveLength(1);
-    expect(screen.getByText("Getting Started with 3D Printing")).toBeInTheDocument();
+    expect(
+      screen.getByText("Getting Started with 3D Printing"),
+    ).toBeInTheDocument();
   });
 });
+

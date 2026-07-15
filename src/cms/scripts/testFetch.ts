@@ -4,7 +4,8 @@ import {
   getSponsors,
   getTeamMembers,
   getProjects,
-  getBlogs,
+  getBlogPosts,
+  getTags,
 } from "../../lib/cms/fetch";
 
 const test = async () => {
@@ -12,7 +13,15 @@ const test = async () => {
   console.log("Sponsors:", await getSponsors());
   console.log("Team Members:", await getTeamMembers());
   console.log("Projects:", await getProjects());
-  console.log("Blogs:", await getBlogs());
+  console.log(
+    "Blogs:",
+    await getBlogPosts({
+      page: 1,
+      limit: 100,
+    }),
+  );
+  console.log("Tags:", await getTags());
+  console.log("FETCH SUCCESSFUL");
 };
 
 test();

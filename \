@@ -17,15 +17,6 @@ import {
   TeamMember as PayloadTeamMember,
 } from "../../../payload-types";
 
-type DocType =
-  | PayloadEvent
-  | PayloadSponsor
-  | PayloadAuthor
-  | PayloadShowcase
-  | PayloadBlogPost
-  | PayloadTeamMember
-  | PayloadTag;
-
 // Get the ordinal identifier for the day
 const getOrdinal = (day: number) => {
   if (day > 3 && day < 21) return `${day}th`;
@@ -88,7 +79,7 @@ export const transformEvent = (doc: PayloadEvent): Event => {
 
 // transform an entire payload doc to event objects
 export const transformEvents = (docs: PayloadEvent[]): Event[] => {
-  return transformDocs(docs, transformEvent);
+  return transformDocs<Event>(docs, transformEvent);
 };
 
 // transform ONE payload doc object to an event object
@@ -104,11 +95,11 @@ export const transformSponsor = (doc: PayloadSponsor): Sponsor => {
 
 // transform an entire payload doc to sponsor objects
 export const transformSponsors = (docs: PayloadSponsor[]): Sponsor[] => {
-  return transformDocs(docs, transformSponsor);
+  return transformDocs<Sponsor>(docs, transformSponsor);
 };
 
 // transform ONE payload doc object into a blog
-export const transformBlog = (doc: PayloadBlogPost): BlogPost => {
+export const transformBlog = (doc: any): BlogPost => {
   return {
     id: doc.id,
     slug: doc.slug,
@@ -128,22 +119,19 @@ export const transformBlog = (doc: PayloadBlogPost): BlogPost => {
     readingTime: doc.readingTime,
     coverImage: doc.coverImage,
     tags:
-      doc.tags?.map((tag) =>
-        typeof tag === "object" && tag !== null
-          ? {
-              id: tag.id,
-              title: tag.title,
-              description: tag.description ?? undefined,
-            }
-          : tag,
-      ) ?? null,
+      doc.tags?.length && typeof doc.tags[0] === "object"
+        ? (doc.tags as Tag[]).map((tag) => ({
+            title: tag.title,
+            description: tag.description ?? undefined,
+          }))
+        : doc.tags,
     content: doc.content,
   };
 };
 
 // transform an entire payload doc to blog objects
 export const transformBlogs = (docs: PayloadBlogPost[]): BlogPost[] => {
-  return transformDocs(docs, transformBlog);
+  return transformDocs<BlogPost>(docs, transformBlog);
 };
 
 export const transformAuthor = (doc: PayloadAuthor): Author => {
@@ -155,7 +143,7 @@ export const transformAuthor = (doc: PayloadAuthor): Author => {
 };
 
 export const transformAuthors = (docs: PayloadAuthor[]): Author[] => {
-  return transformDocs(docs, transformAuthor);
+  return transformDocs<Author>(docs, transformAuthor);
 };
 
 // transform ONE payload doc object into a showcase object
@@ -171,7 +159,7 @@ export const transformProject = (doc: PayloadShowcase): Showcase => {
 
 // transform an entire payload doc to showcase objects
 export const transformProjects = (docs: PayloadShowcase[]): Showcase[] => {
-  return transformDocs(docs, transformProject);
+  return transformDocs<Showcase>(docs, transformProject);
 };
 
 // transform ONE payload doc object into a team member object
@@ -190,7 +178,7 @@ export const transformTeamMember = (doc: PayloadTeamMember): MenuItem => {
 
 // transform an entire payload doc to team member objects
 export const transformTeamMembers = (docs: PayloadTeamMember[]): MenuItem[] => {
-  return transformDocs(docs, transformTeamMember);
+  return transformDocs<MenuItem>(docs, transformTeamMember);
 };
 
 export const transformTag = (doc: PayloadTag): Tag => {
@@ -202,13 +190,13 @@ export const transformTag = (doc: PayloadTag): Tag => {
 };
 
 export const transformTags = (docs: PayloadTag[]): Tag[] => {
-  return transformDocs(docs, transformTag);
+  return transformDocs<Tag>(docs, transformTag);
 };
 
 // Transform an entire payload doc to a generic typed object
-export const transformDocs = <D extends DocType, T>(
-  docs: D[],
-  transformItem: (doc: D) => T,
+export const transformDocs = <T>(
+  docs: any[],
+  transformItem: (doc: any) => T,
 ): T[] => {
   return docs?.map(transformItem);
 };

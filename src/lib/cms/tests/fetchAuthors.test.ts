@@ -1,6 +1,5 @@
 import { describe, it, expect } from "vitest";
 import { getAuthorsByIds } from "../fetchAuthors";
-import { sampleAuthors } from "@/cms/static-data/authors";
 
 describe("getAuthorsByIds", () => {
   it("returns authors matching array of ids", async () => {

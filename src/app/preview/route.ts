@@ -42,7 +42,7 @@ export async function GET(req: Request): Promise<Response> {
         status: 403,
       });
     }
-  } catch (error) {
+  } catch (_) {
     return new Response("Error verifying user", { status: 500 });
   }
 

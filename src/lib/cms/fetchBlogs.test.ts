@@ -1,6 +1,11 @@
 import { describe, it, expect } from "vitest";
 import { getBlogPosts, getPostBySlug } from "./fetchBlogs";
 import { sampleBlogs } from "@/cms/static-data/blogs";
+import { vi } from "vitest";
+
+vi.mock("next/headers", () => ({
+  draftMode: async () => ({ isEnabled: false }),
+}));
 
 describe("getBlogPosts", () => {
   it("returns all blog posts", async () => {
