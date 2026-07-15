@@ -26,6 +26,10 @@ type DocType =
   | PayloadTeamMember
   | PayloadTag;
 
+type ResolvedBlogPost = Omit<PayloadBlogPost, "tags"> & {
+  tags: PayloadTag[] | null;
+};
+
 // Get the ordinal identifier for the day
 const getOrdinal = (day: number) => {
   if (day > 3 && day < 21) return `${day}th`;
@@ -108,7 +112,7 @@ export const transformSponsors = (docs: PayloadSponsor[]): Sponsor[] => {
 };
 
 // transform ONE payload doc object into a blog
-export const transformBlog = (doc: PayloadBlogPost): BlogPost => {
+export const transformBlog = (doc: ResolvedBlogPost): BlogPost => {
   return {
     id: doc.id,
     slug: doc.slug,
@@ -128,21 +132,17 @@ export const transformBlog = (doc: PayloadBlogPost): BlogPost => {
     readingTime: doc.readingTime,
     coverImage: doc.coverImage,
     tags:
-      doc.tags?.map((tag) =>
-        typeof tag === "object" && tag !== null
-          ? {
-              id: tag.id,
-              title: tag.title,
-              description: tag.description ?? undefined,
-            }
-          : tag,
-      ) ?? null,
+      doc.tags?.map((tag) => ({
+        id: tag.id,
+        title: tag.title,
+        description: tag.description ?? undefined,
+      })) ?? null,
     content: doc.content,
   };
 };
 
 // transform an entire payload doc to blog objects
-export const transformBlogs = (docs: PayloadBlogPost[]): BlogPost[] => {
+export const transformBlogs = (docs: ResolvedBlogPost[]): BlogPost[] => {
   return transformDocs(docs, transformBlog);
 };
 

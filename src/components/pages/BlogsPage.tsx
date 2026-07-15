@@ -27,7 +27,7 @@ export function BlogsPage({ posts, tags }: BlogsPageProps) {
     setPage(1);
   };
   const handleCategory = (value: Category) => {
-    setCategory(value);
+    setCategory((prev) => (value === prev ? "All" : value));
     setPage(1);
   };
 
@@ -84,7 +84,7 @@ export function BlogsPage({ posts, tags }: BlogsPageProps) {
                 className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none"
                 aria-hidden="true"
               />
-               <input
+              <input
                 id={searchId}
                 type="text"
                 placeholder="Search posts…"

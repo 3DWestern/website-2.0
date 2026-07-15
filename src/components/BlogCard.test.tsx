@@ -1,32 +1,40 @@
 // Unit tests for the BlogCard and BlogCardSkeleton components.
-// Run with: npx jest BlogCard
-
+import { vi } from "vitest";
 import React from "react";
+
+import { describe, it, expect } from "vitest";
 import { render, screen } from "@testing-library/react";
 import { BlogCard, BlogCardSkeleton } from "@/components/content/BlogCard";
 import type { BlogPost } from "@/types/content";
 
-// ─── Mocks ────────────────────────────────────────────────────────────────────
-// Next.js components don't work in plain Jest, so we swap them for simple HTML.
-
-jest.mock("next/image", () => ({
+vi.mock("next/image", () => ({
   __esModule: true,
   default: ({ src, alt }: { src: string; alt: string }) => (
     <img src={src} alt={alt} />
   ),
 }));
 
-jest.mock("next/link", () => ({
+vi.mock("next/link", () => ({
   __esModule: true,
-  default: ({ href, children, ...rest }: { href: string; children: React.ReactNode; [key: string]: unknown }) => (
-    <a href={href} {...rest}>{children}</a>
+  default: ({
+    href,
+    children,
+    ...rest
+  }: {
+    href: string;
+    children: React.ReactNode;
+    [key: string]: unknown;
+  }) => (
+    <a href={href} {...rest}>
+      {children}
+    </a>
   ),
 }));
 
 // ─── Test data ────────────────────────────────────────────────────────────────
 
 const mockPost: BlogPost = {
-  id: "1",
+  id: 1,
   slug: "test-post",
   title: "My First 3D Print",
   excerpt: "A short summary of the post.",
@@ -37,22 +45,25 @@ const mockPost: BlogPost = {
     alt: "A 3D printer",
   },
   author: {
-    id: "a1",
+    id: 1,
     name: "Jane Doe",
     avatar: { url: "/images/avatar.jpg", alt: "Jane Doe" },
   },
-  tags: ["Tutorials", "beginner"],
+  tags: [
+    { id: 1, title: "Tutorials" },
+    { id: 2, title: "beginner" },
+  ],
   content: {} as never, // not rendered by BlogCard
 };
 
 // A post with only the required fields (no optional ones)
 const minimalPost: BlogPost = {
-  id: "2",
+  id: 2,
   slug: "minimal-post",
   title: "Minimal Post",
   date: "April 1, 2025",
   author: {
-    id: "a2",
+    id: 2,
     name: "Alex Kim",
     avatar: { url: "/images/avatar2.jpg", alt: "Alex Kim" },
   },
@@ -69,12 +80,16 @@ describe("BlogCard", () => {
 
   it("renders the excerpt when provided", () => {
     render(<BlogCard post={mockPost} />);
-    expect(screen.getByText("A short summary of the post.")).toBeInTheDocument();
+    expect(
+      screen.getByText("A short summary of the post."),
+    ).toBeInTheDocument();
   });
 
   it("shows fallback text when excerpt is missing", () => {
     render(<BlogCard post={minimalPost} />);
-    expect(screen.getByText("Click to read more about the blog!")).toBeInTheDocument();
+    expect(
+      screen.getByText("Click to read more about the blog!"),
+    ).toBeInTheDocument();
   });
 
   it("renders the date", () => {
@@ -111,7 +126,9 @@ describe("BlogCard", () => {
 
   it("Read Post link points to the correct blog URL", () => {
     render(<BlogCard post={mockPost} />);
-    const link = screen.getByRole("link", { name: /read post: my first 3d print/i });
+    const link = screen.getByRole("link", {
+      name: /read post: my first 3d print/i,
+    });
     expect(link).toHaveAttribute("href", "/blogs/test-post");
   });
 
@@ -144,7 +161,7 @@ describe("BlogCardSkeleton", () => {
     render(<BlogCardSkeleton />);
     expect(screen.getByTestId("blog-card-skeleton")).toHaveAttribute(
       "aria-hidden",
-      "true"
+      "true",
     );
   });
 

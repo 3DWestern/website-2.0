@@ -1,10 +1,11 @@
 // Integration tests: checks that the blog listing page renders posts correctly,
 // that filters and search narrow the list, and that links point to the right
 // article pages.
-//
-// Run with: npx jest blog.integration
 
+import { vi } from "vitest";
 import React from "react";
+
+import { describe, it, expect } from "vitest";
 import { render, screen, within } from "@testing-library/react";
 import { BlogGrid } from "@/components/content/BlogGrid";
 import { BlogCard } from "@/components/content/BlogCard";
@@ -12,14 +13,14 @@ import type { BlogPost } from "@/types/content";
 
 // ─── Mocks ────────────────────────────────────────────────────────────────────
 
-jest.mock("next/image", () => ({
+vi.mock("next/image", () => ({
   __esModule: true,
   default: ({ src, alt }: { src: string; alt: string }) => (
     <img src={src} alt={alt} />
   ),
 }));
 
-jest.mock("next/link", () => ({
+vi.mock("next/link", () => ({
   __esModule: true,
   default: ({
     href,
@@ -37,7 +38,7 @@ jest.mock("next/link", () => ({
 }));
 
 // Framer Motion animations would time out in tests — replace with plain divs
-jest.mock("framer-motion", () => ({
+vi.mock("framer-motion", () => ({
   motion: {
     div: ({
       children,
@@ -56,7 +57,7 @@ jest.mock("framer-motion", () => ({
 
 const POSTS: BlogPost[] = [
   {
-    id: "1",
+    id: 1,
     slug: "getting-started",
     title: "Getting Started with 3D Printing",
     excerpt: "Your first print starts here.",
@@ -64,15 +65,18 @@ const POSTS: BlogPost[] = [
     readingTime: 6,
     coverImage: { url: "/images/post1.jpg", alt: "3D printer" },
     author: {
-      id: "a1",
+      id: 1,
       name: "Jane Doe",
       avatar: { url: "/images/av1.jpg", alt: "Jane" },
     },
-    tags: ["Tutorials", "beginner"],
+    tags: [
+      { id: 1, title: "Tutorials" },
+      { id: 2, title: "beginner" },
+    ],
     content: {} as never,
   },
   {
-    id: "2",
+    id: 2,
     slug: "resin-vs-fdm",
     title: "Resin vs FDM",
     excerpt: "A comparison of print technologies.",
@@ -80,15 +84,18 @@ const POSTS: BlogPost[] = [
     readingTime: 8,
     coverImage: { url: "/images/post2.jpg", alt: "Resin printer" },
     author: {
-      id: "a2",
+      id: 2,
       name: "Alex Kim",
       avatar: { url: "/images/av2.jpg", alt: "Alex" },
     },
-    tags: ["Guides", "resin"],
+    tags: [
+      { id: 3, title: "Guides" },
+      { id: 4, title: "resin" },
+    ],
     content: {} as never,
   },
   {
-    id: "3",
+    id: 3,
     slug: "spring-showcase",
     title: "Club Recap: Spring Showcase",
     excerpt: "A look back at our biggest event.",
@@ -96,11 +103,14 @@ const POSTS: BlogPost[] = [
     readingTime: 4,
     coverImage: { url: "/images/post3.jpg", alt: "Showcase" },
     author: {
-      id: "a3",
+      id: 3,
       name: "Sam Patel",
       avatar: { url: "/images/av3.jpg", alt: "Sam" },
     },
-    tags: ["News", "event"],
+    tags: [
+      { id: 5, title: "News" },
+      { id: 6, title: "event" },
+    ],
     content: {} as never,
   },
 ];
@@ -194,12 +204,13 @@ describe("BlogCard — navigation links", () => {
 function filterPosts(posts: BlogPost[], category: string, search: string) {
   const q = search.toLowerCase().trim();
   return posts.filter((p) => {
-    const matchesCategory = category === "All" || p.tags?.[0] === category;
+    const matchesCategory =
+      category === "All" || p.tags?.[0].title === category;
     const matchesSearch =
       !q ||
       p.title.toLowerCase().includes(q) ||
       p.excerpt?.toLowerCase().includes(q) ||
-      p.tags?.some((t) => t.toLowerCase().includes(q));
+      p.tags?.some((t) => t.title.toLowerCase().includes(q));
     return matchesCategory && matchesSearch;
   });
 }
@@ -261,4 +272,3 @@ describe("Blog listing — filter and search logic", () => {
     ).toBeInTheDocument();
   });
 });
-

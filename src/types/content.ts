@@ -70,7 +70,7 @@ export type BlogPost = {
   /** Relationship field pointing at an Authors collection */
   author: Author | number;
   /** Array of plain strings — Payload array or select field */
-  tags?: (number | Tag)[] | null;
+  tags?: Tag[] | null;
   /** The main article body.
    * richText type from payload, read docs for more info
    * Includes all DEFAULT features offered by payload
