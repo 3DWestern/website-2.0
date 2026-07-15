@@ -22,13 +22,24 @@ export function TeamMemberCard({ member }: TeamMemberCardProps) {
 
 	return (
 		<div className="flex flex-col overflow-hidden rounded-xl border border-slate-200 bg-white">
-			{/* Portrait photo — fixed 180px height keeps cards small regardless of grid width */}
-			<div className="relative w-full h-[240px] bg-slate-100 overflow-hidden shrink-0">
+			{/* Portrait photo.
+			    IMPORTANT: this used to be a fixed pixel height (h-[240px]) with
+			    a width that changes per breakpoint/column-count. That meant the
+			    box's width:height ratio was different at every screen size, so
+			    object-cover had to zoom in by a different, unpredictable amount
+			    each time — on narrow columns it zoomed in so far that half the
+			    face got cropped off.
+			    Using a fixed aspect-ratio instead means width and height always
+			    scale together. The crop framing stays identical no matter how
+			    wide or narrow the card ends up — it just gets bigger/smaller,
+			    never more/less cropped. 4:5 is a standard portrait headshot
+			    ratio; adjust if your source photos are a different shape. */}
+			<div className="relative w-full aspect-[4/5] bg-slate-100 overflow-hidden shrink-0">
 				<Image
 					src={member.image}
 					alt={member.name}
 					fill
-					sizes="20vw"
+					sizes="(max-width: 640px) 90vw, (max-width: 1024px) 45vw, 20vw"
 					className="object-cover object-top"
 				/>
 			</div>
