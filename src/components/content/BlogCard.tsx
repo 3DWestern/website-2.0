@@ -27,7 +27,7 @@ export function BlogCard({ post }: BlogCardProps) {
         aria-hidden="true"
       >
         <Image
-          src={post.coverImage ? post.coverImage.url : "/images/sampleBlog.jpg"}
+          src={post.coverImage?.url ?? "/images/sampleBlog.jpg"}
           alt={post.coverImage?.alt ?? "Blog Post"}
           fill
           sizes="(max-width: 640px) 100vw, 288px"

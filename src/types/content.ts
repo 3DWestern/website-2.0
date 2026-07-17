@@ -68,7 +68,7 @@ export type BlogPost = {
     alt?: string | null;
   } | null;
   /** Relationship field pointing at an Authors collection */
-  author: Author | number;
+  author: Author | null;
   /** Array of plain strings — Payload array or select field */
   tags?: Tag[] | null;
   /** The main article body.

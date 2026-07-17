@@ -1,8 +1,10 @@
-import { BlogPost } from "../../types/content";
+import { Blog } from "../../../payload-types";
 
-export const sampleBlogs: BlogPost[] = [
+type SampleBlogPost = Omit<Blog, "updatedAt" | "createdAt">;
+
+export const sampleBlogs: SampleBlogPost[] = [
   {
-    id: "1",
+    id: 1,
     slug: "getting-started-with-nextjs",
     title: "Getting Started with Next.js 15",
     excerpt:
@@ -47,7 +49,7 @@ export const sampleBlogs: BlogPost[] = [
     },
   },
   {
-    id: "2",
+    id: 2,
     slug: "intro-to-typescript-generics",
     title: "A Gentle Introduction to TypeScript Generics",
     excerpt:
@@ -92,7 +94,7 @@ export const sampleBlogs: BlogPost[] = [
     },
   },
   {
-    id: "3",
+    id: 3,
     slug: "designing-accessible-forms",
     title: "Designing Accessible Forms That Don't Suck",
     excerpt:
@@ -137,7 +139,7 @@ export const sampleBlogs: BlogPost[] = [
     },
   },
   {
-    id: "4",
+    id: 4,
     slug: "postgres-vs-mongo-for-cms",
     title: "Postgres vs Mongo: Picking a Database for Your CMS",
     excerpt:
@@ -182,7 +184,7 @@ export const sampleBlogs: BlogPost[] = [
     },
   },
   {
-    id: "5",
+    id: 5,
     slug: "club-hackathon-recap",
     title: "Recap: Our Spring Hackathon Was a Blast",
     excerpt:

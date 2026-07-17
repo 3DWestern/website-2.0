@@ -3,6 +3,7 @@ import { sampleTags } from "@/cms/static-data/tags";
 import { sampleAuthors } from "@/cms/static-data/authors";
 import { sampleBlogs } from "@/cms/static-data/blogs";
 import { Author } from "@/types/content";
+import { Author as PayloadAuthor } from "../../payload-types";
 
 export const handlers = [
   http.get("http://localhost:3000/api/tags", ({ request }) => {
@@ -54,6 +55,7 @@ export const handlers = [
 
     let blogs = sampleBlogs;
 
+    console.log("ran");
     // Filter by slug
     if (slugParam) {
       blogs = sampleBlogs.filter((blog) => blog.slug === slugParam);
@@ -76,7 +78,7 @@ export const handlers = [
       ...blog,
       author: sampleAuthors.find(
         (author) => author.id === (blog.author as unknown as number),
-      ) as Author,
+      ) as PayloadAuthor,
     }));
 
     return HttpResponse.json({
