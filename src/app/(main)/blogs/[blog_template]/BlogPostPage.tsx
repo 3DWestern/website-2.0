@@ -1,6 +1,5 @@
 "use client";
 
-// app/blog/[blog_template]/BlogPostPage.tsx
 
 import { koulen } from "@/lib/fonts";
 import { motion } from "framer-motion";
@@ -29,7 +28,7 @@ export function BlogPostPage({ post }: BlogPostPageProps) {
           <div className="mb-8">
             <Link
               href="/blogs"
-              className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+              className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-purple-700 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 rounded"
             >
               <ArrowLeft className="w-4 h-4" />
               Back to Blog
@@ -41,7 +40,7 @@ export function BlogPostPage({ post }: BlogPostPageProps) {
               {post.tags.map((tag) => (
                 <span
                   key={tag.id + tag.title}
-                  className="text-xs font-medium px-2.5 py-1 rounded-full bg-slate-100 text-slate-600 uppercase tracking-wide"
+                  className="text-xs font-medium px-2.5 py-1 rounded-full bg-purple-50 text-purple-700 uppercase tracking-wide"
                 >
                   {tag.title}
                 </span>
@@ -67,7 +66,7 @@ export function BlogPostPage({ post }: BlogPostPageProps) {
                     alt={post.author.avatar.alt ?? post.author.name}
                     width={28}
                     height={28}
-                    className="rounded-full object-cover"
+                    className="rounded-full object-cover ring-1 ring-purple-200"
                   />
                 )}
                 <span className="font-medium text-foreground">

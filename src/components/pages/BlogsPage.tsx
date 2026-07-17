@@ -9,6 +9,7 @@ import { BlogGrid } from "../content/BlogGrid";
 import { BlogPost, Tag } from "@/types/content";
 
 const PAGE_SIZE = 4;
+const ALL_TAG: Tag = { id: "all", title: "All" as Category };
 
 type BlogsPageProps = {
   posts: BlogPost[];
@@ -22,12 +23,14 @@ export function BlogsPage({ posts, tags }: BlogsPageProps) {
   const [page, setPage] = useState(1);
   const [blogPosts] = useState<BlogPost[]>(posts);
 
+  const filterTags = useMemo(() => [ALL_TAG, ...tags], [tags]);
+
   const handleSearch = (value: string) => {
     setSearch(value);
     setPage(1);
   };
   const handleCategory = (value: Category) => {
-    setCategory((prev) => (value === prev ? "All" : value));
+    setCategory(value);
     setPage(1);
   };
 
@@ -90,7 +93,7 @@ export function BlogsPage({ posts, tags }: BlogsPageProps) {
                 placeholder="Search posts…"
                 value={search}
                 onChange={(e) => handleSearch(e.target.value)}
-                className="w-full pl-9 pr-9 py-2 text-sm rounded-lg border border-slate-200 bg-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:border-transparent transition"
+                className="w-full pl-9 pr-9 py-2 text-sm rounded-lg border border-slate-200 bg-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent transition"
               />
               {search && (
                 <button
@@ -109,17 +112,17 @@ export function BlogsPage({ posts, tags }: BlogsPageProps) {
               aria-label="Filter by category"
               className="flex flex-wrap gap-2"
             >
-              {tags.map((tag) => (
+              {filterTags.map((tag) => (
                 <button
                   key={tag.id}
                   onClick={() => handleCategory(tag.title)}
                   aria-pressed={category === tag.title}
                   className={`px-3.5 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wide
 									            transition-colors focus-visible:outline-none focus-visible:ring-2
-									            focus-visible:ring-slate-400
+									            focus-visible:ring-purple-400
 									            ${
                                 category === tag.title
-                                  ? "bg-slate-900 text-white"
+                                  ? "bg-purple-600 text-white"
                                   : "bg-slate-100 text-slate-600 hover:bg-slate-200"
                               }`}
                 >
@@ -143,7 +146,7 @@ export function BlogsPage({ posts, tags }: BlogsPageProps) {
             <div className="mt-12 flex justify-center">
               <button
                 onClick={() => setPage((p) => p + 1)}
-                className="px-8 py-3 rounded-lg bg-slate-900 text-white text-sm font-semibold hover:bg-slate-700 active:scale-95 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-400"
+                className="px-8 py-3 rounded-lg bg-purple-600 text-white text-sm font-semibold hover:bg-purple-700 active:scale-95 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400"
               >
                 Load more posts
               </button>

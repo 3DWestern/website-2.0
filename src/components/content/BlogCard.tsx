@@ -43,7 +43,7 @@ export function BlogCard({ post }: BlogCardProps) {
             return (
               <span
                 key={tag.id + tag.title}
-                className="text-xs font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full bg-slate-100 text-slate-600"
+                className="text-xs font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full bg-purple-50 text-purple-700"
               >
                 {tag.title}
               </span>
@@ -63,7 +63,7 @@ export function BlogCard({ post }: BlogCardProps) {
         <h3 className="text-xl sm:text-2xl font-bold leading-tight text-slate-900">
           <Link
             href={`/blogs/${post.slug}`}
-            className="hover:text-slate-600 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-400 rounded"
+            className="hover:text-purple-700 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 rounded"
           >
             {post.title}
           </Link>
@@ -79,7 +79,7 @@ export function BlogCard({ post }: BlogCardProps) {
           {post.author && (
             <div className="flex items-center gap-2">
               {post.author.avatar && (
-                <div className="relative w-7 h-7 rounded-full overflow-hidden ring-1 ring-slate-200 shrink-0">
+                <div className="relative w-7 h-7 rounded-full overflow-hidden ring-1 ring-purple-200 shrink-0">
                   <Image
                     src={post.author.avatar.url}
                     alt={post.author.avatar.alt ?? post.author.name}
@@ -110,7 +110,7 @@ export function BlogCard({ post }: BlogCardProps) {
 
           <Link
             href={`/blogs/${post.slug}`}
-            className="inline-flex items-center gap-1 text-sm font-semibold underline underline-offset-2 text-slate-800 hover:text-slate-600 transition-colors ml-auto"
+            className="inline-flex items-center gap-1 text-sm font-semibold underline underline-offset-2 text-purple-700 hover:text-purple-900 transition-colors ml-auto focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 rounded"
             aria-label={`Read post: ${post.title}`}
           >
             Read Post
