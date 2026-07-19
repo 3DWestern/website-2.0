@@ -1,4 +1,4 @@
-import { EventsSection } from "@/components/sections/EventsSection";
+// import { EventsSection } from "@/components/sections/EventsSection";
 import { BigTextSection } from "@/components/sections/BigTextSection";
 import { MakerspacesSection } from "@/components/sections/MakerspacesSection";
 import { FAQSection } from "@/components/sections/FAQSection";
@@ -12,7 +12,7 @@ export function HomePage() {
       <MorissetteModel />
       <BigTextSection />
       <AboutUsSection />
-      <EventsSection />
+      {/* <EventsSection /> */}
       <MakerspacesSection />
       <ExecsSection />
       <FAQSection />

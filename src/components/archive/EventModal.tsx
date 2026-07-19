@@ -11,7 +11,7 @@ import {
 	DialogClose,
 } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
-import { Event } from '@/components/data/events';
+import { Event } from '@/components/archive/events';
 import { Calendar, Clock, MapPin } from 'lucide-react';
 
 interface EventModalProps {

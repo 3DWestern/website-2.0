@@ -2,7 +2,7 @@
 'use client';
 
 import { Card } from '@/components/ui/card';
-import { Event } from '@/components/data/events';
+import { Event } from '@/components/archive/events';
 import Image from 'next/image';
 
 interface EventCardProps {

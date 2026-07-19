@@ -1,163 +1,199 @@
+export type EventCategory = "workshop" | "social" | "meeting" | "holiday" | "other";
+
 export type Event = {
-	id: number;
-	title: string;
-	date: string;
-	time: string;
-	image: string;
-	alt: string;
-	location: string;
-	category: string;
-	description: string;
-	url?: string;
-}
+  id: number;
+  title: string;
+  description: string;
+  schedule: {
+    date: string; // ISO date, "YYYY-MM-DD"
+    startTime: string; // 24hr "HH:MM"
+    endTime: string; // 24hr "HH:MM"
+  };
+  location: string;
+  image: {
+    src: string;
+    alt: string;
+  };
+  url?: string;
+  categories: EventCategory[];
+  recurrence: {
+    isRecurring: boolean;
+    frequency?: "daily" | "weekly" | "monthly" | "yearly";
+    interval?: number;
+    endsOn?: string;
+  };
+  rsvp: {
+    enabled: boolean;
+    capacity?: number;
+    rsvpCount: number;
+  };
+  status: "upcoming" | "ongoing" | "past" | "cancelled";
+};
 
-export const highlightEvents: Event[] = [
-	{
-		id: 1,
-		title: "Mystery Bucket Challenge",
-		date: "January 14th, 2026",
-		time: "2:00 PM - 4:00 PM",
-		image: "/images/lucky-block.webp",
-		alt: "Canvas Background Image",
-		location: "Sabourin Makerspace",
-		category: "Workshop",
-		description: "Participants engage in the full cycle of product ideation, prototyping and learning how to pitch an innovative idea.",
-		url: "https://www.bouncelife.com/events/6942f5d21d54a5775305dcb4",
-	},
-	{
-		id: 2,
-		title: "Prototype and Design Thinking",
-		date: "January 14th, 2026",
-		time: "4:00 PM - 6:00 PM",
-		image: "/images/workshop3.webp",
-		alt: "Canvas Background Image",
-		location: "Digital Makerspace",
-		category: "Workshop",
-		description: "Fun challenge to build the tallest and most stable structure to hold a golf ball using CAD basics to design and prepare a project for printing. Any students interested in product development, prototyping and learning how to design an innovative idea are welcome, but will need to bring their own laptop.",
-		url: "https://www.bouncelife.com/events/6942f785c42f2067dc31b05e",
-	},
-	{
-		id: 3,
-		title: "Spaghetti Marshmallow Challenge",
-		date: "January 21st, 2026",
-		time: "2:00 PM - 4:00 PM",
-		image: "/images/workshop2.webp",
-		alt: "Canvas Background Image",
-		location: "Sabourin Makerspace",
-		category: "Activity",
-		description: "A fun, hands-on workshop to introduce principles of prototyping, collaboration and design thinking, using simple materials like spaghetti, marshmallows, string and tape to build the tallest structure possible.",
-		url: "https://www.bouncelife.com/events/6942f676bfdf6dc764c83089",
-	},
-
-	{
-		id: 4,
-		title: "Advanced 3D Printing Workshop: From Model to Reality",
-		date: "January 21st, 2026",
-		time: "4:00 PM - 6:00 PM",
-		image: "/images/workshop1.webp",
-		alt: "Canvas Background Image",
-		location: "Digital Makerspace",
-		category: "Workshop",
-		description: "Design your own desk organizer or name tag like a pen holder or phone stand! Create something functional, take it home, and make it yours. Don't miss this fun and practical hands-on competition!",
-		url: "https://www.bouncelife.com/events/6942f7f43d78d96d38414993",
-	},
-	{
-		id: 5,
-		title: "Bob Ross Style and Brand - 'Happy Little Trees': Honoring Art and Generosity",
-		date: "January 28th, 2026",
-		time: "2:00 PM - 4:00 PM",
-		image: "/images/workshop4.webp",
-		alt: "Canvas Background Image",
-		location: "Sabourin Makerspace",
-		category: "Workshop",
-		description: "Using techniques learned during the workshop, students will use oil on canvas to create and showcase their own masterpieces in an exhibition, inspired by the Thames River in London in honor of the spirit of Bob Ross and his creative approach. This workshop is made possible through the generosity of the Sabourin Family Foundation.",
-		url: "https://www.bouncelife.com/events/6942f6fa7ffe1cc83a76c004",
-	},
-	{
-		id: 6,
-		title: "Sewing for Entrepeneurs: Prototyping with Fabric",
-		date: "January 28th, 2026",
-		time: "4:00 PM - 6:00 PM",
-		image: "/images/sewing.jpg",
-		alt: "Canvas Background Image",
-		location: "Digital Makerspace",
-		category: "Workshop",
-		description: "An introductory workshop to the basics of sewing and its applications in prototyping, including foundational stitching skills for both hand and machine. Explore fabric as a medium for creating functional and aesthetic prototypes.",
-		url: "https://www.bouncelife.com/events/6942f84dda486964077145ca",
-	},
+export const eventCategories: EventCategory[] = [
+  "workshop",
+  "social",
+  "meeting",
+  "holiday",
+  "other",
 ];
 
-export const pastEvents: Event[] = [
-	{
-		id: 1,
-		title: "Mystery Bucket Challenge",
-		date: "January 14th, 2026",
-		time: "2:00 PM - 4:00 PM",
-		image: "/images/lucky-block.webp",
-		alt: "Canvas Background Image",
-		location: "Sabourin Makerspace",
-		category: "Workshop",
-		description: "Participants engage in the full cycle of product ideation, prototyping and learning how to pitch an innovative idea.",
-		url: "https://www.bouncelife.com/events/6942f5d21d54a5775305dcb4",
-	},
-	{
-		id: 2,
-		title: "Prototype and Design Thinking",
-		date: "January 14th, 2026",
-		time: "4:00 PM - 6:00 PM",
-		image: "/images/workshop3.webp",
-		alt: "Canvas Background Image",
-		location: "Digital Makerspace",
-		category: "Workshop",
-		description: "Fun challenge to build the tallest and most stable structure to hold a golf ball using CAD basics to design and prepare a project for printing. Any students interested in product development, prototyping and learning how to design an innovative idea are welcome, but will need to bring their own laptop.",
-		url: "https://www.bouncelife.com/events/6942f785c42f2067dc31b05e",
-	},
-	{
-		id: 3,
-		title: "Spaghetti Marshmallow Challenge",
-		date: "January 21st, 2026",
-		time: "2:00 PM - 4:00 PM",
-		image: "/images/workshop2.webp",
-		alt: "Canvas Background Image",
-		location: "Sabourin Makerspace",
-		category: "Activity",
-		description: "A fun, hands-on workshop to introduce principles of prototyping, collaboration and design thinking, using simple materials like spaghetti, marshmallows, string and tape to build the tallest structure possible.",
-		url: "https://www.bouncelife.com/events/6942f676bfdf6dc764c83089",
-	},
-
-	{
-		id: 4,
-		title: "Advanced 3D Printing Workshop: From Model to Reality",
-		date: "January 21st, 2026",
-		time: "4:00 PM - 6:00 PM",
-		image: "/images/workshop1.webp",
-		alt: "Canvas Background Image",
-		location: "Digital Makerspace",
-		category: "Workshop",
-		description: "Design your own desk organizer or name tag like a pen holder or phone stand! Create something functional, take it home, and make it yours. Don't miss this fun and practical hands-on competition!",
-		url: "https://www.bouncelife.com/events/6942f7f43d78d96d38414993",
-	},
-	{
-		id: 5,
-		title: "Bob Ross Style and Brand - 'Happy Little Trees': Honoring Art and Generosity",
-		date: "January 28th, 2026",
-		time: "2:00 PM - 4:00 PM",
-		image: "/images/workshop4.webp",
-		alt: "Canvas Background Image",
-		location: "Sabourin Makerspace",
-		category: "Workshop",
-		description: "Using techniques learned during the workshop, students will use oil on canvas to create and showcase their own masterpieces in an exhibition, inspired by the Thames River in London in honor of the spirit of Bob Ross and his creative approach. This workshop is made possible through the generosity of the Sabourin Family Foundation.",
-		url: "https://www.bouncelife.com/events/6942f6fa7ffe1cc83a76c004",
-	},
-	{
-		id: 6,
-		title: "Sewing for Entrepeneurs: Prototyping with Fabric",
-		date: "January 28th, 2026",
-		time: "4:00 PM - 6:00 PM",
-		image: "/images/sewing.jpg",
-		alt: "Canvas Background Image",
-		location: "Digital Makerspace",
-		category: "Workshop",
-		description: "An introductory workshop to the basics of sewing and its applications in prototyping, including foundational stitching skills for both hand and machine. Explore fabric as a medium for creating functional and aesthetic prototypes.",
-		url: "https://www.bouncelife.com/events/6942f84dda486964077145ca",
-	},];
+export const events: Event[] = [
+  {
+    id: 1,
+    title: "Intro to 3D Printing Workshop",
+    description:
+      "A hands-on beginner workshop covering slicer settings, bed leveling, and your first print. No experience necessary — all materials provided.",
+    schedule: { date: "2026-07-22", startTime: "17:00", endTime: "19:00" },
+    location: "Makerspace, Room 210",
+    image: { src: "/images/dmaker.jpg", alt: "Students at 3D printers" },
+    url: "https://forms.gle/example-workshop-signup",
+    categories: ["workshop"],
+    recurrence: { isRecurring: false },
+    rsvp: { enabled: true, capacity: 20, rsvpCount: 14 },
+    status: "upcoming",
+  },
+  {
+    id: 2,
+    title: "Club Social: End of Term Pizza Night",
+    description:
+      "Wrap up the term with pizza, games, and a highlight reel of everything the club built this semester.",
+    schedule: { date: "2026-07-25", startTime: "18:30", endTime: "20:30" },
+    location: "Student Union, Great Hall",
+    image: { src: "/images/workshop3.webp", alt: "Club members socializing" },
+    categories: ["social"],
+    recurrence: { isRecurring: false },
+    rsvp: { enabled: true, capacity: 60, rsvpCount: 41 },
+    status: "upcoming",
+  },
+  {
+    id: 3,
+    title: "Weekly Officer Meeting",
+    description:
+      "Standing meeting for club officers to review budget, upcoming events, and sponsorship outreach.",
+    schedule: { date: "2026-07-21", startTime: "18:00", endTime: "19:00" },
+    location: "Makerspace, Conference Room",
+    image: { src: "/images/smaker.jpg", alt: "Officers around a table" },
+    categories: ["meeting"],
+    recurrence: { isRecurring: true, frequency: "weekly", interval: 1, endsOn: "2026-12-01" },
+    rsvp: { enabled: false, rsvpCount: 0 },
+    status: "upcoming",
+  },
+  {
+    id: 4,
+    title: "CNC Router Safety Certification",
+    description:
+      "Required certification session before members can book solo time on the ShopBot CNC router. Covers safe operation, material clamping, and emergency stop procedures.",
+    schedule: { date: "2026-07-18", startTime: "14:00", endTime: "16:00" },
+    location: "Makerspace, Fabrication Bay",
+    image: { src: "/images/image10.webp", alt: "CNC router in use" },
+    categories: ["workshop"],
+    recurrence: { isRecurring: false },
+    rsvp: { enabled: true, capacity: 12, rsvpCount: 12 },
+    status: "ongoing",
+  },
+  {
+    id: 5,
+    title: "Campus Closed — Reading Week",
+    description: "The makerspace is closed for the university's reading week.",
+    schedule: { date: "2026-08-03", startTime: "00:00", endTime: "23:59" },
+    location: "Campus-wide",
+    image: { src: "/images/workshop3.webp", alt: "Empty campus building" },
+    categories: ["holiday"],
+    recurrence: { isRecurring: false },
+    rsvp: { enabled: false, rsvpCount: 0 },
+    status: "upcoming",
+  },
+  {
+    id: 6,
+    title: "Laser Cutting Deep Dive",
+    description:
+      "Go beyond basic cuts: vector vs. raster settings, engraving on non-standard materials, and troubleshooting focus issues on the Glowforge.",
+    schedule: { date: "2026-08-05", startTime: "17:00", endTime: "19:00" },
+    location: "Makerspace, Room 210",
+    image: { src: "/images/dmaker.jpg", alt: "Laser cutter engraving acrylic" },
+    url: "https://forms.gle/example-laser-signup",
+    categories: ["workshop"],
+    recurrence: { isRecurring: false },
+    rsvp: { enabled: true, capacity: 15, rsvpCount: 6 },
+    status: "upcoming",
+  },
+  {
+    id: 7,
+    title: "Sponsor Info Session",
+    description:
+      "Open session for prospective sponsors to tour the makerspace and meet the officer team.",
+    schedule: { date: "2026-07-30", startTime: "13:00", endTime: "14:30" },
+    location: "Makerspace, Conference Room",
+    image: { src: "/images/smaker.jpg", alt: "Tour of the makerspace" },
+    categories: ["meeting", "other"],
+    recurrence: { isRecurring: false },
+    rsvp: { enabled: true, capacity: 10, rsvpCount: 3 },
+    status: "upcoming",
+  },
+  {
+    id: 8,
+    title: "Summer Kickoff Mixer",
+    description:
+      "First social of the summer term — meet new members, grab free swag, and sign up for project teams.",
+    schedule: { date: "2026-07-05", startTime: "17:00", endTime: "19:00" },
+    location: "Student Union, Great Hall",
+    image: { src: "/images/image10.webp", alt: "Members mingling at a mixer" },
+    categories: ["social"],
+    recurrence: { isRecurring: false },
+    rsvp: { enabled: true, capacity: 80, rsvpCount: 80 },
+    status: "past",
+  },
+  {
+    id: 9,
+    title: "Electronics Soldering Basics",
+    description:
+      "Learn safe soldering technique and assemble a simple throwaway PCB kit to practice on.",
+    schedule: { date: "2026-06-28", startTime: "16:00", endTime: "18:00" },
+    location: "Makerspace, Room 105",
+    image: { src: "/images/workshop3.webp", alt: "Soldering iron and PCB" },
+    categories: ["workshop"],
+    recurrence: { isRecurring: false },
+    rsvp: { enabled: true, capacity: 16, rsvpCount: 16 },
+    status: "past",
+  },
+  {
+    id: 10,
+    title: "Water Jet Orientation",
+    description: "Orientation session for the OMAX waterjet — postponed due to a maintenance issue.",
+    schedule: { date: "2026-07-19", startTime: "15:00", endTime: "16:30" },
+    location: "Makerspace, Fabrication Bay",
+    image: { src: "/images/image10.webp", alt: "Water jet cutter" },
+    categories: ["workshop"],
+    recurrence: { isRecurring: false },
+    rsvp: { enabled: true, capacity: 10, rsvpCount: 2 },
+    status: "cancelled",
+  },
+  {
+    id: 11,
+    title: "Monthly Town Hall",
+    description:
+      "Open forum for all members to raise ideas, vote on budget items, and hear updates from each project team lead.",
+    schedule: { date: "2026-08-12", startTime: "18:00", endTime: "19:30" },
+    location: "Student Union, Room 220",
+    image: { src: "/images/smaker.jpg", alt: "Members at a town hall meeting" },
+    categories: ["meeting"],
+    recurrence: { isRecurring: true, frequency: "monthly", interval: 1, endsOn: "2027-04-01" },
+    rsvp: { enabled: false, rsvpCount: 0 },
+    status: "upcoming",
+  },
+  {
+    id: 12,
+    title: "Woodworking 101",
+    description:
+      "Covers bandsaw, planer, and router basics before members are cleared to use the wood shop solo.",
+    schedule: { date: "2026-08-08", startTime: "17:00", endTime: "19:00" },
+    location: "Makerspace, Wood Shop",
+    image: { src: "/images/dmaker.jpg", alt: "Wood shop tools" },
+    url: "https://forms.gle/example-wood-signup",
+    categories: ["workshop"],
+    recurrence: { isRecurring: false },
+    rsvp: { enabled: true, capacity: 10, rsvpCount: 4 },
+    status: "upcoming",
+  },
+];
