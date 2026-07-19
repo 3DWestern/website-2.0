@@ -31,7 +31,7 @@ export const sampleProjects: Project[] = [
     ],
     dateAdded: "2025-11-02",
     featured: true,
-    githubUrl: "https://github.com/3dwestern/greenhouse-monitor",
+    github: "https://github.com/3dwestern/greenhouse-monitor",
   },
   {
     id: 3,
@@ -76,7 +76,7 @@ export const sampleProjects: Project[] = [
       },
     ],
     dateAdded: "2025-11-15",
-    githubUrl: "https://github.com/3dwestern/adaptive-controller",
+    github: "https://github.com/3dwestern/adaptive-controller",
     blogUrl: "/blog/adaptive-gaming-controller",
   },
 ];

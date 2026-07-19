@@ -227,25 +227,20 @@ export interface Project {
   title: string;
   slug: string;
   creator: string;
-  contributors?:
-    | {
-        name?: string | null;
-        id?: string | null;
-      }[]
-    | null;
+  contributors?: string[] | null;
   description: string;
   image: {
     src: string;
     alt: string;
   };
-  gallery?:
+  galleryImages?:
     | {
         src: string;
         alt: string;
         id?: string | null;
       }[]
     | null;
-  categories: number | ProjectCategory;
+  categories: (number | ProjectCategory)[];
   featured?: boolean | null;
   github?: string | null;
   blogUrl?: string | null;
@@ -500,12 +495,7 @@ export interface ProjectsSelect<T extends boolean = true> {
   title?: T;
   slug?: T;
   creator?: T;
-  contributors?:
-    | T
-    | {
-        name?: T;
-        id?: T;
-      };
+  contributors?: T;
   description?: T;
   image?:
     | T
@@ -513,7 +503,7 @@ export interface ProjectsSelect<T extends boolean = true> {
         src?: T;
         alt?: T;
       };
-  gallery?:
+  galleryImages?:
     | T
     | {
         src?: T;

@@ -11,9 +11,9 @@ export const Projects: CollectionConfig = {
     { name: "creator", type: "text", required: true },
     {
       name: "contributors",
-      type: "array",
+      type: "text",
+      hasMany: true,
       label: "All Contributors (Including Creator)",
-      fields: [{ name: "name", type: "text" }],
     },
     { name: "description", type: "text", required: true },
     {
@@ -26,7 +26,7 @@ export const Projects: CollectionConfig = {
       required: true,
     },
     {
-      name: "gallery",
+      name: "galleryImages",
       type: "array",
       label: "Image Gallery Items",
       fields: [
@@ -39,6 +39,8 @@ export const Projects: CollectionConfig = {
       type: "relationship",
       relationTo: "project-category",
       required: true,
+      hasMany: true,
+      maxRows: 3,
     },
     {
       name: "featured",

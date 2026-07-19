@@ -102,7 +102,7 @@ export type Project = {
   categories: ProjectCategory[];
   dateAdded: string; // ISO date, e.g. "2025-11-15"
   featured?: boolean;
-  githubUrl?: string;
+  github?: string;
   blogUrl?: string;
 };
 
