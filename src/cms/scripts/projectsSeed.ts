@@ -6,7 +6,7 @@ export const projectsSeed = async (payload: Payload) => {
     // Resolve each category name to its corresponding category document ID,
     // since Payload relationship fields expect IDs, not full objects
     const categoryIds = await Promise.all(
-      project.categories.map(async (category) => {
+      project.categories?.map(async (category) => {
         const result = await payload.find({
           collection: "project-category",
           where: {
@@ -15,7 +15,7 @@ export const projectsSeed = async (payload: Payload) => {
           limit: 1,
         });
         return result.docs[0]?.id;
-      }),
+      }) ?? [],
     );
 
     await payload.create({

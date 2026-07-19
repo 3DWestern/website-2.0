@@ -57,11 +57,11 @@ export type BlogPost = {
   slug: string;
   title: string;
   /** One-sentence summary shown below the title and used in meta tags */
-  excerpt?: string | null;
+  excerpt?: string;
   /** ISO 8601 date string — Payload stores this as a date field */
   date: string;
   /** Minutes to read — derive this in a Payload beforeChange hook */
-  readingTime?: number | null;
+  readingTime?: number;
   /** Hero image — Payload upload field */
   coverImage?: {
     url: string | null;
@@ -99,7 +99,7 @@ export type Project = {
     src: string;
     alt: string;
   }[];
-  categories: ProjectCategory[];
+  categories: ProjectCategory[] | null;
   dateAdded: string; // ISO date, e.g. "2025-11-15"
   featured?: boolean;
   github?: string;

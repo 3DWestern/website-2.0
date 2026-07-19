@@ -9,7 +9,7 @@ import { BlogGrid } from "../content/BlogGrid";
 import { BlogPost, Tag } from "@/types/content";
 
 const PAGE_SIZE = 4;
-const ALL_TAG: Tag = { id: "all", title: "All" as Category };
+const ALL_TAG: Tag = { id: 0, title: "All" as Category };
 
 type BlogsPageProps = {
   posts: BlogPost[];
@@ -157,3 +157,4 @@ export function BlogsPage({ posts, tags }: BlogsPageProps) {
     </main>
   );
 }
+

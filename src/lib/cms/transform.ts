@@ -2,16 +2,17 @@ import { MenuItem } from "@/components/data/teamdata";
 import {
   Event,
   BlogPost,
-  Showcase,
+  Project,
   Sponsor,
   Author,
   Tag,
+  ProjectCategory,
 } from "@/types/content";
 import {
   Event as PayloadEvent,
   Sponsor as PayloadSponsor,
   Blog as PayloadBlogPost,
-  Project as PayloadShowcase,
+  Project as PayloadProject,
   Author as PayloadAuthor,
   Tag as PayloadTag,
   TeamMember as PayloadTeamMember,
@@ -21,7 +22,7 @@ type DocType =
   | PayloadEvent
   | PayloadSponsor
   | PayloadAuthor
-  | PayloadShowcase
+  | PayloadProject
   | PayloadBlogPost
   | PayloadTeamMember
   | PayloadTag;
@@ -29,6 +30,10 @@ type DocType =
 type ResolvedBlogPost = Omit<PayloadBlogPost, "tags" | "author"> & {
   tags: PayloadTag[] | null;
   author: Author | null;
+};
+
+type ResolvedProject = Omit<PayloadProject, "categories"> & {
+  categories: ProjectCategory[] | null;
 };
 
 // Get the ordinal identifier for the day
@@ -118,7 +123,7 @@ export const transformBlog = (doc: ResolvedBlogPost): BlogPost => {
     id: doc.id,
     slug: doc.slug,
     title: doc.title,
-    excerpt: doc.excerpt,
+    excerpt: doc.excerpt || undefined,
     // author may come back as just an ID (string/number) if not populated,
     // or as a full Author object if fetched with depth >= 1
     author:
@@ -130,7 +135,7 @@ export const transformBlog = (doc: ResolvedBlogPost): BlogPost => {
           }
         : doc.author, // fallback: unpopulated, just the raw ID
     date: formatDate(doc.date),
-    readingTime: doc.readingTime,
+    readingTime: doc.readingTime || undefined,
     coverImage: doc.coverImage,
     tags:
       doc.tags?.map((tag) => ({
@@ -160,18 +165,26 @@ export const transformAuthors = (docs: PayloadAuthor[]): Author[] => {
 };
 
 // transform ONE payload doc object into a showcase object
-export const transformProject = (doc: PayloadShowcase): Showcase => {
+export const transformProject = (doc: ResolvedProject): Project => {
   return {
     id: doc.id,
+    slug: doc.slug,
     title: doc.title,
     creator: doc.creator,
     image: doc.image,
-    alt: doc.alt,
+    contributors: doc.contributors || undefined,
+    description: doc.description,
+    galleryImages: doc.galleryImages || undefined,
+    categories: doc.categories,
+    dateAdded: doc.createdAt,
+    featured: doc.featured || false,
+    github: doc.github || undefined,
+    blogUrl: doc.blogUrl || undefined,
   };
 };
 
 // transform an entire payload doc to showcase objects
-export const transformProjects = (docs: PayloadShowcase[]): Showcase[] => {
+export const transformProjects = (docs: ResolvedProject[]): Project[] => {
   return transformDocs(docs, transformProject);
 };
 
