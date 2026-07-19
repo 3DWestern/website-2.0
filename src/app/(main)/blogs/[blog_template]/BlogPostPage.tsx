@@ -95,7 +95,7 @@ export function BlogPostPage({ post }: BlogPostPageProps) {
         <div className="bg-slate-100">
           <div className="relative w-full aspect-21/9 max-h-[400px] overflow-hidden">
             <Image
-              src={post.coverImage.url}
+              src={post.coverImage.url ?? "#"}
               alt={post.coverImage.alt ?? post.title}
               fill
               className="object-cover"

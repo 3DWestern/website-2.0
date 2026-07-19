@@ -26,8 +26,9 @@ type DocType =
   | PayloadTeamMember
   | PayloadTag;
 
-type ResolvedBlogPost = Omit<PayloadBlogPost, "tags"> & {
+type ResolvedBlogPost = Omit<PayloadBlogPost, "tags" | "author"> & {
   tags: PayloadTag[] | null;
+  author: Author | null;
 };
 
 // Get the ordinal identifier for the day

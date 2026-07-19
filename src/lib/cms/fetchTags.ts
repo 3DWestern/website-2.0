@@ -1,22 +1,27 @@
 import { cmsClient } from "./cmsClient";
 import { transformTags } from "./transform";
-import { sampleTags } from "@/cms/static-data/tags";
-import { CMSEnabled } from "./utils";
 import { Tag } from "@/types/content";
 import { URLSearchParams } from "url";
 
+// Fetches all tags from the CMS.
+// If the CMS is disabled, MSW serves sample data
 export const getTags = async (): Promise<Tag[]> => {
-  if (!CMSEnabled) return sampleTags;
-
+  // Fetch all tags from the CMS tags collection
   const res = await cmsClient.get("/api/tags");
+
+  // Convert raw CMS documents into the app's Tag shape
   return transformTags(res.docs);
 };
 
+// Fetches only the tags matching the given list of numeric IDs.
 export const getTagsByIds = async (ids: number[]): Promise<Tag[]> => {
-  if (!CMSEnabled) return sampleTags.filter((tag) => ids.includes(tag.id));
-
+  // Build query params for a CMS where filter: id must be in the provided list
   const params = new URLSearchParams();
   params.set("where[id][in]", ids.join(","));
+
+  // Fetch matching tags from the CMS tags collection
   const res = await cmsClient.get(`/api/tags?${params}`);
+
+  // Convert raw CMS documents into the app's Tag shape
   return transformTags(res.docs);
 };

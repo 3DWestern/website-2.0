@@ -47,6 +47,6 @@ describe("getPostBySlug", () => {
 
     expect(post).toBeDefined();
 
-    expect(post).toHaveProperty("id", "5");
+    expect(post).toHaveProperty("id", 5);
   });
 });
