@@ -75,6 +75,7 @@ export interface Config {
     events: Event;
     sponsors: Sponsor;
     authors: Author;
+    'project-category': ProjectCategory;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -90,6 +91,7 @@ export interface Config {
     events: EventsSelect<false> | EventsSelect<true>;
     sponsors: SponsorsSelect<false> | SponsorsSelect<true>;
     authors: AuthorsSelect<false> | AuthorsSelect<true>;
+    'project-category': ProjectCategorySelect<false> | ProjectCategorySelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -223,9 +225,41 @@ export interface User {
 export interface Project {
   id: number;
   title: string;
+  slug: string;
   creator: string;
-  image: string;
-  alt: string;
+  contributors?:
+    | {
+        name?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  description: string;
+  image: {
+    src: string;
+    alt: string;
+  };
+  gallery?:
+    | {
+        src: string;
+        alt: string;
+        id?: string | null;
+      }[]
+    | null;
+  categories: number | ProjectCategory;
+  featured?: boolean | null;
+  github?: string | null;
+  blogUrl?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "project-category".
+ */
+export interface ProjectCategory {
+  id: number;
+  name: string;
+  description?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -355,6 +389,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'authors';
         value: number | Author;
+      } | null)
+    | ({
+        relationTo: 'project-category';
+        value: number | ProjectCategory;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -460,9 +498,32 @@ export interface TagsSelect<T extends boolean = true> {
  */
 export interface ProjectsSelect<T extends boolean = true> {
   title?: T;
+  slug?: T;
   creator?: T;
-  image?: T;
-  alt?: T;
+  contributors?:
+    | T
+    | {
+        name?: T;
+        id?: T;
+      };
+  description?: T;
+  image?:
+    | T
+    | {
+        src?: T;
+        alt?: T;
+      };
+  gallery?:
+    | T
+    | {
+        src?: T;
+        alt?: T;
+        id?: T;
+      };
+  categories?: T;
+  featured?: T;
+  github?: T;
+  blogUrl?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -548,6 +609,16 @@ export interface AuthorsSelect<T extends boolean = true> {
         url?: T;
         alt?: T;
       };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "project-category_select".
+ */
+export interface ProjectCategorySelect<T extends boolean = true> {
+  name?: T;
+  description?: T;
   updatedAt?: T;
   createdAt?: T;
 }

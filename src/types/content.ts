@@ -78,12 +78,32 @@ export type BlogPost = {
    * */
   content: DefaultTypedEditorState;
 };
-export type Showcase = {
+
+export type ProjectCategory = {
+  name: string;
+  description: string;
+};
+
+export type Project = {
   id: number;
+  slug: string;
   title: string;
   creator: string;
-  image: string;
-  alt: string;
+  contributors?: string[];
+  description: string;
+  image: {
+    src: string;
+    alt: string;
+  };
+  galleryImages?: {
+    src: string;
+    alt: string;
+  }[];
+  categories: ProjectCategory[];
+  dateAdded: string; // ISO date, e.g. "2025-11-15"
+  featured?: boolean;
+  githubUrl?: string;
+  blogUrl?: string;
 };
 
 export type Sponsor = {
