@@ -16,6 +16,7 @@ import {
   Author as PayloadAuthor,
   Tag as PayloadTag,
   TeamMember as PayloadTeamMember,
+  ProjectCategory as PayloadPC,
 } from "../../../payload-types";
 
 type DocType =
@@ -25,7 +26,8 @@ type DocType =
   | PayloadProject
   | PayloadBlogPost
   | PayloadTeamMember
-  | PayloadTag;
+  | PayloadTag
+  | PayloadPC;
 
 type ResolvedBlogPost = Omit<PayloadBlogPost, "tags" | "author"> & {
   tags: PayloadTag[] | null;
@@ -175,7 +177,7 @@ export const transformProject = (doc: ResolvedProject): Project => {
     contributors: doc.contributors || undefined,
     description: doc.description,
     galleryImages: doc.galleryImages || undefined,
-    categories: doc.categories,
+    categories: doc.categories || [],
     dateAdded: doc.createdAt,
     featured: doc.featured || false,
     github: doc.github || undefined,
@@ -186,6 +188,21 @@ export const transformProject = (doc: ResolvedProject): Project => {
 // transform an entire payload doc to showcase objects
 export const transformProjects = (docs: ResolvedProject[]): Project[] => {
   return transformDocs(docs, transformProject);
+};
+
+// transform a project category doc to project category data shape
+export const transformProjectCategory = (doc: PayloadPC): ProjectCategory => {
+  return {
+    name: doc.name,
+    description: doc.description,
+  };
+};
+
+// transform a list of project category docs to project category data shapes
+export const transformProjectCategories = (
+  docs: PayloadPC[],
+): ProjectCategory[] => {
+  return transformDocs(docs, transformProjectCategory);
 };
 
 // transform ONE payload doc object into a team member object

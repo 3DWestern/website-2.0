@@ -4,13 +4,13 @@ import { useCallback, useEffect, useId, useRef, useState } from "react";
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
+import { Project } from "@/types/content";
 
 type ProjectGalleryProps = {
-  images: string[];
-  alt: string;
+  images: Project.Image[];
 };
 
-export function ProjectGallery({ images, alt }: ProjectGalleryProps) {
+export function ProjectGallery({ images }: ProjectGalleryProps) {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
   const dialogId = useId();
   const triggerRefs = useRef<(HTMLButtonElement | null)[]>([]);
@@ -24,7 +24,9 @@ export function ProjectGallery({ images, alt }: ProjectGalleryProps) {
   }, []);
 
   const showPrev = useCallback(() => {
-    setActiveIndex((i) => (i === null ? i : (i - 1 + images.length) % images.length));
+    setActiveIndex((i) =>
+      i === null ? i : (i - 1 + images.length) % images.length,
+    );
   }, [images.length]);
 
   const showNext = useCallback(() => {
@@ -55,15 +57,15 @@ export function ProjectGallery({ images, alt }: ProjectGalleryProps) {
           images.length === 1 ? "grid-cols-1" : "grid-cols-2 sm:grid-cols-3"
         }`}
       >
-        {images.map((src, i) => (
+        {images.map((image, i) => (
           <button
-            key={src + i}
+            key={image.src + i}
             ref={(el) => {
               triggerRefs.current[i] = el;
             }}
             onClick={() => setActiveIndex(i)}
             role="listitem"
-            aria-label={`Open image ${i + 1} of ${images.length}: ${alt}`}
+            aria-label={`Open image ${i + 1} of ${images.length}: ${image.alt}`}
             className={`relative overflow-hidden rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 ${
               i === 0 && images.length > 2
                 ? "col-span-2 row-span-2 aspect-video"
@@ -71,8 +73,8 @@ export function ProjectGallery({ images, alt }: ProjectGalleryProps) {
             }`}
           >
             <Image
-              src={src}
-              alt={`${alt} — image ${i + 1} of ${images.length}`}
+              src={image.src}
+              alt={`${image.alt} — image ${i + 1} of ${images.length}`}
               fill
               className="object-cover hover:scale-105 transition-transform duration-500"
               sizes="(max-width: 640px) 50vw, 33vw"
@@ -90,7 +92,7 @@ export function ProjectGallery({ images, alt }: ProjectGalleryProps) {
             transition={{ duration: 0.2 }}
             role="dialog"
             aria-modal="true"
-            aria-label={`Image ${activeIndex + 1} of ${images.length}: ${alt}`}
+            aria-label={`Image ${activeIndex + 1} of ${images.length}: ${images[activeIndex].alt}`}
             id={dialogId}
             className="fixed inset-0 z-50 bg-slate-950/90 flex items-center justify-center p-4"
             onClick={close}
@@ -130,8 +132,8 @@ export function ProjectGallery({ images, alt }: ProjectGalleryProps) {
               onClick={(e) => e.stopPropagation()}
             >
               <Image
-                src={images[activeIndex]}
-                alt={`${alt} — image ${activeIndex + 1} of ${images.length}`}
+                src={images[activeIndex].src}
+                alt={`${images[activeIndex].alt} — image ${activeIndex + 1} of ${images.length}`}
                 fill
                 className="object-contain"
                 sizes="90vw"
@@ -163,3 +165,4 @@ export function ProjectGallery({ images, alt }: ProjectGalleryProps) {
     </>
   );
 }
+

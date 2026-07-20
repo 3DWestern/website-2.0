@@ -7,7 +7,7 @@ import { ArrowRight, Users } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { cn } from "../ui/utils";
 import { koulen } from "@/lib/fonts";
-import { Project } from "@/components/data/projects";
+import { Project } from "@/types/content";
 
 type ProjectShowcaseCardProps = {
   project: Project;
@@ -21,7 +21,10 @@ const formatDate = (iso: string) =>
     year: "numeric",
   });
 
-const ProjectShowcaseCard = ({ project, className }: ProjectShowcaseCardProps) => {
+const ProjectShowcaseCard = ({
+  project,
+  className,
+}: ProjectShowcaseCardProps) => {
   const contributors = project.contributors?.length
     ? project.contributors
     : [project.creator];
@@ -36,7 +39,7 @@ const ProjectShowcaseCard = ({ project, className }: ProjectShowcaseCardProps) =
       className="mb-6 break-inside-avoid"
     >
       <Link
-        href={`/projects/${project.id}`}
+        href={`/projects/${project.slug}`}
         aria-label={`View project: ${project.title}`}
         className="block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 rounded-xl"
       >
@@ -48,15 +51,20 @@ const ProjectShowcaseCard = ({ project, className }: ProjectShowcaseCardProps) =
         >
           <div className="relative overflow-hidden">
             <Image
-              src={project.image}
-              alt={project.title}
+              src={project.image.src}
+              alt={project.image.alt}
               width={600}
               height={400}
               className="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500"
             />
-            <span className="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-slate-900/80 text-white text-[10px] font-semibold uppercase tracking-wide backdrop-blur-sm">
-              {project.category}
-            </span>
+            {project.categories.map((category) => (
+              <span
+                key={category.name}
+                className="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-slate-900/80 text-white text-[10px] font-semibold uppercase tracking-wide backdrop-blur-sm"
+              >
+                {category.name}
+              </span>
+            ))}
           </div>
 
           <div className="p-5 flex flex-col gap-3">
@@ -81,7 +89,8 @@ const ProjectShowcaseCard = ({ project, className }: ProjectShowcaseCardProps) =
             </time>
 
             <span className="mt-1 inline-flex items-center gap-1 text-sm font-semibold text-purple-700 group-hover:gap-2 transition-all">
-              Read more <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
+              Read more{" "}
+              <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
             </span>
           </div>
         </Card>
@@ -91,3 +100,4 @@ const ProjectShowcaseCard = ({ project, className }: ProjectShowcaseCardProps) =
 };
 
 export default ProjectShowcaseCard;
+

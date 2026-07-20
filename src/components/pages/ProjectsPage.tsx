@@ -4,14 +4,10 @@ import { useEffect, useMemo, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { PackageSearch } from "lucide-react";
 import { koulen } from "@/lib/fonts";
-import {
-  projects as allProjects,
-  categories,
-  type ProjectCategory,
-} from "@/components/data/projects";
 import ProjectShowcaseCard from "@/components/content/ProjectShowcaseCard";
 import { FeaturedProjectSpotlight } from "@/components/content/FeaturedProjectSpotlight";
 import { ProjectFilterBar } from "@/components/content/ProjectFilterBar";
+import { Project, ProjectCategory } from "@/types/content";
 
 const PAGE_SIZE = 9;
 
@@ -29,10 +25,15 @@ function ProjectCardSkeleton({ tall }: { tall?: boolean }) {
   );
 }
 
-export function ProjectsPage() {
+interface ProjectsPageProps {
+  allProjects: Project[];
+  categories: ProjectCategory[];
+}
+
+export function ProjectsPage({ allProjects, categories }: ProjectsPageProps) {
   const [isLoading, setIsLoading] = useState(true);
   const [search, setSearch] = useState("");
-  const [category, setCategory] = useState<ProjectCategory>("All");
+  const [category, setCategory] = useState<string>("All");
   const [page, setPage] = useState(1);
 
   // Mimics the delay that will come from Sam's real fetch layer once it lands.
@@ -45,7 +46,8 @@ export function ProjectsPage() {
   const sortedProjects = useMemo(
     () =>
       [...allProjects].sort(
-        (a, b) => new Date(b.dateAdded).getTime() - new Date(a.dateAdded).getTime(),
+        (a, b) =>
+          new Date(b.dateAdded).getTime() - new Date(a.dateAdded).getTime(),
       ),
     [],
   );
@@ -60,7 +62,7 @@ export function ProjectsPage() {
     setPage(1);
   };
 
-  const handleCategory = (value: ProjectCategory) => {
+  const handleCategory = (value: string) => {
     setCategory(value);
     setPage(1);
   };
@@ -68,7 +70,8 @@ export function ProjectsPage() {
   const filtered = useMemo(() => {
     const q = search.toLowerCase().trim();
     return sortedProjects.filter((p) => {
-      const matchesCategory = category === "All" || p.category === category;
+      const matchesCategory =
+        category === "All" || p.categories.some((c) => c.name === category);
       const matchesSearch =
         !q ||
         p.title.toLowerCase().includes(q) ||
@@ -116,7 +119,11 @@ export function ProjectsPage() {
         <section className="bg-white pb-16">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid gap-6 md:grid-cols-2">
             {featured.slice(0, 2).map((project, i) => (
-              <FeaturedProjectSpotlight key={project.id} project={project} index={i} />
+              <FeaturedProjectSpotlight
+                key={project.id}
+                project={project}
+                index={i}
+              />
             ))}
           </div>
         </section>
@@ -167,9 +174,13 @@ export function ProjectsPage() {
               animate={{ opacity: 1 }}
               className="flex flex-col items-center justify-center text-center py-24 gap-4"
             >
-              <PackageSearch className="w-10 h-10 text-slate-300" aria-hidden="true" />
+              <PackageSearch
+                className="w-10 h-10 text-slate-300"
+                aria-hidden="true"
+              />
               <p className="text-slate-500 max-w-sm">
-                No projects match those filters. Try a different category or search term.
+                No projects match those filters. Try a different category or
+                search term.
               </p>
               <button
                 onClick={handleReset}
@@ -184,3 +195,4 @@ export function ProjectsPage() {
     </main>
   );
 }
+

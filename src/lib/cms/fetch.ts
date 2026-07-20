@@ -5,3 +5,8 @@ export * from "./fetchTeam";
 export * from "./fetchProjects";
 export * from "./fetchAuthors";
 export * from "./fetchTags";
+
+export interface BaseParams {
+  limit?: number;
+  page?: number;
+}

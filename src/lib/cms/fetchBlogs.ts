@@ -2,6 +2,7 @@ import { cmsClient } from "./cmsClient";
 import { transformBlog, transformBlogs } from "./transform";
 import { URLSearchParams } from "url";
 import { draftMode } from "next/headers";
+import { BaseParams } from "./fetch";
 
 /**
  * Fetches a paginated, filterable list of blog posts.
@@ -23,11 +24,7 @@ export const getBlogPosts = async ({
   limit,
   page,
   tags,
-}: {
-  limit?: number;
-  page: number;
-  tags?: string[];
-}) => {
+}: BaseParams & { tags?: string[] }) => {
   // Build query string for Payload's REST API
   const params = new URLSearchParams();
   if (limit) params.set("limit", String(limit));

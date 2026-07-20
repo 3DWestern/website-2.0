@@ -6,13 +6,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, Users, Calendar, Code2, FileText } from "lucide-react";
-import type { Project } from "@/components/data/projects";
-import { projects as allProjects } from "@/components/data/projects";
+import type { Project } from "@/types/content";
 import { ProjectGallery } from "@/components/content/ProjectGallery";
 import ProjectShowcaseCard from "@/components/content/ProjectShowcaseCard";
 
 type ProjectDetailPageProps = {
   project: Project | null;
+  allProjects: Project[];
 };
 
 const formatDate = (iso: string) =>
@@ -22,17 +22,28 @@ const formatDate = (iso: string) =>
     year: "numeric",
   });
 
-export function ProjectDetailPage({ project }: ProjectDetailPageProps) {
+export function ProjectDetailPage({
+  project,
+  allProjects,
+}: ProjectDetailPageProps) {
   if (!project) notFound();
 
   const contributors = project.contributors?.length
     ? project.contributors
     : [project.creator];
 
-  const gallery = project.images?.length ? project.images : [project.image];
+  const gallery = project.galleryImages?.length
+    ? project.galleryImages
+    : [project.image];
 
   const related = allProjects
-    .filter((p) => p.id !== project.id && p.category === project.category)
+    .filter(
+      (p) =>
+        p.id !== project.id &&
+        project.categories?.some((c) =>
+          p.categories.some((cat) => cat.name === c.name),
+        ),
+    )
     .slice(0, 3);
 
   return (
@@ -51,9 +62,14 @@ export function ProjectDetailPage({ project }: ProjectDetailPageProps) {
           </div>
 
           <div className="flex flex-wrap gap-2 mb-4">
-            <span className="text-xs font-medium px-2.5 py-1 rounded-full bg-purple-50 text-purple-700 uppercase tracking-wide">
-              {project.category}
-            </span>
+            {project.categories.map((category) => (
+              <span
+                key={category.name}
+                className="text-xs font-medium px-2.5 py-1 rounded-full bg-purple-50 text-purple-700 uppercase tracking-wide"
+              >
+                {category.name}
+              </span>
+            ))}
           </div>
 
           <motion.h1
@@ -74,7 +90,9 @@ export function ProjectDetailPage({ project }: ProjectDetailPageProps) {
             </div>
             <div className="flex items-center gap-1.5">
               <Calendar className="w-4 h-4" aria-hidden="true" />
-              <time dateTime={project.dateAdded}>{formatDate(project.dateAdded)}</time>
+              <time dateTime={project.dateAdded}>
+                {formatDate(project.dateAdded)}
+              </time>
             </div>
           </div>
         </div>
@@ -84,8 +102,8 @@ export function ProjectDetailPage({ project }: ProjectDetailPageProps) {
       <div className="bg-slate-100">
         <div className="relative w-full aspect-21/9 max-h-[400px] overflow-hidden">
           <Image
-            src={project.image}
-            alt={project.title}
+            src={project.image.src}
+            alt={project.image.alt}
             fill
             className="object-cover"
             priority
@@ -106,11 +124,11 @@ export function ProjectDetailPage({ project }: ProjectDetailPageProps) {
               {project.description}
             </p>
 
-            {(project.githubUrl || project.blogUrl) && (
+            {(project.github || project.blogUrl) && (
               <div className="flex flex-wrap gap-3">
-                {project.githubUrl && (
+                {project.github && (
                   <a
-                    href={project.githubUrl}
+                    href={project.github}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-slate-900 text-white text-sm font-semibold hover:bg-slate-700 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400"
@@ -133,7 +151,7 @@ export function ProjectDetailPage({ project }: ProjectDetailPageProps) {
 
             <div>
               <h2 className={`text-2xl mb-4 ${koulen.className}`}>Gallery</h2>
-              <ProjectGallery images={gallery} alt={project.title} />
+              <ProjectGallery images={gallery} />
             </div>
           </motion.div>
         </div>
@@ -144,7 +162,7 @@ export function ProjectDetailPage({ project }: ProjectDetailPageProps) {
         <section className="py-16 bg-white border-t border-slate-100">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 className={`text-2xl mb-8 ${koulen.className}`}>
-              More {project.category} Projects
+              More Projects
             </h2>
             <div className="columns-1 sm:columns-2 lg:columns-3 gap-6">
               {related.map((p) => (
@@ -157,3 +175,4 @@ export function ProjectDetailPage({ project }: ProjectDetailPageProps) {
     </main>
   );
 }
+

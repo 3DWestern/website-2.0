@@ -20,7 +20,6 @@ export const cmsClient = {
       // Not in a request-scoped context (standalone script, cron, etc.) —
       // proceed with no cookies. Public/published-only access still works.
     }
-    console.log("payload fetching");
     const res = await fetch(`${BASE_URL}${path}`, {
       ...options,
       headers: {

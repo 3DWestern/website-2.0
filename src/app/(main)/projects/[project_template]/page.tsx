@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { projects } from "@/components/data/projects";
 import { ProjectDetailPage } from "@/components/pages/ProjectDetailPage";
+import { getProjectBySlug, getProjects } from "@/lib/cms/fetchProjects";
 
 type Props = {
   params: Promise<{ project_template: string }>;
@@ -27,9 +28,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function Page({ params }: Props) {
   const { project_template } = await params;
-  const project = projects.find((p) => p.id === Number(project_template)) ?? null;
+  const project = await getProjectBySlug(project_template);
+  const allProjects = await getProjects({});
 
   if (!project) notFound();
 
-  return <ProjectDetailPage project={project} />;
+  return <ProjectDetailPage project={project} allProjects={allProjects} />;
 }
+

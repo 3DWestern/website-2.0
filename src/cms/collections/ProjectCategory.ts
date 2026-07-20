@@ -1,12 +1,12 @@
 import type { CollectionConfig } from "payload";
 
 export const ProjectCategory: CollectionConfig = {
-  slug: "project-category",
+  slug: "project-categories",
   access: {
     read: () => true,
   },
   fields: [
     { name: "name", type: "text", required: true },
-    { name: "description", type: "text" },
+    { name: "description", type: "text", required: true },
   ],
 };

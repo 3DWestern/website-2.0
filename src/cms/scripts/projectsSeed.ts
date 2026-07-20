@@ -8,7 +8,7 @@ export const projectsSeed = async (payload: Payload) => {
     const categoryIds = await Promise.all(
       project.categories?.map(async (category) => {
         const result = await payload.find({
-          collection: "project-category",
+          collection: "project-categories",
           where: {
             name: { equals: category.name },
           },
@@ -40,5 +40,7 @@ export const projectsSeed = async (payload: Payload) => {
         blogUrl: project.blogUrl,
       },
     });
+
+    console.log(`Seeded project: ${project.title}`);
   }
 };

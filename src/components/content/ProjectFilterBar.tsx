@@ -2,13 +2,13 @@
 
 import { useId } from "react";
 import { Search, X } from "lucide-react";
-import type { ProjectCategory } from "@/components/data/projects";
+import { ProjectCategory } from "@/types/content";
 
 type ProjectFilterBarProps = {
   search: string;
   onSearchChange: (value: string) => void;
-  category: ProjectCategory;
-  onCategoryChange: (value: ProjectCategory) => void;
+  category: string;
+  onCategoryChange: (value: string) => void;
   categories: ProjectCategory[];
   resultCount: number;
 };
@@ -54,22 +54,26 @@ export function ProjectFilterBar({
             )}
           </div>
 
-          <div role="group" aria-label="Filter by category" className="flex flex-wrap gap-2">
+          <div
+            role="group"
+            aria-label="Filter by category"
+            className="flex flex-wrap gap-2"
+          >
             {categories.map((cat) => (
               <button
-                key={cat}
-                onClick={() => onCategoryChange(cat)}
-                aria-pressed={category === cat}
+                key={cat.name}
+                onClick={() => onCategoryChange(cat.name)}
+                aria-pressed={category === cat.name}
                 className={`px-3.5 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wide
                   transition-colors focus-visible:outline-none focus-visible:ring-2
                   focus-visible:ring-purple-400
                   ${
-                    category === cat
+                    category === cat.name
                       ? "bg-purple-600 text-white"
                       : "bg-slate-100 text-slate-600 hover:bg-slate-200"
                   }`}
               >
-                {cat}
+                {cat.name}
               </button>
             ))}
           </div>
@@ -82,3 +86,4 @@ export function ProjectFilterBar({
     </section>
   );
 }
+

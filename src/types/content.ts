@@ -84,6 +84,13 @@ export type ProjectCategory = {
   description: string;
 };
 
+export namespace Project {
+  export type Image = {
+    src: string;
+    alt: string;
+  };
+}
+
 export type Project = {
   id: number;
   slug: string;
@@ -91,15 +98,9 @@ export type Project = {
   creator: string;
   contributors?: string[];
   description: string;
-  image: {
-    src: string;
-    alt: string;
-  };
-  galleryImages?: {
-    src: string;
-    alt: string;
-  }[];
-  categories: ProjectCategory[] | null;
+  image: Project.Image;
+  galleryImages?: Project.Image[];
+  categories: ProjectCategory[];
   dateAdded: string; // ISO date, e.g. "2025-11-15"
   featured?: boolean;
   github?: string;

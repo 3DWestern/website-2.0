@@ -75,7 +75,7 @@ export interface Config {
     events: Event;
     sponsors: Sponsor;
     authors: Author;
-    'project-category': ProjectCategory;
+    'project-categories': ProjectCategory;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -91,7 +91,7 @@ export interface Config {
     events: EventsSelect<false> | EventsSelect<true>;
     sponsors: SponsorsSelect<false> | SponsorsSelect<true>;
     authors: AuthorsSelect<false> | AuthorsSelect<true>;
-    'project-category': ProjectCategorySelect<false> | ProjectCategorySelect<true>;
+    'project-categories': ProjectCategoriesSelect<false> | ProjectCategoriesSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -246,15 +246,16 @@ export interface Project {
   blogUrl?: string | null;
   updatedAt: string;
   createdAt: string;
+  _status?: ('draft' | 'published') | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "project-category".
+ * via the `definition` "project-categories".
  */
 export interface ProjectCategory {
   id: number;
   name: string;
-  description?: string | null;
+  description: string;
   updatedAt: string;
   createdAt: string;
 }
@@ -386,7 +387,7 @@ export interface PayloadLockedDocument {
         value: number | Author;
       } | null)
     | ({
-        relationTo: 'project-category';
+        relationTo: 'project-categories';
         value: number | ProjectCategory;
       } | null);
   globalSlug?: string | null;
@@ -516,6 +517,7 @@ export interface ProjectsSelect<T extends boolean = true> {
   blogUrl?: T;
   updatedAt?: T;
   createdAt?: T;
+  _status?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -604,9 +606,9 @@ export interface AuthorsSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "project-category_select".
+ * via the `definition` "project-categories_select".
  */
-export interface ProjectCategorySelect<T extends boolean = true> {
+export interface ProjectCategoriesSelect<T extends boolean = true> {
   name?: T;
   description?: T;
   updatedAt?: T;
