@@ -15,6 +15,12 @@ export type Author = {
   };
 };
 
+export type EventCategory = {
+  id: number;
+  name: string;
+  description: string;
+};
+
 export type Event = {
   id: number;
   title: string;
@@ -44,13 +50,6 @@ export type Event = {
   };
   status: "upcoming" | "ongoing" | "past" | "cancelled";
 };
-
-export type EventCategory =
-  | "workshop"
-  | "social"
-  | "meeting"
-  | "holiday"
-  | "other";
 
 export type BlogPost = {
   id: number;

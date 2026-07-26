@@ -1,87 +1,90 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { CalendarX } from "lucide-react";
 import { koulen } from "@/lib/fonts";
-import { events as allEvents, eventCategories, type Event, type EventCategory } from "@/components/data/events";
-import { CalendarGrid, CalendarGridSkeleton } from "@/components/content/CalendarGrid";
+import {
+  CalendarGrid,
+  CalendarGridSkeleton,
+  MonthNav,
+} from "@/components/content/CalendarGrid";
 import { EventCard, EventCardSkeleton } from "@/components/content/EventCard";
 import { EventDetailModal } from "@/components/content/EventDetailModal";
-import { EventFilterBar, type DateRangeFilter } from "@/components/content/EventFilterBar";
+import { EventFilterBar } from "@/components/content/EventFilterBar";
 import {
-  addDays,
   formatDayLabel,
   isSameDay,
   isSameMonth,
   parseEventDate,
 } from "@/components/content/calendarUtils";
+import { useEvents, View } from "@/context/EventContext";
+import { Event } from "@/types/content";
 
 const AGENDA_PAGE_SIZE = 8;
-
 export function EventsPage() {
-  const today = useMemo(() => new Date(), []);
-  const [isLoading, setIsLoading] = useState(true);
-  const [month, setMonth] = useState(() => new Date(today.getFullYear(), today.getMonth(), 1));
-  const [selectedDate, setSelectedDate] = useState<Date | null>(today);
+  const {
+    category,
+    setCategory,
+    view,
+    setView,
+    currentDate,
+    setCurrentDate,
+    events,
+    isLoading: eventsLoading,
+    allCategories,
+  } = useEvents();
+
+  const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
   const [selectedEvent, setSelectedEvent] = useState<Event | null>(null);
   const [search, setSearch] = useState("");
-  const [category, setCategory] = useState<EventCategory | "all">("all");
-  const [dateRange, setDateRange] = useState<DateRangeFilter>("all");
   const [agendaPage, setAgendaPage] = useState(1);
 
-  useEffect(() => {
-    const timeout = setTimeout(() => setIsLoading(false), 500);
-    return () => clearTimeout(timeout);
-  }, []);
-
+  // `events` is already filtered by category + view/date range from context.
+  // Only search narrowing happens here.
   const filteredEvents = useMemo(() => {
     const q = search.toLowerCase().trim();
-    const weekEnd = addDays(today, 7);
-
-    return allEvents.filter((event) => {
-      const eventDate = parseEventDate(event.schedule.date);
-      const matchesCategory = category === "all" || event.categories.includes(category);
-      const matchesSearch =
+    return events.filter(
+      (event) =>
         !q ||
         event.title.toLowerCase().includes(q) ||
-        event.location.toLowerCase().includes(q);
-      const matchesRange =
-        dateRange === "all"
-          ? true
-          : dateRange === "week"
-            ? eventDate >= today && eventDate <= weekEnd
-            : dateRange === "month"
-              ? isSameMonth(eventDate, today)
-              : dateRange === "upcoming"
-                ? event.status === "upcoming" || event.status === "ongoing"
-                : event.status === "past";
-      return matchesCategory && matchesSearch && matchesRange;
-    });
-  }, [search, category, dateRange, today]);
+        event.location.toLowerCase().includes(q),
+    );
+  }, [events, search]);
 
-  // Events shown as dots on the visible calendar month
+  // Only "upcoming" can span multiple months; day/week/month are already
+  // scoped to currentDate by context, so this filter is a no-op for those.
   const calendarMonthEvents = useMemo(
-    () => filteredEvents.filter((e) => isSameMonth(parseEventDate(e.schedule.date), month)),
-    [filteredEvents, month],
+    () =>
+      view === "upcoming"
+        ? filteredEvents.filter((e) =>
+            isSameMonth(parseEventDate(e.schedule.date), currentDate),
+          )
+        : filteredEvents,
+    [filteredEvents, currentDate, view],
   );
 
   const selectedDayEvents = useMemo(
     () =>
       selectedDate
         ? filteredEvents
-            .filter((e) => isSameDay(parseEventDate(e.schedule.date), selectedDate))
-            .sort((a, b) => a.schedule.startTime.localeCompare(b.schedule.startTime))
+            .filter((e) =>
+              isSameDay(parseEventDate(e.schedule.date), selectedDate),
+            )
+            .sort((a, b) =>
+              a.schedule.startTime.localeCompare(b.schedule.startTime),
+            )
         : [],
     [filteredEvents, selectedDate],
   );
 
-  // Chronological agenda for the mobile fallback
   const agendaEvents = useMemo(
     () =>
       [...filteredEvents].sort(
-        (a, b) => parseEventDate(a.schedule.date).getTime() - parseEventDate(b.schedule.date).getTime(),
+        (a, b) =>
+          parseEventDate(a.schedule.date).getTime() -
+          parseEventDate(b.schedule.date).getTime(),
       ),
     [filteredEvents],
   );
@@ -92,20 +95,21 @@ export function EventsPage() {
     setSearch(v);
     setAgendaPage(1);
   };
-  const handleCategory = (v: EventCategory | "all") => {
+  const handleCategory = (v: string) => {
     setCategory(v);
     setAgendaPage(1);
   };
-  const handleDateRange = (v: DateRangeFilter) => {
-    setDateRange(v);
+  const handleViewChange = (v: View) => {
+    setView(v);
     setAgendaPage(1);
   };
   const handleReset = () => {
     setSearch("");
     setCategory("all");
-    setDateRange("all");
+    setView("month");
     setAgendaPage(1);
   };
+  const handleMonthChange = (v: Date) => setCurrentDate(v);
 
   return (
     <main className="min-h-screen pt-[88px]">
@@ -126,7 +130,8 @@ export function EventsPage() {
             transition={{ duration: 0.6, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
             className="text-xl text-muted-foreground max-w-2xl"
           >
-            Workshops, socials, and meetings — see what's happening in the makerspace.
+            Workshops, socials, and meetings — see what's happening in the
+            makerspace.
           </motion.p>
         </div>
       </section>
@@ -137,9 +142,9 @@ export function EventsPage() {
         onSearchChange={handleSearch}
         category={category}
         onCategoryChange={handleCategory}
-        categories={eventCategories}
-        dateRange={dateRange}
-        onDateRangeChange={handleDateRange}
+        categories={allCategories}
+        view={view}
+        onViewChange={handleViewChange}
         resultCount={filteredEvents.length}
       />
 
@@ -148,12 +153,12 @@ export function EventsPage() {
           {/* Desktop / tablet: calendar-first layout */}
           <div className="hidden md:grid grid-cols-3 gap-8">
             <div className="col-span-2">
-              {isLoading ? (
+              {eventsLoading ? (
                 <CalendarGridSkeleton />
               ) : (
                 <CalendarGrid
-                  month={month}
-                  onMonthChange={setMonth}
+                  month={currentDate}
+                  onMonthChange={handleMonthChange}
                   events={calendarMonthEvents}
                   selectedDate={selectedDate}
                   onSelectDate={setSelectedDate}
@@ -165,7 +170,7 @@ export function EventsPage() {
               <h3 className={`text-lg mb-4 ${koulen.className}`}>
                 {selectedDate ? formatDayLabel(selectedDate) : "Select a day"}
               </h3>
-              {isLoading ? (
+              {eventsLoading ? (
                 <div className="flex flex-col gap-3">
                   {Array.from({ length: 3 }).map((_, i) => (
                     <EventCardSkeleton key={i} variant="compact" />
@@ -184,9 +189,16 @@ export function EventsPage() {
                 </div>
               ) : (
                 <div className="flex flex-col items-center text-center py-12 px-4 rounded-xl border border-dashed border-slate-200">
-                  <CalendarX className="w-8 h-8 text-slate-300 mb-3" aria-hidden="true" />
+                  <CalendarX
+                    className="w-8 h-8 text-slate-300 mb-3"
+                    aria-hidden="true"
+                  />
                   <p className="text-sm text-slate-500">
-                    No events on this day{category !== "all" || search ? " matching your filters" : ""}.
+                    No events on this day
+                    {category !== "all" || search
+                      ? " matching your filters"
+                      : ""}
+                    .
                   </p>
                 </div>
               )}
@@ -194,8 +206,14 @@ export function EventsPage() {
           </div>
 
           {/* Mobile: agenda/list view */}
+          {/* Mobile: agenda/list view */}
           <div className="md:hidden">
-            {isLoading ? (
+            <MonthNav
+              month={currentDate}
+              onMonthChange={handleMonthChange}
+              onToday={() => setCurrentDate(new Date())}
+            />
+            {eventsLoading ? (
               <div className="flex flex-col gap-3">
                 {Array.from({ length: 5 }).map((_, i) => (
                   <EventCardSkeleton key={i} variant="compact" />
@@ -226,8 +244,13 @@ export function EventsPage() {
               </>
             ) : (
               <div className="flex flex-col items-center text-center py-16">
-                <CalendarX className="w-10 h-10 text-slate-300 mb-4" aria-hidden="true" />
-                <p className="text-slate-500 mb-4">No events match those filters.</p>
+                <CalendarX
+                  className="w-10 h-10 text-slate-300 mb-4"
+                  aria-hidden="true"
+                />
+                <p className="text-slate-500 mb-4">
+                  No events match those filters.
+                </p>
                 <button
                   onClick={handleReset}
                   className="px-6 py-2.5 rounded-lg bg-purple-600 text-white text-sm font-semibold hover:bg-purple-700 active:scale-95 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400"

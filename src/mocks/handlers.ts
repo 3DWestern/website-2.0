@@ -8,6 +8,7 @@ import { Author as PayloadAuthor } from "../../payload-types";
 import { sampleProjectCategories } from "@/cms/static-data/projectCategories";
 import { sampleProjects } from "@/cms/static-data/projects";
 import { sampleEvents } from "@/cms/static-data/events";
+import { sampleEventCategories } from "@/cms/static-data";
 
 // MSW (Mock Service Worker) request handlers that intercept calls to the
 // local Payload CMS API (http://localhost:3000/api/...) and respond with
@@ -67,45 +68,61 @@ export const handlers = [
   // Also hydrates each blog by resolving its relationship fields
   // (tags, author) from raw IDs into full nested objects, similar to
   // how Payload would return populated relationships from a real query.
+  // Mock GET /api/project-categories
   http.get("http://localhost:3000/api/blogs", ({ request }) => {
     const url = new URL(request.url);
     const slugParam = url.searchParams.get("where[slug][equals]");
+    const tagParam = url.searchParams.get("where[tags.title][in]"); // confirm this matches your categoryField config
+    const idsParam = url.searchParams.get("where[id][in]");
+    const limit = Number(url.searchParams.get("limit")) || sampleBlogs.length;
+    const page = Number(url.searchParams.get("page")) || 1;
 
     let blogs = sampleBlogs;
 
-    // Filter by slug
     if (slugParam) {
-      blogs = sampleBlogs.filter((blog) => blog.slug === slugParam);
+      blogs = blogs.filter((blog) => blog.slug === slugParam);
     }
 
-    // Step 1: replace each blog's raw `tags` (array of tag IDs) with the
-    // full matching Tag objects looked up from sampleTags
+    if (idsParam) {
+      const ids = idsParam.split(",");
+      blogs = blogs.filter((blog) => ids.includes(String(blog.id)));
+    }
+
+    // Resolve tags (IDs -> full Tag objects) and author (ID -> full Author
+    // object) BEFORE tag-name filtering, since the filter needs `tag.title`.
     let deepBlogs = blogs.map((blog) => ({
       ...blog,
       tags: (blog.tags as unknown as number[])
         ?.map((tagID) => sampleTags.find((sTag) => sTag.id === tagID))
-        .filter((tag) => tag !== undefined),
-    }));
-
-    // Step 2: replace each blog's raw `author` (an author ID) with the
-    // full matching Author object looked up from sampleAuthors
-    deepBlogs = deepBlogs.map((blog) => ({
-      ...blog,
+        .filter((tag): tag is (typeof sampleTags)[number] => tag !== undefined),
       author: sampleAuthors.find(
         (author) => author.id === (blog.author as unknown as number),
       ) as PayloadAuthor,
     }));
 
+    if (tagParam) {
+      const tagTitles = tagParam.split(",");
+      deepBlogs = deepBlogs.filter((blog) =>
+        blog.tags?.some((t) => tagTitles.includes(t.title)),
+      );
+    }
+
+    const totalDocs = deepBlogs.length;
+    const startIndex = (page - 1) * limit;
+    const docs = deepBlogs.slice(startIndex, startIndex + limit);
+
     return HttpResponse.json({
-      docs: deepBlogs,
-      totalDocs: blogs.length,
-      limit: 10,
-      page: 1,
-      totalPages: Math.ceil(blogs.length / 10),
+      docs,
+      totalDocs,
+      limit,
+      page,
+      totalPages: Math.ceil(totalDocs / limit),
+      hasNextPage: startIndex + limit < totalDocs,
+      hasPrevPage: page > 1,
     });
   }),
 
-  // Mock GET /api/project-categories
+  //
   http.get("http://localhost:3000/api/project-categories", () => {
     return HttpResponse.json({
       docs: sampleProjectCategories,
@@ -144,22 +161,39 @@ export const handlers = [
   // Mock GET /api/events
   // Supports "where[categories][in]" and date-range filtering via
   // "where[schedule.startTime][greater_than_equal/less_than_equal]"
-  http.get("http://localhost:3000/api/events", ({ request }) => {
+
+  http.get("*/api/events", ({ request }) => {
     const url = new URL(request.url);
-    const categoryParam = url.searchParams.get("where[categories][in]");
+    const categoryParam = url.searchParams.get("where[categories.name][in]");
     const startParam = url.searchParams.get(
       "where[schedule.startTime][greater_than_equal]",
     );
     const endParam = url.searchParams.get(
       "where[schedule.startTime][less_than_equal]",
     );
+    const idsParam = url.searchParams.get("where[id][in]");
+    const limit = Number(url.searchParams.get("limit")) || sampleEvents.length;
+    const page = Number(url.searchParams.get("page")) || 1;
 
-    let events = sampleEvents;
+    // Resolve category IDs -> full EventCategory objects, same as Payload would at depth >= 1
+    const resolveCategories = (event: (typeof sampleEvents)[number]) => ({
+      ...event,
+      categories: event.categories
+        .map((id) => sampleEventCategories.find((c) => c.id === id))
+        .filter((c): c is (typeof sampleEventCategories)[number] => Boolean(c)),
+    });
+
+    let events = sampleEvents.map(resolveCategories);
+
+    if (idsParam) {
+      const ids = idsParam.split(",");
+      events = events.filter((e) => ids.includes(String(e.id)));
+    }
 
     if (categoryParam) {
-      const categories = categoryParam.split(",");
+      const categoryNames = categoryParam.split(",");
       events = events.filter((event) =>
-        event.categories.some((c) => categories.includes(c)),
+        event.categories.some((c) => categoryNames.includes(c.name)),
       );
     }
 
@@ -174,16 +208,20 @@ export const handlers = [
       });
     }
 
+    const totalDocs = events.length;
+    const startIndex = (page - 1) * limit;
+    const docs = events.slice(startIndex, startIndex + limit);
+
     return HttpResponse.json({
-      docs: events,
-      totalDocs: events.length,
-      limit: 10,
-      page: 1,
-      totalPages: 1,
+      docs,
+      totalDocs,
+      limit,
+      page,
+      totalPages: Math.ceil(totalDocs / limit),
+      hasNextPage: startIndex + limit < totalDocs,
+      hasPrevPage: page > 1,
     });
   }),
-
-  // ... alongside your existing handlers
 
   // Mock GET /api/team-members
   http.get("http://localhost:3000/api/team-members", () => {

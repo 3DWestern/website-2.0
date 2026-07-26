@@ -4,10 +4,10 @@ import Image from "next/image";
 import { Card } from "@/components/ui/card";
 import { MapPin, Clock } from "lucide-react";
 import { cn } from "../ui/utils";
-import type { Event, EventCategory } from "@/components/data/events";
 import { formatTime, parseEventDate, formatShortDate } from "./calendarUtils";
+import { Event, EventCategory } from "@/types/content";
 
-export const categoryStyles: Record<EventCategory, { dot: string; badge: string }> = {
+export const categoryStyles: Record<string, { dot: string; badge: string }> = {
   workshop: { dot: "bg-purple-600", badge: "bg-purple-50 text-purple-700" },
   social: { dot: "bg-pink-500", badge: "bg-pink-50 text-pink-700" },
   meeting: { dot: "bg-blue-500", badge: "bg-blue-50 text-blue-700" },
@@ -15,7 +15,10 @@ export const categoryStyles: Record<EventCategory, { dot: string; badge: string 
   other: { dot: "bg-slate-400", badge: "bg-slate-100 text-slate-600" },
 };
 
-const statusStyles: Record<Event["status"], { label: string; badge: string } | null> = {
+const statusStyles: Record<
+  Event["status"],
+  { label: string; badge: string } | null
+> = {
   upcoming: null,
   ongoing: { label: "Happening now", badge: "bg-emerald-600 text-white" },
   past: { label: "Past", badge: "bg-slate-500 text-white" },
@@ -29,7 +32,12 @@ type EventCardProps = {
   className?: string;
 };
 
-export function EventCard({ event, onClick, variant = "default", className }: EventCardProps) {
+export function EventCard({
+  event,
+  onClick,
+  variant = "default",
+  className,
+}: EventCardProps) {
   const date = parseEventDate(event.schedule.date);
   const status = statusStyles[event.status];
 
@@ -46,14 +54,23 @@ export function EventCard({ event, onClick, variant = "default", className }: Ev
         )}
       >
         <div className="flex flex-col items-center justify-center w-12 h-12 rounded-lg bg-purple-50 text-purple-700 shrink-0">
-          <span className="text-[10px] font-semibold leading-none">{month}</span>
+          <span className="text-[10px] font-semibold leading-none">
+            {month}
+          </span>
           <span className="text-lg font-bold leading-tight">{day}</span>
         </div>
         <div className="min-w-0 flex-1">
           <div className="flex items-center gap-2">
-            <p className="text-sm font-semibold text-slate-900 truncate">{event.title}</p>
+            <p className="text-sm font-semibold text-slate-900 truncate">
+              {event.title}
+            </p>
             {status && (
-              <span className={cn("shrink-0 text-[10px] font-semibold px-1.5 py-0.5 rounded-full", status.badge)}>
+              <span
+                className={cn(
+                  "shrink-0 text-[10px] font-semibold px-1.5 py-0.5 rounded-full",
+                  status.badge,
+                )}
+              >
                 {status.label}
               </span>
             )}
@@ -71,7 +88,13 @@ export function EventCard({ event, onClick, variant = "default", className }: Ev
         </div>
         <span className="flex gap-1 shrink-0" aria-hidden="true">
           {event.categories.slice(0, 3).map((cat) => (
-            <span key={cat} className={cn("w-2 h-2 rounded-full", categoryStyles[cat].dot)} />
+            <span
+              key={cat.name}
+              className={cn(
+                "w-2 h-2 rounded-full",
+                categoryStyles[cat.name]?.dot ?? "bg-slate-300",
+              )}
+            />
           ))}
         </span>
       </button>
@@ -108,10 +131,10 @@ export function EventCard({ event, onClick, variant = "default", className }: Ev
       <div className="absolute top-4 left-4 z-20 flex flex-wrap gap-1.5">
         {event.categories.map((cat) => (
           <span
-            key={cat}
+            key={cat.name}
             className="text-[10px] font-semibold uppercase tracking-wide px-2 py-1 rounded-full bg-white/90 text-purple-700"
           >
-            {cat}
+            {cat.name}
           </span>
         ))}
       </div>
@@ -127,9 +150,16 @@ export function EventCard({ event, onClick, variant = "default", className }: Ev
       )}
 
       <div className="relative p-6 flex flex-col justify-end h-full text-white z-20">
-        <h3 className="text-2xl font-bold drop-shadow-lg leading-tight">{event.title}</h3>
+        <h3 className="text-2xl font-bold drop-shadow-lg leading-tight">
+          {event.title}
+        </h3>
         <div className="flex flex-wrap items-center gap-3 mt-2 text-sm drop-shadow-md">
-          <span>{date.toLocaleDateString("en-US", { month: "short", day: "numeric" })}</span>
+          <span>
+            {date.toLocaleDateString("en-US", {
+              month: "short",
+              day: "numeric",
+            })}
+          </span>
           <span className="flex items-center gap-1">
             <Clock className="w-3.5 h-3.5" aria-hidden="true" />
             {formatTime(event.schedule.startTime)}
@@ -144,7 +174,11 @@ export function EventCard({ event, onClick, variant = "default", className }: Ev
   );
 }
 
-export function EventCardSkeleton({ variant = "default" }: { variant?: "default" | "compact" }) {
+export function EventCardSkeleton({
+  variant = "default",
+}: {
+  variant?: "default" | "compact";
+}) {
   if (variant === "compact") {
     return (
       <div className="w-full flex items-center gap-4 p-3 rounded-lg bg-white border border-slate-100 animate-pulse">
@@ -156,5 +190,7 @@ export function EventCardSkeleton({ variant = "default" }: { variant?: "default"
       </div>
     );
   }
-  return <div className="rounded-lg bg-slate-200 min-h-[300px] animate-pulse" />;
+  return (
+    <div className="rounded-lg bg-slate-200 min-h-[300px] animate-pulse" />
+  );
 }

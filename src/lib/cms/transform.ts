@@ -7,6 +7,7 @@ import {
   Author,
   Tag,
   ProjectCategory,
+  EventCategory,
 } from "@/types/content";
 import {
   Event as PayloadEvent,
@@ -17,9 +18,10 @@ import {
   Tag as PayloadTag,
   TeamMember as PayloadTeamMember,
   ProjectCategory as PayloadPC,
+  EventCategory as PayloadEC,
 } from "../../../payload-types";
 
-type DocType =
+export type DocType =
   | PayloadEvent
   | PayloadSponsor
   | PayloadAuthor
@@ -76,13 +78,13 @@ export const transformEvent = (doc: PayloadEvent): Event => {
     image: doc.image,
     description: doc.description,
     schedule: {
-      date: formatDate(doc.schedule.date),
-      startTime: formatTime(doc.schedule.startTime),
-      endTime: formatTime(doc.schedule.endTime),
+      date: doc.schedule.date,
+      startTime: doc.schedule.startTime,
+      endTime: doc.schedule.endTime,
     },
     location: doc.location,
     url: doc.url ?? undefined,
-    categories: doc.categories,
+    categories: doc.categories as EventCategory[], // set up to always come back with categories, no raw IDs
     recurrence: {
       isRecurring: doc.recurrence?.isRecurring ?? false,
       frequency: doc.recurrence?.frequency ?? undefined,
@@ -101,6 +103,22 @@ export const transformEvent = (doc: PayloadEvent): Event => {
 // transform an entire payload doc to event objects
 export const transformEvents = (docs: PayloadEvent[]): Event[] => {
   return transformDocs(docs, transformEvent);
+};
+
+// transform a project category doc to project category data shape
+export const transformEventCategory = (doc: PayloadEC): EventCategory => {
+  return {
+    id: doc.id,
+    name: doc.name,
+    description: doc.description,
+  };
+};
+
+// transform a list of project category docs to project category data shapes
+export const transformEventCategories = (
+  docs: PayloadEC[],
+): EventCategory[] => {
+  return transformDocs(docs, transformEventCategory);
 };
 
 // transform ONE payload doc object to an event object

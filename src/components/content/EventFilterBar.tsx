@@ -2,27 +2,18 @@
 
 import { useId } from "react";
 import { Search, X } from "lucide-react";
-import type { EventCategory } from "@/components/data/events";
 import { cn } from "../ui/utils";
-
-export type DateRangeFilter = "all" | "week" | "month" | "upcoming" | "past";
-
-const dateRangeOptions: { value: DateRangeFilter; label: string }[] = [
-  { value: "all", label: "All" },
-  { value: "week", label: "This Week" },
-  { value: "month", label: "This Month" },
-  { value: "upcoming", label: "Upcoming" },
-  { value: "past", label: "Past" },
-];
+import { View, views } from "@/context/EventContext";
+import { EventCategory } from "@/types/content";
 
 type EventFilterBarProps = {
   search: string;
   onSearchChange: (value: string) => void;
-  category: EventCategory | "all";
-  onCategoryChange: (value: EventCategory | "all") => void;
+  category: string | undefined;
+  onCategoryChange: (value: string) => void;
   categories: EventCategory[];
-  dateRange: DateRangeFilter;
-  onDateRangeChange: (value: DateRangeFilter) => void;
+  view: View;
+  onViewChange: (value: View) => void;
   resultCount: number;
 };
 
@@ -32,8 +23,8 @@ export function EventFilterBar({
   category,
   onCategoryChange,
   categories,
-  dateRange,
-  onDateRangeChange,
+  view,
+  onViewChange,
   resultCount,
 }: EventFilterBarProps) {
   const searchId = useId();
@@ -70,20 +61,24 @@ export function EventFilterBar({
               )}
             </div>
 
-            <div role="group" aria-label="Filter by date range" className="flex flex-wrap gap-2">
-              {dateRangeOptions.map((opt) => (
+            <div
+              role="group"
+              aria-label="Filter by date range"
+              className="flex flex-wrap gap-2"
+            >
+              {views.map((opt) => (
                 <button
-                  key={opt.value}
-                  onClick={() => onDateRangeChange(opt.value)}
-                  aria-pressed={dateRange === opt.value}
+                  key={opt}
+                  onClick={() => onViewChange(opt)}
+                  aria-pressed={view === opt}
                   className={cn(
                     "px-3.5 py-1.5 rounded-full text-xs font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400",
-                    dateRange === opt.value
+                    view === opt
                       ? "bg-slate-900 text-white"
                       : "bg-slate-100 text-slate-600 hover:bg-slate-200",
                   )}
                 >
-                  {opt.label}
+                  {opt.toUpperCase()}
                 </button>
               ))}
             </div>
@@ -93,7 +88,11 @@ export function EventFilterBar({
             </span>
           </div>
 
-          <div role="group" aria-label="Filter by category" className="flex flex-wrap gap-2">
+          <div
+            role="group"
+            aria-label="Filter by category"
+            className="flex flex-wrap gap-2"
+          >
             <button
               onClick={() => onCategoryChange("all")}
               aria-pressed={category === "all"}
@@ -108,17 +107,17 @@ export function EventFilterBar({
             </button>
             {categories.map((cat) => (
               <button
-                key={cat}
-                onClick={() => onCategoryChange(cat)}
-                aria-pressed={category === cat}
+                key={cat.name}
+                onClick={() => onCategoryChange(cat.name)}
+                aria-pressed={category === cat.name}
                 className={cn(
                   "px-3.5 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wide transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400",
-                  category === cat
+                  category === cat.name
                     ? "bg-purple-600 text-white"
                     : "bg-slate-100 text-slate-600 hover:bg-slate-200",
                 )}
               >
-                {cat}
+                {cat.name}
               </button>
             ))}
           </div>

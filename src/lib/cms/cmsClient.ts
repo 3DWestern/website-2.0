@@ -1,5 +1,4 @@
 import type { RequestInit } from "next/dist/server/web/spec-extension/request";
-import { cookies } from "next/headers";
 const BASE_URL = process.env.CMS_BASE_URL || "http://localhost:3000";
 
 export const cmsClient = {
@@ -9,6 +8,7 @@ export const cmsClient = {
   // rule) — but works fine with no cookies at all for scripts, cron jobs,
   // or genuinely logged-out visitors.
   get: async (path: string, options: RequestInit = {}) => {
+    const { cookies } = await import("next/headers"); // import here avoids breaking clientGet
     let cookieString = "";
     try {
       const cookieStore = await cookies();
@@ -27,6 +27,14 @@ export const cmsClient = {
         ...(cookieString ? { Cookie: cookieString } : {}),
       },
     });
+    if (!res.ok) throw new Error(`CMS request failed: ${res.status}`);
+    return res.json();
+  },
+
+  // Client-safe: same-origin fetch, browser attaches cookies automatically,
+  // no next/headers, no API key — safe to import in "use client" files.
+  clientGet: async (path: string) => {
+    const res = await fetch(`/api/${path}`);
     if (!res.ok) throw new Error(`CMS request failed: ${res.status}`);
     return res.json();
   },

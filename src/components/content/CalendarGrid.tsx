@@ -4,7 +4,6 @@ import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { koulen } from "@/lib/fonts";
-import type { Event } from "@/components/data/events";
 import { categoryStyles } from "./EventCard";
 import {
   getMonthMatrix,
@@ -16,6 +15,7 @@ import {
   parseEventDate,
 } from "./calendarUtils";
 import { cn } from "../ui/utils";
+import { Event } from "@/types/content";
 
 type CalendarGridProps = {
   month: Date;
@@ -96,32 +96,11 @@ export function CalendarGrid({
 
   return (
     <div>
-      {/* Month nav */}
-      <div className="flex items-center justify-between mb-4">
-        <h2 className={`text-2xl ${koulen.className}`}>{formatMonthYear(month)}</h2>
-        <div className="flex items-center gap-2">
-          <button
-            onClick={goToToday}
-            className="px-3 py-1.5 rounded-lg text-xs font-semibold text-purple-700 bg-purple-50 hover:bg-purple-100 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400"
-          >
-            Today
-          </button>
-          <button
-            onClick={() => onMonthChange(addMonths(month, -1))}
-            aria-label="Previous month"
-            className="w-8 h-8 rounded-full border border-slate-200 bg-white flex items-center justify-center text-slate-600 hover:bg-slate-50 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400"
-          >
-            <ChevronLeft className="w-4 h-4" />
-          </button>
-          <button
-            onClick={() => onMonthChange(addMonths(month, 1))}
-            aria-label="Next month"
-            className="w-8 h-8 rounded-full border border-slate-200 bg-white flex items-center justify-center text-slate-600 hover:bg-slate-50 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400"
-          >
-            <ChevronRight className="w-4 h-4" />
-          </button>
-        </div>
-      </div>
+      <MonthNav
+        month={month}
+        onMonthChange={onMonthChange}
+        onToday={goToToday}
+      />
 
       <AnimatePresence mode="wait">
         <motion.div
@@ -134,7 +113,10 @@ export function CalendarGrid({
           aria-label={formatMonthYear(month)}
           className="rounded-xl border border-slate-100 overflow-hidden bg-white"
         >
-          <div role="row" className="grid grid-cols-7 bg-slate-50 border-b border-slate-100">
+          <div
+            role="row"
+            className="grid grid-cols-7 bg-slate-50 border-b border-slate-100"
+          >
             {WEEKDAY_LABELS.map((d) => (
               <div
                 key={d}
@@ -153,7 +135,9 @@ export function CalendarGrid({
                 const dayEvents = eventsByDay.get(key) ?? [];
                 const inMonth = isSameMonth(date, month);
                 const isToday = isSameDay(date, today);
-                const isSelected = selectedDate ? isSameDay(date, selectedDate) : false;
+                const isSelected = selectedDate
+                  ? isSameDay(date, selectedDate)
+                  : false;
                 const isTabbable = isSameDay(date, focusedDate);
 
                 return (
@@ -179,7 +163,9 @@ export function CalendarGrid({
                     onKeyDown={(e) => handleKeyDown(e, date)}
                     className={cn(
                       "relative h-16 sm:h-20 border-b border-r border-slate-50 flex flex-col items-center justify-start pt-1.5 gap-1 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-purple-400",
-                      inMonth ? "bg-white hover:bg-purple-50/60" : "bg-slate-50/50 text-slate-300",
+                      inMonth
+                        ? "bg-white hover:bg-purple-50/60"
+                        : "bg-slate-50/50 text-slate-300",
                       isSelected && "bg-purple-50 hover:bg-purple-50",
                     )}
                   >
@@ -198,7 +184,8 @@ export function CalendarGrid({
                           key={event.id}
                           className={cn(
                             "w-1.5 h-1.5 rounded-full",
-                            categoryStyles[event.categories[0]].dot,
+                            categoryStyles[event.categories[0]?.name]?.dot ??
+                              "bg-slate-300",
                           )}
                         />
                       ))}
@@ -218,7 +205,45 @@ export function CalendarGrid({
     </div>
   );
 }
-
+export function MonthNav({
+  month,
+  onMonthChange,
+  onToday,
+}: {
+  month: Date;
+  onMonthChange: (month: Date) => void;
+  onToday: () => void;
+}) {
+  return (
+    <div className="flex items-center justify-between mb-4">
+      <h2 className={`text-2xl ${koulen.className}`}>
+        {formatMonthYear(month)}
+      </h2>
+      <div className="flex items-center gap-2">
+        <button
+          onClick={onToday}
+          className="px-3 py-1.5 rounded-lg text-xs font-semibold text-purple-700 bg-purple-50 hover:bg-purple-100 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400"
+        >
+          Today
+        </button>
+        <button
+          onClick={() => onMonthChange(addMonths(month, -1))}
+          aria-label="Previous month"
+          className="w-8 h-8 rounded-full border border-slate-200 bg-white flex items-center justify-center text-slate-600 hover:bg-slate-50 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400"
+        >
+          <ChevronLeft className="w-4 h-4" />
+        </button>
+        <button
+          onClick={() => onMonthChange(addMonths(month, 1))}
+          aria-label="Next month"
+          className="w-8 h-8 rounded-full border border-slate-200 bg-white flex items-center justify-center text-slate-600 hover:bg-slate-50 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400"
+        >
+          <ChevronRight className="w-4 h-4" />
+        </button>
+      </div>
+    </div>
+  );
+}
 export function CalendarGridSkeleton() {
   return (
     <div className="rounded-xl border border-slate-100 overflow-hidden bg-white animate-pulse">
@@ -230,7 +255,10 @@ export function CalendarGridSkeleton() {
       {Array.from({ length: 5 }).map((_, wi) => (
         <div key={wi} className="grid grid-cols-7">
           {Array.from({ length: 7 }).map((_, di) => (
-            <div key={di} className="h-16 sm:h-20 border-b border-r border-slate-50 bg-slate-50" />
+            <div
+              key={di}
+              className="h-16 sm:h-20 border-b border-r border-slate-50 bg-slate-50"
+            />
           ))}
         </div>
       ))}

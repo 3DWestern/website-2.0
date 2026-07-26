@@ -10,7 +10,8 @@ import {
   Projects,
   Authors,
   Users,
-  ProjectCategory,
+  ProjectCategories,
+  EventCategories,
 } from "@/cms/collections";
 import { Tags } from "@/cms/collections/Tags";
 
@@ -25,7 +26,8 @@ export default buildConfig({
     Events,
     Sponsors,
     Authors,
-    ProjectCategory,
+    ProjectCategories,
+    EventCategories,
   ],
   secret: process.env.PAYLOAD_SECRET || "",
   db: postgresAdapter({

@@ -9,6 +9,6 @@ export const eventSeed = async (payload: Payload) => {
         ...event,
       },
     });
-    console.log(`Seeded: ${event.title}`);
+    console.log(`Seeded: ${event.title} ✓`);
   }
 };

@@ -5,3 +5,4 @@ export { sampleEvents } from "./events";
 export { sampleProjects } from "./projects";
 export { sampleSponsors } from "./sponsors";
 export { sampleProjectCategories } from "./projectCategories";
+export { sampleEventCategories } from "./eventCategories";

@@ -46,9 +46,9 @@ export function toISODate(date: Date): string {
     date.getDate(),
   ).padStart(2, "0")}`;
 }
-
 export function parseEventDate(isoDate: string): Date {
-  const [y, m, d] = isoDate.split("-").map(Number);
+  const datePart = isoDate.split("T")[0]; // "2026-07-26"
+  const [y, m, d] = datePart.split("-").map(Number);
   return new Date(y, m - 1, d);
 }
 
@@ -57,7 +57,11 @@ export function formatMonthYear(date: Date): string {
 }
 
 export function formatDayLabel(date: Date): string {
-  return date.toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric" });
+  return date.toLocaleDateString("en-US", {
+    weekday: "long",
+    month: "long",
+    day: "numeric",
+  });
 }
 
 export function formatShortDate(date: Date): { day: string; month: string } {
@@ -69,10 +73,13 @@ export function formatShortDate(date: Date): { day: string; month: string } {
 
 // "14:00" -> "2:00 PM"
 export function formatTime(time: string): string {
-  const [h, m] = time.split(":").map(Number);
-  const period = h >= 12 ? "PM" : "AM";
-  const hour12 = h % 12 === 0 ? 12 : h % 12;
-  return `${hour12}:${String(m).padStart(2, "0")} ${period}`;
+  // Handles both full ISO datetimes ("2026-07-26T14:00:00.000Z") and bare "HH:MM"
+  const date = time.includes("T")
+    ? new Date(time)
+    : new Date(`1970-01-01T${time}`);
+  return date.toLocaleTimeString("en-US", {
+    hour: "numeric",
+    minute: "2-digit",
+  });
 }
-
 export const WEEKDAY_LABELS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];

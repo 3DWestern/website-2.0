@@ -5,4 +5,5 @@ export { Authors } from "./Authors";
 export { Events } from "./Events";
 export { TeamMembers } from "./TeamMembers";
 export { Users } from "./Users";
-export { ProjectCategory } from "./ProjectCategory";
+export { ProjectCategories } from "./ProjectCategories";
+export { EventCategories } from "./EventCategories";

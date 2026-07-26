@@ -45,16 +45,11 @@ export const Events: CollectionConfig = {
     // Changed from free-text to select so filtering has a fixed, known set of values.
     {
       name: "categories",
-      type: "select",
-      required: true,
+      type: "relationship",
+      relationTo: "event-categories",
       hasMany: true,
-      options: [
-        { label: "Workshop", value: "workshop" },
-        { label: "Social", value: "social" },
-        { label: "Meeting", value: "meeting" },
-        { label: "Holiday", value: "holiday" },
-        { label: "Other", value: "other" },
-      ],
+      required: true,
+      maxRows: 3,
     },
 
     // --- Recurring event support ---

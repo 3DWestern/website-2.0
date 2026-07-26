@@ -2,8 +2,7 @@ import type { Metadata } from "next";
 import { ProjectsPage } from "@/components/pages/ProjectsPage";
 import { HorizontalNav } from "@/components/HorizontalNav";
 import { Footer } from "@/components/Footer";
-import { getProjects } from "@/lib/cms/fetchProjects";
-import { getProjectCategories } from "@/lib/cms/fetchProjectCategories";
+import { api } from "@/lib/cms/api.server";
 
 export const metadata: Metadata = {
   title: "Projects Showcase | 3D Western",
@@ -12,8 +11,10 @@ export const metadata: Metadata = {
 };
 
 export default async function Page() {
-  const allProjects = await getProjects({});
-  const allCategories = await getProjectCategories();
+  const [allProjects, allCategories] = await Promise.all([
+    api.for("projects").getMany(),
+    api.for("project-categories").getMany(),
+  ]);
   return (
     <main className="min-h-screen flex flex-col">
       <HorizontalNav variant="dark" />

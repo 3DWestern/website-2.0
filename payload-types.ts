@@ -76,6 +76,7 @@ export interface Config {
     sponsors: Sponsor;
     authors: Author;
     'project-categories': ProjectCategory;
+    'event-categories': EventCategory;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -92,6 +93,7 @@ export interface Config {
     sponsors: SponsorsSelect<false> | SponsorsSelect<true>;
     authors: AuthorsSelect<false> | AuthorsSelect<true>;
     'project-categories': ProjectCategoriesSelect<false> | ProjectCategoriesSelect<true>;
+    'event-categories': EventCategoriesSelect<false> | EventCategoriesSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -295,7 +297,7 @@ export interface Event {
     alt: string;
   };
   url?: string | null;
-  categories: ('workshop' | 'social' | 'meeting' | 'holiday' | 'other')[];
+  categories: (number | EventCategory)[];
   recurrence?: {
     isRecurring?: boolean | null;
     frequency?: ('daily' | 'weekly' | 'monthly' | 'yearly') | null;
@@ -314,6 +316,17 @@ export interface Event {
    * Set to 'cancelled' manually when needed. Upcoming/ongoing/past are otherwise recalculated from schedule dates at fetch time.
    */
   status: 'upcoming' | 'ongoing' | 'past' | 'cancelled';
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "event-categories".
+ */
+export interface EventCategory {
+  id: number;
+  name: string;
+  description: string;
   updatedAt: string;
   createdAt: string;
 }
@@ -389,6 +402,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'project-categories';
         value: number | ProjectCategory;
+      } | null)
+    | ({
+        relationTo: 'event-categories';
+        value: number | EventCategory;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -609,6 +626,16 @@ export interface AuthorsSelect<T extends boolean = true> {
  * via the `definition` "project-categories_select".
  */
 export interface ProjectCategoriesSelect<T extends boolean = true> {
+  name?: T;
+  description?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "event-categories_select".
+ */
+export interface EventCategoriesSelect<T extends boolean = true> {
   name?: T;
   description?: T;
   updatedAt?: T;

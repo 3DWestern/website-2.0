@@ -1,8 +1,7 @@
 import { ProjectCategory } from "@/types/content";
-import { cmsClient } from "./cmsClient";
-
-import { transformProjectCategories } from "./transform";
 import { URLSearchParams } from "url";
+import { cmsClient } from "../cmsClient";
+import { transformProjectCategories } from "../transform";
 
 // Get all project categories from CMS
 export const getProjectCategories = async () => {

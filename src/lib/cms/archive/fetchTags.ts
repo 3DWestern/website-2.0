@@ -1,7 +1,7 @@
-import { cmsClient } from "./cmsClient";
-import { transformTags } from "./transform";
 import { Tag } from "@/types/content";
 import { URLSearchParams } from "url";
+import { cmsClient } from "../cmsClient";
+import { transformTags } from "../transform";
 
 // Fetches all tags from the CMS.
 // If the CMS is disabled, MSW serves sample data

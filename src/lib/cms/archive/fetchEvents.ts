@@ -1,4 +1,3 @@
-import { cmsClient } from "./cmsClient";
 import {
   endOfDay,
   endOfMonth,
@@ -7,9 +6,10 @@ import {
   startOfMonth,
   startOfWeek,
 } from "date-fns";
-import { transformEvents } from "./transform";
 import { URLSearchParams } from "url";
 import { EventCategory } from "@/types/content";
+import { cmsClient } from "../cmsClient";
+import { transformEvents } from "../transform";
 
 type Options = {
   category?: EventCategory;
@@ -48,7 +48,7 @@ export const getEventsInRange = async (
   // Options filtering
   if (options?.limit) params.set("limit", String(options.limit));
   if (options?.page) params.set("page", String(options.page));
-  if (options?.category) params.set("where[categories][in]", options.category);
+  // if (options?.category) params.set("where[categories][in]", options.category);
 
   // ensure event is after the start date
   params.set(

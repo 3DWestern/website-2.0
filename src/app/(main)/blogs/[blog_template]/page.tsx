@@ -1,4 +1,4 @@
-import { getPostBySlug } from "@/lib/cms/fetchBlogs";
+import { getPostBySlug } from "@/lib/cms/fetchBySlug";
 import { BlogPostPage } from "./BlogPostPage";
 import { blogPostMeta } from "@/lib/blogMeta";
 
@@ -25,4 +25,3 @@ const Blog = async ({
 };
 
 export default Blog;
-

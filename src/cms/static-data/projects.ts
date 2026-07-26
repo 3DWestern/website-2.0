@@ -1,5 +1,8 @@
-import { Project } from "../../types/content";
-export const sampleProjects: Project[] = [
+import { Project } from "../../../payload-types";
+
+type SampleProject = Omit<Project, "updatedAt" | "createdAt">;
+
+export const sampleProjects: SampleProject[] = [
   {
     id: 1,
     slug: "autonomous-greenhouse-monitor",
@@ -22,14 +25,7 @@ export const sampleProjects: Project[] = [
         alt: "Workshop bench during greenhouse monitor assembly",
       },
     ],
-    categories: [
-      {
-        name: "Electronics",
-        description:
-          "Circuit builds, PCB designs, and embedded electronics projects.",
-      },
-    ],
-    dateAdded: "2025-11-02",
+    categories: [7], // Electronics
     featured: true,
     github: "https://github.com/3dwestern/greenhouse-monitor",
   },
@@ -45,14 +41,7 @@ export const sampleProjects: Project[] = [
       src: "/images/smaker.jpg",
       alt: "Formula Student steering wheel prototype",
     },
-    categories: [
-      {
-        name: "CNC",
-        description:
-          "Precision-machined parts and projects made with CNC milling and routing.",
-      },
-    ],
-    dateAdded: "2025-10-20",
+    categories: [3], // CNC
     featured: true,
     blogUrl: "/blog/formula-student-steering-wheel",
   },
@@ -68,14 +57,7 @@ export const sampleProjects: Project[] = [
       src: "/images/dmaker.jpg",
       alt: "Adaptive gaming controller with modular 3D-printed housing",
     },
-    categories: [
-      {
-        name: "3D Printing",
-        description:
-          "Projects built using additive manufacturing, from FDM to resin printing.",
-      },
-    ],
-    dateAdded: "2025-11-15",
+    categories: [2], // 3D Printing
     github: "https://github.com/3dwestern/adaptive-controller",
     blogUrl: "/blog/adaptive-gaming-controller",
   },
