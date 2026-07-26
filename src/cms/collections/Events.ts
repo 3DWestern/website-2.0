@@ -52,45 +52,45 @@ export const Events: CollectionConfig = {
       maxRows: 3,
     },
 
-    // --- Recurring event support ---
-    {
-      name: "recurrence",
-      type: "group",
-      fields: [
-        { name: "isRecurring", type: "checkbox", defaultValue: false },
-        {
-          name: "frequency",
-          type: "select",
-          options: ["daily", "weekly", "monthly", "yearly"],
-          admin: { condition: (_, siblingData) => siblingData?.isRecurring },
-        },
-        {
-          name: "interval",
-          type: "number",
-          admin: {
-            description: "Repeat every N days/weeks/months/years",
-            condition: (_, siblingData) => siblingData?.isRecurring,
-          },
-        },
-        {
-          name: "endsOn",
-          type: "date",
-          admin: { condition: (_, siblingData) => siblingData?.isRecurring },
-        },
-      ],
-    },
-
-    // --- RSVP / capacity (future expansion point, data model only) ---
-    {
-      name: "rsvp",
-      type: "group",
-      fields: [
-        { name: "enabled", type: "checkbox", defaultValue: false },
-        { name: "capacity", type: "number" },
-        { name: "rsvpCount", type: "number", defaultValue: 0 },
-      ],
-    },
-
+    // // --- Recurring event support ---
+    // {
+    //   name: "recurrence",
+    //   type: "group",
+    //   fields: [
+    //     { name: "isRecurring", type: "checkbox", defaultValue: false },
+    //     {
+    //       name: "frequency",
+    //       type: "select",
+    //       options: ["daily", "weekly", "monthly", "yearly"],
+    //       admin: { condition: (_, siblingData) => siblingData?.isRecurring },
+    //     },
+    //     {
+    //       name: "interval",
+    //       type: "number",
+    //       admin: {
+    //         description: "Repeat every N days/weeks/months/years",
+    //         condition: (_, siblingData) => siblingData?.isRecurring,
+    //       },
+    //     },
+    //     {
+    //       name: "endsOn",
+    //       type: "date",
+    //       admin: { condition: (_, siblingData) => siblingData?.isRecurring },
+    //     },
+    //   ],
+    // },
+    //
+    // // --- RSVP / capacity (future expansion point, data model only) ---
+    // {
+    //   name: "rsvp",
+    //   type: "group",
+    //   fields: [
+    //     { name: "enabled", type: "checkbox", defaultValue: false },
+    //     { name: "capacity", type: "number" },
+    //     { name: "rsvpCount", type: "number", defaultValue: 0 },
+    //   ],
+    // },
+    //
     // --- Status ---
     // Stored + manually overridable (for "cancelled"), but upcoming/ongoing/past
     // should be computed at read-time in the fetch utility rather than trusted

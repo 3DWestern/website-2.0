@@ -17,6 +17,7 @@ export type CollectionConfig<TDoc = any, TOut = any> = {
 export type CollectionKey = keyof typeof collections;
 
 // Collection config for generic fetch api
+// Read docs in /docs/CMS-Collections-Guide.md
 export const collections = {
   events: {
     slug: "events",
@@ -33,6 +34,7 @@ export const collections = {
   projects: {
     slug: "projects",
     transform: transformProjects,
+    categoryField: "categories.name",
   },
   tags: {
     slug: "tags",

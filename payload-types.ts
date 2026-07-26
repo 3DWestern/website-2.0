@@ -298,20 +298,6 @@ export interface Event {
   };
   url?: string | null;
   categories: (number | EventCategory)[];
-  recurrence?: {
-    isRecurring?: boolean | null;
-    frequency?: ('daily' | 'weekly' | 'monthly' | 'yearly') | null;
-    /**
-     * Repeat every N days/weeks/months/years
-     */
-    interval?: number | null;
-    endsOn?: string | null;
-  };
-  rsvp?: {
-    enabled?: boolean | null;
-    capacity?: number | null;
-    rsvpCount?: number | null;
-  };
   /**
    * Set to 'cancelled' manually when needed. Upcoming/ongoing/past are otherwise recalculated from schedule dates at fetch time.
    */
@@ -575,21 +561,6 @@ export interface EventsSelect<T extends boolean = true> {
       };
   url?: T;
   categories?: T;
-  recurrence?:
-    | T
-    | {
-        isRecurring?: T;
-        frequency?: T;
-        interval?: T;
-        endsOn?: T;
-      };
-  rsvp?:
-    | T
-    | {
-        enabled?: T;
-        capacity?: T;
-        rsvpCount?: T;
-      };
   status?: T;
   updatedAt?: T;
   createdAt?: T;

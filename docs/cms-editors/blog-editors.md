@@ -101,6 +101,7 @@ Each post must have an author. Authors are managed separately.
 - Marcus Lee
 - Priya Nair
 - Sam Okafor
+  (ALL SAMPLES)
 
 **To add authors:**
 
@@ -156,6 +157,6 @@ If you need help:
 
 1. Check this guide first
 2. Ask another editor
-3. Contact the dev team (link to Slack/email)
+3. Contact the dev team
 
 Happy writing! 🚀
