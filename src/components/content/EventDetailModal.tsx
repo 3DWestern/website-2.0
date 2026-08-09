@@ -98,16 +98,16 @@ export function EventDetailModal({
             <MapPin size={16} aria-hidden="true" />
             <span>{event.location}</span>
           </div>
-          {event.rsvp.enabled && (
-            <div className="flex items-center gap-2 text-sm text-muted-foreground">
-              <Users size={16} aria-hidden="true" />
-              <span>
-                {event.rsvp.rsvpCount}
-                {event.rsvp.capacity ? ` / ${event.rsvp.capacity}` : ""} spots
-                reserved
-              </span>
-            </div>
-          )}
+          {/* {event.rsvp.enabled && ( */}
+          {/*   <div className="flex items-center gap-2 text-sm text-muted-foreground"> */}
+          {/*     <Users size={16} aria-hidden="true" /> */}
+          {/*     <span> */}
+          {/*       {event.rsvp.rsvpCount} */}
+          {/*       {event.rsvp.capacity ? ` / ${event.rsvp.capacity}` : ""} spots */}
+          {/*       reserved */}
+          {/*     </span> */}
+          {/*   </div> */}
+          {/* )} */}
         </div>
 
         <DialogFooter>

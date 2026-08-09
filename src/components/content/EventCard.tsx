@@ -5,7 +5,7 @@ import { Card } from "@/components/ui/card";
 import { MapPin, Clock } from "lucide-react";
 import { cn } from "../ui/utils";
 import { formatTime, parseEventDate, formatShortDate } from "./calendarUtils";
-import { Event, EventCategory } from "@/types/content";
+import { Event } from "@/types/content";
 
 export const categoryStyles: Record<string, { dot: string; badge: string }> = {
   workshop: { dot: "bg-purple-600", badge: "bg-purple-50 text-purple-700" },

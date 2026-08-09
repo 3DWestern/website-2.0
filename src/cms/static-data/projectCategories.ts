@@ -2,11 +2,6 @@ import type { ProjectCategory } from "../../types/content";
 
 export const sampleProjectCategories: ProjectCategory[] = [
   {
-    name: "All",
-    description:
-      "Browse every project across all fabrication methods and disciplines.",
-  },
-  {
     name: "3D Printing",
     description:
       "Projects built using additive manufacturing, from FDM to resin printing.",

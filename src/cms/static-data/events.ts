@@ -17,8 +17,6 @@ export const sampleEvents: SampleEvent[] = [
     image: { src: "/images/lucky-block.webp", alt: "Canvas Background Image" },
     url: "https://www.bouncelife.com/events/6942f5d21d54a5775305dcb4",
     categories: [1], // workshop
-    recurrence: { isRecurring: false },
-    rsvp: { enabled: false, rsvpCount: 0 },
     status: "upcoming",
   },
   {
@@ -35,8 +33,6 @@ export const sampleEvents: SampleEvent[] = [
     image: { src: "/images/workshop3.webp", alt: "Canvas Background Image" },
     url: "https://www.bouncelife.com/events/6942f785c42f2067dc31b05e",
     categories: [1], // workshop
-    recurrence: { isRecurring: false },
-    rsvp: { enabled: false, rsvpCount: 0 },
     status: "upcoming",
   },
   {
@@ -53,8 +49,6 @@ export const sampleEvents: SampleEvent[] = [
     image: { src: "/images/workshop2.webp", alt: "Canvas Background Image" },
     url: "https://www.bouncelife.com/events/6942f676bfdf6dc764c83089",
     categories: [5], // other (was "Activity" -- not a defined select option)
-    recurrence: { isRecurring: false },
-    rsvp: { enabled: false, rsvpCount: 0 },
     status: "upcoming",
   },
   {
@@ -71,8 +65,6 @@ export const sampleEvents: SampleEvent[] = [
     image: { src: "/images/workshop1.webp", alt: "Canvas Background Image" },
     url: "https://www.bouncelife.com/events/6942f7f43d78d96d38414993",
     categories: [1], // workshop
-    recurrence: { isRecurring: false },
-    rsvp: { enabled: false, rsvpCount: 0 },
     status: "upcoming",
   },
   {
@@ -90,8 +82,6 @@ export const sampleEvents: SampleEvent[] = [
     image: { src: "/images/workshop4.webp", alt: "Canvas Background Image" },
     url: "https://www.bouncelife.com/events/6942f6fa7ffe1cc83a76c004",
     categories: [1], // workshop
-    recurrence: { isRecurring: false },
-    rsvp: { enabled: false, rsvpCount: 0 },
     status: "upcoming",
   },
   {
@@ -108,8 +98,6 @@ export const sampleEvents: SampleEvent[] = [
     image: { src: "/images/sewing.jpg", alt: "Canvas Background Image" },
     url: "https://www.bouncelife.com/events/6942f84dda486964077145ca",
     categories: [1], // workshop
-    recurrence: { isRecurring: false },
-    rsvp: { enabled: false, rsvpCount: 0 },
     status: "upcoming",
   },
 ];

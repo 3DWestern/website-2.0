@@ -37,13 +37,13 @@ export type Event = {
   };
   url?: string;
   categories: EventCategory[];
-  recurrence: {
+  recurrence?: {
     isRecurring: boolean;
     frequency?: "daily" | "weekly" | "monthly" | "yearly";
     interval?: number;
     endsOn?: string;
   };
-  rsvp: {
+  rsvp?: {
     enabled: boolean;
     capacity?: number;
     rsvpCount: number;
@@ -83,12 +83,10 @@ export type ProjectCategory = {
   description: string;
 };
 
-export namespace Project {
-  export type Image = {
-    src: string;
-    alt: string;
-  };
-}
+export type ProjectImage = {
+  src: string;
+  alt: string;
+};
 
 export type Project = {
   id: number;
@@ -97,8 +95,8 @@ export type Project = {
   creator: string;
   contributors?: string[];
   description: string;
-  image: Project.Image;
-  galleryImages?: Project.Image[];
+  image: ProjectImage;
+  galleryImages?: ProjectImage[];
   categories: ProjectCategory[];
   dateAdded: string; // ISO date, e.g. "2025-11-15"
   featured?: boolean;

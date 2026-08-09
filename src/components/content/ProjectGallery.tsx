@@ -4,10 +4,10 @@ import { useCallback, useEffect, useId, useRef, useState } from "react";
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
-import { Project } from "@/types/content";
+import { ProjectImage } from "@/types/content";
 
 type ProjectGalleryProps = {
-  images: Project.Image[];
+  images: ProjectImage[];
 };
 
 export function ProjectGallery({ images }: ProjectGalleryProps) {
@@ -165,4 +165,3 @@ export function ProjectGallery({ images }: ProjectGalleryProps) {
     </>
   );
 }
-

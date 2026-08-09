@@ -1,8 +1,7 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
-import { motion } from "framer-motion";
 import { CalendarX } from "lucide-react";
 import { koulen } from "@/lib/fonts";
 import {
@@ -13,16 +12,11 @@ import {
 import { EventCard, EventCardSkeleton } from "@/components/content/EventCard";
 import { EventDetailModal } from "@/components/content/EventDetailModal";
 import { EventFilterBar } from "@/components/content/EventFilterBar";
-import {
-  formatDayLabel,
-  isSameDay,
-  isSameMonth,
-  parseEventDate,
-} from "@/components/content/calendarUtils";
-import { useEvents, View } from "@/context/EventContext";
+import { formatDayLabel } from "@/components/content/calendarUtils";
+import { useEvents } from "@/context/EventContext";
 import { Event } from "@/types/content";
+import PageHeader from "../content/Header";
 
-const AGENDA_PAGE_SIZE = 8;
 export function EventsPage() {
   const {
     category,
@@ -31,121 +25,35 @@ export function EventsPage() {
     setView,
     currentDate,
     setCurrentDate,
-    events,
+    search,
+    setSearch,
     isLoading: eventsLoading,
     allCategories,
+    calendarEvents,
+    getEventsForDay,
+    resetFilters,
   } = useEvents();
 
-  const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
   const [selectedEvent, setSelectedEvent] = useState<Event | null>(null);
-  const [search, setSearch] = useState("");
-  const [agendaPage, setAgendaPage] = useState(1);
-
-  // `events` is already filtered by category + view/date range from context.
-  // Only search narrowing happens here.
-  const filteredEvents = useMemo(() => {
-    const q = search.toLowerCase().trim();
-    return events.filter(
-      (event) =>
-        !q ||
-        event.title.toLowerCase().includes(q) ||
-        event.location.toLowerCase().includes(q),
-    );
-  }, [events, search]);
-
-  // Only "upcoming" can span multiple months; day/week/month are already
-  // scoped to currentDate by context, so this filter is a no-op for those.
-  const calendarMonthEvents = useMemo(
-    () =>
-      view === "upcoming"
-        ? filteredEvents.filter((e) =>
-            isSameMonth(parseEventDate(e.schedule.date), currentDate),
-          )
-        : filteredEvents,
-    [filteredEvents, currentDate, view],
-  );
-
-  const selectedDayEvents = useMemo(
-    () =>
-      selectedDate
-        ? filteredEvents
-            .filter((e) =>
-              isSameDay(parseEventDate(e.schedule.date), selectedDate),
-            )
-            .sort((a, b) =>
-              a.schedule.startTime.localeCompare(b.schedule.startTime),
-            )
-        : [],
-    [filteredEvents, selectedDate],
-  );
-
-  const agendaEvents = useMemo(
-    () =>
-      [...filteredEvents].sort(
-        (a, b) =>
-          parseEventDate(a.schedule.date).getTime() -
-          parseEventDate(b.schedule.date).getTime(),
-      ),
-    [filteredEvents],
-  );
-  const visibleAgenda = agendaEvents.slice(0, agendaPage * AGENDA_PAGE_SIZE);
-  const hasMoreAgenda = visibleAgenda.length < agendaEvents.length;
-
-  const handleSearch = (v: string) => {
-    setSearch(v);
-    setAgendaPage(1);
-  };
-  const handleCategory = (v: string) => {
-    setCategory(v);
-    setAgendaPage(1);
-  };
-  const handleViewChange = (v: View) => {
-    setView(v);
-    setAgendaPage(1);
-  };
-  const handleReset = () => {
-    setSearch("");
-    setCategory("all");
-    setView("month");
-    setAgendaPage(1);
-  };
-  const handleMonthChange = (v: Date) => setCurrentDate(v);
+  const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
+  const selectedDayEvents = selectedDate ? getEventsForDay(selectedDate) : [];
 
   return (
     <main className="min-h-screen pt-[88px]">
-      {/* Header */}
-      <section className="bg-white py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-            className={`text-3xl sm:text-4xl lg:text-5xl mb-4 ${koulen.className}`}
-          >
-            Our Events
-          </motion.h1>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-            className="text-xl text-muted-foreground max-w-2xl"
-          >
-            Workshops, socials, and meetings — see what's happening in the
-            makerspace.
-          </motion.p>
-        </div>
-      </section>
+      <PageHeader
+        title="Our Events"
+        description="Workshops, socials, and meetings — see what's happening in the makerspace"
+      ></PageHeader>
 
-      {/* Filters */}
       <EventFilterBar
         search={search}
-        onSearchChange={handleSearch}
+        onSearchChange={setSearch}
         category={category}
-        onCategoryChange={handleCategory}
+        onCategoryChange={setCategory}
         categories={allCategories}
         view={view}
-        onViewChange={handleViewChange}
-        resultCount={filteredEvents.length}
+        onViewChange={setView}
+        resultCount={calendarEvents.length}
       />
 
       <section className="py-16 bg-slate-50">
@@ -158,8 +66,8 @@ export function EventsPage() {
               ) : (
                 <CalendarGrid
                   month={currentDate}
-                  onMonthChange={handleMonthChange}
-                  events={calendarMonthEvents}
+                  onMonthChange={setCurrentDate}
+                  events={calendarEvents}
                   selectedDate={selectedDate}
                   onSelectDate={setSelectedDate}
                 />
@@ -205,12 +113,11 @@ export function EventsPage() {
             </div>
           </div>
 
-          {/* Mobile: agenda/list view */}
-          {/* Mobile: agenda/list view */}
+          {/* Mobile: list view — renders the same calendarEvents array as the desktop grid */}
           <div className="md:hidden">
             <MonthNav
               month={currentDate}
-              onMonthChange={handleMonthChange}
+              onMonthChange={setCurrentDate}
               onToday={() => setCurrentDate(new Date())}
             />
             {eventsLoading ? (
@@ -219,29 +126,17 @@ export function EventsPage() {
                   <EventCardSkeleton key={i} variant="compact" />
                 ))}
               </div>
-            ) : agendaEvents.length > 0 ? (
-              <>
-                <div className="flex flex-col gap-3">
-                  {visibleAgenda.map((event) => (
-                    <EventCard
-                      key={event.id}
-                      event={event}
-                      variant="compact"
-                      onClick={setSelectedEvent}
-                    />
-                  ))}
-                </div>
-                {hasMoreAgenda && (
-                  <div className="mt-6 flex justify-center">
-                    <button
-                      onClick={() => setAgendaPage((p) => p + 1)}
-                      className="px-8 py-3 rounded-lg bg-purple-600 text-white text-sm font-semibold hover:bg-purple-700 active:scale-95 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400"
-                    >
-                      Load more events
-                    </button>
-                  </div>
-                )}
-              </>
+            ) : calendarEvents.length > 0 ? (
+              <div className="flex flex-col gap-3">
+                {calendarEvents.map((event) => (
+                  <EventCard
+                    key={event.id}
+                    event={event}
+                    variant="compact"
+                    onClick={setSelectedEvent}
+                  />
+                ))}
+              </div>
             ) : (
               <div className="flex flex-col items-center text-center py-16">
                 <CalendarX
@@ -252,7 +147,7 @@ export function EventsPage() {
                   No events match those filters.
                 </p>
                 <button
-                  onClick={handleReset}
+                  onClick={resetFilters}
                   className="px-6 py-2.5 rounded-lg bg-purple-600 text-white text-sm font-semibold hover:bg-purple-700 active:scale-95 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400"
                 >
                   Clear filters
@@ -271,7 +166,6 @@ export function EventsPage() {
           </p>
         </div>
       </section>
-
       <EventDetailModal
         event={selectedEvent}
         isOpen={!!selectedEvent}

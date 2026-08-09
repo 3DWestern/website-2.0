@@ -1,7 +1,7 @@
 import { Card } from "@/components/ui/card";
 import Image from "next/image";
 import { cn } from "../ui/utils";
-import { Project } from "@/components/data/projects";
+import { Project } from "@/types/content";
 
 type ProjectCardProps = {
   project: Project;
@@ -10,10 +10,15 @@ type ProjectCardProps = {
 
 const ProjectCard = ({ project, className }: ProjectCardProps) => {
   return (
-    <Card className={cn("group relative h-64 w-fit rounded-xl border-none", className)}>
+    <Card
+      className={cn(
+        "group relative h-64 w-fit rounded-xl border-none",
+        className,
+      )}
+    >
       <Image
-        src={project.image}
-        alt={project.title}
+        src={project.image.src}
+        alt={project.image.alt}
         width={400}
         height={256}
         className="h-full object-cover group-hover:brightness-50 transition-all duration-300 rounded-xl"

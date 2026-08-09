@@ -36,7 +36,7 @@ type ResolvedBlogPost = Omit<PayloadBlogPost, "tags" | "author"> & {
   author: Author | null;
 };
 
-type ResolvedProject = Omit<PayloadProject, "categories"> & {
+export type ResolvedProject = Omit<PayloadProject, "categories"> & {
   categories: ProjectCategory[] | null;
 };
 
@@ -85,17 +85,17 @@ export const transformEvent = (doc: PayloadEvent): Event => {
     location: doc.location,
     url: doc.url ?? undefined,
     categories: doc.categories as EventCategory[], // set up to always come back with categories, no raw IDs
-    recurrence: {
-      isRecurring: doc.recurrence?.isRecurring ?? false,
-      frequency: doc.recurrence?.frequency ?? undefined,
-      interval: doc.recurrence?.interval ?? undefined,
-      endsOn: doc.recurrence?.endsOn ?? undefined,
-    },
-    rsvp: {
-      enabled: doc.rsvp?.enabled ?? false,
-      capacity: doc.rsvp?.capacity ?? undefined,
-      rsvpCount: doc.rsvp?.rsvpCount ?? 0,
-    },
+    // recurrence: {
+    //   isRecurring: doc.recurrence?.isRecurring ?? false,
+    //   frequency: doc.recurrence?.frequency ?? undefined,
+    //   interval: doc.recurrence?.interval ?? undefined,
+    //   endsOn: doc.recurrence?.endsOn ?? undefined,
+    // },
+    // rsvp: {
+    //   enabled: doc.rsvp?.enabled ?? false,
+    //   capacity: doc.rsvp?.capacity ?? undefined,
+    //   rsvpCount: doc.rsvp?.rsvpCount ?? 0,
+    // },
     status: doc.status,
   };
 };

@@ -56,7 +56,7 @@ export async function GET(req: Request): Promise<Response> {
         status: 403,
       });
     }
-  } catch (_) {
+  } catch {
     // Covers network failures, CMS being down, JSON parse errors, etc.
     return new Response("Error verifying user", { status: 500 });
   }

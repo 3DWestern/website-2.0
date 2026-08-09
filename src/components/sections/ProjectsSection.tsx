@@ -1,5 +1,5 @@
 "use client";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import Link from "next/link";
 import { koulen } from "@/lib/fonts";
 import { ArrowRight } from "lucide-react";
@@ -10,9 +10,18 @@ import {
   CarouselItem,
 } from "@/components/ui/carousel";
 import ProjectCard from "../content/ProjectCard";
-import { projects } from "@/components/data/projects";
+import { apiClient } from "@/lib/cms/api.client";
+import { Project } from "@/types/content";
 
 const ProjectsSection = () => {
+  let projects: Project[] = [];
+  useEffect(() => {
+    const fetchProjects = async () => {
+      projects = await apiClient.for("projects").getMany({ limit: 10 });
+    };
+    fetchProjects;
+  });
+
   const plugin = useRef(
     AutoScroll({ speed: 1, stopOnInteraction: false, stopOnMouseEnter: true }),
   );
@@ -27,7 +36,8 @@ const ProjectsSection = () => {
           href="/projects"
           className="inline-flex items-center gap-1 text-sm font-semibold text-slate-900 hover:gap-2 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-400 rounded"
         >
-          View all projects <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
+          View all projects{" "}
+          <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
         </Link>
       </div>
       <Carousel opts={{ loop: true }} plugins={[plugin.current]}>

@@ -1,9 +1,11 @@
-import { transformProjects } from "./transform";
+import { ResolvedProject, transformProjects } from "./transform";
 
-export type Fetcher = (slug: string, qs: string) => Promise<{ docs: any[] }>;
+export type ProjectsFetcher = (
+  slug: string,
+  qs: string,
+) => Promise<{ docs: ResolvedProject[] }>;
 
-// Bespoke — only projects needs this, so it isn't generalized into `api.ts`.
-export const makeProjectsOverrides = (fetch: Fetcher) => ({
+export const makeProjectsOverrides = (fetch: ProjectsFetcher) => ({
   getFeatured: async (options?: { limit?: number }) => {
     const params = new URLSearchParams();
     params.set("where[featured][equals]", "true");

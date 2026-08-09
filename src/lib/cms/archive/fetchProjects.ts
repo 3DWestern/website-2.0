@@ -1,7 +1,5 @@
 import { sampleProjects } from "@/cms/static-data/projects";
-import { ProjectCategory } from "@/types/content";
 import { URLSearchParams } from "url";
-import { draftMode } from "next/headers";
 import { cmsClient } from "../cmsClient";
 import { BaseParams } from "../fetch";
 import { transformProjects } from "../transform";
