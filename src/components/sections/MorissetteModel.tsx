@@ -132,7 +132,7 @@ export function MorissetteModel() {
               onClick={disclaimerVisible ? handleDismiss : undefined}
             >
               {/* NAVBAR - Now inside canvas container */}
-              <HorizontalNav isHeroOnly={true} variant="light" />
+              {/* <HorizontalNav isHeroOnly={true} variant="light" /> */}
 
               {/* TOAST - Animated popup with Framer Motion */}
               <AnimatePresence>

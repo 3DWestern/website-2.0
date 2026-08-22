@@ -3,6 +3,11 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --header: #1e1a23;
+  --border: #3e184a33;
+  --base-text: #8b949e;
+  --purple-light: #ba58d7;
+  --purple-dark: #582c83;
 }
 
 @theme inline {
@@ -10,17 +15,65 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-inter);
   --font-heading: var(--font-space-grotesk);
+  --color-header: var(--header);
+  --color-border: var(--border);
+  --color-base: var(--base-text);
+  --color-purple-light: var(--purple-light);
+  --color-purple-dark: var(--purple-dark);
 }
 
 body {
   background: #ffffff;
   color: #000000;
-  font-family: var(--font-inter), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-family:
+    var(--font-inter),
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    sans-serif;
+}
+
+.btn {
+  --btn-bg-2: hsl(270.34, 49.71%, 34.31%);
+  --btn-bg-1: hsl(286.3, 61.35%, 59.41%);
+  --btn-bg-color: hsla(360 100% 100% / 1);
+  cursor: pointer;
+  transition: 0.8s;
+  background-size: 280% auto;
+  background-image: linear-gradient(
+    325deg,
+    var(--btn-bg-2) 0%,
+    var(--btn-bg-1) 55%,
+    var(--btn-bg-2) 90%
+  );
+  border: none;
+  color: var(--btn-bg-color);
+}
+.btn:hover {
+  background-position: right top;
+}
+
+@layer components {
+  .header-link {
+    @apply text-base text-[15px] hover:text-white transition-colors duration-300;
+  }
 }
 
 /* Typography Scale */
-h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-space-grotesk), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family:
+    var(--font-space-grotesk),
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    sans-serif;
   font-weight: 600;
   line-height: 1.2;
   letter-spacing: -0.02em;
@@ -63,11 +116,23 @@ p {
 
 /* Font utility classes */
 .font-heading {
-  font-family: var(--font-space-grotesk), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-family:
+    var(--font-space-grotesk),
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    sans-serif;
 }
 
 .font-body {
-  font-family: var(--font-inter), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-family:
+    var(--font-inter),
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    sans-serif;
 }
 
 html {
