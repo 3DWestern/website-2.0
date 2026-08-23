@@ -1,88 +1,52 @@
-'use client';
-
-import { koulen } from '@/lib/fonts';
-import { content } from '@/components/data/landing';
-import Image from 'next/image';
+import Image from "next/image";
+import Link from "next/link";
 
 export function AboutUsSection() {
-	return (
-		<section className="relative bg-white">
-			{/* Header */}
-			<div className="sticky top-0 z-10 bg-white/80 backdrop-blur-sm py-8 lg:py-6">
-				<div
-					className={`text-3xl lg:text-5xl xl:text-6xl font-bold ${koulen.className} text-center`}
-				>
-					ABOUT US
-				</div>
-			</div>
+  return (
+    <section className="w-full bg-[#151A20] px-6 py-16 lg:px-16 lg:py-24">
+      <div className="mx-auto flex max-w-7xl flex-col gap-10 lg:flex-row lg:items-center lg:gap-16">
+        {/* Image — top on mobile, right on desktop */}
+        <div className="order-1 w-full lg:order-2 lg:w-1/2">
+          <div className="clip-corners relative aspect-[4/3] w-full overflow-hidden">
+            <Image
+              src="/images/morrissette.png"
+              alt="Rendering of the 3D Western makerspace building"
+              fill
+              className="object-cover"
+            />
+          </div>
+        </div>
 
-			{/* Simple Stacking Cards */}
-			<div className="relative">
-				{content.map((item, index) => (
-					<Card
-						key={index}
-						index={index}
-						title={item.title}
-						description={item.description}
-						detail={item.detail}
-						image={item.image}
-					/>
-				))}
-			</div>
+        {/* Text — bottom on mobile, left on desktop */}
+        <div className="order-2 flex flex-col items-start text-left lg:order-1 lg:w-1/2">
+          <div className="mb-4 flex items-center gap-3 text-sm font-medium tracking-wider text-purple-light uppercase">
+            <span className="h-px w-6 bg-purple-light" />
+            Who We Are
+          </div>
 
-			{/* Spacer for scroll effect */}
-			<div className="sm:h-[20vh]" />
-		</section>
-	);
-}
+          <h2 className="text-white">3D Western</h2>
 
-interface CardProps {
-	index: number;
-	title: string;
-	description: string;
-	detail: string;
-	image?: string;
-}
+          <p className="mt-6 text-[15px] leading-relaxed text-[color:var(--base-text)] sm:text-base">
+            We&apos;re a student-run organization built on one idea: the
+            tools to prototype, fabricate, and build shouldn&apos;t be
+            locked away. Originally founded as a 3D printing club, we&apos;ve
+            grown into a full makerspace.
+          </p>
 
-function Card({ index, title, description, detail, image }: CardProps) {
-	return (
-		<div className="min-h-[80vh] lg:h-screen w-full flex items-start justify-center sticky top-20 px-4 sm:px-6 lg:px-8">
-			<div
-				style={{
-					top: `calc(5% + ${index * 15}px)`
-				}}
-				className="relative w-full sm:w-4/5 origin-top"
-			>
-				<div className="bg-gradient-to-br from-purple-50 to-indigo-50 rounded-3xl p-8 lg:p-12 shadow-xl border border-purple-100 flex items-start overflow-hidden">
-					<div className="flex flex-col items-start gap-6 w-full">
-						{/* Text Content (first on md+, below image on mobile) */}
-						<div className="order-2 md:order-1 flex-1 space-y-4 w-full">
-							<h3 className={`text-3xl lg:text-4xl font-bold text-gray-900 ${koulen.className}`}>
-								{title}
-							</h3>
-							<p className="text-lg lg:text-xl font-semibold text-gray-800">
-								{description}
-							</p>
-							<p className="text-base lg:text-lg text-gray-600 leading-relaxed">
-								{detail}
-							</p>
-						</div>
+          <p className="mt-4 text-[15px] leading-relaxed text-[color:var(--base-text)] sm:text-base">
+            Partnered with Morrissette Entrepreneurship at Western, we now
+            offer CNC, laser cutting, water jet, and woodworking — free to
+            access for any student on campus.
+          </p>
 
-						{/* Optional Image (first on mobile, below text on md+) */}
-						{image && (
-							<div className="order-1 md:order-2 relative w-full h-48 md:h-110 md:mt-10 shrink-0 rounded-2xl overflow-hidden">
-								<Image
-									src={image}
-									alt={title}
-									fill
-									sizes="(max-width: 768px) 100vw, 40vw"
-									className="object-cover"
-								/>
-							</div>
-						)}
-					</div>
-				</div>
-			</div>
-		</div>
-	);
+          <Link
+            href="/about"
+            className="mt-8 inline-flex items-center rounded-lg border border-white/15 px-5 py-2.5 text-sm font-medium text-white transition-colors hover:border-white/30 hover:bg-white/5"
+          >
+            Learn more about us
+          </Link>
+        </div>
+      </div>
+    </section>
+  );
 }

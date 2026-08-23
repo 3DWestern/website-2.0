@@ -3,6 +3,7 @@ import "./globals.css";
 import { LoadingWrapper } from "@/components/LoadingWrapper";
 import { MenuProvider } from "@/context/MenuContext";
 import { inter, spaceGrotesk } from "@/lib/fonts";
+import { chakraPetch, workSans } from "@/lib/fonts";
 
 // global metadata for SEO, can be overridden by specific individual pages
 export const metadata: Metadata = {
@@ -73,7 +74,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`scroll-smooth overflow-x-hidden ${inter.variable} ${spaceGrotesk.variable}`}
+      className={`scroll-smooth overflow-x-hidden ${workSans.variable} ${chakraPetch.variable}`}
     >
       <body className="antialiased">
         <MenuProvider>

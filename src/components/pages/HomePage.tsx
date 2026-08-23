@@ -1,18 +1,17 @@
-// import { EventsSection } from "@/components/sections/EventsSection";
-import { BigTextSection } from "@/components/sections/BigTextSection";
-import { MakerspacesSection } from "@/components/sections/MakerspacesSection";
-import { FAQSection } from "@/components/sections/FAQSection";
-import { AboutUsSection } from "@/components/sections/AboutUsSection";
+import { Hero } from "@/components/sections/Hero";
 import { MorissetteModel } from "@/components/sections/MorissetteModel";
+import { BigTextSection } from "@/components/sections/BigTextSection";
+import { AboutUsSection } from "@/components/sections/AboutUsSection";
+import { MakerspacesSection } from "@/components/sections/MakerspacesSection";
 import { ExecsSection } from "@/components/sections/ExecsSection";
+import { FAQSection } from "@/components/sections/FAQSection";
 
 export function HomePage() {
   return (
     <main>
+      <Hero />
       <MorissetteModel />
-      <BigTextSection />
       <AboutUsSection />
-      {/* <EventsSection /> */}
       <MakerspacesSection />
       <ExecsSection />
       <FAQSection />

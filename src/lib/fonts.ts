@@ -1,4 +1,5 @@
 import { Inter, Space_Grotesk } from "next/font/google";
+import { Chakra_Petch, Work_Sans } from "next/font/google";
 
 // Body font - Inter (clean, modern, highly readable)
 export const inter = Inter({
@@ -27,4 +28,19 @@ export const koulen = Koulen({
 export const krub = Krub({
   subsets: ["latin"],
   weight: "400",
+});
+
+
+export const chakraPetch = Chakra_Petch({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-chakra-petch",
+  display: "swap",
+});
+
+export const workSans = Work_Sans({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-work-sans",
+  display: "swap",
 });
