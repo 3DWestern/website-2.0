@@ -13,8 +13,8 @@ export function HomePage() {
       <MorissetteModel />
       <AboutUsSection />
       <MakerspacesSection />
-      <ExecsSection />
-      <FAQSection />
+      {/* <ExecsSection />
+      <FAQSection /> */}
     </main>
   );
 }
