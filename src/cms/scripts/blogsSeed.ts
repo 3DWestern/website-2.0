@@ -29,6 +29,6 @@ export const blogsSeed = async (payload: Payload) => {
         _status: "published",
       } as Blog,
     });
-    console.log(`Seeded: ${blog.slug}`);
+    console.log(`Seeded: ${blog.slug} ✓`);
   }
 };

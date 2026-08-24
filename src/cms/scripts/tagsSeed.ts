@@ -7,5 +7,7 @@ export const tagsSeed = async (payload: Payload) => {
       collection: "tags",
       data: tag,
     });
+
+    console.log(`Seeded: ${tag.title} ✓`);
   }
 };

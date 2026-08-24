@@ -25,7 +25,7 @@ export const sampleProjects: SampleProject[] = [
         alt: "Workshop bench during greenhouse monitor assembly",
       },
     ],
-    categories: [7], // Electronics
+    categories: [6], // Electronics
     featured: true,
     github: "https://github.com/3dwestern/greenhouse-monitor",
   },

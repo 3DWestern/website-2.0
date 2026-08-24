@@ -7,5 +7,7 @@ export const authorsSeed = async (payload: Payload) => {
       collection: "authors",
       data: author,
     });
+
+    console.log(`Seeded: ${author.name} ✓`);
   }
 };

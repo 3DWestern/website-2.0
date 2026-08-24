@@ -10,6 +10,6 @@ export const projectsSeed = async (payload: Payload) => {
       },
     });
 
-    console.log(`Seeded project: ${project.title}`);
+    console.log(`Seeded project: ${project.title} ✓`);
   }
 };

@@ -12,5 +12,6 @@ export const sponsorsSeed = async (payload: Payload) => {
         website: sponsor.website || "",
       },
     });
+    console.log(`Seeded: ${sponsor.name} ✓`);
   }
 };
