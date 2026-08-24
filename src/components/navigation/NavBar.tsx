@@ -5,16 +5,11 @@ import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
 import { useEffect } from "react";
 import { useMenu } from "@/context/MenuContext";
-import MobileMenu from "./navigation/MobileMenu";
-import DashButton from "./navigation/DashButton";
-import NavLink from "./navigation/NavLink";
-
-export interface NavLink {
-  path: string;
-  label: string;
-  external?: boolean;
-}
-
+import DashButton from "./DashButton";
+import MobileMenu from "./MobileMenu";
+import NavLink from "./NavLink";
+import Logo from "../Logo";
+import { navLinks } from "../data/navLinks";
 // Prevent scrolling via wheel, touch, and keyboard events
 const preventDefault = (e: Event) => {
   e.preventDefault();
@@ -62,24 +57,13 @@ export function NavBar() {
     }
   }, [isMenuOpen]);
 
-  const navLinks: NavLink[] = [
-    { path: "/about", label: "About Us" },
-    { path: "/explore", label: "Explore" },
-    { path: "/events", label: "Events" },
-    { path: "/blogs", label: "Blog" },
-    { path: "/makerspace", label: "Availability" },
-    {
-      path: "https://westernu.brightspace.com/d2l/le/discovery/view/course/151344",
-      label: "Training",
-      external: true,
-    },
-    { path: "/contact", label: "Contact Us" },
-  ];
-
   const isActive = (path: string) => pathname === path;
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-header border-b border-border">
+    <nav
+      id="top"
+      className="fixed top-0 left-0 right-0 z-50 bg-header border-b border-border"
+    >
       <div className="flex items-center justify-between px-4 lg:px-8 h-16">
         <div className="flex gap-2 items-center">
           {/** Mobile Menu Hamburger */}
@@ -92,11 +76,8 @@ export function NavBar() {
           </button>
 
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2 shrink-0">
-            <span className="text-lg font-semibold text-white">
-              Maker<span className="text-purple-light">spaces</span>
-              {/** TODO: CREATE LOGO */}
-            </span>
+          <Link href="/">
+            <Logo></Logo>
           </Link>
         </div>
 

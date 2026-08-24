@@ -4,6 +4,7 @@ import { LoadingWrapper } from "@/components/LoadingWrapper";
 import { MenuProvider } from "@/context/MenuContext";
 import { inter, spaceGrotesk } from "@/lib/fonts";
 import { chakraPetch, workSans } from "@/lib/fonts";
+import { NavBar } from "@/components/navigation/NavBar";
 
 // global metadata for SEO, can be overridden by specific individual pages
 export const metadata: Metadata = {
@@ -78,7 +79,10 @@ export default function RootLayout({
     >
       <body className="antialiased">
         <MenuProvider>
-          <LoadingWrapper>{children}</LoadingWrapper>
+          <main className="min-h-screen w-full flex flex-col">
+            <NavBar></NavBar>
+            <LoadingWrapper>{children}</LoadingWrapper>
+          </main>
         </MenuProvider>
       </body>
     </html>

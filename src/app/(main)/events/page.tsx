@@ -1,6 +1,4 @@
 import type { Metadata } from "next";
-import { HorizontalNav } from "@/components/HorizontalNav";
-import { Footer } from "@/components/Footer";
 import { EventsPage } from "@/components/pages/EventsPage";
 import { api } from "@/lib/cms/api.server";
 import { EventsProvider } from "@/context/EventContext";
@@ -23,11 +21,7 @@ export default async function Page() {
       initialEvents={initialEvents ?? []}
       allCategories={eventCategories}
     >
-      <main className="min-h-screen flex flex-col">
-        <HorizontalNav variant="dark" />
-        <EventsPage />
-        <Footer />
-      </main>
+      <EventsPage />
     </EventsProvider>
   );
 }

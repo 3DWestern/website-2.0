@@ -3,11 +3,13 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
-  --header: #1e1a23;
+  --header-footer: #1e1a23;
   --border: #3e184a33;
   --base-text: #8b949e;
   --purple-light: #ba58d7;
   --purple-dark: #582c83;
+  --text-primary: #e7e4df;
+  --text-secondary: #8b949e;
 }
 
 @theme inline {
@@ -16,10 +18,18 @@
   --font-sans: var(--font-work-sans);
   --font-heading: var(--font-chakra-petch);
   --color-header: var(--header);
+  --font-sans: var(--font-inter);
+  --font-heading: var(--font-space-grotesk);
+  --color-header: var(--header-footer);
+  --color-footer: var(--header-footer);
   --color-border: var(--border);
   --color-base: var(--base-text);
   --color-purple-light: var(--purple-light);
   --color-purple-dark: var(--purple-dark);
+
+  --color-primary-text: var(--text-primary);
+  --color-secondary-text: var(--text-secondary);
+  --color-footer-text: rgb(from var(--text-primary) r g b / 80%);
 }
 
 body {
@@ -58,10 +68,18 @@ body {
   .header-link {
     @apply text-base text-[15px] hover:text-white transition-colors duration-300;
   }
+  .text-small {
+    @apply text-[14px];
+  }
 }
 
 /* Typography Scale */
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family:
     var(--font-chakra-petch),
     -apple-system,

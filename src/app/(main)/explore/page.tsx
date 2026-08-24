@@ -1,13 +1,5 @@
-import { ExplorePage } from '@/components/pages/ExplorePage';
-import { HorizontalNav } from '@/components/HorizontalNav';
-import { Footer } from '@/components/Footer';
+import { ExplorePage } from "@/components/pages/ExplorePage";
 
 export default function Blogs() {
-  return (
-    <main className="min-h-screen flex flex-col">
-      <HorizontalNav variant="dark" />
-      <ExplorePage />
-      <Footer />
-    </main>
-  );
+  return <ExplorePage />;
 }

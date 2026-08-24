@@ -1,7 +1,5 @@
 import type { Metadata } from "next";
 import { ProjectsPage } from "@/components/pages/ProjectsPage";
-import { HorizontalNav } from "@/components/HorizontalNav";
-import { Footer } from "@/components/Footer";
 
 export const metadata: Metadata = {
   title: "Projects Showcase | 3D Western",
@@ -12,9 +10,7 @@ export const metadata: Metadata = {
 export default function Page() {
   return (
     <main className="min-h-screen flex flex-col">
-      <HorizontalNav variant="dark" />
       <ProjectsPage />
-      <Footer />
     </main>
   );
 }

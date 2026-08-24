@@ -1,5 +1,4 @@
-import Link from "next/link";
-import { NavLink as NavLinkType } from "../NavBar";
+import { NavLink as NavLinkType } from "../data/navLinks";
 import { cn } from "../ui/utils";
 
 interface NavLinkProps {
@@ -19,7 +18,7 @@ export default function NavLink({
       rel={link.external ? "noopener noreferrer" : ""}
       className={cn(
         "text-sm transition-colors",
-        active ? "text-pruple-light" : "header-link",
+        active ? "text-purple-light" : "header-link",
         mobile && "text-2xl font-medium",
       )}
     >

@@ -1,16 +1,7 @@
-'use client';
+"use client";
 
-import { ContactPage } from '@/components/pages/ContactPage';
-import { HorizontalNav } from '@/components/HorizontalNav';
-import { Footer } from '@/components/Footer';
+import { ContactPage } from "@/components/pages/ContactPage";
 
 export default function Contact() {
-  return (
-    <main className="min-h-screen flex flex-col">
-      <HorizontalNav variant="dark" />
-      <ContactPage />
-      <Footer />
-    </main>
-  );
+  return <ContactPage />;
 }
-
