@@ -3,9 +3,9 @@ import { HomePage } from "@/components/pages/HomePage";
 
 export default function Home() {
   return (
-    <>
-      <HomePage></HomePage>
-      <Footer></Footer>
-    </>
+    <main className="min-h-screen w-full flex flex-col">
+      <HomePage />
+        <Footer />
+    </main>
   );
 }

@@ -40,7 +40,7 @@ export function Hero() {
             Western University
           </div>
 
-          <h1 className="text-white">
+          <h1>
             Think It. Design It.
             <br />
             <span className="text-purple-light">Build It.</span>

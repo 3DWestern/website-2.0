@@ -62,7 +62,9 @@ export function NavBar() {
   return (
     <nav
       id="top"
-      className="fixed top-0 left-0 right-0 z-50 bg-header border-b border-border"
+      className={`fixed top-0 left-0 right-0 z-50 bg-header backdrop-blur-sm transition-[border-color] duration-300 border-b ${
+        isMenuOpen ? "border-transparent" : "border-border"
+      }`}
     >
       <div className="flex items-center justify-between px-4 lg:px-8 h-16">
         <div className="flex gap-2 items-center">

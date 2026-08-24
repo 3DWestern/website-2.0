@@ -5,8 +5,7 @@ import { motion } from "motion/react";
 
 export function JoinUsSection() {
   return (
-    <section className="relative w-full overflow-hidden bg-[#0B0D10] px-6 py-32 lg:py-44">
-      {/* Center glow */}
+    <section className="relative w-full bg-[#0B0D10] px-6 py-32 lg:py-44">      {/* Center glow */}
       <div
         className="pointer-events-none absolute top-1/2 left-1/2 h-[229px] w-[483px] -translate-x-1/2 -translate-y-1/2 lg:h-[457px] lg:w-[966px]"
         style={{

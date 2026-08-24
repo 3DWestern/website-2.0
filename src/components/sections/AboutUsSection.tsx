@@ -39,7 +39,7 @@ export function AboutUsSection() {
             Who We Are
           </div>
 
-          <h2 className="text-white">3D Western</h2>
+          <h2>3D Western</h2>
 
           <p className="mt-6 text-[15px] leading-relaxed text-[color:var(--base-text)] sm:text-base">
             We&apos;re a student-run organization built on one idea: the tools

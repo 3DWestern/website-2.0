@@ -53,7 +53,7 @@ export default function Footer() {
               Copyright © 2026, 3dwestern.ca, All Rights Reserved.
             </span>
             <Button variant="outlined" size="pill" asChild>
-              <Link href="#top">Go To Top</Link>
+              <Link href="#top">Back to top</Link>
             </Button>
           </div>
         </div>
@@ -64,8 +64,7 @@ export default function Footer() {
 
 export function oldFooter() {
   return (
-    <footer className="bg-slate-50 text-slate-700 mt-auto">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 py-12 lg:py-16">
+      <footer className="relative bg-footer text-footer-text font-medium p-8 border-b border-border backdrop-blur-[8px]">      <div className="container mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 py-12 lg:py-16">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
           {/* About */}
           <div className="col-span-1 md:col-span-2">

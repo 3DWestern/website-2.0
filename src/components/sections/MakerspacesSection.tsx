@@ -17,7 +17,7 @@ export function MakerspacesSection() {
           transition={{ duration: 0.6 }}
           className="mb-12 text-center lg:mb-16"
         >
-          <h2 className="text-white">The Makerspaces</h2>
+          <h2>The Makerspaces</h2>
           <p className="mt-3 text-[15px] text-[color:var(--base-text)] sm:text-base">
             Two floors, two disciplines, one Morrissette Building.
           </p>
@@ -56,7 +56,7 @@ export function MakerspacesSection() {
 
                   {/* Content */}
                   <div className="flex flex-col justify-center p-8 lg:p-12">
-                    <h3 className="text-white">{space.name}</h3>
+                    <h3>{space.name}</h3>
                     <p className="mt-3 text-[15px] leading-relaxed text-[color:var(--base-text)] sm:text-base">
                       {space.description}
                     </p>
