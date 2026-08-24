@@ -5,6 +5,7 @@ import { AboutUsSection } from "@/components/sections/AboutUsSection";
 import { MakerspacesSection } from "@/components/sections/MakerspacesSection";
 import { ExecsSection } from "@/components/sections/ExecsSection";
 import { FAQSection } from "@/components/sections/FAQSection";
+import { JoinUsSection } from "@/components/sections/JoinUsSection";
 
 export function HomePage() {
   return (
@@ -15,6 +16,7 @@ export function HomePage() {
       <MakerspacesSection />
       {/* <ExecsSection />
       <FAQSection /> */}
+      <JoinUsSection />
     </main>
   );
 }
