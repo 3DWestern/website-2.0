@@ -7,13 +7,13 @@ import { SponsorCard } from '@/components/content/SponsorCard';
 
 export function SponsorSection() {
 	return (
-		<section className="py-16 bg-slate-50">
+		<section className="py-16">
 			{/* Header */}
 			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-8">
-				<p className="text-xs font-medium tracking-widest uppercase text-slate-400 mb-1">
+				<p className="text-xs font-medium tracking-widest uppercase text-secondary-text mb-1">
 					Made possible by
 				</p>
-				<h2 className={`text-3xl sm:text-4xl ${koulen.className}`}>
+				<h2 className={`text-3xl sm:text-4xl`}>
 					Our Sponsors
 				</h2>
 			</div>
@@ -25,9 +25,9 @@ export function SponsorSection() {
 			*/}
 			<div className="relative py-6">
 				{/* Left fade overlay */}
-				<div className="absolute left-0 top-0 bottom-0 w-32 z-10 pointer-events-none bg-gradient-to-r from-slate-50 to-transparent" />
+				<div className="absolute left-0 top-0 bottom-0 w-32 z-10 pointer-events-none bg-gradient-to-r from-black-bg to-transparent" />
 				{/* Right fade overlay */}
-				<div className="absolute right-0 top-0 bottom-0 w-32 z-10 pointer-events-none bg-gradient-to-l from-slate-50 to-transparent" />
+				<div className="absolute right-0 top-0 bottom-0 w-32 z-10 pointer-events-none bg-gradient-to-l from-black-bg to-transparent" />
 
 				<Marquee
 					autoFill

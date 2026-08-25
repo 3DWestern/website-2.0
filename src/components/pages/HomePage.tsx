@@ -17,10 +17,10 @@ export default async function HomePage() {
     <main>
       <Hero />
       <AboutUsSection />
+      <MakerspacesSection />
       {latestPost && (
         <LatestSection post={latestPost} projects={latestProjects} />
       )}
-      <MakerspacesSection />
       <JoinUsSection />
     </main>
   );
