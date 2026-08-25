@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { motion } from "motion/react";
+import { Button } from "../ui/button";
 
 export function JoinUsSection() {
   return (
@@ -62,16 +63,13 @@ export function JoinUsSection() {
           starts <span className="text-purple-light">here</span>
         </h2>
 
-        <p className="mt-6 text-[15px] leading-relaxed text-[color:var(--base-text)] sm:text-base">
+        <p className="mt-6 text-[15px] leading-relaxed text-[color:var(--base-text)] sm:text-base mb-8">
           Join hundreds of Western students already using the space.
         </p>
-
-        <Link
-          href="/join"
-          className="btn mt-8 inline-flex items-center gap-2 rounded-lg px-6 py-2.5 text-sm font-medium text-white"
-        >
-          Join Us
-        </Link>
+        <Button variant="gradient" size="pill" asChild>
+             <Link href="/join"> Join Us
+             </Link>
+        </Button>
       </motion.div>
     </section>
   );

@@ -3,6 +3,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "motion/react";
+import { Button } from "../ui/button";
+
 
 export function AboutUsSection() {
   return (
@@ -41,25 +43,25 @@ export function AboutUsSection() {
 
           <h2>3D Western</h2>
 
-          <p className="mt-6 text-[15px] leading-relaxed text-[color:var(--base-text)] sm:text-base">
+          <p className="mt-6 text-[15px] leading-relaxed text-base sm:text-base">
             We&apos;re a student-run organization built on one idea: the tools
             to prototype, fabricate, and build shouldn&apos;t be locked away.
             Originally founded as a 3D printing club, we&apos;ve grown into a
             full makerspace.
           </p>
 
-          <p className="mt-3 text-[15px] leading-relaxed text-[color:var(--base-text)] sm:text-base">
+          <p className="mt-3 text-[15px] leading-relaxed text-base sm:text-base mb-8">
             Partnered with Morrissette Entrepreneurship at Western, we now
             offer CNC, laser cutting, water jet, and woodworking — free to
             access for any student on campus.
           </p>
 
-          <Link
-            href="/about"
-            className="mt-8 inline-flex items-center rounded-lg border border-white/15 px-5 py-2.5 text-sm font-medium text-white transition-colors hover:border-white/30 hover:bg-white/5"
-          >
+          <Button variant="outlined" size="pill" asChild>
+            <Link
+            href="/about">
             Learn more about us
           </Link>
+          </Button>
         </motion.div>
       </div>
     </section>

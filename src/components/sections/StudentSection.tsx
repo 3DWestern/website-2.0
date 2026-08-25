@@ -3,7 +3,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-import { koulen } from '@/lib/fonts';
 import { spotlights } from '@/components/data/spotlights';
 import { SpotlightCard } from '@/components/content/SpotlightCard';
 
@@ -26,15 +25,15 @@ export function StudentSection() {
 	};
 
 	return (
-		<section className="py-16 bg-white">
+		<section className="py-16 bg-[#151A20]">
 			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 				{/* Header row */}
 				<div className="flex items-end justify-between mb-10">
 					<div>
-						<p className="text-xs font-medium tracking-widest uppercase text-slate-400 mb-1">
+						<p className="text-xs font-medium tracking-widest uppercase text-secondary-text mb-1">
 							Made by our members
 						</p>
-						<h2 className={`text-3xl sm:text-4xl ${koulen.className}`}>
+						<h2 className={`text-3xl sm:text-4xl `}>
 							Student Spotlight
 						</h2>
 					</div>

@@ -5,6 +5,7 @@ import Link from "next/link";
 import { MapPin, Clock } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { spaces } from "@/components/data/spaces";
+import { Button } from "../ui/button";
 
 export function MakerspacesSection() {
   return (
@@ -95,12 +96,12 @@ export function MakerspacesSection() {
             Complete level 1 training on our OWL course to access the
             Makerspaces.
           </p>
-          <Link
-            href="/training"
-            className="btn inline-flex items-center gap-2 rounded-lg px-6 py-2.5 text-sm font-medium text-white"
-          >
+          <Button variant="gradient" size="pill" asChild>
+            <Link
+            href="/training">
             Access Training
           </Link>
+          </Button>
         </div>
       </div>
     </section>

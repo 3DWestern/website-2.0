@@ -19,9 +19,9 @@ export function AnnouncementCard({ announcement }: AnnouncementCardProps) {
 	const paragraphs = announcement.body.split('\n\n').filter(Boolean);
 
 	return (
-		<Card className="bg-slate-100 border-slate-200 shadow-sm hover:shadow-md transition-shadow duration-300 flex flex-col h-full">
+		<Card className="bg-[#151A20] border-[#29323b] shadow-sm hover:shadow-md transition-shadow duration-300 flex flex-col h-full">
 			<CardHeader>
-				<CardTitle className="text-lg font-bold text-slate-900">
+				<CardTitle className="text-lg font-bold">
 					{announcement.title}
 				</CardTitle>
 			</CardHeader>
@@ -29,16 +29,16 @@ export function AnnouncementCard({ announcement }: AnnouncementCardProps) {
 			<CardContent className="flex-1">
 				<div className="flex flex-col gap-3">
 					{paragraphs.map((para, i) => (
-						<p key={i} className="text-sm text-slate-600 leading-relaxed">
+						<p key={i} className="text-sm text-secondary-text leading-relaxed">
 							{para}
 						</p>
 					))}
 				</div>
 			</CardContent>
 
-			<CardFooter className="border-t border-slate-200 mt-auto flex items-center justify-between text-xs text-slate-500">
+			<CardFooter className="border-t border-[#29323b] mt-auto flex items-center justify-between text-secondary-text text-sm">
 				<span className="flex items-center gap-1.5">
-					<UserCircle className="w-5 h-5 text-slate-400" />
+					<UserCircle className="w-5 h-5 text-secondary-text" />
 					By {announcement.author}
 				</span>
 				<span>{announcement.timestamp}</span>

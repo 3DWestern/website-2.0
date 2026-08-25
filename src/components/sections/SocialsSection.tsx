@@ -3,7 +3,6 @@
 import { useState, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-import { koulen } from '@/lib/fonts';
 import { instagramPosts } from '@/components/data/socials';
 import { InstaPostCard } from '@/components/content/InstaPostCard';
 
@@ -33,13 +32,13 @@ export function SocialsSection() {
 	const offsets = Array.from({ length: SIDE_COUNT * 2 + 1 }, (_, i) => i - SIDE_COUNT);
 
 	return (
-		<section className="py-16 bg-white overflow-hidden">
+		<section className="py-16 bg-grey-bg overflow-hidden">
 			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 				<div className="mb-10">
-					<p className="text-xs font-medium tracking-widest uppercase text-slate-400 mb-1">
+					<p className="text-xs font-medium tracking-widest uppercase text-secondary-text mb-1">
 						Follow along
 					</p>
-					<h2 className={`text-3xl sm:text-4xl ${koulen.className}`}>
+					<h2 className={`text-3xl sm:text-4xl `}>
 						Socials
 					</h2>
 				</div>

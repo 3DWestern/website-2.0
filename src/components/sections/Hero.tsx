@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import { Button } from "../ui/button";
 
 export function Hero() {
   return (
@@ -52,19 +53,20 @@ export function Hero() {
           </p>
 
           <div className="mt-8 flex flex-wrap items-center gap-4">
+            
+            <Button variant="gradient" size="pill" asChild>
             <Link
-                href="/explore"
-                className="inline-flex items-center gap-2 px-5 py-2 rounded-lg btn text-white text-sm font-medium transition-colors"
-                >
-                Explore the Space
-                <ArrowRight className="h-4 w-4" />
-                </Link>
+            href="/explore">
+            Explore the Space
+            <ArrowRight className="h-4 w-4" />
+          </Link>
+          </Button>
+            <Button variant="outlined" size="pill" asChild>
             <Link
-              href="/contact"
-              className="inline-flex items-center rounded-lg border border-white/15 px-5 py-2.5 text-sm font-medium text-white transition-colors hover:border-white/30 hover:bg-white/5"
-            >
-              Contact us
-            </Link>
+            href="/contact">
+            Contact us
+          </Link>
+          </Button>
           </div>
         </div>
       </div>

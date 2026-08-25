@@ -5,11 +5,13 @@
   --foreground: #171717;
   --header-footer: rgba(30, 26, 35, 0.70);
   --border: #3e184a33;
-  --base-text: #8b949e;
   --purple-light: #ba58d7;
   --purple-dark: #582c83;
   --text-primary: #e7e4df;
   --text-secondary: #8b949e;
+  --black-bg: #0B0D10;
+  --grey-bg: #151A20;
+  --b-grey: #29323b;
 }
 
 @theme inline {
@@ -21,9 +23,11 @@
   --color-header: var(--header-footer);
   --color-footer: var(--header-footer);
   --color-border: var(--border);
-  --color-base: var(--base-text);
   --color-purple-light: var(--purple-light);
   --color-purple-dark: var(--purple-dark);
+  --color-black-bg: var(--black-bg);
+  --color-grey-bg: var(--grey-bg);
+  --color-b-grey: var(--b-grey);
 
   --color-primary-text: var(--text-primary);
   --color-secondary-text: var(--text-secondary);
@@ -66,7 +70,7 @@ body {
 
 @layer components {
   .header-link {
-    @apply text-base text-[15px] hover:text-white transition-colors duration-300;
+    @apply text-secondary-text text-[15px] hover:text-white transition-colors duration-300;
     color: var(--color-footer-text);
   }
   .text-small {
@@ -241,6 +245,41 @@ canvas {
       calc(100% - 48px) 100%,
       0% 100%,
       0% 48px
+    );
+  }
+}
+
+.clip-corners-sm {
+  clip-path: polygon(
+    14px 0%,
+    100% 0%,
+    100% calc(100% - 14px),
+    calc(100% - 14px) 100%,
+    0% 100%,
+    0% 14px
+  );
+}
+
+.clip-corners-lg {
+  clip-path: polygon(
+    40px 0%,
+    100% 0%,
+    100% calc(100% - 40px),
+    calc(100% - 40px) 100%,
+    0% 100%,
+    0% 40px
+  );
+}
+
+@media (min-width: 1024px) {
+  .clip-corners-lg {
+    clip-path: polygon(
+      56px 0%,
+      100% 0%,
+      100% calc(100% - 56px),
+      calc(100% - 56px) 100%,
+      0% 100%,
+      0% 56px
     );
   }
 }

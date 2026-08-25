@@ -2,9 +2,9 @@
 
 import { useRef, useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { koulen } from '@/lib/fonts';
 import { announcements } from '@/components/data/announcements';
 import { AnnouncementCard } from '@/components/content/AnnouncementCard';
+import { Button } from '../ui/button';
 
 const INITIAL_COUNT = 3;
 const LOAD_MORE_COUNT = 3;
@@ -42,7 +42,7 @@ export function AnnouncementsSection() {
 			{/* Content on top */}
 			<div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 				{/* Section title */}
-				<h2 className={`text-4xl font-bold text-white mb-10 ${koulen.className}`}>
+				<h2 className={`text-4xl font-bold mb-10`}>
 					Announcements
 				</h2>
 
@@ -68,23 +68,21 @@ export function AnnouncementsSection() {
 				{/* Show more / show less */}
 				{hasMore && (
 					<div className="flex justify-center mt-10">
-						<button
+						<Button size="pill" variant="outlined"
 							onClick={() => setVisibleCount((c) => c + LOAD_MORE_COUNT)}
-							className="px-6 py-2.5 rounded-full border border-white/40 text-sm font-medium text-white hover:bg-white/10 transition-colors duration-200"
 						>
 							Show older announcements
-						</button>
+						</Button>
 					</div>
 				)}
 
 				{!hasMore && announcements.length > INITIAL_COUNT && (
 					<div className="flex justify-center mt-10">
-						<button
+						<Button size="pill" variant="outlined"
 							onClick={() => setVisibleCount(INITIAL_COUNT)}
-							className="px-6 py-2.5 rounded-full border border-white/40 text-sm font-medium text-white hover:bg-white/10 transition-colors duration-200"
 						>
 							Show less
-						</button>
+						</Button>
 					</div>
 				)}
 			</div>

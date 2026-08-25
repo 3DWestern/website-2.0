@@ -3,9 +3,9 @@
 import { useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import { koulen } from "@/lib/fonts";
 import { items, MenuItem } from "@/components/data/teamdata";
 import { TeamMemberCard } from "@/components/content/TeamMemberCard";
+import { Button } from "../ui/button";
 
 const leadership = items.filter(
   (m) => m.role === "President" || m.role.startsWith("Chief"),
@@ -102,32 +102,36 @@ function Tier({ label, members, maxCols }: TierProps) {
 
   return (
     <div>
-      <div className="flex items-center justify-between mb-3 pb-2 border-b border-slate-100">
-        <p className="text-xs font-medium tracking-widest uppercase text-slate-400">
+      <div className="flex items-center justify-between mb-3 pb-2 border-b border-[#29323b]">
+        <p className="text-xs font-medium tracking-widest uppercase text-secondary-text">
           {label}
         </p>
         {showNav && (
           <div className="flex items-center gap-2">
-            <span className="text-xs text-slate-400">
+            <span className="text-xs text-secondary-text">
               {page + 1} / {totalPages}
             </span>
             <div className="flex gap-1">
-              <button
+              <Button
+                size="icon"
+                variant="outlined"
                 onClick={() => go(page - 1)}
                 disabled={page === 0}
                 aria-label="Previous"
-                className="w-6 h-6 rounded-full border border-slate-200 flex items-center justify-center text-slate-500 hover:bg-slate-50 disabled:opacity-30 disabled:cursor-not-allowed transition-colors duration-200"
+                className="w-6 h-6 p-1 rounded-full"
               >
                 <ChevronLeft className="w-3 h-3" />
-              </button>
-              <button
+              </Button>
+              <Button
+                size="icon"
+                variant="outlined"
                 onClick={() => go(page + 1)}
                 disabled={page === totalPages - 1}
                 aria-label="Next"
-                className="w-6 h-6 rounded-full border border-slate-200 flex items-center justify-center text-slate-500 hover:bg-slate-50 disabled:opacity-30 disabled:cursor-not-allowed transition-colors duration-200"
+                className="w-6 h-6 p-1 rounded-full"
               >
                 <ChevronRight className="w-3 h-3" />
-              </button>
+              </Button>
             </div>
           </div>
         )}
@@ -165,13 +169,13 @@ function Tier({ label, members, maxCols }: TierProps) {
 
 export function TeamSection() {
   return (
-    <section className="py-16 bg-white">
+    <section className="py-16 bg-w">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-10">
-          <p className="text-xs font-medium tracking-widest uppercase text-slate-400 mb-1">
+          <p className="text-xs font-medium tracking-widest uppercase text-secondary-text mb-1">
             Who we are
           </p>
-          <h2 className={`text-3xl sm:text-4xl ${koulen.className}`}>
+          <h2 className={`text-3xl sm:text-4xl`}>
             Meet the team
           </h2>
         </div>
