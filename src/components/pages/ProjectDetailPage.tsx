@@ -9,18 +9,12 @@ import { ArrowLeft, Users, Calendar, Code2, FileText } from "lucide-react";
 import type { Project } from "@/types/content";
 import { ProjectGallery } from "@/components/content/ProjectGallery";
 import ProjectShowcaseCard from "@/components/content/ProjectShowcaseCard";
+import { formatLongDate } from "../utils";
 
 type ProjectDetailPageProps = {
   project: Project | null;
   allProjects: Project[];
 };
-
-const formatDate = (iso: string) =>
-  new Date(iso).toLocaleDateString("en-US", {
-    month: "long",
-    day: "numeric",
-    year: "numeric",
-  });
 
 export function ProjectDetailPage({
   project,
@@ -91,7 +85,7 @@ export function ProjectDetailPage({
             <div className="flex items-center gap-1.5">
               <Calendar className="w-4 h-4" aria-hidden="true" />
               <time dateTime={project.dateAdded}>
-                {formatDate(project.dateAdded)}
+                {formatLongDate(project.dateAdded)}
               </time>
             </div>
           </div>
@@ -175,4 +169,3 @@ export function ProjectDetailPage({
     </main>
   );
 }
-

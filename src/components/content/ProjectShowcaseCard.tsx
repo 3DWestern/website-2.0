@@ -8,18 +8,12 @@ import { Card } from "@/components/ui/card";
 import { cn } from "../ui/utils";
 import { koulen } from "@/lib/fonts";
 import { Project } from "@/types/content";
+import { formatShortDate } from "@/components/utils";
 
 type ProjectShowcaseCardProps = {
   project: Project;
   className?: string;
 };
-
-const formatDate = (iso: string) =>
-  new Date(iso).toLocaleDateString("en-US", {
-    month: "short",
-    day: "numeric",
-    year: "numeric",
-  });
 
 const ProjectShowcaseCard = ({
   project,
@@ -85,7 +79,7 @@ const ProjectShowcaseCard = ({
               dateTime={project.dateAdded}
               className="text-xs text-slate-400"
             >
-              Added {formatDate(project.dateAdded)}
+              Added {formatShortDate(project.dateAdded)}
             </time>
 
             <span className="mt-1 inline-flex items-center gap-1 text-sm font-semibold text-purple-700 group-hover:gap-2 transition-all">
@@ -100,4 +94,3 @@ const ProjectShowcaseCard = ({
 };
 
 export default ProjectShowcaseCard;
-

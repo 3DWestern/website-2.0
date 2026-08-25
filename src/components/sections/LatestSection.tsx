@@ -2,16 +2,11 @@ import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import type { BlogPost, Project } from "@/types/content";
+import { formatLongDate } from "../utils";
 
 interface LatestSectionProps {
   post: BlogPost;
   projects: Project[]; // expects the 4 most recent
-}
-
-function formatDate(iso: string) {
-  return new Date(iso)
-    .toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })
-    .toUpperCase();
 }
 
 export function LatestSection({ post, projects }: LatestSectionProps) {
@@ -48,7 +43,7 @@ export function LatestSection({ post, projects }: LatestSectionProps) {
 
             <div className="p-6 lg:p-8">
               <div className="text-sm font-medium text-purple-light">
-                {formatDate(post.date)}
+                {formatLongDate(post.date)}
               </div>
               <h3 className="mt-2">{post.title}</h3>
               {post.excerpt && (
@@ -86,7 +81,8 @@ export function LatestSection({ post, projects }: LatestSectionProps) {
                     <span
                       className="absolute top-2 right-2 flex h-[21px] w-[91px] items-center justify-center gap-2 rounded-[4px] text-[11px] font-medium text-white"
                       style={{
-                        background: "linear-gradient(96deg, #582C83 0%, #BA58D7 100%)",
+                        background:
+                          "linear-gradient(96deg, #582C83 0%, #BA58D7 100%)",
                       }}
                     >
                       {project.categories[0].name.toUpperCase()}
@@ -94,7 +90,9 @@ export function LatestSection({ post, projects }: LatestSectionProps) {
                   )}
                 </div>
                 <div className="p-4">
-                  <h4 className="text-base font-semibold text-white">{project.title}</h4>
+                  <h4 className="text-base font-semibold text-white">
+                    {project.title}
+                  </h4>
                   <p className="mt-1 text-sm text-[color:var(--base-text)]">
                     {project.creator}
                   </p>

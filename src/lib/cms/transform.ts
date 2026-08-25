@@ -154,7 +154,7 @@ export const transformBlog = (doc: ResolvedBlogPost): BlogPost => {
             avatar: doc.author.avatar,
           }
         : doc.author, // fallback: unpopulated, just the raw ID
-    date: formatDate(doc.date),
+    date: doc.date,
     readingTime: doc.readingTime || undefined,
     coverImage: doc.coverImage,
     tags:
