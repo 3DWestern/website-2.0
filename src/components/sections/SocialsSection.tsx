@@ -52,14 +52,14 @@ export function SocialsSection() {
 							<button
 								onClick={prev}
 								aria-label="Previous post"
-								className="absolute left-0 sm:left-6 top-1/2 -translate-y-1/2 z-30 w-9 h-9 rounded-full border border-slate-200 bg-white flex items-center justify-center text-slate-600 hover:bg-slate-50 transition-colors duration-200 shadow-sm"
+								className="absolute left-0 sm:left-6 top-1/2 -translate-y-1/2 z-30 w-9 h-9 rounded-full border border-[#29323b] bg-[#151A20] flex items-center justify-center text-primary-text hover:border-purple-light hover:bg-purple-light/6 transition-colors duration-200"
 							>
 								<ChevronLeft className="w-4 h-4" />
 							</button>
 							<button
 								onClick={next}
 								aria-label="Next post"
-								className="absolute right-0 sm:right-6 top-1/2 -translate-y-1/2 z-30 w-9 h-9 rounded-full border border-slate-200 bg-white flex items-center justify-center text-slate-600 hover:bg-slate-50 transition-colors duration-200 shadow-sm"
+								className="absolute right-0 sm:right-6 top-1/2 -translate-y-1/2 z-30 w-9 h-9 rounded-full border border-[#29323b] bg-[#151A20] flex items-center justify-center text-primary-text hover:border-purple-light hover:bg-purple-light/6 transition-colors duration-200"
 							>
 								<ChevronRight className="w-4 h-4" />
 							</button>
@@ -112,7 +112,7 @@ export function SocialsSection() {
 								onClick={() => goTo(i)}
 								aria-label={`Go to post ${i + 1}`}
 								className={`rounded-full transition-all duration-300 ${
-									i === current ? 'w-5 h-2 bg-purple-500' : 'w-2 h-2 bg-slate-300 hover:bg-slate-400'
+									i === current ? 'w-5 h-2 bg-purple-light' : 'w-2 h-2 bg-primary-text/25 hover:bg-primary-text/40'
 								}`}
 							/>
 						))}

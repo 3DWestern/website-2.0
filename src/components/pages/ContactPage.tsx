@@ -60,7 +60,7 @@ export function ContactPage() {
       ></PageHeader>
 
       {/* Inquiry Types */}
-      <section className="py-20 bg-white">
+      <section className="bg-grey-bg py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="font-bold text-2xl sm:text-3xl lg:text-4xl mb-4">
@@ -70,10 +70,10 @@ export function ContactPage() {
 
           {/* Contact Form */}
           <div className="w-full sm:w-3/5 mx-auto">
-            <Card>
+            <Card className="bg-black-bg border-b-grey">
               <CardHeader>
                 <CardTitle>
-                  *We will get back to you within 1-2 business days.
+                  <span className="text-secondary-text font-medium text-xl">*We will get back to you within 1-2 business days. </span>
                 </CardTitle>
               </CardHeader>
               <CardContent>
@@ -83,7 +83,7 @@ export function ContactPage() {
 
                   <div className="grid md:grid-cols-2 gap-4">
                     <div className="space-y-2">
-                      <Label htmlFor="firstName">
+                      <Label htmlFor="firstName" className="text-secondary-text">
                         First Name{" "}
                         <span className="text-red-500" aria-label="required">
                           *
@@ -93,11 +93,12 @@ export function ContactPage() {
                         id="firstName"
                         name="firstName"
                         placeholder="John"
+                        
                         required
                       />
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="lastName">
+                      <Label htmlFor="lastName" className="text-secondary-text">
                         Last Name{" "}
                         <span className="text-red-500" aria-label="required">
                           *
@@ -113,7 +114,7 @@ export function ContactPage() {
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="email">
+                    <Label htmlFor="email" className="text-secondary-text">
                       Email{" "}
                       <span className="text-red-500" aria-label="required">
                         *
@@ -129,17 +130,17 @@ export function ContactPage() {
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="inquiryType">
+                    <Label htmlFor="inquiryType" className="text-secondary-text">
                       Inquiry Type{" "}
                       <span className="text-red-500" aria-label="required">
                         *
                       </span>
                     </Label>
                     <Select value={inquiryType} onValueChange={setInquiryType}>
-                      <SelectTrigger id="inquiryType" className="bg-white">
-                        <SelectValue placeholder="Select inquiry type" />
+                      <SelectTrigger id="inquiryType" className="bg-grey-bg border-b-grey text-primary-text">
+                        <SelectValue placeholder="Select inquiry type"/>
                       </SelectTrigger>
-                      <SelectContent className="bg-white">
+                      <SelectContent className="bg-grey-bg border-b-grey text-primary-text">
                         <SelectItem value="organization">
                           Organization Booking
                         </SelectItem>
@@ -151,7 +152,7 @@ export function ContactPage() {
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="subject">
+                    <Label htmlFor="subject" className="text-secondary-text">
                       Subject{" "}
                       <span className="text-red-500" aria-label="required">
                         *
@@ -166,7 +167,7 @@ export function ContactPage() {
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="message">
+                    <Label htmlFor="message" className="text-secondary-text">
                       Message{" "}
                       <span className="text-red-500" aria-label="required">
                         *
@@ -184,7 +185,7 @@ export function ContactPage() {
                   <div className="flex justify-center mt-6">
                     <Button
                       type="submit"
-                      className="hover:bg-purple-50 hover:text-purple-700"
+                      variant="outlined"
                       size="lg"
                       disabled={isSubmitting}
                     >
@@ -203,7 +204,7 @@ export function ContactPage() {
                     <div
                       role="status"
                       aria-live="polite"
-                      className="text-sm text-muted-foreground text-center"
+                      className="text-sm text-secondary-text text-center"
                     >
                       {result}
                     </div>
@@ -259,18 +260,17 @@ export function ContactPage() {
       </section> */}
 
       {/* FAQ Link */}
-      <section className="py-10 bg-white">
+      <section className="py-10 ">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl mb-4">Have a Quick Question?</h2>
-          <p className="text-lg text-muted-foreground mb-8">
+          <p className="text-lg text-secondary-text mb-8">
             Check out our FAQ section - you might find the answer you&apos;re
             looking for!
           </p>
           <Link href="/#faq">
             <Button
               size="lg"
-              variant="outline"
-              className="hover:bg-purple-50 hover:text-purple-700"
+              variant="gradient"
             >
               View FAQs
             </Button>

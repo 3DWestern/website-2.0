@@ -35,7 +35,7 @@ export function ProjectsPage() {
       ></PageHeader>
       {/* Featured spotlight */}
       {featured.length > 0 && (
-        <section className="bg-white pb-16">
+        <section className="bg-grey-bg pb-16">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid gap-6 md:grid-cols-2">
             {featured.slice(0, 2).map((project, i) => (
               <FeaturedProjectSpotlight
@@ -60,7 +60,7 @@ export function ProjectsPage() {
         includeAllOption
       />
       {/* Grid */}
-      <section className="py-16 bg-slate-50">
+      <section className="py-16 bg-black-bg">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <ProjectsGrid projects={filtered} onClearFilters={handleReset} />
 

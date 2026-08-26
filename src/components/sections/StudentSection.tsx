@@ -25,7 +25,7 @@ export function StudentSection() {
 	};
 
 	return (
-		<section className="py-16 bg-[#151A20]">
+		<section className="py-16 bg-grey-bg">
 			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 				{/* Header row */}
 				<div className="flex items-end justify-between mb-10">
@@ -44,7 +44,7 @@ export function StudentSection() {
 							onClick={prev}
 							disabled={current === 0}
 							aria-label="Previous spotlight"
-							className="w-9 h-9 rounded-full border border-slate-200 bg-white flex items-center justify-center text-slate-600 hover:bg-slate-50 disabled:opacity-30 disabled:cursor-not-allowed transition-colors duration-200"
+							className="w-9 h-9 rounded-full border border-slate-200 bg-primary-text flex items-center justify-center text-purple-dark hover:bg-slate-50 disabled:opacity-30 disabled:cursor-not-allowed transition-colors duration-200"
 						>
 							<ChevronLeft className="w-4 h-4" />
 						</button>
@@ -52,7 +52,7 @@ export function StudentSection() {
 							onClick={next}
 							disabled={current === spotlights.length - 1}
 							aria-label="Next spotlight"
-							className="w-9 h-9 rounded-full border border-slate-200 bg-white flex items-center justify-center text-slate-600 hover:bg-slate-50 disabled:opacity-30 disabled:cursor-not-allowed transition-colors duration-200"
+							className="w-9 h-9 rounded-full border border-slate-200 bg-primary-text flex items-center justify-center text-purple-dark hover:bg-slate-50 disabled:opacity-30 disabled:cursor-not-allowed transition-colors duration-200"
 						>
 							<ChevronRight className="w-4 h-4" />
 						</button>

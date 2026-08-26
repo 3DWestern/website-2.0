@@ -6,7 +6,6 @@ import { motion } from "framer-motion";
 import { ArrowRight, Users } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { cn } from "../ui/utils";
-import { koulen } from "@/lib/fonts";
 import { Project } from "@/types/content";
 import { formatShortDate } from "@/components/utils";
 
@@ -35,11 +34,11 @@ const ProjectShowcaseCard = ({
       <Link
         href={`/projects/${project.slug}`}
         aria-label={`View project: ${project.title}`}
-        className="block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 rounded-xl"
+        className="block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-light rounded-xl"
       >
         <Card
           className={cn(
-            "group relative overflow-hidden rounded-xl border-none bg-white shadow-sm hover:shadow-lg transition-shadow duration-300",
+            "group relative overflow-hidden rounded-xl border-none bg-grey-bg shadow-sm hover:shadow-lg transition-shadow duration-300",
             className,
           )}
         >
@@ -54,7 +53,7 @@ const ProjectShowcaseCard = ({
             {project.categories.map((category) => (
               <span
                 key={category.name}
-                className="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-slate-900/80 text-white text-[10px] font-semibold uppercase tracking-wide backdrop-blur-sm"
+                className="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-purple-light/10 text-purple-light border border-purple-light/20S text-[10px] font-semibold uppercase tracking-wide backdrop-blur-sm"
               >
                 {category.name}
               </span>
@@ -62,27 +61,27 @@ const ProjectShowcaseCard = ({
           </div>
 
           <div className="p-5 flex flex-col gap-3">
-            <h3 className={`text-xl leading-tight ${koulen.className}`}>
+            <h3 className={`text-xl leading-tight`}>
               {project.title}
             </h3>
 
-            <div className="flex items-center gap-1.5 text-sm text-slate-500">
+            <div className="flex items-center gap-1.5 text-sm text-secondary-text">
               <Users className="w-3.5 h-3.5" aria-hidden="true" />
               <span>{contributors.join(", ")}</span>
             </div>
 
-            <p className="text-sm text-slate-600 leading-relaxed">
+            <p className="text-sm text-secondary-text leading-relaxed">
               {project.description}
             </p>
 
             <time
               dateTime={project.dateAdded}
-              className="text-xs text-slate-400"
+              className="text-xs text-secondary-text"
             >
               Added {formatShortDate(project.dateAdded)}
             </time>
 
-            <span className="mt-1 inline-flex items-center gap-1 text-sm font-semibold text-purple-700 group-hover:gap-2 transition-all">
+            <span className="mt-1 inline-flex items-center gap-1 text-sm font-semibold text-purple-light group-hover:gap-2 transition-all">
               Read more{" "}
               <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
             </span>

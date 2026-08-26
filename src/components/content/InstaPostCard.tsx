@@ -15,24 +15,24 @@ interface InstaPostCardProps {
 export function InstaPostCard({ post, active }: InstaPostCardProps) {
 	return (
 		<Card
-			className={`w-56 sm:w-64 overflow-hidden bg-white border-slate-200 gap-0 select-none transition-shadow duration-300 ${
+			className={`w-56 sm:w-64 overflow-hidden bg-black-bg border-[#29323b] gap-0 select-none transition-shadow duration-300 ${
 				active ? 'shadow-lg' : 'shadow-sm'
 			}`}
 		>
 			{/* Header: avatar, username, follow link, "more" icon */}
 			<div className="flex items-center justify-between px-3 py-2.5">
 				<div className="flex items-center gap-2 min-w-0">
-					<div className="relative w-7 h-7 rounded-full overflow-hidden bg-purple-100 shrink-0">
+					<div className="relative w-7 h-7 rounded-full overflow-hidden bg-purple-dark/40 shrink-0">
 						{post.avatar ? (
 							<Image src={post.avatar} alt={post.username} fill className="object-cover" sizes="28px" />
 						) : (
 							// No avatar on file yet — fall back to a monogram
-							<div className="w-full h-full flex items-center justify-center text-[10px] font-semibold text-purple-600">
+							<div className="w-full h-full flex items-center justify-center text-[10px] font-semibold text-purple-light">
 								{post.username.charAt(0).toUpperCase()}
 							</div>
 						)}
 					</div>
-					<span className="text-xs font-semibold truncate">{post.username}</span>
+					<span className="text-xs font-semibold truncate text-primary-text">{post.username}</span>
 				</div>
 				<div className="flex items-center gap-2 shrink-0">
 					<a
@@ -42,11 +42,11 @@ export function InstaPostCard({ post, active }: InstaPostCardProps) {
 						// Stop the click from bubbling up to the carousel's
 						// "select this card" handler
 						onClick={(e) => e.stopPropagation()}
-						className="text-[10px] font-semibold text-purple-600 hover:text-purple-700"
+						className="text-[10px] font-semibold text-purple-light hover:text-white"
 					>
 						Follow
 					</a>
-					<MoreHorizontal className="w-3.5 h-3.5 text-slate-400" />
+					<MoreHorizontal className="w-3.5 h-3.5 text-secondary-text" />
 				</div>
 			</div>
 
@@ -71,18 +71,18 @@ export function InstaPostCard({ post, active }: InstaPostCardProps) {
 			{/* Like / comment / share / save icons */}
 			<div className="flex items-center justify-between px-3 pt-2.5">
 				<div className="flex items-center gap-3">
-					<Heart className="w-4 h-4 text-slate-700" />
-					<MessageCircle className="w-4 h-4 text-slate-700" />
-					<Send className="w-4 h-4 text-slate-700" />
+					<Heart className="w-4 h-4 text-primary-text" />
+					<MessageCircle className="w-4 h-4 text-primary-text" />
+					<Send className="w-4 h-4 text-primary-text" />
 				</div>
-				<Bookmark className="w-4 h-4 text-slate-700" />
+				<Bookmark className="w-4 h-4 text-primary-text" />
 			</div>
 
 			{/* Like count + caption */}
 			<div className="px-3 pt-1.5 pb-3">
-				<p className="text-xs font-semibold">{post.likes.toLocaleString()} likes</p>
-				<p className="text-xs text-slate-600 truncate">
-					<span className="font-semibold text-slate-800">{post.username} </span>
+				<p className="text-xs font-semibold text-primary-text">{post.likes.toLocaleString()} likes</p>
+				<p className="text-xs text-secondary-text truncate">
+					<span className="font-semibold text-primary-text">{post.username} </span>
 					{post.caption}
 				</p>
 			</div>

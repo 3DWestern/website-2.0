@@ -9,11 +9,9 @@ interface SpotlightCardProps {
 
 export function SpotlightCard({ spotlight }: SpotlightCardProps) {
   return (
-    // Not using Card component here — its built-in gap-6 and flex-col
-    // fight the side-by-side image layout. Plain div gives full control.
-    <div className="flex flex-col sm:flex-row overflow-hidden rounded-xl border border-slate-200 shadow-sm bg-white">
+    <div className="clip-corners-lg flex flex-col sm:flex-row overflow-hidden bg-grey-bg border border-b-grey">
       {/* Left — project photo */}
-      <div className="relative w-full sm:w-80 shrink-0 min-h-[280px] sm:min-h-full bg-slate-800">
+      <div className="relative w-full sm:w-80 shrink-0 min-h-[280px] sm:min-h-full bg-black-bg">
         <Image
           src={spotlight.image}
           alt={spotlight.alt}
@@ -21,31 +19,31 @@ export function SpotlightCard({ spotlight }: SpotlightCardProps) {
           sizes="(max-width: 640px) 100vw, 320px"
           className="object-cover opacity-85"
         />
-        <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent px-5 pt-10 pb-5">
-          <p className="text-sm font-semibold text-white">{spotlight.name}</p>
-          <p className="text-xs text-white/65 mt-0.5">{spotlight.program}</p>
+        <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-purple-dark to-transparent px-5 pt-10 pb-5">
+          <p className="text-sm font-semibold text-primary-text">{spotlight.name}</p>
+          <p className="text-xs text-muted mt-0.5">{spotlight.program}</p>
         </div>
       </div>
 
-      {/* Right — quote grows, project box is pinned to bottom */}
+      {/* Right — quote grows, project box pinned to bottom */}
       <div className="flex flex-col flex-1">
         <div className="flex-1 flex items-center px-6 py-6">
-          <blockquote className="text-base leading-relaxed text-slate-700 italic border-l-2 border-purple-300 pl-4">
+          <blockquote className="text-base leading-relaxed text-primary-text italic border-l-2 border-purple-light pl-4">
             &quot;{spotlight.quote}&quot;
           </blockquote>
         </div>
 
-        <div className="bg-slate-50 border-t border-slate-100 px-6 py-5">
-          <p className="text-[11px] uppercase tracking-widest text-slate-400 mb-2">
+        <div className="bg-black-bg border-t border-b-grey px-6 py-5">
+          <p className="text-[11px] uppercase tracking-widest text-purple-light mb-2">
             Their project
           </p>
-          <p className="text-sm font-semibold text-slate-800 mb-1">
+          <p className="text-sm font-semibold text-primary-text mb-1">
             {spotlight.projectTitle}
           </p>
-          <p className="text-xs text-slate-500 leading-relaxed">
+          <p className="text-xs text-secondary-text leading-relaxed">
             {spotlight.projectDescription}
           </p>
-          <span className="mt-3 inline-block text-[11px] px-3 py-1 rounded-full bg-purple-50 text-purple-700 border border-purple-100">
+          <span className="mt-3 inline-block text-[11px] px-3 py-1 rounded-full bg-purple-light/10 text-purple-light border border-purple-light/20">
             {spotlight.category}
           </span>
         </div>
@@ -53,4 +51,3 @@ export function SpotlightCard({ spotlight }: SpotlightCardProps) {
     </div>
   );
 }
-

@@ -42,7 +42,7 @@ export function BlogsPage() {
         includeAllOption
       />
       {/* Post list */}
-      <section className="py-16 bg-slate-50">
+      <section className="py-16 bg-grey-bg">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <BlogGrid posts={filtered} />
           <CollectionFooter

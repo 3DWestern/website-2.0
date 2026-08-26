@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { PackageSearch } from "lucide-react";
 import ProjectShowcaseCard from "./ProjectShowcaseCard";
 import type { Project } from "@/types/content";
+import { Button } from "../ui/button";
 
 interface ProjectGridProps {
   projects: Project[];
@@ -27,14 +28,16 @@ export function ProjectsGrid({
           className="w-10 h-10 text-slate-300"
           aria-hidden="true"
         />
-        <p className="text-slate-500 max-w-sm">{emptyMessage}</p>
+        <p className="text-secondary-text max-w-sm">{emptyMessage}</p>
         {onClearFilters && (
-          <button
+          <Button
+            variant="gradient"
+            size="pill"
             onClick={onClearFilters}
-            className="px-6 py-2.5 rounded-lg bg-purple-600 text-white text-sm font-semibold hover:bg-purple-700 active:scale-95 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400"
+            // className="px-6 py-2.5 rounded-lg bg-purple-light text-white text-sm font-semibold hover:bg-purple-700 active:scale-95 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400"
           >
             Clear filters
-          </button>
+          </Button>
         )}
       </motion.div>
     );

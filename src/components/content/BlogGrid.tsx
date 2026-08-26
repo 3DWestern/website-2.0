@@ -41,7 +41,7 @@ export function BlogGrid({
   if (posts.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center py-24 text-center">
-        <p className="text-slate-500 text-lg">{emptyMessage}</p>
+        <p className="text-secondary-text text-lg">{emptyMessage}</p>
       </div>
     );
   }

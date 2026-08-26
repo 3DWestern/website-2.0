@@ -19,7 +19,7 @@ export function AnnouncementCard({ announcement }: AnnouncementCardProps) {
 	const paragraphs = announcement.body.split('\n\n').filter(Boolean);
 
 	return (
-		<Card className="bg-[#151A20] border-[#29323b] shadow-sm hover:shadow-md transition-shadow duration-300 flex flex-col h-full">
+		<Card className="bg-grey-bg border-[#29323b] shadow-sm hover:shadow-md transition-shadow duration-300 flex flex-col h-full">
 			<CardHeader>
 				<CardTitle className="text-lg font-bold">
 					{announcement.title}
