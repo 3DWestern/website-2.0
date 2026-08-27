@@ -7,7 +7,7 @@ import { makeProjectsOverrides, ProjectsFetcher } from "./projects.overrides";
 export const apiClient = {
   for: <K extends CollectionKey>(key: K) =>
     buildApi(collections[key], (slug, qs) =>
-      cmsClient.clientGet(`/${slug}?${qs}`),
+      cmsClient.clientGet(`/api/${slug}?${qs}`),
     ),
 };
 export const projectsApi = {
