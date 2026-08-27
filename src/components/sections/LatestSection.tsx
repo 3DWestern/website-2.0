@@ -10,7 +10,7 @@ interface LatestSectionProps {
 }
 
 export function LatestSection({ post, projects }: LatestSectionProps) {
-  console.log(projects[1].categories[0].name)
+  console.log(projects[1].categories[0].name);
   return (
     <section className="w-full bg-grey-bg px-6 py-16 lg:px-16 lg:py-24">
       <div className="mx-auto max-w-7xl">
@@ -79,17 +79,13 @@ export function LatestSection({ post, projects }: LatestSectionProps) {
                     style={{ boxShadow: "0 -30px 30px 0 #0B0D10 inset" }}
                   />
                   {project.categories[0] && (
-                    <span
-                      className="absolute top-2 right-2 flex px-2.5 py-1 items-center justify-center gap-2 rounded-sm text-[11px] font-medium gradient"
-                    >
+                    <span className="absolute top-2 right-2 flex px-2.5 py-1 items-center justify-center gap-2 rounded-sm text-[11px] font-medium gradient">
                       {project.categories[0].name.toUpperCase()}
                     </span>
                   )}
                 </div>
                 <div className="p-4">
-                  <h4 className="text-base font-semibold ">
-                    {project.title}
-                  </h4>
+                  <h4 className="text-base font-semibold ">{project.title}</h4>
                   <p className="mt-1 text-sm text-secondary-text">
                     {project.creator}
                   </p>

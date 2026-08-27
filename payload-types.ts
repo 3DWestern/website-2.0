@@ -67,6 +67,7 @@ export interface Config {
   };
   blocks: {};
   collections: {
+    media: Media;
     blogs: Blog;
     users: User;
     tags: Tag;
@@ -84,6 +85,7 @@ export interface Config {
   };
   collectionsJoins: {};
   collectionsSelect: {
+    media: MediaSelect<false> | MediaSelect<true>;
     blogs: BlogsSelect<false> | BlogsSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
     tags: TagsSelect<false> | TagsSelect<true>;
@@ -131,6 +133,35 @@ export interface UserAuthOperations {
   unlock: {
     email: string;
     password: string;
+  };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "media".
+ */
+export interface Media {
+  id: number;
+  alt?: string | null;
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
+  sizes?: {
+    'blog-thumbnail'?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
   };
 }
 /**
@@ -354,6 +385,10 @@ export interface PayloadLockedDocument {
   id: number;
   document?:
     | ({
+        relationTo: 'media';
+        value: number | Media;
+      } | null)
+    | ({
         relationTo: 'blogs';
         value: number | Blog;
       } | null)
@@ -434,6 +469,38 @@ export interface PayloadMigration {
   batch?: number | null;
   updatedAt: string;
   createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "media_select".
+ */
+export interface MediaSelect<T extends boolean = true> {
+  alt?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  url?: T;
+  thumbnailURL?: T;
+  filename?: T;
+  mimeType?: T;
+  filesize?: T;
+  width?: T;
+  height?: T;
+  focalX?: T;
+  focalY?: T;
+  sizes?:
+    | T
+    | {
+        'blog-thumbnail'?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+      };
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

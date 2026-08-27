@@ -127,9 +127,9 @@ export function resolveEventCategories(): ResponsePayload {
   };
 }
 
-export function resolveProjects(params: URLSearchParams): ResponsePayload {
-  const slugParam = params.get("where[slug][equals]");
-  const featuredParam = params.get("where[featured][equals]");
+export function resolveProjects(params?: URLSearchParams): ResponsePayload {
+  const slugParam = params?.get("where[slug][equals]");
+  const featuredParam = params?.get("where[featured][equals]");
   const projects = sampleProjects;
 
   let deepProjects = projects.map((proj) => ({

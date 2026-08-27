@@ -12,12 +12,14 @@ import {
   Users,
   ProjectCategories,
   EventCategories,
+  Media,
 } from "@/cms/collections";
 import { Tags } from "@/cms/collections/Tags";
 
 export default buildConfig({
   editor: lexicalEditor({}),
   collections: [
+    Media,
     Blogs,
     Users,
     Tags,

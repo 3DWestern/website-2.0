@@ -5,6 +5,7 @@ import { MakerspacesSection } from "@/components/sections/MakerspacesSection";
 import { JoinUsSection } from "@/components/sections/JoinUsSection";
 import { api } from "@/lib/cms/api.server";
 import { EquipmentSection } from "../sections/EquipmentSection";
+import Image from "next/image";
 
 export default async function HomePage() {
   const [latestPosts, latestProjects] = await Promise.all([
@@ -16,6 +17,7 @@ export default async function HomePage() {
 
   return (
     <main>
+      <div className="relative size-100">{/* <Image /> */}</div>
       <Hero />
       <AboutUsSection />
       <EquipmentSection />
