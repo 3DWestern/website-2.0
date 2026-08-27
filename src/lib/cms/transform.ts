@@ -211,6 +211,7 @@ export const transformProjects = (docs: ResolvedProject[]): Project[] => {
 // transform a project category doc to project category data shape
 export const transformProjectCategory = (doc: PayloadPC): ProjectCategory => {
   return {
+    id: doc.id,
     name: doc.name,
     description: doc.description,
   };

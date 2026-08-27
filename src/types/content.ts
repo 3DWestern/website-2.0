@@ -79,6 +79,7 @@ export type BlogPost = {
 };
 
 export type ProjectCategory = {
+  id: number;
   name: string;
   description: string;
 };

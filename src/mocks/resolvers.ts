@@ -1,0 +1,191 @@
+import { items as sampleTeamMembers } from "@/components/data/teamdata";
+import { sampleTags } from "@/cms/static-data/tags";
+import { sampleAuthors } from "@/cms/static-data/authors";
+import { sampleBlogs } from "@/cms/static-data/blogs";
+import { Author as PayloadAuthor } from "../../payload-types";
+import { sampleProjectCategories } from "@/cms/static-data/projectCategories";
+import { sampleProjects } from "@/cms/static-data/projects";
+import { sampleEvents } from "@/cms/static-data/events";
+import { sampleEventCategories } from "@/cms/static-data";
+
+export interface ResponsePayload {
+    docs: unknown[];
+    totalDocs: number;
+    limit: number;
+    page: number;
+    totalPages: number;
+    hasNextPage?: boolean;
+    hasPrevPage?: boolean;
+}
+
+// Each function takes a URLSearchParams (or nothing) and returns the plain
+// JSON-serializable payload. No HttpResponse, no Request/Response objects —
+// those get wrapped on separately by the MSW handler and the direct-call path.
+
+export function resolveTags(params: URLSearchParams): ResponsePayload {
+  const idParam = params.get("where[id][in]");
+  let tags = sampleTags;
+
+  if (idParam) {
+    const ids = idParam.split(",").map(Number);
+    tags = sampleTags.filter((tag) => ids.includes(tag.id));
+  }
+
+  return { docs: tags, totalDocs: tags.length, limit: 10, page: 1, totalPages: 1 };
+}
+
+export function resolveAuthors(params: URLSearchParams): ResponsePayload {
+  const idParam = params.get("where[id][in]");
+  let authors = sampleAuthors;
+
+  if (idParam) {
+    const ids = idParam.split(",").map(Number);
+    authors = sampleAuthors.filter((author) => ids.includes(author.id));
+  }
+
+  return { docs: authors, totalDocs: authors.length, limit: 10, page: 1, totalPages: 1 };
+}
+
+export function resolveBlogs(params: URLSearchParams): ResponsePayload {
+  const slugParam = params.get("where[slug][equals]");
+  const tagParam = params.get("where[tags.title][in]");
+  const idsParam = params.get("where[id][in]");
+  const limit = Number(params.get("limit")) || sampleBlogs.length;
+  const page = Number(params.get("page")) || 1;
+
+  let blogs = sampleBlogs;
+
+  if (slugParam) {
+    blogs = blogs.filter((blog) => blog.slug === slugParam);
+  }
+  if (idsParam) {
+    const ids = idsParam.split(",");
+    blogs = blogs.filter((blog) => ids.includes(String(blog.id)));
+  }
+
+  let deepBlogs = blogs.map((blog) => ({
+    ...blog,
+    tags: (blog.tags as unknown as number[])
+      ?.map((tagID) => sampleTags.find((sTag) => sTag.id === tagID))
+      .filter((tag): tag is (typeof sampleTags)[number] => tag !== undefined),
+    author: sampleAuthors.find(
+      (author) => author.id === (blog.author as unknown as number),
+    ) as PayloadAuthor,
+  }));
+
+  if (tagParam) {
+    const tagTitles = tagParam.split(",");
+    deepBlogs = deepBlogs.filter((blog) =>
+      blog.tags?.some((t) => tagTitles.includes(t.title)),
+    );
+  }
+
+  const totalDocs = deepBlogs.length;
+  const startIndex = (page - 1) * limit;
+  const docs = deepBlogs.slice(startIndex, startIndex + limit);
+
+  return {
+    docs,
+    totalDocs,
+    limit,
+    page,
+    totalPages: Math.ceil(totalDocs / limit),
+    hasNextPage: startIndex + limit < totalDocs,
+    hasPrevPage: page > 1,
+  };
+}
+
+export function resolveProjectCategories(): ResponsePayload {
+  return {
+    docs: sampleProjectCategories,
+    totalDocs: sampleProjectCategories.length,
+    limit: 10,
+    page: 1,
+    totalPages: 1,
+  };
+}
+
+export function resolveProjects(params: URLSearchParams): ResponsePayload {
+  const slugParam = params.get("where[slug][equals]");
+  const featuredParam = params.get("where[featured][equals]");
+  const projects = sampleProjects;
+
+  let deepProjects = projects.map((proj) => ({
+    ...proj,
+    categories: (proj.categories as unknown as number[])?.map((catID) =>
+      sampleProjectCategories.find((sCat) => sCat.id === catID),
+    ),
+  }));
+
+  if (slugParam) {
+    deepProjects = deepProjects.filter((p) => p.slug === slugParam);
+  }
+  if (featuredParam === "true") {
+    deepProjects = deepProjects.filter((p) => p.featured === true);
+  }
+
+  return { docs: deepProjects, totalDocs: projects.length, limit: 10, page: 1, totalPages: 1 };
+}
+
+export function resolveEvents(params: URLSearchParams): ResponsePayload {
+  const categoryParam = params.get("where[categories.name][in]");
+  const startParam = params.get("where[schedule.startTime][greater_than_equal]");
+  const endParam = params.get("where[schedule.startTime][less_than_equal]");
+  const idsParam = params.get("where[id][in]");
+  const limit = Number(params.get("limit")) || sampleEvents.length;
+  const page = Number(params.get("page")) || 1;
+
+  const resolveCategories = (event: (typeof sampleEvents)[number]) => ({
+    ...event,
+    categories: event.categories
+      .map((id) => sampleEventCategories.find((c) => c.id === id))
+      .filter((c): c is (typeof sampleEventCategories)[number] => Boolean(c)),
+  });
+
+  let events = sampleEvents.map(resolveCategories);
+
+  if (idsParam) {
+    const ids = idsParam.split(",");
+    events = events.filter((e) => ids.includes(String(e.id)));
+  }
+  if (categoryParam) {
+    const categoryNames = categoryParam.split(",");
+    events = events.filter((event) =>
+      event.categories.some((c) => categoryNames.includes(c.name)),
+    );
+  }
+  if (startParam || endParam) {
+    const start = startParam ? new Date(startParam) : null;
+    const end = endParam ? new Date(endParam) : null;
+    events = events.filter((event) => {
+      const eventStart = new Date(event.schedule.startTime);
+      if (start && eventStart < start) return false;
+      if (end && eventStart > end) return false;
+      return true;
+    });
+  }
+
+  const totalDocs = events.length;
+  const startIndex = (page - 1) * limit;
+  const docs = events.slice(startIndex, startIndex + limit);
+
+  return {
+    docs,
+    totalDocs,
+    limit,
+    page,
+    totalPages: Math.ceil(totalDocs / limit),
+    hasNextPage: startIndex + limit < totalDocs,
+    hasPrevPage: page > 1,
+  };
+}
+
+export function resolveTeamMembers() {
+  return {
+    docs: sampleTeamMembers,
+    totalDocs: sampleTeamMembers.length,
+    limit: 10,
+    page: 1,
+    totalPages: 1,
+  };
+}

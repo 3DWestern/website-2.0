@@ -20,6 +20,13 @@ export const cmsClient = {
       // Not in a request-scoped context (standalone script, cron, etc.) —
       // proceed with no cookies. Public/published-only access still works.
     }
+
+    if (process.env.CMS_ENABLED === "false") {
+      const { getMockResponse } = await import("@/mocks/handlers-direct");
+      const res = await getMockResponse(path, options);
+      if (!res.ok) throw new Error(`Mock CMS request failed: ${res.status}`);
+      return res.json();
+    }
     const res = await fetch(`${BASE_URL}${path}`, {
       ...options,
       headers: {
