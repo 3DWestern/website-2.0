@@ -9,13 +9,13 @@ import { sampleEvents } from "@/cms/static-data/events";
 import { sampleEventCategories } from "@/cms/static-data";
 
 export interface ResponsePayload {
-    docs: unknown[];
-    totalDocs: number;
-    limit: number;
-    page: number;
-    totalPages: number;
-    hasNextPage?: boolean;
-    hasPrevPage?: boolean;
+  docs: unknown[];
+  totalDocs: number;
+  limit: number;
+  page: number;
+  totalPages: number;
+  hasNextPage?: boolean;
+  hasPrevPage?: boolean;
 }
 
 // Each function takes a URLSearchParams (or nothing) and returns the plain
@@ -31,7 +31,13 @@ export function resolveTags(params: URLSearchParams): ResponsePayload {
     tags = sampleTags.filter((tag) => ids.includes(tag.id));
   }
 
-  return { docs: tags, totalDocs: tags.length, limit: 10, page: 1, totalPages: 1 };
+  return {
+    docs: tags,
+    totalDocs: tags.length,
+    limit: 10,
+    page: 1,
+    totalPages: 1,
+  };
 }
 
 export function resolveAuthors(params: URLSearchParams): ResponsePayload {
@@ -43,7 +49,13 @@ export function resolveAuthors(params: URLSearchParams): ResponsePayload {
     authors = sampleAuthors.filter((author) => ids.includes(author.id));
   }
 
-  return { docs: authors, totalDocs: authors.length, limit: 10, page: 1, totalPages: 1 };
+  return {
+    docs: authors,
+    totalDocs: authors.length,
+    limit: 10,
+    page: 1,
+    totalPages: 1,
+  };
 }
 
 export function resolveBlogs(params: URLSearchParams): ResponsePayload {
@@ -105,6 +117,16 @@ export function resolveProjectCategories(): ResponsePayload {
   };
 }
 
+export function resolveEventCategories(): ResponsePayload {
+  return {
+    docs: sampleEventCategories,
+    totalDocs: sampleEventCategories.length,
+    limit: 10,
+    page: 1,
+    totalPages: 1,
+  };
+}
+
 export function resolveProjects(params: URLSearchParams): ResponsePayload {
   const slugParam = params.get("where[slug][equals]");
   const featuredParam = params.get("where[featured][equals]");
@@ -124,12 +146,20 @@ export function resolveProjects(params: URLSearchParams): ResponsePayload {
     deepProjects = deepProjects.filter((p) => p.featured === true);
   }
 
-  return { docs: deepProjects, totalDocs: projects.length, limit: 10, page: 1, totalPages: 1 };
+  return {
+    docs: deepProjects,
+    totalDocs: projects.length,
+    limit: 10,
+    page: 1,
+    totalPages: 1,
+  };
 }
 
 export function resolveEvents(params: URLSearchParams): ResponsePayload {
   const categoryParam = params.get("where[categories.name][in]");
-  const startParam = params.get("where[schedule.startTime][greater_than_equal]");
+  const startParam = params.get(
+    "where[schedule.startTime][greater_than_equal]",
+  );
   const endParam = params.get("where[schedule.startTime][less_than_equal]");
   const idsParam = params.get("where[id][in]");
   const limit = Number(params.get("limit")) || sampleEvents.length;

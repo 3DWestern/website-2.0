@@ -11,6 +11,7 @@ const routeResolvers: Record<string, Resolver> = {
   "/api/project-categories": () => resolvers.resolveProjectCategories(),
   "/api/projects": resolvers.resolveProjects,
   "/api/events": resolvers.resolveEvents,
+  "/api/event-categories": () => resolvers.resolveEventCategories(),
   "/api/team-members": () => resolvers.resolveTeamMembers(),
 };
 
@@ -19,10 +20,13 @@ export async function getMockResponse(path: string, options: RequestInit = {}) {
   const resolver = routeResolvers[url.pathname];
 
   if (!resolver) {
-    return new Response(JSON.stringify({ error: `No mock for ${url.pathname}` }), {
-      status: 404,
-      headers: { "Content-Type": "application/json" },
-    });
+    return new Response(
+      JSON.stringify({ error: `No mock for ${url.pathname}` }),
+      {
+        status: 404,
+        headers: { "Content-Type": "application/json" },
+      },
+    );
   }
 
   const data = resolver(url.searchParams);

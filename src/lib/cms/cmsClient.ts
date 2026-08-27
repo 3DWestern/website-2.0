@@ -1,6 +1,16 @@
 import type { RequestInit } from "next/dist/server/web/spec-extension/request";
 const BASE_URL = process.env.CMS_BASE_URL || "http://localhost:3000";
 
+const cmsEnabledFallback = async (path: string, options?: RequestInit) => {
+  if (process.env.CMS_ENABLED === "false") {
+    const { getMockResponse } = await import("@/mocks/handlers-direct");
+    const res = await getMockResponse(path, options);
+    if (!res.ok) throw new Error(`Mock CMS request failed: ${res.status}`);
+    return res.json();
+  }
+  return null;
+};
+
 export const cmsClient = {
   // Public/anonymous-safe call. Attempts to forward the current user's
   // session cookies if one exists (so a logged-in admin viewing the site
@@ -21,12 +31,9 @@ export const cmsClient = {
       // proceed with no cookies. Public/published-only access still works.
     }
 
-    if (process.env.CMS_ENABLED === "false") {
-      const { getMockResponse } = await import("@/mocks/handlers-direct");
-      const res = await getMockResponse(path, options);
-      if (!res.ok) throw new Error(`Mock CMS request failed: ${res.status}`);
-      return res.json();
-    }
+    const fallback = cmsEnabledFallback(path, options);
+    if (fallback) return fallback;
+
     const res = await fetch(`${BASE_URL}${path}`, {
       ...options,
       headers: {
@@ -41,6 +48,8 @@ export const cmsClient = {
   // Client-safe: same-origin fetch, browser attaches cookies automatically,
   // no next/headers, no API key — safe to import in "use client" files.
   clientGet: async (path: string) => {
+    const fallback = cmsEnabledFallback(path);
+    if (fallback) return fallback;
     const res = await fetch(`/api/${path}`);
     if (!res.ok) throw new Error(`CMS request failed: ${res.status}`);
     return res.json();
