@@ -17,7 +17,7 @@ export function EquipmentCardMobile({
   onToggle,
 }: EquipmentCardMobileProps) {
   return (
-    <div className="clip-corners-sm overflow-hidden bg-[#0B0D10]">
+    <div className="clip-corners-sm overflow-hidden bg-black-bg">
       <button
         onClick={onToggle}
         className="relative block w-full overflow-hidden transition-[height] duration-500 ease-out"
@@ -25,7 +25,7 @@ export function EquipmentCardMobile({
       >
         <Image src={item.image} alt={item.alt} fill className="object-cover" />
         <div className="absolute inset-0 flex items-center bg-black/30 px-5">
-          <h4 className="text-base font-semibold text-primary-text">
+          <h4 className="text-base font-semibold">
             {item.title}
           </h4>
         </div>
@@ -39,12 +39,12 @@ export function EquipmentCardMobile({
         }}
       >
         <div className="overflow-hidden">
-          <div className="bg-[#151A20] p-5">
-            <p className="text-sm leading-relaxed text-muted">
+          <div className="bg-grey-bg p-5">
+            <p className="text-sm leading-relaxed text-secondary-text">
               {item.description}
             </p>
             <div className="mt-3 flex items-center gap-1.5 text-xs font-medium text-purple-light">
-              <MapPin className="h-3.5 w-3.5 flex-shrink-0" />
+              <MapPin className="h-3.5 w-3.5 shrink-0" />
               {item.location}
             </div>
             <Link

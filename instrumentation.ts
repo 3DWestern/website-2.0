@@ -9,7 +9,7 @@ declare global {
 export async function register() {
   if (
     process.env.NEXT_RUNTIME === "nodejs" &&
-    process.env.CMS_ENABLED === "false"
+    process.env.NEXT_PUBLIC_CMS_ENABLED === "false"
   ) {
         // Guard against double-registration across dev-server reloads
     if (globalThis.__mswServer) {

@@ -20,6 +20,8 @@ export async function getMockResponse(path: string, options: RequestInit = {}) {
   const resolver = routeResolvers[url.pathname];
 
   if (!resolver) {
+  console.log(url.pathname)
+    
     return new Response(
       JSON.stringify({ error: `No mock for ${url.pathname}` }),
       {
@@ -30,7 +32,6 @@ export async function getMockResponse(path: string, options: RequestInit = {}) {
   }
 
   const data = resolver(url.searchParams);
-
   return new Response(JSON.stringify(data), {
     status: 200,
     headers: { "Content-Type": "application/json" },

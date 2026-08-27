@@ -5,7 +5,7 @@ import type { NextRequest } from "next/server";
 // Used to redirect from the admin route if CMS is disabled to avoid errors relating to payload
 export function proxy(request: NextRequest) {
   if (
-    process.env.CMS_ENABLED === "false" &&
+    process.env.NEXT_PUBLIC_CMS_ENABLED === "false" &&
     request.nextUrl.pathname.startsWith("/admin")
   ) {
     return NextResponse.redirect(new URL("/", request.url));

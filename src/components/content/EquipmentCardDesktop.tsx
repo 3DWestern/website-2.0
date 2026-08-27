@@ -36,15 +36,15 @@ export function EquipmentCardDesktop({
 
       {/* Text panel — width 0 unless active, only place the title lives */}
       <div
-        className="h-full shrink-0 overflow-hidden bg-[#151A20] transition-[width] duration-500 ease-out"
+        className="h-full shrink-0 overflow-hidden bg-grey-bg transition-[width] duration-500 ease-out"
         style={{ width: isActive ? TEXT_WIDTH : 0 }}
       >
         <div
           style={{ width: TEXT_WIDTH }}
           className="flex h-full flex-col justify-center gap-3 p-8"
         >
-          <h4 className="text-primary-text">{item.title}</h4>
-          <p className="text-sm leading-relaxed text-muted">
+          <h4>{item.title}</h4>
+          <p className="text-sm leading-relaxed text-secondary-text">
             {item.description}
           </p>
           <div className="flex items-center gap-1.5 text-xs font-medium text-purple-light">

@@ -62,6 +62,7 @@ export function EventsProvider({
   const monthKey = format(currentDate, "yyyy-MM");
   const isInitialMonth = monthKey === format(initialDate, "yyyy-MM");
 
+
   // compute calendar data and cache with SWR for future renders
   const { data, isLoading } = useSWR(
     ["events", monthKey],
@@ -165,8 +166,7 @@ export function EventsProvider({
         ),
     [searched],
   );
-
-  return (
+    return (
     <EventsContext.Provider
       value={{
         view,

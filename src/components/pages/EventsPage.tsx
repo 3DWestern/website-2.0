@@ -3,7 +3,6 @@
 import { useState } from "react";
 import Link from "next/link";
 import { CalendarX } from "lucide-react";
-import { koulen } from "@/lib/fonts";
 import {
   CalendarGrid,
   CalendarGridSkeleton,
@@ -56,7 +55,7 @@ export function EventsPage() {
         resultCount={calendarEvents.length}
       />
 
-      <section className="py-16 bg-slate-50">
+      <section className="py-16 bg-grey-bg">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Desktop / tablet: calendar-first layout */}
           <div className="hidden md:grid grid-cols-3 gap-8">
@@ -75,7 +74,7 @@ export function EventsPage() {
             </div>
 
             <div>
-              <h3 className={`text-lg mb-4 ${koulen.className}`}>
+              <h3 className={`text-lg mb-4`}>
                 {selectedDate ? formatDayLabel(selectedDate) : "Select a day"}
               </h3>
               {eventsLoading ? (
@@ -96,9 +95,9 @@ export function EventsPage() {
                   ))}
                 </div>
               ) : (
-                <div className="flex flex-col items-center text-center py-12 px-4 rounded-xl border border-dashed border-slate-200">
+                <div className="flex flex-col items-center text-center py-12 px-4 rounded-xl border border-dashed border-b-grey">
                   <CalendarX
-                    className="w-8 h-8 text-slate-300 mb-3"
+                    className="w-8 h-8 text-primary-text mb-3"
                     aria-hidden="true"
                   />
                   <p className="text-sm text-slate-500">
