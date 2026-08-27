@@ -1,6 +1,5 @@
 "use client";
 
-import { koulen } from "@/lib/fonts";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
@@ -43,12 +42,12 @@ export function ProjectDetailPage({
   return (
     <main className="min-h-screen">
       {/* Header */}
-      <section className="bg-white py-16">
+      <section className="bg-grey-bg py-25 ">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-8">
             <Link
               href="/projects"
-              className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-purple-700 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 rounded"
+              className="inline-flex items-center gap-2 text-sm text-purple-light hover:text-purple-light/70 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 rounded"
             >
               <ArrowLeft className="w-4 h-4" />
               Back to Projects
@@ -59,7 +58,7 @@ export function ProjectDetailPage({
             {project.categories.map((category) => (
               <span
                 key={category.name}
-                className="text-xs font-medium px-2.5 py-1 rounded-full bg-purple-50 text-purple-700 uppercase tracking-wide"
+                className="text-xs font-medium px-2.5 py-1 rounded-full gradient uppercase tracking-wide"
               >
                 {category.name}
               </span>
@@ -70,15 +69,15 @@ export function ProjectDetailPage({
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-            className={`text-3xl sm:text-4xl lg:text-5xl mb-6 leading-tight ${koulen.className}`}
+            className={`text-3xl sm:text-4xl lg:text-5xl mb-6 leading-tight `}
           >
             {project.title}
           </motion.h1>
 
-          <div className="flex flex-wrap items-center gap-5 text-sm text-muted-foreground">
+          <div className="flex flex-wrap items-center gap-5 text-sm text-secondary-text">
             <div className="flex items-center gap-1.5">
               <Users className="w-4 h-4" aria-hidden="true" />
-              <span className="font-medium text-foreground">
+              <span className="font-medium">
                 {contributors.join(", ")}
               </span>
             </div>
@@ -93,7 +92,7 @@ export function ProjectDetailPage({
       </section>
 
       {/* Cover image */}
-      <div className="bg-slate-100">
+      <div className="bg-black-bg">
         <div className="relative w-full aspect-21/9 max-h-[400px] overflow-hidden">
           <Image
             src={project.image.src}
@@ -106,7 +105,7 @@ export function ProjectDetailPage({
       </div>
 
       {/* Body */}
-      <section className="py-16 bg-slate-50">
+      <section className="py-16 bg-grey-bg">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 24 }}
@@ -114,7 +113,7 @@ export function ProjectDetailPage({
             transition={{ duration: 0.6, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
             className="flex flex-col gap-10"
           >
-            <p className="text-lg text-slate-700 leading-relaxed">
+            <p className="text-lg text-secondary-text leading-relaxed">
               {project.description}
             </p>
 
@@ -125,7 +124,7 @@ export function ProjectDetailPage({
                     href={project.github}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-slate-900 text-white text-sm font-semibold hover:bg-slate-700 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400"
+                    className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg  text-sm font-semibold  transition-colors focus-visible:outline-none btn"
                   >
                     <Code2 className="w-4 h-4" aria-hidden="true" />
                     View on GitHub
@@ -134,7 +133,7 @@ export function ProjectDetailPage({
                 {project.blogUrl && (
                   <Link
                     href={project.blogUrl}
-                    className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-purple-50 text-purple-700 text-sm font-semibold hover:bg-purple-100 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400"
+                    className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg  text-sm font-semibold  transition-colors focus-visible:outline-none border border-primary-text/18 hover:bg-purple-light/6 hover:border-purple-light text-primary-text"
                   >
                     <FileText className="w-4 h-4" aria-hidden="true" />
                     Read the blog post
@@ -144,7 +143,7 @@ export function ProjectDetailPage({
             )}
 
             <div>
-              <h2 className={`text-2xl mb-4 ${koulen.className}`}>Gallery</h2>
+              <h2 className={`text-2xl mb-4`}>Gallery</h2>
               <ProjectGallery images={gallery} />
             </div>
           </motion.div>
@@ -153,14 +152,14 @@ export function ProjectDetailPage({
 
       {/* Related projects */}
       {related.length > 0 && (
-        <section className="py-16 bg-white border-t border-slate-100">
+        <section className="py-16 bg-black-bg border-t border-b-grey">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 className={`text-2xl mb-8 ${koulen.className}`}>
+            <h2 className={`text-2xl mb-8 `}>
               More Projects
             </h2>
             <div className="columns-1 sm:columns-2 lg:columns-3 gap-6">
               {related.map((p) => (
-                <ProjectShowcaseCard key={p.id} project={p} />
+                <ProjectShowcaseCard key={p.id} project={p} className="bg-grey-bg"/>
               ))}
             </div>
           </div>

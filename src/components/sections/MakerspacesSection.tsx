@@ -9,7 +9,7 @@ import { Button } from "../ui/button";
 
 export function MakerspacesSection() {
   return (
-    <section className="bg-[#0B0D10] py-16 lg:py-24">
+    <section className=" py-16 lg:py-24">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 xl:px-12">
         <motion.div
           initial={{ opacity: 0 }}
@@ -19,7 +19,7 @@ export function MakerspacesSection() {
           className="mb-12 text-center lg:mb-16"
         >
           <h2>The Makerspaces</h2>
-          <p className="mt-3 text-[15px] text-[color:var(--base-text)] sm:text-base">
+          <p className="mt-3 text-[15px] text-secondary-text sm:text-base">
             Two floors, two disciplines, one Morrissette Building.
           </p>
         </motion.div>
@@ -58,7 +58,7 @@ export function MakerspacesSection() {
                   {/* Content */}
                   <div className="flex flex-col justify-center p-8 lg:p-12">
                     <h3>{space.name}</h3>
-                    <p className="mt-3 text-[15px] leading-relaxed text-[color:var(--base-text)] sm:text-base">
+                    <p className="mt-3 text-[15px] leading-relaxed text-secondary-text sm:text-base">
                       {space.description}
                     </p>
 
@@ -66,9 +66,9 @@ export function MakerspacesSection() {
                       {space.tools.map((tool) => (
                         <div
                           key={tool}
-                          className="flex items-start gap-2 text-[14px] text-[color:var(--base-text)]"
+                          className="flex items-start gap-2 text-[14px] text-secondary-text"
                         >
-                          <span className="mt-2 h-1 w-1 flex-shrink-0 rounded-full bg-[color:var(--base-text)]" />
+                          <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-secondary-text" />
                           <span>{tool}</span>
                         </div>
                       ))}
@@ -76,11 +76,11 @@ export function MakerspacesSection() {
 
                     <div className="mt-6 flex flex-col gap-2">
                       <div className="flex items-center gap-2 text-sm font-medium text-purple-light">
-                        <MapPin className="h-4 w-4 flex-shrink-0" />
+                        <MapPin className="h-4 w-4 shrink-0" />
                         {space.location}
                       </div>
                       <div className="flex items-center gap-2 text-sm font-medium text-purple-light">
-                        <Clock className="h-4 w-4 flex-shrink-0" />
+                        <Clock className="h-4 w-4 shrink-0" />
                         {space.hours}
                       </div>
                     </div>
@@ -92,7 +92,7 @@ export function MakerspacesSection() {
         </div>
 
         <div className="mt-14 flex flex-col items-center gap-5 text-center lg:mt-16">
-          <p className="text-[15px] text-[color:var(--base-text)] sm:text-base">
+          <p className="text-[15px] text-secondary-text sm:text-base">
             Complete level 1 training on our OWL course to access the
             Makerspaces.
           </p>

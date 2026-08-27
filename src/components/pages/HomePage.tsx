@@ -4,6 +4,7 @@ import { LatestSection } from "@/components/sections/LatestSection";
 import { MakerspacesSection } from "@/components/sections/MakerspacesSection";
 import { JoinUsSection } from "@/components/sections/JoinUsSection";
 import { api } from "@/lib/cms/api.server";
+import { EquipmentSection } from "../sections/EquipmentSection";
 
 export default async function HomePage() {
   const [latestPosts, latestProjects] = await Promise.all([
@@ -17,6 +18,7 @@ export default async function HomePage() {
     <main>
       <Hero />
       <AboutUsSection />
+      <EquipmentSection />
       <MakerspacesSection />
       {latestPost && (
         <LatestSection post={latestPost} projects={latestProjects} />

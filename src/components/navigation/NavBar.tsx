@@ -88,7 +88,7 @@ export function NavBar() {
           {navLinks.map((link) => (
             <NavLink
               link={link}
-              active={isActive(link.label)}
+              active={isActive(link.path)}
               key={link.path}
             />
           ))}

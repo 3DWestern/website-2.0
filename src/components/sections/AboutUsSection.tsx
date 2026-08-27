@@ -8,7 +8,7 @@ import { Button } from "../ui/button";
 
 export function AboutUsSection() {
   return (
-    <section className="w-full bg-[#151A20] px-6 py-16 lg:px-16 lg:py-24">
+    <section className="w-full bg-grey-bg px-6 py-16 lg:px-16 lg:py-24">
       <div className="mx-auto flex max-w-7xl flex-col gap-10 lg:flex-row lg:items-center lg:gap-12">
         {/* Image */}
         <motion.div
@@ -18,7 +18,7 @@ export function AboutUsSection() {
           transition={{ duration: 0.7 }}
           className="order-1 w-full lg:order-2 lg:w-[58%]"
         >
-          <div className="clip-corners relative aspect-[3/2] w-full overflow-hidden">
+          <div className="clip-corners relative aspect-3/2 w-full overflow-hidden">
             <Image
               src="/images/morrissette.png"
               alt="Rendering of the 3D Western makerspace building"
@@ -43,14 +43,14 @@ export function AboutUsSection() {
 
           <h2>3D Western</h2>
 
-          <p className="mt-6 text-[15px] leading-relaxed text-base sm:text-base">
+          <p className="mt-6 text-[15px] leading-relaxed text-base text-secondary-text sm:text-base">
             We&apos;re a student-run organization built on one idea: the tools
             to prototype, fabricate, and build shouldn&apos;t be locked away.
             Originally founded as a 3D printing club, we&apos;ve grown into a
             full makerspace.
           </p>
 
-          <p className="mt-3 text-[15px] leading-relaxed text-base sm:text-base mb-8">
+          <p className="mt-3 text-[15px] leading-relaxed text-base text-secondary-text sm:text-base mb-8">
             Partnered with Morrissette Entrepreneurship at Western, we now
             offer CNC, laser cutting, water jet, and woodworking — free to
             access for any student on campus.

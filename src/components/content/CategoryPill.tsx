@@ -16,8 +16,8 @@ export default function CategoryPill({
                     focus-visible:ring-purple-400
                     ${
                       category === title
-                        ? "bg-purple-600 text-white"
-                        : "bg-slate-100 text-slate-600 hover:bg-slate-200"
+                        ? "gradient"
+                        : "bg-black-bg text-secondary-text hover:bg-purple-dark/30"
                     }`}
     >
       {title}

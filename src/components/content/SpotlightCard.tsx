@@ -43,7 +43,7 @@ export function SpotlightCard({ spotlight }: SpotlightCardProps) {
           <p className="text-xs text-secondary-text leading-relaxed">
             {spotlight.projectDescription}
           </p>
-          <span className="mt-3 inline-block text-[11px] px-3 py-1 rounded-full bg-purple-light/10 text-purple-light border border-purple-light/20">
+          <span className="mt-3 inline-block text-[11px] px-3 py-1 rounded-full gradient">
             {spotlight.category}
           </span>
         </div>

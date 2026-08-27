@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { instagramPosts } from '@/components/data/socials';
 import { InstaPostCard } from '@/components/content/InstaPostCard';
+import { Button } from '../ui/button';
 
 // How many cards render on each side of the centered post.
 // 2 on each side + 1 center = 5 visible cards, matching the design.
@@ -49,20 +50,24 @@ export function SocialsSection() {
 						<>
 							{/* Arrow buttons sit on top of the outer cards, like the
 							    reference design, rather than off to the side. */}
-							<button
+							<Button
+								size="icon"
+								variant="outlined"
 								onClick={prev}
 								aria-label="Previous post"
-								className="absolute left-0 sm:left-6 top-1/2 -translate-y-1/2 z-30 w-9 h-9 rounded-full border border-[#29323b] bg-[#151A20] flex items-center justify-center text-primary-text hover:border-purple-light hover:bg-purple-light/6 transition-colors duration-200"
+								className="absolute left-0 sm:left-6 top-1/2 -translate-y-1/2 z-30 w-9 h-9 rounded-full flex items-center justify-center"
 							>
 								<ChevronLeft className="w-4 h-4" />
-							</button>
-							<button
+							</Button>
+							<Button
+								size="icon"
+								variant="outlined"
 								onClick={next}
 								aria-label="Next post"
-								className="absolute right-0 sm:right-6 top-1/2 -translate-y-1/2 z-30 w-9 h-9 rounded-full border border-[#29323b] bg-[#151A20] flex items-center justify-center text-primary-text hover:border-purple-light hover:bg-purple-light/6 transition-colors duration-200"
+								className="absolute right-0 sm:right-6 top-1/2 -translate-y-1/2 z-30 w-9 h-9 rounded-full flex items-center justify-center"
 							>
 								<ChevronRight className="w-4 h-4" />
-							</button>
+							</Button>
 						</>
 					)}
 

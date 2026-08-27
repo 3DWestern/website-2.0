@@ -1,0 +1,65 @@
+"use client";
+
+import Image from "next/image";
+import Link from "next/link";
+import { MapPin, ArrowRight } from "lucide-react";
+import type { EquipmentItem } from "@/components/data/equipment";
+
+const IMAGE_WIDTH = 260;
+const IMAGE_HEIGHT = 380;
+const TEXT_WIDTH = 340;
+
+interface EquipmentCardDesktopProps {
+  item: EquipmentItem;
+  isActive: boolean;
+  onHover: () => void;
+}
+
+export function EquipmentCardDesktop({
+  item,
+  isActive,
+  onHover,
+}: EquipmentCardDesktopProps) {
+  return (
+    <div
+      onMouseEnter={onHover}
+      className="clip-corners-sm flex shrink-0 overflow-hidden bg-black-bg"
+      style={{ height: IMAGE_HEIGHT }}
+    >
+      {/* Image — fixed size always, never resizes, never scales */}
+      <div
+        className="relative shrink-0"
+        style={{ width: IMAGE_WIDTH, height: IMAGE_HEIGHT }}
+      >
+        <Image src={item.image} alt={item.alt} fill className="object-cover" />
+      </div>
+
+      {/* Text panel — width 0 unless active, only place the title lives */}
+      <div
+        className="h-full shrink-0 overflow-hidden bg-[#151A20] transition-[width] duration-500 ease-out"
+        style={{ width: isActive ? TEXT_WIDTH : 0 }}
+      >
+        <div
+          style={{ width: TEXT_WIDTH }}
+          className="flex h-full flex-col justify-center gap-3 p-8"
+        >
+          <h4 className="text-primary-text">{item.title}</h4>
+          <p className="text-sm leading-relaxed text-muted">
+            {item.description}
+          </p>
+          <div className="flex items-center gap-1.5 text-xs font-medium text-purple-light">
+            <MapPin className="h-3.5 w-3.5 shrink-0" />
+            {item.location}
+          </div>
+          <Link
+            href={item.href}
+            className="inline-flex w-fit items-center gap-1.5 text-sm font-medium text-primary-text hover:text-purple-light"
+          >
+            Book equipment
+            <ArrowRight className="h-4 w-4" />
+          </Link>
+        </div>
+      </div>
+    </div>
+  );
+}

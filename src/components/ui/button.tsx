@@ -19,7 +19,7 @@ const buttonVariants = cva(
           "hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50",
         link: "text-primary underline-offset-4 hover:underline",
         outlined:
-          "border border-primary-text/18 hover:bg-purple-light/6 hover:border-purple-light text-primary-text",
+          "border border-primary-text/18 hover:bg-purple-light/10 hover:border-purple-light text-primary-text",
         gradient: "btn text-white",
       },
       size: {

@@ -94,7 +94,7 @@ export function ProjectGallery({ images }: ProjectGalleryProps) {
             aria-modal="true"
             aria-label={`Image ${activeIndex + 1} of ${images.length}: ${images[activeIndex].alt}`}
             id={dialogId}
-            className="fixed inset-0 z-50 bg-slate-950/90 flex items-center justify-center p-4"
+            className="fixed inset-0 z-50 bg-header backdrop-blur-sm flex items-center justify-center p-4"
             onClick={close}
           >
             <button
@@ -104,7 +104,7 @@ export function ProjectGallery({ images }: ProjectGalleryProps) {
                 close();
               }}
               aria-label="Close gallery"
-              className="absolute top-4 right-4 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400"
+              className="absolute top-4 right-4 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 text-primary-text flex items-center justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400"
             >
               <X className="w-5 h-5" />
             </button>
@@ -116,7 +116,7 @@ export function ProjectGallery({ images }: ProjectGalleryProps) {
                   showPrev();
                 }}
                 aria-label="Previous image"
-                className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400"
+                className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 text-primary-text flex items-center justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400"
               >
                 <ChevronLeft className="w-5 h-5" />
               </button>
@@ -148,14 +148,14 @@ export function ProjectGallery({ images }: ProjectGalleryProps) {
                   showNext();
                 }}
                 aria-label="Next image"
-                className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400"
+                className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 text-primary-text flex items-center justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400"
               >
                 <ChevronRight className="w-5 h-5" />
               </button>
             )}
 
             {images.length > 1 && (
-              <span className="absolute bottom-4 left-1/2 -translate-x-1/2 text-xs text-white/70">
+              <span className="absolute bottom-4 left-1/2 -translate-x-1/2 text-xs text-secondary-text">
                 {activeIndex + 1} / {images.length}
               </span>
             )}

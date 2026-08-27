@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { spotlights } from '@/components/data/spotlights';
 import { SpotlightCard } from '@/components/content/SpotlightCard';
+import { Button } from '../ui/button';
 
 export function StudentSection() {
 	const [current, setCurrent] = useState(0);
@@ -40,22 +41,26 @@ export function StudentSection() {
 
 					{/* Arrow buttons */}
 					<div className="flex gap-2">
-						<button
+						<Button
+							size="icon"
+							variant="outlined"
 							onClick={prev}
 							disabled={current === 0}
 							aria-label="Previous spotlight"
-							className="w-9 h-9 rounded-full border border-slate-200 bg-primary-text flex items-center justify-center text-purple-dark hover:bg-slate-50 disabled:opacity-30 disabled:cursor-not-allowed transition-colors duration-200"
+							className="w-9 h-9 rounded-full  flex items-center justify-center disabled:opacity-30 disabled:cursor-not-allowed transition-colors duration-200"
 						>
 							<ChevronLeft className="w-4 h-4" />
-						</button>
-						<button
+						</Button>
+						<Button
+							size="icon"
+							variant="outlined"
 							onClick={next}
 							disabled={current === spotlights.length - 1}
 							aria-label="Next spotlight"
-							className="w-9 h-9 rounded-full border border-slate-200 bg-primary-text flex items-center justify-center text-purple-dark hover:bg-slate-50 disabled:opacity-30 disabled:cursor-not-allowed transition-colors duration-200"
+							className="w-9 h-9 rounded-full flex items-center justify-center  disabled:opacity-30 disabled:cursor-not-allowed transition-colors duration-200"
 						>
 							<ChevronRight className="w-4 h-4" />
-						</button>
+						</Button>
 					</div>
 				</div>
 
@@ -85,8 +90,8 @@ export function StudentSection() {
 							aria-label={`Go to spotlight ${i + 1}`}
 							className={`rounded-full transition-all duration-300 ${
 								i === current
-									? 'w-5 h-2 bg-purple-500'
-									: 'w-2 h-2 bg-slate-300 hover:bg-slate-400'
+									? 'w-5 h-2 bg-purple-light'
+									: 'w-2 h-2 bg-primary-text/25 hover:bg-primary-text/40'
 							}`}
 						/>
 					))}

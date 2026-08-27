@@ -38,7 +38,7 @@ const ProjectShowcaseCard = ({
       >
         <Card
           className={cn(
-            "group relative overflow-hidden rounded-xl border-none bg-grey-bg shadow-sm hover:shadow-lg transition-shadow duration-300",
+            "group relative overflow-hidden rounded-xl border-b border-b-grey bg-black-bg shadow-sm hover:shadow-lg transition-shadow duration-300",
             className,
           )}
         >
@@ -53,7 +53,7 @@ const ProjectShowcaseCard = ({
             {project.categories.map((category) => (
               <span
                 key={category.name}
-                className="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-purple-light/10 text-purple-light border border-purple-light/20S text-[10px] font-semibold uppercase tracking-wide backdrop-blur-sm"
+                className="absolute top-3 left-3 px-2.5 py-1 rounded-full gradient text-xs font-semibold uppercase tracking-wide backdrop-blur-sm"
               >
                 {category.name}
               </span>

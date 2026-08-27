@@ -63,7 +63,7 @@ export function JoinUsSection() {
           starts <span className="text-purple-light">here</span>
         </h2>
 
-        <p className="mt-6 text-[15px] leading-relaxed text-[color:var(--base-text)] sm:text-base mb-8">
+        <p className="mt-6 text-[15px] leading-relaxed text-e5e1e6cc sm:text-base mb-8">
           Join hundreds of Western students already using the space.
         </p>
         <Button variant="gradient" size="pill" asChild>

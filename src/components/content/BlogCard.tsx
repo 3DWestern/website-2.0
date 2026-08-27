@@ -43,7 +43,7 @@ export function BlogCard({ post }: BlogCardProps) {
             return (
               <span
                 key={tag.id + tag.title}
-                className="text-xs font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full bg-purple-50 text-purple-light"
+                className="text-xs font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full gradient"
               >
                 {tag.title}
               </span>
