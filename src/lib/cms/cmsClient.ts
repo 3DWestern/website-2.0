@@ -48,9 +48,10 @@ export const cmsClient = {
   // Client-safe: same-origin fetch, browser attaches cookies automatically,
   // no next/headers, no API key — safe to import in "use client" files.
   clientGet: async (path: string) => {
-    const fallback = await cmsEnabledFallback(path);
-    if (fallback) return fallback;
-    const res = await fetch(`/api/${path}`);
+    const fallback = await cmsEnabledFallback(`${path}`);
+    if (fallback !== null) return fallback;
+
+    const res = await fetch(`${BASE_URL}${path}`);
     if (!res.ok) throw new Error(`CMS request failed: ${res.status}`);
     return res.json();
   },
