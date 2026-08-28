@@ -5,6 +5,10 @@ export const Events: CollectionConfig = {
   access: {
     read: () => true,
   },
+  admin: {
+    group: "Event Content",
+    useAsTitle: "title",
+  },
   fields: [
     { name: "title", type: "text", required: true },
     { name: "description", type: "textarea", required: true },

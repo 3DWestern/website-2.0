@@ -2,6 +2,10 @@ import type { CollectionConfig } from "payload";
 
 export const ProjectCategories: CollectionConfig = {
   slug: "project-categories",
+  admin: {
+    group: "Project Content",
+    useAsTitle: "name",
+  },
   access: {
     read: () => true,
   },

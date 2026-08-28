@@ -6,6 +6,7 @@ export const EventCategories: CollectionConfig = {
     read: () => true,
   },
   admin: {
+    group: "Event Content",
     useAsTitle: "name",
   },
   fields: [

@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Clock, ArrowUpRight } from "lucide-react";
 import { BlogPost } from "@/types/content";
+import { formatShortDate } from "../utils";
 
 interface BlogCardProps {
   post: BlogPost;
@@ -50,7 +51,9 @@ export function BlogCard({ post }: BlogCardProps) {
             );
           })}
 
-          <span className="text-xs text-secondary-text">{post.date}</span>
+          <span className="text-xs text-secondary-text">
+            {formatShortDate(post.date)}
+          </span>
           {post.readingTime && (
             <span className="flex items-center gap-1 text-xs text-secondary-text">
               <Clock className="w-3 h-3" />

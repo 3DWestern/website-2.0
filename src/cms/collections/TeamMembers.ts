@@ -5,6 +5,10 @@ export const TeamMembers: CollectionConfig = {
   access: {
     read: () => true,
   },
+  admin: {
+    useAsTitle: "name",
+    group: "Team Content",
+  },
   fields: [
     { name: "image", type: "text", required: true },
     { name: "name", type: "text", required: true },

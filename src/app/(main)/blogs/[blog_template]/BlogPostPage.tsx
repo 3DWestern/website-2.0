@@ -1,6 +1,5 @@
 "use client";
 
-
 import { motion } from "framer-motion";
 import { RichText } from "@payloadcms/richtext-lexical/react";
 import Image from "next/image";
@@ -8,6 +7,7 @@ import Link from "next/link";
 import { ArrowLeft, Clock, Calendar } from "lucide-react";
 import type { BlogPost } from "@/types/content";
 import { notFound } from "next/navigation";
+import { formatShortDate } from "@/components/utils";
 
 // ---------------------------------------------------------------------------
 // Page component
@@ -68,15 +68,13 @@ export function BlogPostPage({ post }: BlogPostPageProps) {
                     className="rounded-full object-cover ring-1 ring-purple-200"
                   />
                 )}
-                <span className="font-medium ">
-                  {post.author.name}
-                </span>
+                <span className="font-medium ">{post.author.name}</span>
               </div>
             )}
 
             <div className="flex items-center gap-1.5">
               <Calendar className="w-4 h-4" />
-              <time>{post.date}</time>
+              <time>{formatShortDate(post.date)}</time>
             </div>
 
             {post.readingTime && (

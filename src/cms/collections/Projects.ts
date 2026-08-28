@@ -11,6 +11,9 @@ export const Projects: CollectionConfig = {
     },
   },
   admin: {
+    group: "Project Content",
+    useAsTitle: "title",
+
     preview: ({ slug }) => {
       const encodedParams = new URLSearchParams({
         slug: `${slug as string}`,

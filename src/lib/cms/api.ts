@@ -90,7 +90,7 @@ export function buildApi<C extends CollectionConfig>(
     }
 
     // resolve relationship fields
-    params.set("depth", "1");
+    params.set("depth", "2");
 
     // fetch and return
     const result = await fetch(config.slug, params.toString());

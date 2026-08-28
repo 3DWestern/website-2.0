@@ -19,6 +19,8 @@ import {
   TeamMember as PayloadTeamMember,
   ProjectCategory as PayloadPC,
   EventCategory as PayloadEC,
+  Avatar as PayloadAvatar,
+  CoverImage as PayloadCI,
 } from "../../../payload-types";
 
 export type DocType =
@@ -31,13 +33,21 @@ export type DocType =
   | PayloadTag
   | PayloadPC;
 
-type ResolvedBlogPost = Omit<PayloadBlogPost, "tags" | "author"> & {
+type ResolvedBlogPost = Omit<
+  PayloadBlogPost,
+  "tags" | "author" | "coverImage"
+> & {
   tags: PayloadTag[] | null;
   author: Author | null;
+  coverImage: PayloadCI;
 };
 
 export type ResolvedProject = Omit<PayloadProject, "categories"> & {
   categories: ProjectCategory[] | null;
+};
+
+export type ResolvedAuthor = Omit<PayloadAuthor, "avatar"> & {
+  avatar: PayloadAvatar;
 };
 
 // Get the ordinal identifier for the day
@@ -148,15 +158,14 @@ export const transformBlog = (doc: ResolvedBlogPost): BlogPost => {
     // or as a full Author object if fetched with depth >= 1
     author:
       typeof doc.author === "object" && doc.author !== null
-        ? {
-            id: doc.author.id,
-            name: doc.author.name,
-            avatar: doc.author.avatar,
-          }
+        ? transformAuthor(doc.author as ResolvedAuthor)
         : doc.author, // fallback: unpopulated, just the raw ID
     date: doc.date,
     readingTime: doc.readingTime || undefined,
-    coverImage: doc.coverImage,
+    coverImage: {
+      url: `${process.env.CMS_BASE_URL}${doc.coverImage.url}`,
+      alt: doc.coverImage.alt,
+    },
     tags:
       doc.tags?.map((tag) => ({
         id: tag.id,
@@ -172,15 +181,18 @@ export const transformBlogs = (docs: ResolvedBlogPost[]): BlogPost[] => {
   return transformDocs(docs, transformBlog);
 };
 
-export const transformAuthor = (doc: PayloadAuthor): Author => {
+export const transformAuthor = (doc: ResolvedAuthor): Author => {
   return {
     id: doc.id,
     name: doc.name,
-    avatar: doc.avatar,
+    avatar: {
+      url: `${process.env.CMS_BASE_URL}${doc.avatar.url}`,
+      alt: doc.avatar.alt,
+    },
   };
 };
 
-export const transformAuthors = (docs: PayloadAuthor[]): Author[] => {
+export const transformAuthors = (docs: ResolvedAuthor[]): Author[] => {
   return transformDocs(docs, transformAuthor);
 };
 

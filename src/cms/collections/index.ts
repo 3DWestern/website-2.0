@@ -8,3 +8,4 @@ export { Users } from "./Users";
 export { ProjectCategories } from "./ProjectCategories";
 export { EventCategories } from "./EventCategories";
 export { Media } from "./Media";
+export { Avatars, CoverImages } from "./BlogMedia";

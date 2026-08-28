@@ -14,6 +14,7 @@ export const Blogs: CollectionConfig = {
     },
   },
   admin: {
+    group: "Blog Content",
     // Builds the URL used for the "Preview" button in the Payload admin UI.
     // This lets an editor view a draft/unpublished blog on the live frontend
     // before it's published, by hitting a special /preview route that your
@@ -65,11 +66,8 @@ export const Blogs: CollectionConfig = {
     { name: "readingTime", type: "number" },
     {
       name: "coverImage",
-      type: "group",
-      fields: [
-        { name: "url", type: "text", required: true },
-        { name: "alt", type: "text" },
-      ],
+      type: "relationship",
+      relationTo: "cover-images",
     },
     // Relationship field: can link to multiple documents in the "tags" collection.
     // maxRows caps how many tags can be attached to a single blog post at 3.

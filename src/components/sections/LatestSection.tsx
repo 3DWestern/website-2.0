@@ -10,7 +10,6 @@ interface LatestSectionProps {
 }
 
 export function LatestSection({ post, projects }: LatestSectionProps) {
-  console.log(projects[1].categories[0].name);
   return (
     <section className="w-full bg-grey-bg px-6 py-16 lg:px-16 lg:py-24">
       <div className="mx-auto max-w-7xl">

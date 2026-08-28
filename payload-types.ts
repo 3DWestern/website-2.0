@@ -68,6 +68,8 @@ export interface Config {
   blocks: {};
   collections: {
     media: Media;
+    avatars: Avatar;
+    'cover-images': CoverImage;
     blogs: Blog;
     users: User;
     tags: Tag;
@@ -86,6 +88,8 @@ export interface Config {
   collectionsJoins: {};
   collectionsSelect: {
     media: MediaSelect<false> | MediaSelect<true>;
+    avatars: AvatarsSelect<false> | AvatarsSelect<true>;
+    'cover-images': CoverImagesSelect<false> | CoverImagesSelect<true>;
     blogs: BlogsSelect<false> | BlogsSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
     tags: TagsSelect<false> | TagsSelect<true>;
@@ -166,6 +170,66 @@ export interface Media {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "avatars".
+ */
+export interface Avatar {
+  id: number;
+  'author-name': string;
+  alt: string;
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
+  sizes?: {
+    avatar?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+  };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "cover-images".
+ */
+export interface CoverImage {
+  id: number;
+  'blog-title': string;
+  alt: string;
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
+  sizes?: {
+    'cover-image'?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+  };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "blogs".
  */
 export interface Blog {
@@ -176,10 +240,7 @@ export interface Blog {
   author: number | Author;
   date: string;
   readingTime?: number | null;
-  coverImage: {
-    url: string;
-    alt?: string | null;
-  };
+  coverImage?: (number | null) | CoverImage;
   tags?: (number | Tag)[] | null;
   content: {
     root: {
@@ -207,10 +268,7 @@ export interface Blog {
 export interface Author {
   id: number;
   name: string;
-  avatar: {
-    url: string;
-    alt: string;
-  };
+  avatar?: (number | null) | Avatar;
   updatedAt: string;
   createdAt: string;
 }
@@ -389,6 +447,14 @@ export interface PayloadLockedDocument {
         value: number | Media;
       } | null)
     | ({
+        relationTo: 'avatars';
+        value: number | Avatar;
+      } | null)
+    | ({
+        relationTo: 'cover-images';
+        value: number | CoverImage;
+      } | null)
+    | ({
         relationTo: 'blogs';
         value: number | Blog;
       } | null)
@@ -504,6 +570,72 @@ export interface MediaSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "avatars_select".
+ */
+export interface AvatarsSelect<T extends boolean = true> {
+  'author-name'?: T;
+  alt?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  url?: T;
+  thumbnailURL?: T;
+  filename?: T;
+  mimeType?: T;
+  filesize?: T;
+  width?: T;
+  height?: T;
+  focalX?: T;
+  focalY?: T;
+  sizes?:
+    | T
+    | {
+        avatar?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+      };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "cover-images_select".
+ */
+export interface CoverImagesSelect<T extends boolean = true> {
+  'blog-title'?: T;
+  alt?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  url?: T;
+  thumbnailURL?: T;
+  filename?: T;
+  mimeType?: T;
+  filesize?: T;
+  width?: T;
+  height?: T;
+  focalX?: T;
+  focalY?: T;
+  sizes?:
+    | T
+    | {
+        'cover-image'?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+      };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "blogs_select".
  */
 export interface BlogsSelect<T extends boolean = true> {
@@ -513,12 +645,7 @@ export interface BlogsSelect<T extends boolean = true> {
   author?: T;
   date?: T;
   readingTime?: T;
-  coverImage?:
-    | T
-    | {
-        url?: T;
-        alt?: T;
-      };
+  coverImage?: T;
   tags?: T;
   content?: T;
   updatedAt?: T;
@@ -650,12 +777,7 @@ export interface SponsorsSelect<T extends boolean = true> {
  */
 export interface AuthorsSelect<T extends boolean = true> {
   name?: T;
-  avatar?:
-    | T
-    | {
-        url?: T;
-        alt?: T;
-      };
+  avatar?: T;
   updatedAt?: T;
   createdAt?: T;
 }
