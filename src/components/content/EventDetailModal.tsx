@@ -58,9 +58,9 @@ export function EventDetailModal({
               <span
                 key={cat.name}
                 className={cn(
-                  "text-[10px] font-semibold uppercase tracking-wide px-2 py-1 rounded-full",
+                  "text-[10px] font-semibold uppercase tracking-wide px-2 py-1 rounded-full gradient",
                   categoryStyles[cat.name]?.badge ??
-                    "bg-slate-100 text-slate-600",
+                    "bg-grey-bg text-secondary-text",
                 )}
               >
                 {cat.name}
@@ -83,23 +83,23 @@ export function EventDetailModal({
         )}
 
         <div className="space-y-3">
-          <div className="flex items-center gap-2 text-sm text-muted-foreground">
+          <div className="flex items-center gap-2 text-sm text-secondary-text">
             <Calendar size={16} aria-hidden="true" />
             <span>{formatDayLabel(parseEventDate(event.schedule.date))}</span>
           </div>
-          <div className="flex items-center gap-2 text-sm text-muted-foreground">
+          <div className="flex items-center gap-2 text-sm text-secondary-text">
             <Clock size={16} aria-hidden="true" />
             <span>
               {formatTime(event.schedule.startTime)} –{" "}
               {formatTime(event.schedule.endTime)}
             </span>
           </div>
-          <div className="flex items-center gap-2 text-sm text-muted-foreground">
+          <div className="flex items-center gap-2 text-sm text-secondary-text">
             <MapPin size={16} aria-hidden="true" />
             <span>{event.location}</span>
           </div>
           {/* {event.rsvp.enabled && ( */}
-          {/*   <div className="flex items-center gap-2 text-sm text-muted-foreground"> */}
+          {/*   <div className="flex items-center gap-2 text-sm text-secondary-text"> */}
           {/*     <Users size={16} aria-hidden="true" /> */}
           {/*     <span> */}
           {/*       {event.rsvp.rsvpCount} */}
@@ -112,10 +112,10 @@ export function EventDetailModal({
 
         <DialogFooter>
           <DialogClose asChild>
-            <Button variant="outline">Close</Button>
+            <Button variant="outlined">Close</Button>
           </DialogClose>
           {event.url && (
-            <Button asChild className="bg-purple-600 hover:bg-purple-700">
+            <Button variant="gradient" asChild >
               <a href={event.url} target="_blank" rel="noopener noreferrer">
                 Event Link
                 <ExternalLink

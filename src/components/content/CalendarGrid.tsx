@@ -16,6 +16,7 @@ import {
 } from "./calendarUtils";
 import { cn } from "../ui/utils";
 import { Event } from "@/types/content";
+import { Button } from "../ui/button";
 
 type CalendarGridProps = {
   month: Date;
@@ -111,17 +112,17 @@ export function CalendarGrid({
           transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
           role="grid"
           aria-label={formatMonthYear(month)}
-          className="rounded-xl border border-slate-100 overflow-hidden bg-white"
+          className="rounded-xl border border-b-grey overflow-hidden bg-black-bg"
         >
           <div
             role="row"
-            className="grid grid-cols-7 bg-slate-50 border-b border-slate-100"
+            className="grid grid-cols-7 bg-grey-bg/30 border-b border-b-grey"
           >
             {WEEKDAY_LABELS.map((d) => (
               <div
                 key={d}
                 role="columnheader"
-                className="py-2 text-center text-[11px] font-semibold uppercase tracking-wide text-slate-400"
+                className="py-2 text-center text-[11px] font-semibold uppercase tracking-wide text-secondary-text"
               >
                 {d}
               </div>
@@ -162,18 +163,18 @@ export function CalendarGrid({
                     onFocus={() => setFocusedDate(date)}
                     onKeyDown={(e) => handleKeyDown(e, date)}
                     className={cn(
-                      "relative h-16 sm:h-20 border-b border-r border-slate-50 flex flex-col items-center justify-start pt-1.5 gap-1 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-purple-400",
+                      "relative h-16 sm:h-20 border-b border-r border-b-grey flex flex-col items-center justify-start pt-1.5 gap-1 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-purple-400",
                       inMonth
-                        ? "bg-white hover:bg-purple-50/60"
-                        : "bg-slate-50/50 text-slate-300",
-                      isSelected && "bg-purple-50 hover:bg-purple-50",
+                        ? "bg-black-bg hover:bg-purple-dark/20 text-primary-text"
+                        : "bg-grey-bg/60 text-secondary-text",
+                      isSelected && "bg-purple-dark/40 hover:bg-purple-dark/50",
                     )}
                   >
                     <span
                       className={cn(
                         "text-xs sm:text-sm w-6 h-6 flex items-center justify-center rounded-full",
-                        isToday && "bg-purple-600 text-white font-semibold",
-                        !isToday && inMonth && "text-slate-700",
+                        isToday && "gradient text-primary-text font-semibold",
+                        !isToday && inMonth && "text-primary-text",
                       )}
                     >
                       {date.getDate()}
@@ -185,12 +186,12 @@ export function CalendarGrid({
                           className={cn(
                             "w-1.5 h-1.5 rounded-full",
                             categoryStyles[event.categories[0]?.name]?.dot ??
-                              "bg-slate-300",
+                              "bg-primary-text",
                           )}
                         />
                       ))}
                       {dayEvents.length > 3 && (
-                        <span className="text-[9px] text-slate-400 leading-none">
+                        <span className="text-[9px] text-secondary-text leading-none">
                           +{dayEvents.length - 3}
                         </span>
                       )}
@@ -216,38 +217,44 @@ export function MonthNav({
 }) {
   return (
     <div className="flex items-center justify-between mb-4">
-      <h2 className={`text-2xl ${koulen.className}`}>
+      <h2 className={`text-2xl`}>
         {formatMonthYear(month)}
       </h2>
       <div className="flex items-center gap-2">
-        <button
+        <Button
+          size="pill"
+          variant="gradient"
           onClick={onToday}
-          className="px-3 py-1.5 rounded-lg text-xs font-semibold text-purple-700 bg-purple-50 hover:bg-purple-100 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400"
+          className="px-3 py-1.5 rounded-lg text-xs font-semibold"
         >
           Today
-        </button>
-        <button
+        </Button>
+        <Button
+          size="icon"
+          variant="outlined"
           onClick={() => onMonthChange(addMonths(month, -1))}
           aria-label="Previous month"
-          className="w-8 h-8 rounded-full border border-slate-200 bg-white flex items-center justify-center text-slate-600 hover:bg-slate-50 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400"
+          className="w-8 h-8 rounded-full "
         >
           <ChevronLeft className="w-4 h-4" />
-        </button>
-        <button
+        </Button>
+        <Button
+          size="icon"
+          variant="outlined"
           onClick={() => onMonthChange(addMonths(month, 1))}
           aria-label="Next month"
-          className="w-8 h-8 rounded-full border border-slate-200 bg-white flex items-center justify-center text-slate-600 hover:bg-slate-50 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400"
+          className="w-8 h-8 rounded-full "
         >
           <ChevronRight className="w-4 h-4" />
-        </button>
+        </Button>
       </div>
     </div>
   );
 }
 export function CalendarGridSkeleton() {
   return (
-    <div className="rounded-xl border border-slate-100 overflow-hidden bg-white animate-pulse">
-      <div className="grid grid-cols-7 bg-slate-50 border-b border-slate-100">
+    <div className="rounded-xl border border-b-grey overflow-hidden bg-black-bg animate-pulse">
+      <div className="grid grid-cols-7 bg-grey-bg border-b border-b-grey">
         {Array.from({ length: 7 }).map((_, i) => (
           <div key={i} className="h-8" />
         ))}
@@ -257,7 +264,7 @@ export function CalendarGridSkeleton() {
           {Array.from({ length: 7 }).map((_, di) => (
             <div
               key={di}
-              className="h-16 sm:h-20 border-b border-r border-slate-50 bg-slate-50"
+              className="h-16 sm:h-20 border-b border-r border-b-grey bg-grey-bg"
             />
           ))}
         </div>

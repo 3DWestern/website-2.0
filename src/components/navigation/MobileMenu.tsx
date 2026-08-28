@@ -21,12 +21,12 @@ export default function MobileMenu({ isActive, navLinks }: MobileMenuProps) {
         gridTemplateRows: isMenuOpen ? "1fr" : "0fr",
         transition: "grid-template-rows .5s ease",
       }}
-      className={`top-16 left-0 w-full h-[calc(100dvh-64px)] lg:h-0  ${
+      className={`top-16 left-0 w-full h-[calc(100dvh-64px)] lg:h-0   ${
         isMenuOpen ? "" : "pointer-events-none"
       }`}
       aria-hidden={!isMenuOpen}
     >
-    <div className="flex lg:hidden flex-col z-40 bg-header backdrop-blur-sm w-full h-full items-center justify-center gap-6 overflow-hidden">        {navLinks.map((link) => (
+    <div className="flex lg:hidden flex-col z-40 w-full h-full items-center justify-center gap-6 overflow-hidden bg-header backdrop-blur-sm ">        {navLinks.map((link) => (
           <NavLink
             key={link.path}
             link={link}

@@ -15,6 +15,7 @@ import { formatDayLabel } from "@/components/content/calendarUtils";
 import { useEvents } from "@/context/EventContext";
 import { Event } from "@/types/content";
 import PageHeader from "../content/Header";
+import { Button } from "../ui/button";
 
 export function EventsPage() {
   const {
@@ -97,10 +98,10 @@ export function EventsPage() {
               ) : (
                 <div className="flex flex-col items-center text-center py-12 px-4 rounded-xl border border-dashed border-b-grey">
                   <CalendarX
-                    className="w-8 h-8 text-primary-text mb-3"
+                    className="w-8 h-8 text-secondary-text mb-3"
                     aria-hidden="true"
                   />
-                  <p className="text-sm text-slate-500">
+                  <p className="text-sm text-secondary-text">
                     No events on this day
                     {category !== "all" || search
                       ? " matching your filters"
@@ -139,27 +140,29 @@ export function EventsPage() {
             ) : (
               <div className="flex flex-col items-center text-center py-16">
                 <CalendarX
-                  className="w-10 h-10 text-slate-300 mb-4"
+                  className="w-10 h-10 text-secondary-text mb-4"
                   aria-hidden="true"
                 />
-                <p className="text-slate-500 mb-4">
+                <p className="text-secondary-text mb-4">
                   No events match those filters.
                 </p>
-                <button
+                <Button
+                  size="pill"
+                  variant="outlined"
                   onClick={resetFilters}
-                  className="px-6 py-2.5 rounded-lg bg-purple-600 text-white text-sm font-semibold hover:bg-purple-700 active:scale-95 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400"
+                  className="px-6 py-2.5 rounded-lg text-sm font-semibold  "
                 >
                   Clear filters
-                </button>
+                </Button>
               </div>
             )}
           </div>
         </div>
 
         <div className="flex flex-col items-center justify-center w-full py-4 mt-12">
-          <p className="text-lg font-semibold mb-4 text-center">
+          <p className="text-lg font-semibold mb-4 text-center text-secondary-text">
             Want to organize an event?&nbsp;
-            <Link href="/contact" className="text-purple-700 underline">
+            <Link href="/contact" className="text-purple-light hover:text-purple-light/60">
               Contact Us
             </Link>
           </p>

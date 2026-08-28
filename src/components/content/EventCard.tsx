@@ -48,12 +48,12 @@ export function EventCard({
         onClick={() => onClick(event)}
         aria-label={`View details for ${event.title}`}
         className={cn(
-          "w-full flex items-center gap-4 p-3 rounded-lg bg-white border border-slate-100 hover:border-purple-200 hover:shadow-sm transition-all text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400",
+          "w-full flex items-center gap-4 p-3 rounded-lg bg-black-bg border border-b-grey hover:border-purple-dark/60 hover:shadow-sm transition-all text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400",
           event.status === "cancelled" && "opacity-60",
           className,
         )}
       >
-        <div className="flex flex-col items-center justify-center w-12 h-12 rounded-lg bg-purple-50 text-purple-700 shrink-0">
+        <div className="flex flex-col items-center justify-center w-12 h-12 rounded-lg bg-grey-bg text-purple-light/80 shrink-0">
           <span className="text-[10px] font-semibold leading-none">
             {month}
           </span>
@@ -61,7 +61,7 @@ export function EventCard({
         </div>
         <div className="min-w-0 flex-1">
           <div className="flex items-center gap-2">
-            <p className="text-sm font-semibold text-slate-900 truncate">
+            <p className="text-sm font-semibold text-primary-text truncate">
               {event.title}
             </p>
             {status && (
@@ -75,7 +75,7 @@ export function EventCard({
               </span>
             )}
           </div>
-          <div className="flex items-center gap-3 mt-0.5 text-xs text-slate-500">
+          <div className="flex items-center gap-3 mt-0.5 text-xs text-secondary-text">
             <span className="flex items-center gap-1">
               <Clock className="w-3 h-3" aria-hidden="true" />
               {formatTime(event.schedule.startTime)}
@@ -92,7 +92,7 @@ export function EventCard({
               key={cat.name}
               className={cn(
                 "w-2 h-2 rounded-full",
-                categoryStyles[cat.name]?.dot ?? "bg-slate-300",
+                categoryStyles[cat.name]?.dot ?? "bg-primary-text",
               )}
             />
           ))}
@@ -132,7 +132,7 @@ export function EventCard({
         {event.categories.map((cat) => (
           <span
             key={cat.name}
-            className="text-[10px] font-semibold uppercase tracking-wide px-2 py-1 rounded-full bg-white/90 text-purple-700"
+            className="text-[10px] font-semibold uppercase tracking-wide px-2 py-1 rounded-full bg-primary-text/90 text-purple-dark"
           >
             {cat.name}
           </span>
@@ -149,7 +149,7 @@ export function EventCard({
         </span>
       )}
 
-      <div className="relative p-6 flex flex-col justify-end h-full text-white z-20">
+      <div className="relative p-6 flex flex-col justify-end h-full text-primary-text z-20">
         <h3 className="text-2xl font-bold drop-shadow-lg leading-tight">
           {event.title}
         </h3>
@@ -181,16 +181,16 @@ export function EventCardSkeleton({
 }) {
   if (variant === "compact") {
     return (
-      <div className="w-full flex items-center gap-4 p-3 rounded-lg bg-white border border-slate-100 animate-pulse">
-        <div className="w-12 h-12 rounded-lg bg-slate-200 shrink-0" />
+      <div className="w-full flex items-center gap-4 p-3 rounded-lg bg-black-bg border border-b-grey animate-pulse">
+        <div className="w-12 h-12 rounded-lg bg-grey-bg shrink-0" />
         <div className="flex-1 space-y-2">
-          <div className="h-4 w-2/3 bg-slate-200 rounded" />
-          <div className="h-3 w-1/3 bg-slate-100 rounded" />
+          <div className="h-4 w-2/3 bg-grey-bg rounded" />
+          <div className="h-3 w-1/3 bg-b-grey rounded" />
         </div>
       </div>
     );
   }
   return (
-    <div className="rounded-lg bg-slate-200 min-h-[300px] animate-pulse" />
+    <div className="rounded-lg bg-black-bg min-h-[300px] animate-pulse" />
   );
 }

@@ -56,7 +56,7 @@ export function EventsProvider({
   // ---- raw state ----
   const [view, setView] = useState<View>("month");
   const [currentDate, setCurrentDate] = useState(initialDate);
-  const [category, setCategory] = useState<string | undefined>(undefined);
+  const [category, setCategory] = useState<string | undefined>("all");
   const [search, setSearch] = useState("");
 
   const monthKey = format(currentDate, "yyyy-MM");
