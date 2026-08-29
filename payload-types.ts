@@ -148,6 +148,7 @@ export interface Media {
   alt?: string | null;
   updatedAt: string;
   createdAt: string;
+  _status?: ('draft' | 'published') | null;
   url?: string | null;
   thumbnailURL?: string | null;
   filename?: string | null;
@@ -178,6 +179,7 @@ export interface Avatar {
   alt: string;
   updatedAt: string;
   createdAt: string;
+  _status?: ('draft' | 'published') | null;
   url?: string | null;
   thumbnailURL?: string | null;
   filename?: string | null;
@@ -208,6 +210,7 @@ export interface CoverImage {
   alt: string;
   updatedAt: string;
   createdAt: string;
+  _status?: ('draft' | 'published') | null;
   url?: string | null;
   thumbnailURL?: string | null;
   filename?: string | null;
@@ -271,6 +274,7 @@ export interface Author {
   avatar?: (number | null) | Avatar;
   updatedAt: string;
   createdAt: string;
+  _status?: ('draft' | 'published') | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -282,6 +286,7 @@ export interface Tag {
   description?: string | null;
   updatedAt: string;
   createdAt: string;
+  _status?: ('draft' | 'published') | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -290,6 +295,23 @@ export interface Tag {
 export interface User {
   id: number;
   role: 'admin' | 'editor';
+  allowedCollections?:
+    | (
+        | 'blogs'
+        | 'tags'
+        | 'authors'
+        | 'cover-images'
+        | 'avatars'
+        | 'events'
+        | 'event-categories'
+        | 'projects'
+        | 'project-categories'
+        | 'sponsors'
+        | 'team-members'
+        | 'users'
+        | 'media'
+      )[]
+    | null;
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -349,6 +371,7 @@ export interface ProjectCategory {
   description: string;
   updatedAt: string;
   createdAt: string;
+  _status?: ('draft' | 'published') | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -366,6 +389,7 @@ export interface TeamMember {
   website?: string | null;
   updatedAt: string;
   createdAt: string;
+  _status?: ('draft' | 'published') | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -390,9 +414,10 @@ export interface Event {
   /**
    * Set to 'cancelled' manually when needed. Upcoming/ongoing/past are otherwise recalculated from schedule dates at fetch time.
    */
-  status: 'upcoming' | 'ongoing' | 'past' | 'cancelled';
+  eventStatus: 'upcoming' | 'ongoing' | 'past' | 'cancelled';
   updatedAt: string;
   createdAt: string;
+  _status?: ('draft' | 'published') | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -404,6 +429,7 @@ export interface EventCategory {
   description: string;
   updatedAt: string;
   createdAt: string;
+  _status?: ('draft' | 'published') | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -417,6 +443,7 @@ export interface Sponsor {
   website?: string | null;
   updatedAt: string;
   createdAt: string;
+  _status?: ('draft' | 'published') | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -544,6 +571,7 @@ export interface MediaSelect<T extends boolean = true> {
   alt?: T;
   updatedAt?: T;
   createdAt?: T;
+  _status?: T;
   url?: T;
   thumbnailURL?: T;
   filename?: T;
@@ -577,6 +605,7 @@ export interface AvatarsSelect<T extends boolean = true> {
   alt?: T;
   updatedAt?: T;
   createdAt?: T;
+  _status?: T;
   url?: T;
   thumbnailURL?: T;
   filename?: T;
@@ -610,6 +639,7 @@ export interface CoverImagesSelect<T extends boolean = true> {
   alt?: T;
   updatedAt?: T;
   createdAt?: T;
+  _status?: T;
   url?: T;
   thumbnailURL?: T;
   filename?: T;
@@ -658,6 +688,7 @@ export interface BlogsSelect<T extends boolean = true> {
  */
 export interface UsersSelect<T extends boolean = true> {
   role?: T;
+  allowedCollections?: T;
   updatedAt?: T;
   createdAt?: T;
   email?: T;
@@ -684,6 +715,7 @@ export interface TagsSelect<T extends boolean = true> {
   description?: T;
   updatedAt?: T;
   createdAt?: T;
+  _status?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -731,6 +763,7 @@ export interface TeamMembersSelect<T extends boolean = true> {
   website?: T;
   updatedAt?: T;
   createdAt?: T;
+  _status?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -755,9 +788,10 @@ export interface EventsSelect<T extends boolean = true> {
       };
   url?: T;
   categories?: T;
-  status?: T;
+  eventStatus?: T;
   updatedAt?: T;
   createdAt?: T;
+  _status?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -770,6 +804,7 @@ export interface SponsorsSelect<T extends boolean = true> {
   website?: T;
   updatedAt?: T;
   createdAt?: T;
+  _status?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -780,6 +815,7 @@ export interface AuthorsSelect<T extends boolean = true> {
   avatar?: T;
   updatedAt?: T;
   createdAt?: T;
+  _status?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -790,6 +826,7 @@ export interface ProjectCategoriesSelect<T extends boolean = true> {
   description?: T;
   updatedAt?: T;
   createdAt?: T;
+  _status?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -800,6 +837,7 @@ export interface EventCategoriesSelect<T extends boolean = true> {
   description?: T;
   updatedAt?: T;
   createdAt?: T;
+  _status?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

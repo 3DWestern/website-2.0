@@ -12,6 +12,7 @@
     "start": "next start",
     "lint": "eslint",
     "seedcms": "tsx -r tsconfig-paths/register -r ./src/cms/scripts/env.ts src/cms/scripts/seed.ts",
+    "backfill": "tsx -r tsconfig-paths/register -r ./src/cms/scripts/env.ts src/cms/scripts/backfill-versions.ts",
     "test": "vitest"
   },
   "dependencies": {

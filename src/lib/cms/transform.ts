@@ -106,7 +106,7 @@ export const transformEvent = (doc: PayloadEvent): Event => {
     //   capacity: doc.rsvp?.capacity ?? undefined,
     //   rsvpCount: doc.rsvp?.rsvpCount ?? 0,
     // },
-    status: doc.status,
+    status: doc.eventStatus,
   };
 };
 

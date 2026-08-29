@@ -1,9 +1,14 @@
 import { CollectionConfig } from "payload";
+import { generalAccess } from "../access/collectionAccess";
+
+export const EVENTS_SLUG = "events";
 
 export const Events: CollectionConfig = {
-  slug: "events",
-  access: {
-    read: () => true,
+  slug: EVENTS_SLUG,
+
+  access: generalAccess(EVENTS_SLUG),
+  versions: {
+    drafts: true,
   },
   admin: {
     group: "Event Content",
@@ -100,7 +105,7 @@ export const Events: CollectionConfig = {
     // should be computed at read-time in the fetch utility rather than trusted
     // as always-accurate here, since a stored value would go stale.
     {
-      name: "status",
+      name: "eventStatus",
       type: "select",
       required: true,
       defaultValue: "upcoming",

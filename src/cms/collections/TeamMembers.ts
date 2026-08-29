@@ -1,9 +1,13 @@
 import type { CollectionConfig } from "payload";
+import { generalAccess } from "../access/collectionAccess";
+
+export const TEAMMEMBER_SLUG = "team-members";
 
 export const TeamMembers: CollectionConfig = {
-  slug: "team-members",
-  access: {
-    read: () => true,
+  slug: TEAMMEMBER_SLUG,
+  access: generalAccess(TEAMMEMBER_SLUG),
+  versions: {
+    drafts: true,
   },
   admin: {
     useAsTitle: "name",

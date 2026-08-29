@@ -17,6 +17,7 @@ const seed = async () => {
   // run seed scripts
 
   // -- TEAM MEMBERS SEED DATA --
+  console.log("\n----- TEAM MEMBERS -----");
   await teamSeed(payload);
 
   // -- EVENTS SEED DATA --

@@ -1,9 +1,13 @@
 import { CollectionConfig } from "payload";
+import { generalAccess } from "../access/collectionAccess";
+
+export const AVATAR_SLUG = "avatars";
 
 export const Avatars: CollectionConfig = {
-  slug: "avatars",
-  access: {
-    read: () => true,
+  slug: AVATAR_SLUG,
+  access: generalAccess(AVATAR_SLUG),
+  versions: {
+    drafts: true,
   },
   admin: {
     group: "Blog Content",
@@ -32,10 +36,13 @@ export const Avatars: CollectionConfig = {
   ],
 };
 
+export const COVERIMAGE_SLUG = "cover-images";
+
 export const CoverImages: CollectionConfig = {
-  slug: "cover-images",
-  access: {
-    read: () => true,
+  slug: COVERIMAGE_SLUG,
+  access: generalAccess(COVERIMAGE_SLUG),
+  versions: {
+    drafts: true,
   },
   admin: {
     group: "Blog Content",

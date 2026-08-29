@@ -1,8 +1,14 @@
 import type { CollectionConfig } from "payload";
+import { generalAccess } from "../access/collectionAccess";
+
+export const AUTHOR_SLUG = "authors";
 
 export const Authors: CollectionConfig = {
-  slug: "authors",
-
+  slug: AUTHOR_SLUG,
+  versions: {
+    drafts: true,
+  },
+  access: generalAccess(AUTHOR_SLUG),
   admin: {
     group: "Blog Content",
     useAsTitle: "name",

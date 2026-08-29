@@ -17,11 +17,11 @@ export async function GET(request: Request) {
     where: {
       and: [
         { "schedule.endTime": { less_than: now } },
-        { status: { not_equals: "past" } },
-        { status: { not_equals: "cancelled" } },
+        { eventStatus: { not_equals: "past" } },
+        { eventStatus: { not_equals: "cancelled" } },
       ],
     },
-    data: { status: "past" },
+    data: { eventStatus: "past" },
   });
 
   // Mark currently-running events as ongoing
@@ -31,10 +31,10 @@ export async function GET(request: Request) {
       and: [
         { "schedule.startTime": { less_than_equal: now } },
         { "schedule.endTime": { greater_than: now } },
-        { status: { not_equals: "cancelled" } },
+        { eventStatus: { not_equals: "cancelled" } },
       ],
     },
-    data: { status: "ongoing" },
+    data: { eventStatus: "ongoing" },
   });
 
   return NextResponse.json({

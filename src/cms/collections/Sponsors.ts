@@ -1,9 +1,14 @@
 import type { CollectionConfig } from "payload";
+import { generalAccess } from "../access/collectionAccess";
+
+export const SPONSORS_SLUG = "sponsors";
 
 export const Sponsors: CollectionConfig = {
-  slug: "sponsors",
-  access: {
-    read: () => true,
+  slug: SPONSORS_SLUG,
+
+  access: generalAccess(SPONSORS_SLUG),
+  versions: {
+    drafts: true,
   },
   admin: {
     useAsTitle: "name",

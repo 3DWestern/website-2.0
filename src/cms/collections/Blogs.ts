@@ -1,7 +1,11 @@
 // Blogs collection
 import type { CollectionConfig } from "payload";
+import { generalAccess, hasCollectionAccess } from "../access/collectionAccess";
+
+const BLOG_SLUG = "blogs";
+
 export const Blogs: CollectionConfig = {
-  slug: "blogs",
+  slug: BLOG_SLUG,
 
   // Enables draft/published workflow for this collection.
   // Documents can be saved as drafts before being published, and autosave
@@ -33,23 +37,7 @@ export const Blogs: CollectionConfig = {
       return `/preview?${encodedParams.toString()}`;
     },
   },
-  // Read access:
-  // - If there's a logged-in user (req.user exists), allow reading everything,
-  //   including drafts/unpublished posts (useful for admin/editor preview).
-  // - If there's no logged-in user (public/anonymous request), Payload applies
-  //   this returned query constraint instead of a plain true/false — meaning
-  //   public visitors can only read documents where _status equals "published".
-  access: {
-    read: ({ req }) => {
-      if (req.user) return true;
-      return {
-        _status: { equals: "published" },
-      };
-    },
-    create: ({ req }) => Boolean(req.user), // any logged-in user (editor or admin) can create
-    update: ({ req }) => Boolean(req.user),
-    delete: ({ req }) => req.user?.role === "admin", // only admins can delete
-  },
+  access: generalAccess(BLOG_SLUG),
   fields: [
     { name: "title", type: "text", required: true },
     { name: "slug", type: "text", required: true, unique: true },
