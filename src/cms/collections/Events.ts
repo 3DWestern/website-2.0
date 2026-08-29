@@ -42,11 +42,10 @@ export const Events: CollectionConfig = {
     { name: "location", type: "text", required: true },
     {
       name: "image",
-      type: "group",
-      fields: [
-        { name: "src", type: "text", required: true },
-        { name: "alt", type: "text", required: true },
-      ],
+      type: "relationship",
+      relationTo: "cover-images",
+      label: "Cover Image",
+      required: true,
     },
     { name: "url", type: "text" },
 

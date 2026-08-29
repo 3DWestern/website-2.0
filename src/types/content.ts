@@ -92,6 +92,8 @@ export type ProjectImage = {
   alt: string;
 };
 
+export type GalleryImage = Image & {};
+
 export type Project = {
   id: number;
   slug: string;

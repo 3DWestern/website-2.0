@@ -18,6 +18,7 @@ import {
   CoverImages,
   Teams,
   Logos,
+  GalleryImages,
 } from "@/cms/collections";
 import { Tags } from "@/cms/collections/Tags";
 
@@ -28,6 +29,7 @@ export default buildConfig({
     Avatars,
     CoverImages,
     Logos,
+    GalleryImages,
     Blogs,
     Tags,
     Projects,
@@ -42,7 +44,12 @@ export default buildConfig({
 
   plugins: [
     s3Storage({
-      collections: { logos: true, avatars: true, "cover-images": true },
+      collections: {
+        logos: true,
+        avatars: true,
+        "cover-images": true,
+        "gallery-images": true,
+      },
       bucket: process.env.SUPABASE_BUCKET ?? "",
       config: {
         credentials: {

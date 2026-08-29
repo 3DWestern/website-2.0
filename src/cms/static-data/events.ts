@@ -14,7 +14,7 @@ export const sampleEvents: SampleEvent[] = [
       endTime: "2026-01-14T16:00:00.000Z",
     },
     location: "Sabourin Makerspace",
-    image: { src: "/images/lucky-block.webp", alt: "Canvas Background Image" },
+    image: 1,
     url: "https://www.bouncelife.com/events/6942f5d21d54a5775305dcb4",
     categories: [1], // workshop
     eventStatus: "upcoming",
@@ -30,7 +30,7 @@ export const sampleEvents: SampleEvent[] = [
       endTime: "2026-01-14T18:00:00.000Z",
     },
     location: "Digital Makerspace",
-    image: { src: "/images/workshop3.webp", alt: "Canvas Background Image" },
+    image: 1,
     url: "https://www.bouncelife.com/events/6942f785c42f2067dc31b05e",
     categories: [1], // workshop
     eventStatus: "upcoming",
@@ -46,7 +46,7 @@ export const sampleEvents: SampleEvent[] = [
       endTime: "2026-01-21T16:00:00.000Z",
     },
     location: "Sabourin Makerspace",
-    image: { src: "/images/workshop2.webp", alt: "Canvas Background Image" },
+    image: 1,
     url: "https://www.bouncelife.com/events/6942f676bfdf6dc764c83089",
     categories: [5], // other (was "Activity" -- not a defined select option)
     eventStatus: "upcoming",
@@ -62,7 +62,7 @@ export const sampleEvents: SampleEvent[] = [
       endTime: "2026-01-21T18:00:00.000Z",
     },
     location: "Digital Makerspace",
-    image: { src: "/images/workshop1.webp", alt: "Canvas Background Image" },
+    image: 1,
     url: "https://www.bouncelife.com/events/6942f7f43d78d96d38414993",
     categories: [1], // workshop
     eventStatus: "upcoming",
@@ -79,7 +79,7 @@ export const sampleEvents: SampleEvent[] = [
       endTime: "2026-01-28T16:00:00.000Z",
     },
     location: "Sabourin Makerspace",
-    image: { src: "/images/workshop4.webp", alt: "Canvas Background Image" },
+    image: 1,
     url: "https://www.bouncelife.com/events/6942f6fa7ffe1cc83a76c004",
     categories: [1], // workshop
     eventStatus: "upcoming",
@@ -95,7 +95,7 @@ export const sampleEvents: SampleEvent[] = [
       endTime: "2026-01-28T18:00:00.000Z",
     },
     location: "Digital Makerspace",
-    image: { src: "/images/sewing.jpg", alt: "Canvas Background Image" },
+    image: 1,
     url: "https://www.bouncelife.com/events/6942f84dda486964077145ca",
     categories: [1], // workshop
     eventStatus: "upcoming",

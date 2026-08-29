@@ -44,21 +44,17 @@ export const Projects: CollectionConfig = {
     { name: "description", type: "text", required: true },
     {
       name: "image",
-      type: "group",
-      fields: [
-        { name: "src", type: "text", required: true },
-        { name: "alt", type: "text", required: true },
-      ],
+      type: "relationship",
+      label: "Cover Image",
+      relationTo: "cover-images",
       required: true,
     },
     {
       name: "galleryImages",
-      type: "array",
+      type: "relationship",
       label: "Image Gallery Items",
-      fields: [
-        { name: "src", type: "text", required: true },
-        { name: "alt", type: "text", required: true },
-      ],
+      relationTo: "gallery-images",
+      hasMany: true,
     },
     {
       name: "categories",

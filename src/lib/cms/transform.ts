@@ -9,6 +9,7 @@ import {
   ProjectCategory,
   EventCategory,
   TeamMember,
+  ProjectImage,
 } from "@/types/content";
 import {
   Event as PayloadEvent,
@@ -22,6 +23,7 @@ import {
   EventCategory as PayloadEC,
   Avatar as PayloadAvatar,
   CoverImage as PayloadCI,
+  GalleryImage as PayloadGI,
   Logo as PayloadLogo,
 } from "../../../payload-types";
 
@@ -44,8 +46,13 @@ type ResolvedBlogPost = Omit<
   coverImage: PayloadCI;
 };
 
-export type ResolvedProject = Omit<PayloadProject, "categories"> & {
+export type ResolvedProject = Omit<
+  PayloadProject,
+  "categories" | "image" | "galleryImages"
+> & {
   categories: ProjectCategory[] | null;
+  image: PayloadCI;
+  galleryImages: PayloadGI[];
 };
 
 export type ResolvedAuthor = Omit<PayloadAuthor, "avatar"> & {
@@ -58,6 +65,10 @@ export type ResolvedTeamMember = Omit<PayloadTeamMember, "image"> & {
 
 export type ResolvedSponsor = Omit<PayloadSponsor, "logo"> & {
   logo: PayloadLogo;
+};
+
+export type ResolvedEvent = Omit<PayloadEvent, "image"> & {
+  image: PayloadCI;
 };
 
 // Get the ordinal identifier for the day
@@ -91,11 +102,14 @@ export const formatTime = (dateStr: string) => {
 };
 
 // Transform ONE payload doc object to an event object
-export const transformEvent = (doc: PayloadEvent): Event => {
+export const transformEvent = (doc: ResolvedEvent): Event => {
   return {
     id: doc.id,
     title: doc.title,
-    image: doc.image,
+    image: {
+      src: doc.image.url ?? "",
+      alt: doc.image.alt,
+    },
     description: doc.description,
     schedule: {
       date: doc.schedule.date,
@@ -121,7 +135,7 @@ export const transformEvent = (doc: PayloadEvent): Event => {
 };
 
 // transform an entire payload doc to event objects
-export const transformEvents = (docs: PayloadEvent[]): Event[] => {
+export const transformEvents = (docs: ResolvedEvent[]): Event[] => {
   return transformDocs(docs, transformEvent);
 };
 
@@ -215,10 +229,16 @@ export const transformProject = (doc: ResolvedProject): Project => {
     slug: doc.slug,
     title: doc.title,
     creator: doc.creator,
-    image: doc.image,
+    image: {
+      src: doc.image.url ?? "",
+      alt: doc.image.alt,
+    },
     contributors: doc.contributors || undefined,
     description: doc.description,
-    galleryImages: doc.galleryImages || undefined,
+    galleryImages: doc.galleryImages.map((image) => ({
+      src: image.url ?? "",
+      alt: image.alt,
+    })),
     categories: doc.categories || [],
     dateAdded: doc.createdAt,
     featured: doc.featured || false,

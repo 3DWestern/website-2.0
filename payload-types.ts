@@ -71,6 +71,7 @@ export interface Config {
     avatars: Avatar;
     'cover-images': CoverImage;
     logos: Logo;
+    'gallery-images': GalleryImage;
     blogs: Blog;
     tags: Tag;
     projects: Project;
@@ -92,6 +93,7 @@ export interface Config {
     avatars: AvatarsSelect<false> | AvatarsSelect<true>;
     'cover-images': CoverImagesSelect<false> | CoverImagesSelect<true>;
     logos: LogosSelect<false> | LogosSelect<true>;
+    'gallery-images': GalleryImagesSelect<false> | GalleryImagesSelect<true>;
     blogs: BlogsSelect<false> | BlogsSelect<true>;
     tags: TagsSelect<false> | TagsSelect<true>;
     projects: ProjectsSelect<false> | ProjectsSelect<true>;
@@ -164,6 +166,7 @@ export interface User {
         | 'users'
         | 'teams'
         | 'logos'
+        | 'gallery-images'
       )[]
     | null;
   updatedAt: string;
@@ -280,6 +283,37 @@ export interface Logo {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "gallery-images".
+ */
+export interface GalleryImage {
+  id: number;
+  name: string;
+  alt: string;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
+  sizes?: {
+    logo?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+  };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "blogs".
  */
 export interface Blog {
@@ -346,17 +380,8 @@ export interface Project {
   creator: string;
   contributors?: string[] | null;
   description: string;
-  image: {
-    src: string;
-    alt: string;
-  };
-  galleryImages?:
-    | {
-        src: string;
-        alt: string;
-        id?: string | null;
-      }[]
-    | null;
+  image: number | CoverImage;
+  galleryImages?: (number | GalleryImage)[] | null;
   categories: (number | ProjectCategory)[];
   featured?: boolean | null;
   github?: string | null;
@@ -435,10 +460,7 @@ export interface Event {
     endTime: string;
   };
   location: string;
-  image: {
-    src: string;
-    alt: string;
-  };
+  image: number | CoverImage;
   url?: string | null;
   categories: (number | EventCategory)[];
   /**
@@ -513,6 +535,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'logos';
         value: number | Logo;
+      } | null)
+    | ({
+        relationTo: 'gallery-images';
+        value: number | GalleryImage;
       } | null)
     | ({
         relationTo: 'blogs';
@@ -724,6 +750,40 @@ export interface LogosSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "gallery-images_select".
+ */
+export interface GalleryImagesSelect<T extends boolean = true> {
+  name?: T;
+  alt?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+  url?: T;
+  thumbnailURL?: T;
+  filename?: T;
+  mimeType?: T;
+  filesize?: T;
+  width?: T;
+  height?: T;
+  focalX?: T;
+  focalY?: T;
+  sizes?:
+    | T
+    | {
+        logo?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+      };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "blogs_select".
  */
 export interface BlogsSelect<T extends boolean = true> {
@@ -761,19 +821,8 @@ export interface ProjectsSelect<T extends boolean = true> {
   creator?: T;
   contributors?: T;
   description?: T;
-  image?:
-    | T
-    | {
-        src?: T;
-        alt?: T;
-      };
-  galleryImages?:
-    | T
-    | {
-        src?: T;
-        alt?: T;
-        id?: T;
-      };
+  image?: T;
+  galleryImages?: T;
   categories?: T;
   featured?: T;
   github?: T;
@@ -815,12 +864,7 @@ export interface EventsSelect<T extends boolean = true> {
         endTime?: T;
       };
   location?: T;
-  image?:
-    | T
-    | {
-        src?: T;
-        alt?: T;
-      };
+  image?: T;
   url?: T;
   categories?: T;
   eventStatus?: T;

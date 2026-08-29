@@ -102,3 +102,37 @@ export const Logos: CollectionConfig = {
     },
   ],
 };
+
+export const GALLERY_SLUG = "gallery-images";
+
+export const GalleryImages: CollectionConfig = {
+  slug: GALLERY_SLUG,
+  access: generalAccess(GALLERY_SLUG),
+  versions: {
+    drafts: true,
+  },
+  admin: {
+    group: "Media",
+    useAsTitle: "name",
+  },
+  upload: {
+    disableLocalStorage: true,
+    imageSizes: [
+      {
+        name: "logo",
+        width: 1000,
+        height: 1000,
+        position: "center",
+        fit: "cover",
+      },
+    ],
+  },
+  fields: [
+    { name: "name", type: "text", required: true },
+    {
+      name: "alt",
+      type: "text",
+      required: true,
+    },
+  ],
+};

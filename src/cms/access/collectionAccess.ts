@@ -15,6 +15,7 @@ export const assignableCollections = [
   { label: "Users", slug: "users" },
   { label: "Teams", slug: "teams" },
   { label: "Logos", slug: "logos" },
+  { label: "Gallery Images", slug: "gallery-images" },
 ] as const;
 
 export type AssignableCollection =
