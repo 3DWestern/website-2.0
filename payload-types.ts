@@ -67,11 +67,11 @@ export interface Config {
   };
   blocks: {};
   collections: {
-    media: Media;
+    users: User;
     avatars: Avatar;
     'cover-images': CoverImage;
+    logos: Logo;
     blogs: Blog;
-    users: User;
     tags: Tag;
     projects: Project;
     'team-members': TeamMember;
@@ -80,6 +80,7 @@ export interface Config {
     authors: Author;
     'project-categories': ProjectCategory;
     'event-categories': EventCategory;
+    teams: Team;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -87,11 +88,11 @@ export interface Config {
   };
   collectionsJoins: {};
   collectionsSelect: {
-    media: MediaSelect<false> | MediaSelect<true>;
+    users: UsersSelect<false> | UsersSelect<true>;
     avatars: AvatarsSelect<false> | AvatarsSelect<true>;
     'cover-images': CoverImagesSelect<false> | CoverImagesSelect<true>;
+    logos: LogosSelect<false> | LogosSelect<true>;
     blogs: BlogsSelect<false> | BlogsSelect<true>;
-    users: UsersSelect<false> | UsersSelect<true>;
     tags: TagsSelect<false> | TagsSelect<true>;
     projects: ProjectsSelect<false> | ProjectsSelect<true>;
     'team-members': TeamMembersSelect<false> | TeamMembersSelect<true>;
@@ -100,6 +101,7 @@ export interface Config {
     authors: AuthorsSelect<false> | AuthorsSelect<true>;
     'project-categories': ProjectCategoriesSelect<false> | ProjectCategoriesSelect<true>;
     'event-categories': EventCategoriesSelect<false> | EventCategoriesSelect<true>;
+    teams: TeamsSelect<false> | TeamsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -141,33 +143,47 @@ export interface UserAuthOperations {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "media".
+ * via the `definition` "users".
  */
-export interface Media {
+export interface User {
   id: number;
-  alt?: string | null;
+  role: 'admin' | 'editor';
+  allowedCollections?:
+    | (
+        | 'blogs'
+        | 'tags'
+        | 'authors'
+        | 'cover-images'
+        | 'avatars'
+        | 'events'
+        | 'event-categories'
+        | 'projects'
+        | 'project-categories'
+        | 'sponsors'
+        | 'team-members'
+        | 'users'
+        | 'teams'
+        | 'logos'
+      )[]
+    | null;
   updatedAt: string;
   createdAt: string;
-  _status?: ('draft' | 'published') | null;
-  url?: string | null;
-  thumbnailURL?: string | null;
-  filename?: string | null;
-  mimeType?: string | null;
-  filesize?: number | null;
-  width?: number | null;
-  height?: number | null;
-  focalX?: number | null;
-  focalY?: number | null;
-  sizes?: {
-    'blog-thumbnail'?: {
-      url?: string | null;
-      width?: number | null;
-      height?: number | null;
-      mimeType?: string | null;
-      filesize?: number | null;
-      filename?: string | null;
-    };
-  };
+  email: string;
+  resetPasswordToken?: string | null;
+  resetPasswordExpiration?: string | null;
+  salt?: string | null;
+  hash?: string | null;
+  loginAttempts?: number | null;
+  lockUntil?: string | null;
+  sessions?:
+    | {
+        id: string;
+        createdAt?: string | null;
+        expiresAt: string;
+      }[]
+    | null;
+  password?: string | null;
+  collection: 'users';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -233,6 +249,37 @@ export interface CoverImage {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "logos".
+ */
+export interface Logo {
+  id: number;
+  name: string;
+  alt: string;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
+  sizes?: {
+    logo?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+  };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "blogs".
  */
 export interface Blog {
@@ -243,7 +290,7 @@ export interface Blog {
   author: number | Author;
   date: string;
   readingTime?: number | null;
-  coverImage?: (number | null) | CoverImage;
+  coverImage: number | CoverImage;
   tags?: (number | Tag)[] | null;
   content: {
     root: {
@@ -271,7 +318,7 @@ export interface Blog {
 export interface Author {
   id: number;
   name: string;
-  avatar?: (number | null) | Avatar;
+  avatar: number | Avatar;
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
@@ -287,49 +334,6 @@ export interface Tag {
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "users".
- */
-export interface User {
-  id: number;
-  role: 'admin' | 'editor';
-  allowedCollections?:
-    | (
-        | 'blogs'
-        | 'tags'
-        | 'authors'
-        | 'cover-images'
-        | 'avatars'
-        | 'events'
-        | 'event-categories'
-        | 'projects'
-        | 'project-categories'
-        | 'sponsors'
-        | 'team-members'
-        | 'users'
-        | 'media'
-      )[]
-    | null;
-  updatedAt: string;
-  createdAt: string;
-  email: string;
-  resetPasswordToken?: string | null;
-  resetPasswordExpiration?: string | null;
-  salt?: string | null;
-  hash?: string | null;
-  loginAttempts?: number | null;
-  lockUntil?: string | null;
-  sessions?:
-    | {
-        id: string;
-        createdAt?: string | null;
-        expiresAt: string;
-      }[]
-    | null;
-  password?: string | null;
-  collection: 'users';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -379,14 +383,40 @@ export interface ProjectCategory {
  */
 export interface TeamMember {
   id: number;
-  image: string;
+  image: number | Avatar;
   name: string;
   role: string;
-  description?: string | null;
+  team: number | Team;
+  bio: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
   emoji?: string | null;
   linkedin?: string | null;
   github?: string | null;
   website?: string | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "teams".
+ */
+export interface Team {
+  id: number;
+  teamName: string;
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
@@ -438,8 +468,7 @@ export interface EventCategory {
 export interface Sponsor {
   id: number;
   name: string;
-  logo: string;
-  alt: string;
+  logo: number | Logo;
   website?: string | null;
   updatedAt: string;
   createdAt: string;
@@ -470,8 +499,8 @@ export interface PayloadLockedDocument {
   id: number;
   document?:
     | ({
-        relationTo: 'media';
-        value: number | Media;
+        relationTo: 'users';
+        value: number | User;
       } | null)
     | ({
         relationTo: 'avatars';
@@ -482,12 +511,12 @@ export interface PayloadLockedDocument {
         value: number | CoverImage;
       } | null)
     | ({
-        relationTo: 'blogs';
-        value: number | Blog;
+        relationTo: 'logos';
+        value: number | Logo;
       } | null)
     | ({
-        relationTo: 'users';
-        value: number | User;
+        relationTo: 'blogs';
+        value: number | Blog;
       } | null)
     | ({
         relationTo: 'tags';
@@ -520,6 +549,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'event-categories';
         value: number | EventCategory;
+      } | null)
+    | ({
+        relationTo: 'teams';
+        value: number | Team;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -565,35 +598,26 @@ export interface PayloadMigration {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "media_select".
+ * via the `definition` "users_select".
  */
-export interface MediaSelect<T extends boolean = true> {
-  alt?: T;
+export interface UsersSelect<T extends boolean = true> {
+  role?: T;
+  allowedCollections?: T;
   updatedAt?: T;
   createdAt?: T;
-  _status?: T;
-  url?: T;
-  thumbnailURL?: T;
-  filename?: T;
-  mimeType?: T;
-  filesize?: T;
-  width?: T;
-  height?: T;
-  focalX?: T;
-  focalY?: T;
-  sizes?:
+  email?: T;
+  resetPasswordToken?: T;
+  resetPasswordExpiration?: T;
+  salt?: T;
+  hash?: T;
+  loginAttempts?: T;
+  lockUntil?: T;
+  sessions?:
     | T
     | {
-        'blog-thumbnail'?:
-          | T
-          | {
-              url?: T;
-              width?: T;
-              height?: T;
-              mimeType?: T;
-              filesize?: T;
-              filename?: T;
-            };
+        id?: T;
+        createdAt?: T;
+        expiresAt?: T;
       };
 }
 /**
@@ -666,6 +690,40 @@ export interface CoverImagesSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "logos_select".
+ */
+export interface LogosSelect<T extends boolean = true> {
+  name?: T;
+  alt?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+  url?: T;
+  thumbnailURL?: T;
+  filename?: T;
+  mimeType?: T;
+  filesize?: T;
+  width?: T;
+  height?: T;
+  focalX?: T;
+  focalY?: T;
+  sizes?:
+    | T
+    | {
+        logo?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+      };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "blogs_select".
  */
 export interface BlogsSelect<T extends boolean = true> {
@@ -681,30 +739,6 @@ export interface BlogsSelect<T extends boolean = true> {
   updatedAt?: T;
   createdAt?: T;
   _status?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "users_select".
- */
-export interface UsersSelect<T extends boolean = true> {
-  role?: T;
-  allowedCollections?: T;
-  updatedAt?: T;
-  createdAt?: T;
-  email?: T;
-  resetPasswordToken?: T;
-  resetPasswordExpiration?: T;
-  salt?: T;
-  hash?: T;
-  loginAttempts?: T;
-  lockUntil?: T;
-  sessions?:
-    | T
-    | {
-        id?: T;
-        createdAt?: T;
-        expiresAt?: T;
-      };
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -756,7 +790,8 @@ export interface TeamMembersSelect<T extends boolean = true> {
   image?: T;
   name?: T;
   role?: T;
-  description?: T;
+  team?: T;
+  bio?: T;
   emoji?: T;
   linkedin?: T;
   github?: T;
@@ -800,7 +835,6 @@ export interface EventsSelect<T extends boolean = true> {
 export interface SponsorsSelect<T extends boolean = true> {
   name?: T;
   logo?: T;
-  alt?: T;
   website?: T;
   updatedAt?: T;
   createdAt?: T;
@@ -835,6 +869,16 @@ export interface ProjectCategoriesSelect<T extends boolean = true> {
 export interface EventCategoriesSelect<T extends boolean = true> {
   name?: T;
   description?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "teams_select".
+ */
+export interface TeamsSelect<T extends boolean = true> {
+  teamName?: T;
   updatedAt?: T;
   createdAt?: T;
   _status?: T;

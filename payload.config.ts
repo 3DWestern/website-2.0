@@ -14,20 +14,21 @@ import {
   Users,
   ProjectCategories,
   EventCategories,
-  Media,
   Avatars,
   CoverImages,
+  Teams,
+  Logos,
 } from "@/cms/collections";
 import { Tags } from "@/cms/collections/Tags";
 
 export default buildConfig({
   editor: lexicalEditor({}),
   collections: [
-    Media,
+    Users,
     Avatars,
     CoverImages,
+    Logos,
     Blogs,
-    Users,
     Tags,
     Projects,
     TeamMembers,
@@ -36,11 +37,12 @@ export default buildConfig({
     Authors,
     ProjectCategories,
     EventCategories,
+    Teams,
   ],
 
   plugins: [
     s3Storage({
-      collections: { media: true, avatars: true, "cover-images": true },
+      collections: { logos: true, avatars: true, "cover-images": true },
       bucket: process.env.SUPABASE_BUCKET ?? "",
       config: {
         credentials: {

@@ -16,8 +16,7 @@ export const Sponsors: CollectionConfig = {
   },
   fields: [
     { name: "name", type: "text", required: true },
-    { name: "logo", type: "text", required: true },
-    { name: "alt", type: "text", required: true },
+    { name: "logo", type: "relationship", relationTo: "logos", required: true },
     { name: "website", type: "text" },
   ],
 };

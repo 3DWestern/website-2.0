@@ -111,7 +111,18 @@ export type Project = {
 export type Sponsor = {
   id: number;
   name: string;
-  logo: string;
-  alt: string;
+  logo: Image;
   website?: string;
 };
+
+export interface TeamMember {
+  image: Image;
+  name: string;
+  role: string;
+  team: string;
+  bio: DefaultTypedEditorState;
+  emoji?: string;
+  linkedin?: string;
+  github?: string;
+  website?: string;
+}

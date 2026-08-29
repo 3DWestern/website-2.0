@@ -10,7 +10,7 @@ const collectionsToBackfill: AssignableCollection[] = [
   // "team-members",
   // "sponsors",
   // "authors",
-  // "avatars",
+  "avatars",
   // "cover-images",
   // "media",
 ];

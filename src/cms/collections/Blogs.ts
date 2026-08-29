@@ -56,6 +56,8 @@ export const Blogs: CollectionConfig = {
       name: "coverImage",
       type: "relationship",
       relationTo: "cover-images",
+      label: "Cover Image",
+      required: true,
     },
     // Relationship field: can link to multiple documents in the "tags" collection.
     // maxRows caps how many tags can be attached to a single blog post at 3.

@@ -13,7 +13,8 @@ export const assignableCollections = [
   { label: "Sponsors", slug: "sponsors" },
   { label: "Team Members", slug: "team-members" },
   { label: "Users", slug: "users" },
-  { label: "Media", slug: "media" },
+  { label: "Teams", slug: "teams" },
+  { label: "Logos", slug: "logos" },
 ] as const;
 
 export type AssignableCollection =

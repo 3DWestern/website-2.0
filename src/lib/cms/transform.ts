@@ -8,6 +8,7 @@ import {
   Tag,
   ProjectCategory,
   EventCategory,
+  TeamMember,
 } from "@/types/content";
 import {
   Event as PayloadEvent,
@@ -21,6 +22,7 @@ import {
   EventCategory as PayloadEC,
   Avatar as PayloadAvatar,
   CoverImage as PayloadCI,
+  Logo as PayloadLogo,
 } from "../../../payload-types";
 
 export type DocType =
@@ -48,6 +50,14 @@ export type ResolvedProject = Omit<PayloadProject, "categories"> & {
 
 export type ResolvedAuthor = Omit<PayloadAuthor, "avatar"> & {
   avatar: PayloadAvatar;
+};
+
+export type ResolvedTeamMember = Omit<PayloadTeamMember, "image"> & {
+  image: PayloadAvatar;
+};
+
+export type ResolvedSponsor = Omit<PayloadSponsor, "logo"> & {
+  logo: PayloadLogo;
 };
 
 // Get the ordinal identifier for the day
@@ -132,18 +142,20 @@ export const transformEventCategories = (
 };
 
 // transform ONE payload doc object to an event object
-export const transformSponsor = (doc: PayloadSponsor): Sponsor => {
+export const transformSponsor = (doc: ResolvedSponsor): Sponsor => {
   return {
     id: doc.id,
     name: doc.name,
-    logo: doc.logo,
-    alt: doc.alt,
+    logo: {
+      url: doc.logo.url ?? "",
+      alt: doc.logo.alt,
+    },
     website: doc.website || "",
   };
 };
 
 // transform an entire payload doc to sponsor objects
-export const transformSponsors = (docs: PayloadSponsor[]): Sponsor[] => {
+export const transformSponsors = (docs: ResolvedSponsor[]): Sponsor[] => {
   return transformDocs(docs, transformSponsor);
 };
 
@@ -237,12 +249,16 @@ export const transformProjectCategories = (
 };
 
 // transform ONE payload doc object into a team member object
-export const transformTeamMember = (doc: PayloadTeamMember): MenuItem => {
+export const transformTeamMember = (doc: ResolvedTeamMember): TeamMember => {
   return {
-    image: doc.image,
+    image: {
+      url: doc.image.url ?? "",
+      alt: doc.image.alt,
+    },
     name: doc.name,
     role: doc.role,
-    description: doc.description || "",
+    team: "",
+    bio: doc.bio,
     emoji: doc.emoji || "",
     linkedin: doc.linkedin || "",
     github: doc.github || "",
@@ -251,7 +267,9 @@ export const transformTeamMember = (doc: PayloadTeamMember): MenuItem => {
 };
 
 // transform an entire payload doc to team member objects
-export const transformTeamMembers = (docs: PayloadTeamMember[]): MenuItem[] => {
+export const transformTeamMembers = (
+  docs: ResolvedTeamMember[],
+): TeamMember[] => {
   return transformDocs(docs, transformTeamMember);
 };
 

@@ -10,7 +10,7 @@ export const Authors: CollectionConfig = {
   },
   access: generalAccess(AUTHOR_SLUG),
   admin: {
-    group: "Blog Content",
+    group: "People",
     useAsTitle: "name",
   },
   fields: [
@@ -19,6 +19,7 @@ export const Authors: CollectionConfig = {
       name: "avatar",
       type: "relationship",
       relationTo: "avatars",
+      required: true,
     },
   ],
 };

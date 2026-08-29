@@ -1,11 +1,10 @@
-import { Sponsor } from "../../types/content";
+import { Sponsor } from "../../../payload-types";
 
-export const sampleSponsors: Sponsor[] = [
+export const sampleSponsors: Omit<Sponsor, "updatedAt" | "createdAt">[] = [
   {
     id: 1,
     name: "Sample Sponsor",
-    logo: "/images/blank.webp",
-    alt: "Sample Image",
+    logo: 1,
     website: "/",
   },
 ];
