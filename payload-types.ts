@@ -67,8 +67,12 @@ export interface Config {
   };
   blocks: {};
   collections: {
-    blogs: Blog;
     users: User;
+    avatars: Avatar;
+    'cover-images': CoverImage;
+    logos: Logo;
+    'gallery-images': GalleryImage;
+    blogs: Blog;
     tags: Tag;
     projects: Project;
     'team-members': TeamMember;
@@ -77,6 +81,7 @@ export interface Config {
     authors: Author;
     'project-categories': ProjectCategory;
     'event-categories': EventCategory;
+    teams: Team;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -84,8 +89,12 @@ export interface Config {
   };
   collectionsJoins: {};
   collectionsSelect: {
-    blogs: BlogsSelect<false> | BlogsSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
+    avatars: AvatarsSelect<false> | AvatarsSelect<true>;
+    'cover-images': CoverImagesSelect<false> | CoverImagesSelect<true>;
+    logos: LogosSelect<false> | LogosSelect<true>;
+    'gallery-images': GalleryImagesSelect<false> | GalleryImagesSelect<true>;
+    blogs: BlogsSelect<false> | BlogsSelect<true>;
     tags: TagsSelect<false> | TagsSelect<true>;
     projects: ProjectsSelect<false> | ProjectsSelect<true>;
     'team-members': TeamMembersSelect<false> | TeamMembersSelect<true>;
@@ -94,6 +103,7 @@ export interface Config {
     authors: AuthorsSelect<false> | AuthorsSelect<true>;
     'project-categories': ProjectCategoriesSelect<false> | ProjectCategoriesSelect<true>;
     'event-categories': EventCategoriesSelect<false> | EventCategoriesSelect<true>;
+    teams: TeamsSelect<false> | TeamsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -135,6 +145,175 @@ export interface UserAuthOperations {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "users".
+ */
+export interface User {
+  id: number;
+  role: 'admin' | 'editor';
+  allowedCollections?:
+    | (
+        | 'blogs'
+        | 'tags'
+        | 'authors'
+        | 'cover-images'
+        | 'avatars'
+        | 'events'
+        | 'event-categories'
+        | 'projects'
+        | 'project-categories'
+        | 'sponsors'
+        | 'team-members'
+        | 'users'
+        | 'teams'
+        | 'logos'
+        | 'gallery-images'
+      )[]
+    | null;
+  updatedAt: string;
+  createdAt: string;
+  email: string;
+  resetPasswordToken?: string | null;
+  resetPasswordExpiration?: string | null;
+  salt?: string | null;
+  hash?: string | null;
+  loginAttempts?: number | null;
+  lockUntil?: string | null;
+  sessions?:
+    | {
+        id: string;
+        createdAt?: string | null;
+        expiresAt: string;
+      }[]
+    | null;
+  password?: string | null;
+  collection: 'users';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "avatars".
+ */
+export interface Avatar {
+  id: number;
+  'author-name': string;
+  alt: string;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
+  sizes?: {
+    avatar?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+  };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "cover-images".
+ */
+export interface CoverImage {
+  id: number;
+  'blog-title': string;
+  alt: string;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
+  sizes?: {
+    'cover-image'?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+  };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "logos".
+ */
+export interface Logo {
+  id: number;
+  name: string;
+  alt: string;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
+  sizes?: {
+    logo?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+  };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "gallery-images".
+ */
+export interface GalleryImage {
+  id: number;
+  name: string;
+  alt: string;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
+  sizes?: {
+    logo?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+  };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "blogs".
  */
 export interface Blog {
@@ -145,10 +324,7 @@ export interface Blog {
   author: number | Author;
   date: string;
   readingTime?: number | null;
-  coverImage: {
-    url: string;
-    alt?: string | null;
-  };
+  coverImage: number | CoverImage;
   tags?: (number | Tag)[] | null;
   content: {
     root: {
@@ -176,12 +352,10 @@ export interface Blog {
 export interface Author {
   id: number;
   name: string;
-  avatar: {
-    url: string;
-    alt: string;
-  };
+  avatar: number | Avatar;
   updatedAt: string;
   createdAt: string;
+  _status?: ('draft' | 'published') | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -193,32 +367,7 @@ export interface Tag {
   description?: string | null;
   updatedAt: string;
   createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "users".
- */
-export interface User {
-  id: number;
-  role: 'admin' | 'editor';
-  updatedAt: string;
-  createdAt: string;
-  email: string;
-  resetPasswordToken?: string | null;
-  resetPasswordExpiration?: string | null;
-  salt?: string | null;
-  hash?: string | null;
-  loginAttempts?: number | null;
-  lockUntil?: string | null;
-  sessions?:
-    | {
-        id: string;
-        createdAt?: string | null;
-        expiresAt: string;
-      }[]
-    | null;
-  password?: string | null;
-  collection: 'users';
+  _status?: ('draft' | 'published') | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -231,17 +380,8 @@ export interface Project {
   creator: string;
   contributors?: string[] | null;
   description: string;
-  image: {
-    src: string;
-    alt: string;
-  };
-  galleryImages?:
-    | {
-        src: string;
-        alt: string;
-        id?: string | null;
-      }[]
-    | null;
+  image: number | CoverImage;
+  galleryImages: (number | GalleryImage)[];
   categories: (number | ProjectCategory)[];
   featured?: boolean | null;
   github?: string | null;
@@ -260,6 +400,7 @@ export interface ProjectCategory {
   description: string;
   updatedAt: string;
   createdAt: string;
+  _status?: ('draft' | 'published') | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -267,16 +408,43 @@ export interface ProjectCategory {
  */
 export interface TeamMember {
   id: number;
-  image: string;
+  image: number | Avatar;
   name: string;
   role: string;
-  description?: string | null;
+  team: number | Team;
+  bio: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
   emoji?: string | null;
   linkedin?: string | null;
   github?: string | null;
   website?: string | null;
   updatedAt: string;
   createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "teams".
+ */
+export interface Team {
+  id: number;
+  teamName: string;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -292,18 +460,16 @@ export interface Event {
     endTime: string;
   };
   location: string;
-  image: {
-    src: string;
-    alt: string;
-  };
+  image: number | CoverImage;
   url?: string | null;
   categories: (number | EventCategory)[];
   /**
    * Set to 'cancelled' manually when needed. Upcoming/ongoing/past are otherwise recalculated from schedule dates at fetch time.
    */
-  status: 'upcoming' | 'ongoing' | 'past' | 'cancelled';
+  eventStatus: 'upcoming' | 'ongoing' | 'past' | 'cancelled';
   updatedAt: string;
   createdAt: string;
+  _status?: ('draft' | 'published') | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -315,6 +481,7 @@ export interface EventCategory {
   description: string;
   updatedAt: string;
   createdAt: string;
+  _status?: ('draft' | 'published') | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -323,11 +490,11 @@ export interface EventCategory {
 export interface Sponsor {
   id: number;
   name: string;
-  logo: string;
-  alt: string;
+  logo: number | Logo;
   website?: string | null;
   updatedAt: string;
   createdAt: string;
+  _status?: ('draft' | 'published') | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -354,12 +521,28 @@ export interface PayloadLockedDocument {
   id: number;
   document?:
     | ({
-        relationTo: 'blogs';
-        value: number | Blog;
-      } | null)
-    | ({
         relationTo: 'users';
         value: number | User;
+      } | null)
+    | ({
+        relationTo: 'avatars';
+        value: number | Avatar;
+      } | null)
+    | ({
+        relationTo: 'cover-images';
+        value: number | CoverImage;
+      } | null)
+    | ({
+        relationTo: 'logos';
+        value: number | Logo;
+      } | null)
+    | ({
+        relationTo: 'gallery-images';
+        value: number | GalleryImage;
+      } | null)
+    | ({
+        relationTo: 'blogs';
+        value: number | Blog;
       } | null)
     | ({
         relationTo: 'tags';
@@ -392,6 +575,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'event-categories';
         value: number | EventCategory;
+      } | null)
+    | ({
+        relationTo: 'teams';
+        value: number | Team;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -437,33 +624,11 @@ export interface PayloadMigration {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "blogs_select".
- */
-export interface BlogsSelect<T extends boolean = true> {
-  title?: T;
-  slug?: T;
-  excerpt?: T;
-  author?: T;
-  date?: T;
-  readingTime?: T;
-  coverImage?:
-    | T
-    | {
-        url?: T;
-        alt?: T;
-      };
-  tags?: T;
-  content?: T;
-  updatedAt?: T;
-  createdAt?: T;
-  _status?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "users_select".
  */
 export interface UsersSelect<T extends boolean = true> {
   role?: T;
+  allowedCollections?: T;
   updatedAt?: T;
   createdAt?: T;
   email?: T;
@@ -483,6 +648,160 @@ export interface UsersSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "avatars_select".
+ */
+export interface AvatarsSelect<T extends boolean = true> {
+  'author-name'?: T;
+  alt?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+  url?: T;
+  thumbnailURL?: T;
+  filename?: T;
+  mimeType?: T;
+  filesize?: T;
+  width?: T;
+  height?: T;
+  focalX?: T;
+  focalY?: T;
+  sizes?:
+    | T
+    | {
+        avatar?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+      };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "cover-images_select".
+ */
+export interface CoverImagesSelect<T extends boolean = true> {
+  'blog-title'?: T;
+  alt?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+  url?: T;
+  thumbnailURL?: T;
+  filename?: T;
+  mimeType?: T;
+  filesize?: T;
+  width?: T;
+  height?: T;
+  focalX?: T;
+  focalY?: T;
+  sizes?:
+    | T
+    | {
+        'cover-image'?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+      };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "logos_select".
+ */
+export interface LogosSelect<T extends boolean = true> {
+  name?: T;
+  alt?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+  url?: T;
+  thumbnailURL?: T;
+  filename?: T;
+  mimeType?: T;
+  filesize?: T;
+  width?: T;
+  height?: T;
+  focalX?: T;
+  focalY?: T;
+  sizes?:
+    | T
+    | {
+        logo?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+      };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "gallery-images_select".
+ */
+export interface GalleryImagesSelect<T extends boolean = true> {
+  name?: T;
+  alt?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+  url?: T;
+  thumbnailURL?: T;
+  filename?: T;
+  mimeType?: T;
+  filesize?: T;
+  width?: T;
+  height?: T;
+  focalX?: T;
+  focalY?: T;
+  sizes?:
+    | T
+    | {
+        logo?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+      };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "blogs_select".
+ */
+export interface BlogsSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  excerpt?: T;
+  author?: T;
+  date?: T;
+  readingTime?: T;
+  coverImage?: T;
+  tags?: T;
+  content?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "tags_select".
  */
 export interface TagsSelect<T extends boolean = true> {
@@ -490,6 +809,7 @@ export interface TagsSelect<T extends boolean = true> {
   description?: T;
   updatedAt?: T;
   createdAt?: T;
+  _status?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -501,19 +821,8 @@ export interface ProjectsSelect<T extends boolean = true> {
   creator?: T;
   contributors?: T;
   description?: T;
-  image?:
-    | T
-    | {
-        src?: T;
-        alt?: T;
-      };
-  galleryImages?:
-    | T
-    | {
-        src?: T;
-        alt?: T;
-        id?: T;
-      };
+  image?: T;
+  galleryImages?: T;
   categories?: T;
   featured?: T;
   github?: T;
@@ -530,13 +839,15 @@ export interface TeamMembersSelect<T extends boolean = true> {
   image?: T;
   name?: T;
   role?: T;
-  description?: T;
+  team?: T;
+  bio?: T;
   emoji?: T;
   linkedin?: T;
   github?: T;
   website?: T;
   updatedAt?: T;
   createdAt?: T;
+  _status?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -553,17 +864,13 @@ export interface EventsSelect<T extends boolean = true> {
         endTime?: T;
       };
   location?: T;
-  image?:
-    | T
-    | {
-        src?: T;
-        alt?: T;
-      };
+  image?: T;
   url?: T;
   categories?: T;
-  status?: T;
+  eventStatus?: T;
   updatedAt?: T;
   createdAt?: T;
+  _status?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -572,10 +879,10 @@ export interface EventsSelect<T extends boolean = true> {
 export interface SponsorsSelect<T extends boolean = true> {
   name?: T;
   logo?: T;
-  alt?: T;
   website?: T;
   updatedAt?: T;
   createdAt?: T;
+  _status?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -583,14 +890,10 @@ export interface SponsorsSelect<T extends boolean = true> {
  */
 export interface AuthorsSelect<T extends boolean = true> {
   name?: T;
-  avatar?:
-    | T
-    | {
-        url?: T;
-        alt?: T;
-      };
+  avatar?: T;
   updatedAt?: T;
   createdAt?: T;
+  _status?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -601,6 +904,7 @@ export interface ProjectCategoriesSelect<T extends boolean = true> {
   description?: T;
   updatedAt?: T;
   createdAt?: T;
+  _status?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -611,6 +915,17 @@ export interface EventCategoriesSelect<T extends boolean = true> {
   description?: T;
   updatedAt?: T;
   createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "teams_select".
+ */
+export interface TeamsSelect<T extends boolean = true> {
+  teamName?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

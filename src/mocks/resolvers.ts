@@ -7,6 +7,11 @@ import { sampleProjectCategories } from "@/cms/static-data/projectCategories";
 import { sampleProjects } from "@/cms/static-data/projects";
 import { sampleEvents } from "@/cms/static-data/events";
 import { sampleEventCategories } from "@/cms/static-data";
+import {
+  sampleAvatars,
+  sampleCoverImages,
+  sampleGalleryImages,
+} from "@/cms/static-data/media";
 
 export interface ResponsePayload {
   docs: unknown[];
@@ -80,9 +85,13 @@ export function resolveBlogs(params: URLSearchParams): ResponsePayload {
     tags: (blog.tags as unknown as number[])
       ?.map((tagID) => sampleTags.find((sTag) => sTag.id === tagID))
       .filter((tag): tag is (typeof sampleTags)[number] => tag !== undefined),
-    author: sampleAuthors.find(
-      (author) => author.id === (blog.author as unknown as number),
-    ) as PayloadAuthor,
+    author: {
+      ...(sampleAuthors.find(
+        (author) => author.id === (blog.author as unknown as number),
+      ) as PayloadAuthor),
+      avatar: sampleAvatars[0],
+    },
+    coverImage: sampleCoverImages[(blog.coverImage as unknown as number) - 1],
   }));
 
   if (tagParam) {
@@ -127,15 +136,19 @@ export function resolveEventCategories(): ResponsePayload {
   };
 }
 
-export function resolveProjects(params: URLSearchParams): ResponsePayload {
-  const slugParam = params.get("where[slug][equals]");
-  const featuredParam = params.get("where[featured][equals]");
+export function resolveProjects(params?: URLSearchParams): ResponsePayload {
+  const slugParam = params?.get("where[slug][equals]");
+  const featuredParam = params?.get("where[featured][equals]");
   const projects = sampleProjects;
 
   let deepProjects = projects.map((proj) => ({
     ...proj,
     categories: (proj.categories as unknown as number[])?.map((catID) =>
       sampleProjectCategories.find((sCat) => sCat.id === catID),
+    ),
+    image: sampleCoverImages[(proj.image as unknown as number) - 1],
+    galleryImages: proj.galleryImages?.map(
+      (img) => sampleGalleryImages[(img as unknown as number) - 1],
     ),
   }));
 
@@ -165,14 +178,15 @@ export function resolveEvents(params: URLSearchParams): ResponsePayload {
   const limit = Number(params.get("limit")) || sampleEvents.length;
   const page = Number(params.get("page")) || 1;
 
-  const resolveCategories = (event: (typeof sampleEvents)[number]) => ({
+  const resolveRelationships = (event: (typeof sampleEvents)[number]) => ({
     ...event,
     categories: event.categories
       .map((id) => sampleEventCategories.find((c) => c.id === id))
       .filter((c): c is (typeof sampleEventCategories)[number] => Boolean(c)),
+    image: sampleCoverImages[(event.image as unknown as number) - 1],
   });
 
-  let events = sampleEvents.map(resolveCategories);
+  let events = sampleEvents.map(resolveRelationships);
 
   if (idsParam) {
     const ids = idsParam.split(",");

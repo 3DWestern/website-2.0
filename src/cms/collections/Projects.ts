@@ -1,8 +1,11 @@
 import type { CollectionConfig } from "payload";
 import { URLSearchParams } from "url";
+import { generalAccess } from "../access/collectionAccess";
+
+export const PROJECTS_SLUG = "projects";
 
 export const Projects: CollectionConfig = {
-  slug: "projects",
+  slug: PROJECTS_SLUG,
   versions: {
     drafts: {
       autosave: {
@@ -11,6 +14,9 @@ export const Projects: CollectionConfig = {
     },
   },
   admin: {
+    group: "Project Content",
+    useAsTitle: "title",
+
     preview: ({ slug }) => {
       const encodedParams = new URLSearchParams({
         slug: `${slug as string}`,
@@ -22,17 +28,8 @@ export const Projects: CollectionConfig = {
       return `/preview?${encodedParams.toString()}`;
     },
   },
-  access: {
-    read: ({ req }) => {
-      if (req.user) return true;
-      return {
-        _status: { equals: "published" },
-      };
-    },
-    create: ({ req }) => Boolean(req.user), // any logged-in user (editor or admin) can create
-    update: ({ req }) => Boolean(req.user),
-    delete: ({ req }) => req.user?.role === "admin", // only admins can delete
-  },
+
+  access: generalAccess(PROJECTS_SLUG),
 
   fields: [
     { name: "title", type: "text", required: true },
@@ -47,21 +44,18 @@ export const Projects: CollectionConfig = {
     { name: "description", type: "text", required: true },
     {
       name: "image",
-      type: "group",
-      fields: [
-        { name: "src", type: "text", required: true },
-        { name: "alt", type: "text", required: true },
-      ],
+      type: "relationship",
+      label: "Cover Image",
+      relationTo: "cover-images",
       required: true,
     },
     {
       name: "galleryImages",
-      type: "array",
+      type: "relationship",
       label: "Image Gallery Items",
-      fields: [
-        { name: "src", type: "text", required: true },
-        { name: "alt", type: "text", required: true },
-      ],
+      relationTo: "gallery-images",
+      hasMany: true,
+      required: true,
     },
     {
       name: "categories",

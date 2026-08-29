@@ -1,10 +1,13 @@
 import Footer from "@/components/Footer";
+import { LoadingWrapper } from "@/components/LoadingWrapper";
 import HomePage from "@/components/pages/HomePage";
 
 export default function Home() {
   return (
     <main className="min-h-screen w-full flex flex-col">
-      <HomePage />
+      <LoadingWrapper>
+        <HomePage />
+      </LoadingWrapper>
     </main>
   );
 }

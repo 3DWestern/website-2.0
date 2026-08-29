@@ -1,18 +1,8 @@
 import type { DefaultTypedEditorState } from "@payloadcms/richtext-lexical";
 
-export type Tag = {
-  id: number;
-  title: string;
-  description?: string | undefined;
-};
-
-export type Author = {
-  id: number;
-  name: string;
-  avatar: {
-    url: string;
-    alt: string;
-  };
+export type Image = {
+  url: string;
+  alt: string;
 };
 
 export type EventCategory = {
@@ -51,6 +41,22 @@ export type Event = {
   status: "upcoming" | "ongoing" | "past" | "cancelled";
 };
 
+export type Avatar = Image & {};
+
+export type Author = {
+  id: number;
+  name: string;
+  avatar: Avatar;
+};
+
+export type CoverImage = Image & {};
+
+export type Tag = {
+  id: number;
+  title: string;
+  description?: string | undefined;
+};
+
 export type BlogPost = {
   id: number;
   slug: string;
@@ -62,10 +68,7 @@ export type BlogPost = {
   /** Minutes to read — derive this in a Payload beforeChange hook */
   readingTime?: number;
   /** Hero image — Payload upload field */
-  coverImage?: {
-    url: string | null;
-    alt?: string | null;
-  } | null;
+  coverImage?: CoverImage;
   /** Relationship field pointing at an Authors collection */
   author: Author | null;
   /** Array of plain strings — Payload array or select field */
@@ -89,6 +92,8 @@ export type ProjectImage = {
   alt: string;
 };
 
+export type GalleryImage = Image & {};
+
 export type Project = {
   id: number;
   slug: string;
@@ -108,7 +113,18 @@ export type Project = {
 export type Sponsor = {
   id: number;
   name: string;
-  logo: string;
-  alt: string;
+  logo: Image;
   website?: string;
 };
+
+export interface TeamMember {
+  image: Image;
+  name: string;
+  role: string;
+  team: string;
+  bio: DefaultTypedEditorState;
+  emoji?: string;
+  linkedin?: string;
+  github?: string;
+  website?: string;
+}

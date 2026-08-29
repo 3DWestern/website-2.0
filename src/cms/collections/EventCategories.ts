@@ -1,11 +1,17 @@
 import type { CollectionConfig } from "payload";
+import { generalAccess } from "../access/collectionAccess";
+
+export const EVENTCATEGORY_SLUG = "event-categories";
 
 export const EventCategories: CollectionConfig = {
-  slug: "event-categories",
-  access: {
-    read: () => true,
+  slug: EVENTCATEGORY_SLUG,
+
+  access: generalAccess(EVENTCATEGORY_SLUG),
+  versions: {
+    drafts: true,
   },
   admin: {
+    group: "Event Content",
     useAsTitle: "name",
   },
   fields: [

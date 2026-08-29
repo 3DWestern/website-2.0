@@ -59,15 +59,13 @@ export function FilterBar({
               className="w-full pl-9 pr-9 py-2 text-sm rounded-lg border border-b-grey bg-black-bg placeholder:text-secondary-text focus:outline-none focus:ring-2 focus:ring-purple-light focus:border-transparent transition"
             />
             {search && (
-              <Button
-                variant="outlined"
-                size="pill"
+              <button
                 onClick={() => onSearchChange("")}
-                // className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-secondary-text hover:text-secondary-text/50"
                 aria-label="Clear search"
               >
                 <X className="w-4 h-4" />
-              </Button>
+              </button>
             )}
           </div>
 

@@ -12,10 +12,7 @@ export const sampleBlogs: SampleBlogPost[] = [
     author: 1,
     date: "2025-03-12T10:00:00.000Z",
     readingTime: 6,
-    coverImage: {
-      url: "/images/workshop3.webp",
-      alt: "Code on a screen",
-    },
+    coverImage: 1,
     tags: [1],
     content: {
       root: {
@@ -57,10 +54,7 @@ export const sampleBlogs: SampleBlogPost[] = [
     author: 2,
     date: "2025-04-02T14:30:00.000Z",
     readingTime: 8,
-    coverImage: {
-      url: "/images/workshop1.webp",
-      alt: "Laptop with code editor open",
-    },
+    coverImage: 1,
     tags: [2],
     content: {
       root: {
@@ -102,10 +96,8 @@ export const sampleBlogs: SampleBlogPost[] = [
     author: 3,
     date: "2025-04-20T09:15:00.000Z",
     readingTime: 5,
-    coverImage: {
-      url: "/images/workshop2.webp",
-      alt: "Wireframe sketches of a form on paper",
-    },
+
+    coverImage: 1,
     tags: [3],
     content: {
       root: {
@@ -147,10 +139,8 @@ export const sampleBlogs: SampleBlogPost[] = [
     author: 4,
     date: "2025-05-08T11:00:00.000Z",
     readingTime: 7,
-    coverImage: {
-      url: "/images/workshop3.webp",
-      alt: "Database schema diagram on a whiteboard",
-    },
+    coverImage: 1,
+
     tags: [4],
     content: {
       root: {
@@ -192,10 +182,8 @@ export const sampleBlogs: SampleBlogPost[] = [
     author: 1,
     date: "2025-05-25T16:45:00.000Z",
     readingTime: 4,
-    coverImage: {
-      url: "/images/workshop1.webp",
-      alt: "Students collaborating around laptops",
-    },
+
+    coverImage: 1,
     tags: [5],
     content: {
       root: {

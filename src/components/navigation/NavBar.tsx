@@ -10,6 +10,7 @@ import MobileMenu from "./MobileMenu";
 import NavLink from "./NavLink";
 import Logo from "../Logo";
 import { navLinks } from "../data/navLinks";
+import { Button } from "../ui/button";
 // Prevent scrolling via wheel, touch, and keyboard events
 const preventDefault = (e: Event) => {
   e.preventDefault();
@@ -86,16 +87,23 @@ export function NavBar() {
         {/* Desktop Links */}
         <div className="hidden lg:flex items-center gap-8">
           {navLinks.map((link) => (
-            <NavLink
-              link={link}
-              active={isActive(link.path)}
-              key={link.path}
-            />
+            <NavLink link={link} active={isActive(link.path)} key={link.path} />
           ))}
         </div>
 
-        {/* Dashboard Button */}
-        <DashButton />
+        {/* Dashboard + Training Buttons --- VISIBLE ON DESKTOP */}
+        <div className="hidden sm:flex gap-2">
+          <Button variant="outlined" size="pill" asChild>
+            <a
+              href="https://westernu.brightspace.com/d2l/le/discovery/view/course/151344"
+              target="_blank"
+              rel="noreferrer noopener"
+            >
+              Training
+            </a>
+          </Button>
+          <DashButton />
+        </div>
       </div>
 
       {/* Mobile Menu */}

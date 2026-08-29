@@ -1,36 +1,26 @@
-import { Author } from "../../types/content";
+import { Author } from "../../../payload-types";
 
-export const sampleAuthors: Author[] = [
+type SampleAuthor = Omit<Author, "updatedAt" | "createdAt">;
+
+export const sampleAuthors: SampleAuthor[] = [
   {
     id: 1,
     name: "Jane Doe",
-    avatar: {
-      url: "/images/avatar.webp",
-      alt: "Jane Doe",
-    },
+    avatar: 1,
   },
   {
     id: 2,
     name: "Marcus Lee",
-    avatar: {
-      url: "/images/avatar.webp",
-      alt: "Marcus Lee",
-    },
+    avatar: 1,
   },
   {
     id: 3,
     name: "Priya Nair",
-    avatar: {
-      url: "/images/avatar.webp",
-      alt: "Priya Nair",
-    },
+    avatar: 1,
   },
   {
     id: 4,
     name: "Sam Okafor",
-    avatar: {
-      url: "/images/avatar.webp",
-      alt: "Sam Okafor",
-    },
+    avatar: 1,
   },
 ];

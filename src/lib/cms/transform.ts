@@ -8,6 +8,8 @@ import {
   Tag,
   ProjectCategory,
   EventCategory,
+  TeamMember,
+  ProjectImage,
 } from "@/types/content";
 import {
   Event as PayloadEvent,
@@ -19,6 +21,10 @@ import {
   TeamMember as PayloadTeamMember,
   ProjectCategory as PayloadPC,
   EventCategory as PayloadEC,
+  Avatar as PayloadAvatar,
+  CoverImage as PayloadCI,
+  GalleryImage as PayloadGI,
+  Logo as PayloadLogo,
 } from "../../../payload-types";
 
 export type DocType =
@@ -31,14 +37,41 @@ export type DocType =
   | PayloadTag
   | PayloadPC;
 
-type ResolvedBlogPost = Omit<PayloadBlogPost, "tags" | "author"> & {
+type ResolvedBlogPost = Omit<
+  PayloadBlogPost,
+  "tags" | "author" | "coverImage"
+> & {
   tags: PayloadTag[] | null;
   author: Author | null;
+  coverImage: PayloadCI;
 };
 
-export type ResolvedProject = Omit<PayloadProject, "categories"> & {
+export type ResolvedProject = Omit<
+  PayloadProject,
+  "categories" | "image" | "galleryImages"
+> & {
   categories: ProjectCategory[] | null;
+  image: PayloadCI;
+  galleryImages: PayloadGI[];
 };
+
+export type ResolvedAuthor = Omit<PayloadAuthor, "avatar"> & {
+  avatar: PayloadAvatar;
+};
+
+export type ResolvedTeamMember = Omit<PayloadTeamMember, "image"> & {
+  image: PayloadAvatar;
+};
+
+export type ResolvedSponsor = Omit<PayloadSponsor, "logo"> & {
+  logo: PayloadLogo;
+};
+
+export type ResolvedEvent = Omit<PayloadEvent, "image"> & {
+  image: PayloadCI;
+};
+
+const BASE_URL = `${process.env.NEXT_PUBLIC_CMS_ENABLED === "true" ? process.env.CMS_BASE_URL : ""}`;
 
 // Get the ordinal identifier for the day
 const getOrdinal = (day: number) => {
@@ -71,11 +104,14 @@ export const formatTime = (dateStr: string) => {
 };
 
 // Transform ONE payload doc object to an event object
-export const transformEvent = (doc: PayloadEvent): Event => {
+export const transformEvent = (doc: ResolvedEvent): Event => {
   return {
     id: doc.id,
     title: doc.title,
-    image: doc.image,
+    image: {
+      src: `${BASE_URL}${doc.image.url}`,
+      alt: doc.image.alt,
+    },
     description: doc.description,
     schedule: {
       date: doc.schedule.date,
@@ -96,12 +132,12 @@ export const transformEvent = (doc: PayloadEvent): Event => {
     //   capacity: doc.rsvp?.capacity ?? undefined,
     //   rsvpCount: doc.rsvp?.rsvpCount ?? 0,
     // },
-    status: doc.status,
+    status: doc.eventStatus,
   };
 };
 
 // transform an entire payload doc to event objects
-export const transformEvents = (docs: PayloadEvent[]): Event[] => {
+export const transformEvents = (docs: ResolvedEvent[]): Event[] => {
   return transformDocs(docs, transformEvent);
 };
 
@@ -122,18 +158,20 @@ export const transformEventCategories = (
 };
 
 // transform ONE payload doc object to an event object
-export const transformSponsor = (doc: PayloadSponsor): Sponsor => {
+export const transformSponsor = (doc: ResolvedSponsor): Sponsor => {
   return {
     id: doc.id,
     name: doc.name,
-    logo: doc.logo,
-    alt: doc.alt,
+    logo: {
+      url: `${BASE_URL}${doc.logo.url}`,
+      alt: doc.logo.alt,
+    },
     website: doc.website || "",
   };
 };
 
 // transform an entire payload doc to sponsor objects
-export const transformSponsors = (docs: PayloadSponsor[]): Sponsor[] => {
+export const transformSponsors = (docs: ResolvedSponsor[]): Sponsor[] => {
   return transformDocs(docs, transformSponsor);
 };
 
@@ -148,15 +186,14 @@ export const transformBlog = (doc: ResolvedBlogPost): BlogPost => {
     // or as a full Author object if fetched with depth >= 1
     author:
       typeof doc.author === "object" && doc.author !== null
-        ? {
-            id: doc.author.id,
-            name: doc.author.name,
-            avatar: doc.author.avatar,
-          }
+        ? transformAuthor(doc.author as ResolvedAuthor)
         : doc.author, // fallback: unpopulated, just the raw ID
     date: doc.date,
     readingTime: doc.readingTime || undefined,
-    coverImage: doc.coverImage,
+    coverImage: {
+      url: `${BASE_URL}${doc.coverImage.url}`,
+      alt: doc.coverImage.alt,
+    },
     tags:
       doc.tags?.map((tag) => ({
         id: tag.id,
@@ -172,15 +209,18 @@ export const transformBlogs = (docs: ResolvedBlogPost[]): BlogPost[] => {
   return transformDocs(docs, transformBlog);
 };
 
-export const transformAuthor = (doc: PayloadAuthor): Author => {
+export const transformAuthor = (doc: ResolvedAuthor): Author => {
   return {
     id: doc.id,
     name: doc.name,
-    avatar: doc.avatar,
+    avatar: {
+      url: `${BASE_URL}${doc.avatar.url}`,
+      alt: doc.avatar.alt,
+    },
   };
 };
 
-export const transformAuthors = (docs: PayloadAuthor[]): Author[] => {
+export const transformAuthors = (docs: ResolvedAuthor[]): Author[] => {
   return transformDocs(docs, transformAuthor);
 };
 
@@ -191,10 +231,17 @@ export const transformProject = (doc: ResolvedProject): Project => {
     slug: doc.slug,
     title: doc.title,
     creator: doc.creator,
-    image: doc.image,
+    image: {
+      src: `${BASE_URL}${doc.image.url}`,
+
+      alt: doc.image.alt,
+    },
     contributors: doc.contributors || undefined,
     description: doc.description,
-    galleryImages: doc.galleryImages || undefined,
+    galleryImages: doc.galleryImages?.map((image) => ({
+      src: `${BASE_URL}${image.url}`,
+      alt: image.alt,
+    })),
     categories: doc.categories || [],
     dateAdded: doc.createdAt,
     featured: doc.featured || false,
@@ -225,12 +272,16 @@ export const transformProjectCategories = (
 };
 
 // transform ONE payload doc object into a team member object
-export const transformTeamMember = (doc: PayloadTeamMember): MenuItem => {
+export const transformTeamMember = (doc: ResolvedTeamMember): TeamMember => {
   return {
-    image: doc.image,
+    image: {
+      url: `${BASE_URL}${doc.image.url}`,
+      alt: doc.image.alt,
+    },
     name: doc.name,
     role: doc.role,
-    description: doc.description || "",
+    team: "",
+    bio: doc.bio,
     emoji: doc.emoji || "",
     linkedin: doc.linkedin || "",
     github: doc.github || "",
@@ -239,7 +290,9 @@ export const transformTeamMember = (doc: PayloadTeamMember): MenuItem => {
 };
 
 // transform an entire payload doc to team member objects
-export const transformTeamMembers = (docs: PayloadTeamMember[]): MenuItem[] => {
+export const transformTeamMembers = (
+  docs: ResolvedTeamMember[],
+): TeamMember[] => {
   return transformDocs(docs, transformTeamMember);
 };
 

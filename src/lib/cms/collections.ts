@@ -5,6 +5,9 @@ import {
   transformTags,
   transformProjectCategories,
   transformEventCategories,
+  transformAuthors,
+  transformSponsors,
+  transformTeamMembers,
 } from "@/lib/cms/transform";
 
 export type CollectionConfig<TDoc = any, TOut = any> = {
@@ -47,5 +50,17 @@ export const collections = {
   "event-categories": {
     slug: "event-categories",
     transform: transformEventCategories,
+  },
+  authors: {
+    slug: "authors",
+    transform: transformAuthors,
+  },
+  sponsors: {
+    slug: "sponsors",
+    transform: transformSponsors,
+  },
+  "team-members": {
+    slug: "team-members",
+    transform: transformTeamMembers,
   },
 } as const satisfies Record<string, CollectionConfig>;

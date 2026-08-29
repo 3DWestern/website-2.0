@@ -1,6 +1,7 @@
 import { useMenu } from "@/context/MenuContext";
 import DashButton from "./DashButton";
 import NavLink from "./NavLink";
+import { Button } from "../ui/button";
 
 interface MobileMenuProps {
   isActive: (path: string) => boolean;
@@ -26,7 +27,8 @@ export default function MobileMenu({ isActive, navLinks }: MobileMenuProps) {
       }`}
       aria-hidden={!isMenuOpen}
     >
-    <div className="flex lg:hidden flex-col z-40 w-full h-full items-center justify-center gap-6 overflow-hidden bg-header backdrop-blur-sm ">        {navLinks.map((link) => (
+      <div className="flex lg:hidden flex-col z-40 bg-header backdrop-blur-sm w-full h-full items-center justify-center gap-6 overflow-hidden">
+        {navLinks.map((link) => (
           <NavLink
             key={link.path}
             link={link}
@@ -34,8 +36,18 @@ export default function MobileMenu({ isActive, navLinks }: MobileMenuProps) {
             mobile={true}
           />
         ))}
-
-        <DashButton />
+        <div className="flex flex-col sm:hidden gap-2">
+          <Button variant="outlined" size="pill" asChild>
+            <a
+              href="https://westernu.brightspace.com/d2l/le/discovery/view/course/151344"
+              target="_blank"
+              rel="noreferrer noopener"
+            >
+              Training
+            </a>
+          </Button>
+          <DashButton />
+        </div>
       </div>
     </div>
   );

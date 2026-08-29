@@ -1,7 +1,11 @@
 // Blogs collection
 import type { CollectionConfig } from "payload";
+import { generalAccess, hasCollectionAccess } from "../access/collectionAccess";
+
+const BLOG_SLUG = "blogs";
+
 export const Blogs: CollectionConfig = {
-  slug: "blogs",
+  slug: BLOG_SLUG,
 
   // Enables draft/published workflow for this collection.
   // Documents can be saved as drafts before being published, and autosave
@@ -14,6 +18,7 @@ export const Blogs: CollectionConfig = {
     },
   },
   admin: {
+    group: "Blog Content",
     // Builds the URL used for the "Preview" button in the Payload admin UI.
     // This lets an editor view a draft/unpublished blog on the live frontend
     // before it's published, by hitting a special /preview route that your
@@ -32,23 +37,7 @@ export const Blogs: CollectionConfig = {
       return `/preview?${encodedParams.toString()}`;
     },
   },
-  // Read access:
-  // - If there's a logged-in user (req.user exists), allow reading everything,
-  //   including drafts/unpublished posts (useful for admin/editor preview).
-  // - If there's no logged-in user (public/anonymous request), Payload applies
-  //   this returned query constraint instead of a plain true/false — meaning
-  //   public visitors can only read documents where _status equals "published".
-  access: {
-    read: ({ req }) => {
-      if (req.user) return true;
-      return {
-        _status: { equals: "published" },
-      };
-    },
-    create: ({ req }) => Boolean(req.user), // any logged-in user (editor or admin) can create
-    update: ({ req }) => Boolean(req.user),
-    delete: ({ req }) => req.user?.role === "admin", // only admins can delete
-  },
+  access: generalAccess(BLOG_SLUG),
   fields: [
     { name: "title", type: "text", required: true },
     { name: "slug", type: "text", required: true, unique: true },
@@ -65,11 +54,10 @@ export const Blogs: CollectionConfig = {
     { name: "readingTime", type: "number" },
     {
       name: "coverImage",
-      type: "group",
-      fields: [
-        { name: "url", type: "text", required: true },
-        { name: "alt", type: "text" },
-      ],
+      type: "relationship",
+      relationTo: "cover-images",
+      label: "Cover Image",
+      required: true,
     },
     // Relationship field: can link to multiple documents in the "tags" collection.
     // maxRows caps how many tags can be attached to a single blog post at 3.
