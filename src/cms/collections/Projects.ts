@@ -55,6 +55,7 @@ export const Projects: CollectionConfig = {
       label: "Image Gallery Items",
       relationTo: "gallery-images",
       hasMany: true,
+      required: true,
     },
     {
       name: "categories",

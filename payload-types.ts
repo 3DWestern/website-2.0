@@ -381,7 +381,7 @@ export interface Project {
   contributors?: string[] | null;
   description: string;
   image: number | CoverImage;
-  galleryImages?: (number | GalleryImage)[] | null;
+  galleryImages: (number | GalleryImage)[];
   categories: (number | ProjectCategory)[];
   featured?: boolean | null;
   github?: string | null;

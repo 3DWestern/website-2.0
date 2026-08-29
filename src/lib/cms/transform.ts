@@ -71,6 +71,8 @@ export type ResolvedEvent = Omit<PayloadEvent, "image"> & {
   image: PayloadCI;
 };
 
+const BASE_URL = `${process.env.NEXT_PUBLIC_CMS_ENABLED === "true" ? process.env.CMS_BASE_URL : ""}`;
+
 // Get the ordinal identifier for the day
 const getOrdinal = (day: number) => {
   if (day > 3 && day < 21) return `${day}th`;
@@ -107,7 +109,7 @@ export const transformEvent = (doc: ResolvedEvent): Event => {
     id: doc.id,
     title: doc.title,
     image: {
-      src: doc.image.url ?? "",
+      src: `${BASE_URL}${doc.image.url}`,
       alt: doc.image.alt,
     },
     description: doc.description,
@@ -161,7 +163,7 @@ export const transformSponsor = (doc: ResolvedSponsor): Sponsor => {
     id: doc.id,
     name: doc.name,
     logo: {
-      url: doc.logo.url ?? "",
+      url: `${BASE_URL}${doc.logo.url}`,
       alt: doc.logo.alt,
     },
     website: doc.website || "",
@@ -189,7 +191,7 @@ export const transformBlog = (doc: ResolvedBlogPost): BlogPost => {
     date: doc.date,
     readingTime: doc.readingTime || undefined,
     coverImage: {
-      url: `${process.env.CMS_BASE_URL}${doc.coverImage.url}`,
+      url: `${BASE_URL}${doc.coverImage.url}`,
       alt: doc.coverImage.alt,
     },
     tags:
@@ -212,7 +214,7 @@ export const transformAuthor = (doc: ResolvedAuthor): Author => {
     id: doc.id,
     name: doc.name,
     avatar: {
-      url: `${process.env.CMS_BASE_URL}${doc.avatar.url}`,
+      url: `${BASE_URL}${doc.avatar.url}`,
       alt: doc.avatar.alt,
     },
   };
@@ -230,13 +232,14 @@ export const transformProject = (doc: ResolvedProject): Project => {
     title: doc.title,
     creator: doc.creator,
     image: {
-      src: doc.image.url ?? "",
+      src: `${BASE_URL}${doc.image.url}`,
+
       alt: doc.image.alt,
     },
     contributors: doc.contributors || undefined,
     description: doc.description,
-    galleryImages: doc.galleryImages.map((image) => ({
-      src: image.url ?? "",
+    galleryImages: doc.galleryImages?.map((image) => ({
+      src: `${BASE_URL}${image.url}`,
       alt: image.alt,
     })),
     categories: doc.categories || [],
@@ -272,7 +275,7 @@ export const transformProjectCategories = (
 export const transformTeamMember = (doc: ResolvedTeamMember): TeamMember => {
   return {
     image: {
-      url: doc.image.url ?? "",
+      url: `${BASE_URL}${doc.image.url}`,
       alt: doc.image.alt,
     },
     name: doc.name,

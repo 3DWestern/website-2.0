@@ -40,6 +40,7 @@ export const sampleProjects: SampleProject[] = [
     description:
       "An accessible gaming controller featuring custom 3D-printed housings and modular input mechanisms designed with input from campus disability services, so buttons, triggers, and grips can be rearranged for different hand mobility needs without any soldering.",
     image: 1,
+    galleryImages: [2],
     categories: [2], // 3D Printing
     github: "https://github.com/3dwestern/adaptive-controller",
     blogUrl: "/blog/adaptive-gaming-controller",

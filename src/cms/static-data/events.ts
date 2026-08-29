@@ -17,7 +17,7 @@ export const sampleEvents: SampleEvent[] = [
     image: 1,
     url: "https://www.bouncelife.com/events/6942f5d21d54a5775305dcb4",
     categories: [1], // workshop
-    eventStatus: "upcoming",
+    eventStatus: "past",
   },
   {
     id: 2,
@@ -33,7 +33,7 @@ export const sampleEvents: SampleEvent[] = [
     image: 1,
     url: "https://www.bouncelife.com/events/6942f785c42f2067dc31b05e",
     categories: [1], // workshop
-    eventStatus: "upcoming",
+    eventStatus: "past",
   },
   {
     id: 3,
@@ -49,7 +49,7 @@ export const sampleEvents: SampleEvent[] = [
     image: 1,
     url: "https://www.bouncelife.com/events/6942f676bfdf6dc764c83089",
     categories: [5], // other (was "Activity" -- not a defined select option)
-    eventStatus: "upcoming",
+    eventStatus: "past",
   },
   {
     id: 4,
@@ -65,7 +65,7 @@ export const sampleEvents: SampleEvent[] = [
     image: 1,
     url: "https://www.bouncelife.com/events/6942f7f43d78d96d38414993",
     categories: [1], // workshop
-    eventStatus: "upcoming",
+    eventStatus: "past",
   },
   {
     id: 5,
@@ -82,7 +82,7 @@ export const sampleEvents: SampleEvent[] = [
     image: 1,
     url: "https://www.bouncelife.com/events/6942f6fa7ffe1cc83a76c004",
     categories: [1], // workshop
-    eventStatus: "upcoming",
+    eventStatus: "past",
   },
   {
     id: 6,
@@ -98,6 +98,6 @@ export const sampleEvents: SampleEvent[] = [
     image: 1,
     url: "https://www.bouncelife.com/events/6942f84dda486964077145ca",
     categories: [1], // workshop
-    eventStatus: "upcoming",
+    eventStatus: "past",
   },
 ];

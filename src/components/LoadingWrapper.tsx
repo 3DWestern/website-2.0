@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, ReactNode } from "react";
+import { useState, useEffect, useLayoutEffect, ReactNode } from "react";
 import Lottie from "lottie-react";
 import { LoadingContext } from "@/context/LoadingContext";
 import { usePathname } from "next/navigation";
@@ -11,25 +11,47 @@ interface LoadingWrapperProps {
   children: ReactNode;
 }
 
+const STORAGE_KEY = "hasSeenLandingAnimation";
+
+// useLayoutEffect on the client, no-op on the server (avoids the
+// "useLayoutEffect does nothing on the server" warning)
+const useIsomorphicLayoutEffect =
+  typeof window !== "undefined" ? useLayoutEffect : useEffect;
+
 export function LoadingWrapper({ children }: LoadingWrapperProps) {
   const pathname = usePathname();
+
   const [animationData, setAnimationData] = useState<AnimationData | null>(
     null,
   );
   const [animationDone, setAnimationDone] = useState(false);
   const [modelReady, setModelReady] = useState(pathname !== "/");
+  const [checkedStorage, setCheckedStorage] = useState(false);
 
-  // Loading is complete when BOTH animation has finished AND model is ready
   const isLoading = !animationDone;
 
+  // Runs only on the client, after hydration, before paint.
+  // Flips state instantly if the animation was already seen this session.
+  useIsomorphicLayoutEffect(() => {
+    try {
+      if (sessionStorage.getItem(STORAGE_KEY) === "true") {
+        setAnimationDone(true);
+      }
+    } catch {
+      // ignore storage errors (private browsing, quota, etc.)
+    } finally {
+      setCheckedStorage(true);
+    }
+  }, []);
+
   useEffect(() => {
+    if (!checkedStorage || animationDone) return; // already resolved, skip fetch
+
     const abortController = new AbortController();
 
     fetch("/animations/loading.json", { signal: abortController.signal })
       .then((res) => {
-        if (!res.ok) {
-          throw new Error("Failed to load animation");
-        }
+        if (!res.ok) throw new Error("Failed to load animation");
         return res.json();
       })
       .then((data: AnimationData) => setAnimationData(data))
@@ -40,15 +62,21 @@ export function LoadingWrapper({ children }: LoadingWrapperProps) {
       });
 
     return () => abortController.abort();
-  }, []);
+  }, [checkedStorage, animationDone]);
 
-  // Minimum animation duration timer
   useEffect(() => {
+    if (!checkedStorage || animationDone) return;
+
     const timer = setTimeout(() => {
       setAnimationDone(true);
+      try {
+        sessionStorage.setItem(STORAGE_KEY, "true");
+      } catch {
+        // ignore storage errors
+      }
     }, 5000);
     return () => clearTimeout(timer);
-  }, []);
+  }, [checkedStorage, animationDone]);
 
   // Dispatch event when loading actually completes
   useEffect(() => {
@@ -61,8 +89,6 @@ export function LoadingWrapper({ children }: LoadingWrapperProps) {
     if (isLoading) {
       // Save current scroll position
       const scrollY = window.scrollY;
-
-      // Apply CSS-based scroll prevention
       document.documentElement.style.overflow = "hidden";
       document.documentElement.style.height = "100vh";
       document.body.style.overflow = "hidden";
@@ -72,7 +98,6 @@ export function LoadingWrapper({ children }: LoadingWrapperProps) {
       document.body.style.right = "0";
       document.body.style.width = "100%";
 
-      // Remove scroll-smooth class from html element
       const htmlElement = document.documentElement;
       const hadScrollSmooth = htmlElement.classList.contains("scroll-smooth");
       if (hadScrollSmooth) {
@@ -80,7 +105,6 @@ export function LoadingWrapper({ children }: LoadingWrapperProps) {
         htmlElement.dataset.hadScrollSmooth = "true";
       }
 
-      // Prevent scroll events
       const preventScroll = (e: Event) => {
         e.preventDefault();
         e.stopPropagation();
@@ -88,30 +112,24 @@ export function LoadingWrapper({ children }: LoadingWrapperProps) {
       };
 
       const preventKeyScroll = (e: KeyboardEvent) => {
-        // Prevent Page Up, Page Down, arrow keys, spacebar
         if ([32, 33, 34, 35, 36, 37, 38, 39, 40].includes(e.keyCode)) {
           e.preventDefault();
           return false;
         }
       };
 
-      // Add event listeners with passive: false to enable preventDefault
       window.addEventListener("wheel", preventScroll, { passive: false });
       window.addEventListener("touchmove", preventScroll, { passive: false });
       window.addEventListener("keydown", preventKeyScroll, { passive: false });
 
-      // Cleanup function
       return () => {
-        // Remove event listeners
         window.removeEventListener("wheel", preventScroll);
         window.removeEventListener("touchmove", preventScroll);
         window.removeEventListener("keydown", preventKeyScroll);
       };
     } else {
-      // Restore scroll position
       const scrollY = document.body.style.top;
 
-      // Restore CSS properties
       document.documentElement.style.overflow = "";
       document.documentElement.style.height = "";
       document.body.style.overflow = "";
@@ -121,14 +139,12 @@ export function LoadingWrapper({ children }: LoadingWrapperProps) {
       document.body.style.right = "";
       document.body.style.width = "";
 
-      // Restore scroll-smooth class if it was present
       const htmlElement = document.documentElement;
       if (htmlElement.dataset.hadScrollSmooth === "true") {
         htmlElement.classList.add("scroll-smooth");
         delete htmlElement.dataset.hadScrollSmooth;
       }
 
-      // Restore scroll position
       if (scrollY) {
         window.scrollTo(0, parseInt(scrollY || "0") * -1);
       }
@@ -139,7 +155,6 @@ export function LoadingWrapper({ children }: LoadingWrapperProps) {
     <LoadingContext.Provider
       value={{ loadingComplete: !isLoading, modelReady, setModelReady }}
     >
-      {/* Loading screen overlay */}
       {isLoading && (
         <div className="fixed inset-0 z-[100] bg-black flex items-center justify-center">
           {animationData ? (
@@ -152,7 +167,6 @@ export function LoadingWrapper({ children }: LoadingWrapperProps) {
         </div>
       )}
 
-      {/* Content - hidden until loading completes */}
       <div data-loading={isLoading ? "true" : undefined}>{children}</div>
     </LoadingContext.Provider>
   );

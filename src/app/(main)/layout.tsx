@@ -82,7 +82,7 @@ export default function RootLayout({
         <MenuProvider>
           <main className="min-h-screen w-full flex flex-col">
             <NavBar></NavBar>
-            <LoadingWrapper>{children}</LoadingWrapper>
+            {children}
             <Footer />
           </main>
         </MenuProvider>
