@@ -1,4 +1,3 @@
-import { MenuItem } from "@/components/data/teamdata";
 import {
   Event,
   BlogPost,
@@ -9,7 +8,6 @@ import {
   ProjectCategory,
   EventCategory,
   TeamMember,
-  ProjectImage,
 } from "@/types/content";
 import {
   Event as PayloadEvent,
@@ -71,7 +69,7 @@ export type ResolvedEvent = Omit<PayloadEvent, "image"> & {
   image: PayloadCI;
 };
 
-const BASE_URL = `${process.env.NEXT_PUBLIC_CMS_ENABLED === "true" ? process.env.CMS_BASE_URL : ""}`;
+const BASE_URL = `${process.env.NEXT_PUBLIC_CMS_ENABLED === "true" ? process.env.NEXT_PUBLIC_BASE_URL : ""}`;
 
 // Get the ordinal identifier for the day
 const getOrdinal = (day: number) => {
@@ -233,7 +231,6 @@ export const transformProject = (doc: ResolvedProject): Project => {
     creator: doc.creator,
     image: {
       src: `${BASE_URL}${doc.image.url}`,
-
       alt: doc.image.alt,
     },
     contributors: doc.contributors || undefined,

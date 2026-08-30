@@ -1,5 +1,5 @@
 import type { RequestInit } from "next/dist/server/web/spec-extension/request";
-const BASE_URL = process.env.CMS_BASE_URL || "http://localhost:3000";
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
 
 const cmsEnabledFallback = async (path: string, options?: RequestInit) => {
   if (process.env.NEXT_PUBLIC_CMS_ENABLED === "false") {

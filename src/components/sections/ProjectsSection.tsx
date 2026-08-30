@@ -49,7 +49,6 @@ const ProjectsSection = () => {
                 <ProjectCard project={project} />
               </CarouselItem>
             ))}
-            : ( )
           </CarouselContent>
         </Carousel>
       ) : (

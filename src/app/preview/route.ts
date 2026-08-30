@@ -35,11 +35,14 @@ export async function GET(req: Request): Promise<Response> {
     // Forward the incoming request's cookies to the CMS's "/api/users/me"
     // endpoint to check whether the person making this request is actually
     // logged into Payload (as opposed to just knowing the preview secret)
-    const userRes = await fetch(`${process.env.CMS_BASE_URL}/api/users/me`, {
-      headers: {
-        Cookie: req.headers.get("cookie") || "",
+    const userRes = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/users/me`,
+      {
+        headers: {
+          Cookie: req.headers.get("cookie") || "",
+        },
       },
-    });
+    );
 
     if (!userRes.ok) {
       return new Response("You are not allowed to preview this page.", {

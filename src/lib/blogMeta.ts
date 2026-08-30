@@ -14,7 +14,7 @@ const SITE_NAME = "3D Western";
 
 /** Meta for the /blogs index page */
 export function blogIndexMeta(): Metadata {
-  const title = "Blog — 3D Western";
+  const title = "Blog | 3D Western";
   const description =
     "Articles, tutorials, and club updates from the 3D Western community.";
 
@@ -39,8 +39,9 @@ export function blogIndexMeta(): Metadata {
 /** Meta for an individual /blogs/[slug] article */
 export function blogPostMeta(post: BlogPost | null): Metadata {
   if (!post) return {};
-  const title = `${post.title} — ${SITE_NAME}`;
-  const description = post.excerpt ?? `Read "${post.title}" on the 3D Western blog.`;
+  const title = `${post.title} | ${SITE_NAME}`;
+  const description =
+    post.excerpt ?? `Read "${post.title}" on the 3D Western blog.`;
   const url = `${SITE_URL}/blogs/${post.slug}`;
   const ogImage = post.coverImage?.url;
 

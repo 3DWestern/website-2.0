@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { LoadingWrapper } from "@/components/LoadingWrapper";
 import { MenuProvider } from "@/context/MenuContext";
-import { inter, spaceGrotesk } from "@/lib/fonts";
 import { chakraPetch, workSans } from "@/lib/fonts";
 import { NavBar } from "@/components/navigation/NavBar";
 import Footer from "@/components/Footer";

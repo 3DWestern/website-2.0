@@ -10,19 +10,17 @@ import {
 } from "@/components/content/CalendarGrid";
 import { EventCard, EventCardSkeleton } from "@/components/content/EventCard";
 import { EventDetailModal } from "@/components/content/EventDetailModal";
-import { EventFilterBar } from "@/components/content/EventFilterBar";
 import { formatDayLabel } from "@/components/content/calendarUtils";
 import { useEvents } from "@/context/EventContext";
 import { Event } from "@/types/content";
 import PageHeader from "../content/Header";
 import { Button } from "../ui/button";
+import { FilterBar } from "../content/FilterBar";
 
 export function EventsPage() {
   const {
     category,
     setCategory,
-    view,
-    setView,
     currentDate,
     setCurrentDate,
     search,
@@ -44,16 +42,16 @@ export function EventsPage() {
         title="Our Events"
         description="Workshops, socials, and meetings — see what's happening in the makerspace"
       ></PageHeader>
-
-      <EventFilterBar
+      <FilterBar
         search={search}
         onSearchChange={setSearch}
+        searchPlaceholder="Search events..."
         category={category}
         onCategoryChange={setCategory}
-        categories={allCategories}
-        view={view}
-        onViewChange={setView}
+        options={allCategories}
         resultCount={calendarEvents.length}
+        resultLabel="event"
+        includeAllOption
       />
 
       <section className="py-16 bg-grey-bg">
@@ -162,7 +160,10 @@ export function EventsPage() {
         <div className="flex flex-col items-center justify-center w-full py-4 mt-12">
           <p className="text-lg font-semibold mb-4 text-center text-secondary-text">
             Want to organize an event?&nbsp;
-            <Link href="/contact" className="text-purple-light hover:text-purple-light/60">
+            <Link
+              href="/contact"
+              className="text-purple-light hover:text-purple-light/60"
+            >
               Contact Us
             </Link>
           </p>

@@ -35,11 +35,11 @@ Copy `.env.example` to `.env.local` and fill in the values:
 
 ```env
 # Set to 'true' to use Payload CMS, 'false' to use mock data
-CMS_ENABLED=true
+NEXT_PUBLIC_CMS_ENABLED=true
 
 # Required for Payload
 PAYLOAD_SECRET=your-secret-key
-CMS_BASE_URL=http://localhost:3000
+NEXT_PUBLIC_BASE_URL=http://localhost:3000
 
 # Optional — only needed if CMS_ENABLED=true
 CMS_DATABASE_URI=postgres://user:password@localhost:5432/payload

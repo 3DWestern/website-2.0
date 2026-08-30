@@ -25,12 +25,10 @@ export const views: View[] = ["day", "week", "month", "upcoming", "past"];
 
 const EventsContext = createContext<{
   // raw filter state
-  view: View;
-  setView: (v: View) => void;
   currentDate: Date;
   setCurrentDate: (d: Date) => void;
-  category: string | undefined;
-  setCategory: (c: string | undefined) => void;
+  category: string;
+  setCategory: (c: string) => void;
   search: string;
   setSearch: (s: string) => void;
   isLoading: boolean;
@@ -54,14 +52,12 @@ export function EventsProvider({
   children: React.ReactNode;
 }) {
   // ---- raw state ----
-  const [view, setView] = useState<View>("month");
   const [currentDate, setCurrentDate] = useState(initialDate);
-  const [category, setCategory] = useState<string | undefined>("all");
+  const [category, setCategory] = useState<string>("All");
   const [search, setSearch] = useState("");
 
   const monthKey = format(currentDate, "yyyy-MM");
   const isInitialMonth = monthKey === format(initialDate, "yyyy-MM");
-
 
   // compute calendar data and cache with SWR for future renders
   const { data, isLoading } = useSWR(
@@ -76,76 +72,31 @@ export function EventsProvider({
   // Reset search filters
   const resetFilters = useCallback(() => {
     setSearch("");
-    setCategory("all");
-    setView("month");
+    setCategory("All");
   }, []);
 
   // ---- derived selectors ----
   // category + view/date-range filtering
-  const categoryAndViewFiltered = useMemo(() => {
+  const categoryFiltered = useMemo(() => {
     let result = data ?? [];
-    if (category && category !== "all") {
+    if (category && category !== "All") {
       result = result.filter((event) =>
         event.categories.some((cat) => cat.name === category),
       );
     }
-    switch (view) {
-      // Events from the current date
-      case "day": {
-        const interval = {
-          start: startOfDay(currentDate),
-          end: endOfDay(currentDate),
-        };
-        result = result.filter((e) =>
-          isWithinInterval(new Date(e.schedule.startTime), interval),
-        );
-        break;
-      }
-
-      // Events from the week the current date is within
-      case "week": {
-        const interval = {
-          start: startOfWeek(currentDate),
-          end: endOfWeek(currentDate),
-        };
-        result = result.filter((e) =>
-          isWithinInterval(new Date(e.schedule.startTime), interval),
-        );
-        break;
-      }
-
-      // events from the month the current date is within
-      case "month":
-        result = result.filter((e) =>
-          isSameMonth(new Date(e.schedule.startTime), currentDate),
-        );
-        break;
-
-      // Events based on the "upcoming" flag on the blog collection from payload
-      case "upcoming":
-        result = result.filter(
-          (e) => e.status === "upcoming" || e.status === "ongoing",
-        );
-        break;
-
-      // events based on the "past" flag on the blog collection from payload
-      case "past":
-        result = result.filter((e) => e.status === "past");
-        break;
-    }
     return result;
-  }, [data, view, currentDate, category]);
+  }, [data, currentDate, category]);
 
   // search narrowing for events
   const searched = useMemo(() => {
     const q = search.toLowerCase().trim();
-    if (!q) return categoryAndViewFiltered;
-    return categoryAndViewFiltered.filter(
+    if (!q) return categoryFiltered;
+    return categoryFiltered.filter(
       (event) =>
         event.title.toLowerCase().includes(q) ||
         event.location.toLowerCase().includes(q),
     );
-  }, [categoryAndViewFiltered, search]);
+  }, [categoryFiltered, search]);
 
   // sort events by date
   const calendarEvents = useMemo(() => {
@@ -166,11 +117,9 @@ export function EventsProvider({
         ),
     [searched],
   );
-    return (
+  return (
     <EventsContext.Provider
       value={{
-        view,
-        setView,
         currentDate,
         setCurrentDate,
         category,

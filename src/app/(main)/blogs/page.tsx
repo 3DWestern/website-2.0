@@ -1,10 +1,10 @@
 import { BlogsPage } from "@/components/pages/BlogsPage";
 import { blogIndexMeta } from "@/lib/blogMeta";
+import { Metadata } from "next";
 
 export function generateMetadata(): Metadata {
   return blogIndexMeta();
 }
-import { Metadata } from "next";
 
 export default function Blogs() {
   return <BlogsPage />;
