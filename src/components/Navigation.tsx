@@ -32,7 +32,6 @@ export function Navigation() {
     { path: "/explore", label: "Explore" },
     { path: "/events", label: "Events" },
     { path: "/blog", label: "Blog" },
-    { path: "/contact", label: "Contact Us" },
     { path: "/makerspace", label: "Availability" },
     {
       path: "https://westernu.brightspace.com/d2l/le/discovery/view/course/151344",

@@ -8,7 +8,7 @@ function HeroBackground() {
     <div className="pointer-events-none absolute inset-0">
       <video
         className="h-full w-full object-cover"
-        src="/videos/hero.mp4"
+        src="/videos/hero_compressed.mp4"
         poster="/images/hero-poster.jpg"
         autoPlay
         muted

@@ -16,5 +16,4 @@ export const navLinks: NavLink[] = [
   //   label: "Training",
   //   external: true,
   // },
-  { path: "/contact", label: "Contact Us" },
 ];
