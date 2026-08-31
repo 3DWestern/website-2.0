@@ -29,26 +29,26 @@ const ProjectShowcaseCard = ({
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -8 }}
       transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-      className="mb-6 break-inside-avoid"
+      className="h-full min-w-0"
     >
       <Link
         href={`/projects/${project.slug}`}
         aria-label={`View project: ${project.title}`}
-        className="block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-light rounded-xl"
+        className="block h-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-light rounded-xl"
       >
         <Card
           className={cn(
-            "group relative overflow-hidden rounded-xl border-b border-b-grey bg-black-bg shadow-sm hover:shadow-lg transition-shadow duration-300",
+            "group relative flex h-full flex-col overflow-hidden rounded-xl border-b border-b-grey bg-black-bg shadow-sm hover:shadow-lg transition-shadow duration-300",
             className,
           )}
         >
-          <div className="relative overflow-hidden">
+          <div className="relative aspect-3/2 shrink-0 overflow-hidden">
             <Image
               src={project.image.src}
               alt={project.image.alt}
-              width={600}
-              height={400}
-              className="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500"
+              fill
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+              className="object-cover group-hover:scale-105 transition-transform duration-500"
             />
             {project.categories.map((category) => (
               <span
@@ -60,17 +60,17 @@ const ProjectShowcaseCard = ({
             ))}
           </div>
 
-          <div className="p-5 flex flex-col gap-3">
-            <h3 className={`text-xl leading-tight`}>
+          <div className="flex min-h-0 flex-1 flex-col gap-3 p-5">
+            <h3 className="min-h-[2.5em] text-xl! leading-tight wrap-break-word line-clamp-2">
               {project.title}
             </h3>
 
-            <div className="flex items-center gap-1.5 text-sm text-secondary-text">
-              <Users className="w-3.5 h-3.5" aria-hidden="true" />
-              <span>{contributors.join(", ")}</span>
+            <div className="flex min-w-0 items-center gap-1.5 text-sm text-secondary-text">
+              <Users className="w-3.5 h-3.5 shrink-0" aria-hidden="true" />
+              <span className="truncate">{contributors.join(", ")}</span>
             </div>
 
-            <p className="text-sm text-secondary-text leading-relaxed">
+            <p className="min-h-[4.875em] text-sm text-pretty text-secondary-text leading-relaxed line-clamp-3">
               {project.description}
             </p>
 
@@ -81,7 +81,7 @@ const ProjectShowcaseCard = ({
               Added {formatShortDate(project.dateAdded)}
             </time>
 
-            <span className="mt-1 inline-flex items-center gap-1 text-sm font-semibold text-purple-light group-hover:gap-2 transition-all">
+            <span className="mt-auto inline-flex items-center gap-1 text-sm font-semibold text-purple-light group-hover:gap-2 transition-[gap]">
               Read more{" "}
               <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
             </span>

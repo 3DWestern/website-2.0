@@ -27,6 +27,10 @@ export function NavBar() {
   const { isMenuOpen, setIsMenuOpen } = useMenu();
   const pathname = usePathname();
 
+  useEffect(() => {
+    setIsMenuOpen(false);
+  }, [pathname, setIsMenuOpen]);
+
   // Prevent scrolling when menu is open
   useEffect(() => {
     if (isMenuOpen) {
@@ -61,6 +65,7 @@ export function NavBar() {
   const isActive = (path: string) => pathname === path;
 
   return (
+    <>
     <nav
       id="top"
       className={`fixed top-0 left-0 right-0 z-50 bg-header backdrop-blur-sm transition-[border-color] duration-300 border-b ${
@@ -72,7 +77,8 @@ export function NavBar() {
           {/** Mobile Menu Hamburger */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            aria-label="Toggle menu"
+            aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={isMenuOpen}
             className="lg:hidden p-2 text-white"
           >
             {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -106,8 +112,8 @@ export function NavBar() {
         </div>
       </div>
 
-      {/* Mobile Menu */}
-      <MobileMenu isActive={isActive} navLinks={navLinks} />
     </nav>
+    <MobileMenu isActive={isActive} navLinks={navLinks} />
+    </>
   );
 }
