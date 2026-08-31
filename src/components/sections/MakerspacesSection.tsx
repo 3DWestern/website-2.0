@@ -98,7 +98,8 @@ export function MakerspacesSection() {
           </p>
           <Button variant="gradient" size="pill" asChild>
             <Link
-            href="/training">
+            href="https://westernu.brightspace.com/d2l/le/discovery/view/course/151344" target="_blank"
+                rel="noopener noreferrer">
             Access Training
           </Link>
           </Button>

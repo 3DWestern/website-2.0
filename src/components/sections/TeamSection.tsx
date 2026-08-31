@@ -5,6 +5,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { items, MenuItem } from "@/components/data/teamdata";
 import { TeamMemberCard } from "@/components/content/TeamMemberCard";
+import { TeamMemberModal } from "@/components/content/TeamMemberModal";
 import { Button } from "../ui/button";
 
 const leadership = items.filter(
@@ -14,12 +15,8 @@ const vicePresidents = items.filter(
   (m) => !m.role.startsWith("Chief") && m.role !== "President",
 );
 
-// Tailwind's default breakpoints. We need the current one in JS (not just
-// CSS) because it drives perPage/pagination, not just layout.
 type Breakpoint = "base" | "sm" | "md" | "lg";
 
-// Watches window width and reports which breakpoint we're in, so the grid
-// can react to resizing instead of staying locked to a fixed column count.
 function useBreakpoint(): Breakpoint {
   const [breakpoint, setBreakpoint] = useState<Breakpoint>("lg");
 
@@ -49,11 +46,6 @@ function useBreakpoint(): Breakpoint {
   return breakpoint;
 }
 
-// Caps the column count (and therefore cards-per-page, since we show one
-// row per page) based on screen size. This is the actual fix: previously
-// `cols` was a fixed number regardless of viewport, so on small screens
-// 4-5 columns squeezed each card down to a sliver — narrow enough that
-// names/roles got cut off. Now fewer, wider cards show per page instead.
 function columnsForBreakpoint(breakpoint: Breakpoint, maxCols: number) {
   switch (breakpoint) {
     case "lg":
@@ -70,28 +62,24 @@ function columnsForBreakpoint(breakpoint: Breakpoint, maxCols: number) {
 interface TierProps {
   label: string;
   members: MenuItem[];
-  maxCols: number; // column count at the 'lg' breakpoint and above
+  maxCols: number;
+  onSelect: (member: MenuItem) => void;
 }
 
-function Tier({ label, members, maxCols }: TierProps) {
+function Tier({ label, members, maxCols, onSelect }: TierProps) {
   const breakpoint = useBreakpoint();
   const cols = columnsForBreakpoint(breakpoint, maxCols);
-  const perPage = cols; // one full row of cards per page
+  const perPage = cols;
   const [page, setPage] = useState(0);
   const [direction, setDirection] = useState(1);
   const [prevCols, setPrevCols] = useState(cols);
 
-  // If resizing changes how many columns fit, the current page can end up
-  // out of range (e.g. you were on page 3 of 4-per-row, now it's 2-per-row
-  // and there are more pages). Snap back to the first page whenever the
-  // column count changes so we never render an empty/invalid page.
   if (cols !== prevCols) {
     setPrevCols(cols);
     setPage(0);
   }
 
   const totalPages = Math.ceil(members.length / perPage);
-
   const visible = members.slice(page * perPage, page * perPage + perPage);
   const showNav = members.length > perPage;
 
@@ -140,10 +128,6 @@ function Tier({ label, members, maxCols }: TierProps) {
       <div className="overflow-hidden">
         <AnimatePresence mode="wait" custom={direction}>
           <motion.div
-            // `cols` is included in the key so a breakpoint change
-            // (which also resets `page` above) always triggers a
-            // fresh enter animation instead of a stale exit/enter
-            // mismatch between two different grid sizes.
             key={`${page}-${cols}`}
             custom={direction}
             initial={{ opacity: 0, x: direction > 0 ? 30 : -30 }}
@@ -158,7 +142,11 @@ function Tier({ label, members, maxCols }: TierProps) {
             }}
           >
             {visible.map((member) => (
-              <TeamMemberCard key={member.name} member={member} />
+              <TeamMemberCard
+                key={member.name}
+                member={member}
+                onClick={() => onSelect(member)}
+              />
             ))}
           </motion.div>
         </AnimatePresence>
@@ -168,6 +156,8 @@ function Tier({ label, members, maxCols }: TierProps) {
 }
 
 export function TeamSection() {
+  const [selectedMember, setSelectedMember] = useState<MenuItem | null>(null);
+
   return (
     <section className="py-16 bg-w">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -175,17 +165,30 @@ export function TeamSection() {
           <p className="text-xs font-medium tracking-widest uppercase text-secondary-text mb-1">
             Who we are
           </p>
-          <h2 className={`text-3xl sm:text-4xl`}>
-            Meet the team
-          </h2>
+          <h2 className="text-3xl sm:text-4xl">Meet the team</h2>
         </div>
 
         <div className="flex flex-col gap-10">
-          <Tier label="Leadership" members={leadership} maxCols={4} />
-          <Tier label="Vice Presidents" members={vicePresidents} maxCols={5} />
+          <Tier
+            label="Leadership"
+            members={leadership}
+            maxCols={4}
+            onSelect={setSelectedMember}
+          />
+          <Tier
+            label="Vice Presidents"
+            members={vicePresidents}
+            maxCols={5}
+            onSelect={setSelectedMember}
+          />
         </div>
       </div>
+
+      <TeamMemberModal
+        member={selectedMember}
+        isOpen={selectedMember !== null}
+        onClose={() => setSelectedMember(null)}
+      />
     </section>
   );
 }
-

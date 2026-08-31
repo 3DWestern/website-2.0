@@ -3,6 +3,7 @@ export interface MenuItem {
 	name: string;
 	role: string;
 	description?: string;
+	bio?: string;
 	emoji?: string;
 	linkedin?: string;
 	github?: string;
@@ -16,6 +17,7 @@ export const items: MenuItem[] = [
 		role: 'President',
 		description: 'Leading the team with vision and energy',
 		emoji: '🦌',
+		bio: 'Across both facilities, we support every step of the creation process, from concept sketching and rapid prototyping to manufacturing fabrication, testing, and idea validation. We offer walk-ins for using the Sabourin Makerspace for woodworking and job ordering through our (coming soon!) dashboard for 3D prints, CNC, laser and water jet cutting.',
 		linkedin: 'www.linkedin.com/in/troyleishman/',
 	},
 	{

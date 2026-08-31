@@ -32,6 +32,7 @@ export function LatestSection({ post, projects }: LatestSectionProps) {
                   src={post.coverImage.url}
                   alt={post.coverImage.alt ?? post.title}
                   fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 70vw, 50vw"
                   className="object-cover transition-transform duration-500 group-hover:scale-105"
                 />
               )}
@@ -71,6 +72,7 @@ export function LatestSection({ post, projects }: LatestSectionProps) {
                     src={project.image.src}
                     alt={project.image.alt}
                     fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 70vw, 50vw"
                     className="object-cover transition-transform duration-500 group-hover:scale-105"
                   />
                   <div

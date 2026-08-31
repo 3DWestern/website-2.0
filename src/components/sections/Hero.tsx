@@ -43,19 +43,19 @@ function HeroCTAs() {
 
 export function Hero() {
   return (
-    <section className="relative flex min-h-[100svh] w-full flex-col items-start justify-center overflow-hidden bg-[#0B0D10] px-6 pt-28 pb-16 sm:pt-32 lg:px-16 lg:pt-36 lg:pb-28">
+    <section className="relative flex min-h-[100svh] w-full flex-col items-start justify-center overflow-hidden px-6 pt-28 pb-16 sm:pt-32 lg:px-16 lg:pt-36 lg:pb-28">
       <HeroBackground />
       <div className="relative flex max-w-xl flex-col items-start text-left">
-        <div className="mb-4 flex items-center gap-3 text-sm font-medium tracking-wider text-purple-light uppercase">
+        {/* <div className="mb-4 flex items-center gap-3 text-sm font-medium tracking-wider text-purple-light uppercase">
           <span className="h-px w-6 bg-purple-light" />
           Western University
-        </div>
+        </div> */}
         <h1>
           Think It. Design It.
           <br />
-          <span className="text-purple-light">Build It.</span>
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-dark to-purple-light">Build It.</span>
         </h1>
-        <p className="mt-6 max-w-md text-[15px] leading-relaxed text-[color:var(--base-text)] sm:text-base">
+        <p className="mt-6 max-w-md text-[15px] leading-relaxed text-primary-text/90 sm:text-base">
           Your campus home for advanced manufacturing, rapid prototyping, and
           collaborative design.
         </p>
