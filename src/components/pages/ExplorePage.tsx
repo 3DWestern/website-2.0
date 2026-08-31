@@ -1,44 +1,21 @@
-'use client'; 
-import { motion } from 'framer-motion';
-import { AnnouncementsSection } from '@/components/sections/AnnouncementsSection';
+import { AnnouncementsSection } from "@/components/sections/AnnouncementsSection";
 import { StudentSection } from "../sections/StudentSection";
 import ProjectsSection from "../sections/ProjectsSection";
-import { TeamSection } from "../sections/TeamSection";
 import { SocialsSection } from "../sections/SocialsSection";
 import { SponsorSection } from "../sections/SponsorSection";
-
+import TeamSection from "../sections/TeamSection";
+import { ExploreHeader } from "../sections/ExploreHeader";
 
 export function ExplorePage() {
-	return (
-		<main className="min-h-screen pt-[88px]">
-			{/* Header */}
-			<section className=" py-16">
-				<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-					<motion.h1
-						initial={{ opacity: 0, y: 20 }}
-						animate={{ opacity: 1, y: 0 }}
-						transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-						className={`text-3xl sm:text-4xl lg:text-5xl mb-4`}
-					>
-						Explore
-					</motion.h1>
-					<motion.p
-						initial={{ opacity: 0, y: 20 }}
-						animate={{ opacity: 1, y: 0 }}
-						transition={{ duration: 0.6, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-						className="text-xl text-secondary-text max-w-2xl"
-					>
-						Updates, projects, dev notes, and more
-					</motion.p>
-				</div>
-			</section>
-            <AnnouncementsSection />
-			<ProjectsSection />
-            <StudentSection />
-			<TeamSection />
-			<SocialsSection />
-			<SponsorSection />
-			
-        </main>
-    )
+  return (
+    <main className="min-h-screen pt-[88px]">
+      <ExploreHeader />
+      <AnnouncementsSection />
+      <ProjectsSection />
+      <StudentSection />
+      <TeamSection />
+      <SocialsSection />
+      <SponsorSection />
+    </main>
+  );
 }

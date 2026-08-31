@@ -1,5 +1,3 @@
-"use client";
-
 import Image from "next/image";
 import Link from "next/link";
 import { Linkedin, Github, Globe } from "lucide-react";
@@ -9,10 +7,11 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import type { MenuItem } from "@/components/data/teamdata";
+import { TeamMember } from "@/types/content";
+import { RichText } from "@payloadcms/richtext-lexical/react";
 
 interface TeamMemberModalProps {
-  member: MenuItem | null;
+  member: TeamMember | null;
   isOpen: boolean;
   onClose: () => void;
 }
@@ -43,19 +42,23 @@ export function TeamMemberModal({
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="max-w-2xl gap-0 overflow-hidden p-0 sm:max-w-2xl  rounded-2xl">
-        <div className="flex flex-col sm:flex-row" style={{
-							backgroundImage: `
+        <div
+          className="flex flex-col sm:flex-row"
+          style={{
+            backgroundImage: `
 								radial-gradient(circle closest-corner at 25% 60%, rgba(147, 51, 234, 0.25), transparent),
 								radial-gradient(circle farthest-side at 71% 16%, rgba(168, 85, 247, 0.2), transparent 35%),
 								radial-gradient(circle closest-corner at 32% 38%, rgba(192, 132, 252, 0.15), transparent 76%),
 								radial-gradient(circle farthest-side at 69% 81%, rgba(139, 92, 246, 0.15), transparent 76%),
 								linear-gradient(#18181b, #18181b)
-							`}}>
+							`,
+          }}
+        >
           {/* Photo */}
           <div className="relative aspect-4/5 w-full shrink-0 sm:w-64">
             <Image
-              src={member.image}
-              alt={member.name}
+              src={member.image.url}
+              alt={member.image.alt}
               fill
               sizes="(max-width: 640px) 100vw, 256px"
               className="object-cover object-top"
@@ -74,9 +77,9 @@ export function TeamMemberModal({
               </p>
             </DialogHeader>
 
-            {(member.bio ?? member.description) && (
+            {member.bio && (
               <p className="text-sm leading-relaxed text-secondary-text">
-                {member.bio ?? member.description}
+                <RichText data={member.bio} />
               </p>
             )}
 

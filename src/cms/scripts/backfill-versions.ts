@@ -10,9 +10,10 @@ const collectionsToBackfill: AssignableCollection[] = [
   // "team-members",
   // "sponsors",
   // "authors",
-  "avatars",
+  // "avatars",
   // "cover-images",
   // "media",
+  "team-members",
 ];
 
 for (const slug of collectionsToBackfill) {
@@ -25,7 +26,7 @@ for (const slug of collectionsToBackfill) {
     await payload.update({
       collection: slug,
       id: doc.id,
-      data: {}, // no actual changes, just forces a version write
+      data: { role: "vice-president" },
     });
     console.log(`Backfilled ${slug}/${doc.id}`);
   }

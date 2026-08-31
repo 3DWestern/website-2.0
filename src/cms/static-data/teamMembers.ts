@@ -7,7 +7,7 @@ export const sampleTeamMembers: SampleTeamMembers[] = [
     id: 1,
     image: 1,
     name: "Thompson Lam",
-    role: "Head of VP",
+    role: "leadership",
     team: 1,
     bio: {
       root: {

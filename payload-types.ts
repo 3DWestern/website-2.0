@@ -410,7 +410,7 @@ export interface TeamMember {
   id: number;
   image: number | Avatar;
   name: string;
-  role: string;
+  role: 'leadership' | 'vice-president';
   team: number | Team;
   bio: {
     root: {
