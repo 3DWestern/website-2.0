@@ -23,6 +23,7 @@ export function AboutUsSection() {
               src="/images/morrissette.png"
               alt="Rendering of the 3D Western makerspace building"
               fill
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 70vw, 50vw"
               className="object-cover"
             />
           </div>
@@ -36,10 +37,6 @@ export function AboutUsSection() {
           transition={{ duration: 0.7, delay: 0.15 }}
           className="order-2 flex flex-col items-start text-left lg:order-1 lg:w-[42%]"
         >
-          <div className="mb-4 flex items-center gap-3 text-sm font-medium tracking-wider text-purple-light uppercase">
-            <span className="h-px w-6 bg-purple-light" />
-            Who We Are
-          </div>
 
           <h2>3D Western</h2>
 

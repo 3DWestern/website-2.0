@@ -11,7 +11,7 @@ export default function Footer() {
   return (
     <footer className="relative bg-footer text-footer-text font-medium p-8">
       <div className="z-1 absolute w-[400px] h-[350px] p-8 blur-xs opacity-20 left-1/2 -translate-x-1/2 sm:left-auto sm:translate-x-0 sm:right-24">
-        <Image src="/logo-2.png" alt="3DW Logo" fill className="object-cover" />
+        <Image src="/logo-2.png" alt="3DW Logo" fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 70vw, 60vw" className="object-cover" />
       </div>
       <div className="relative z-10">
         <div className="flex flex-col gap-8">

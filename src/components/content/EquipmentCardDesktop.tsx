@@ -31,7 +31,7 @@ export function EquipmentCardDesktop({
         className="relative shrink-0"
         style={{ width: IMAGE_WIDTH, height: IMAGE_HEIGHT }}
       >
-        <Image src={item.image} alt={item.alt} fill className="object-cover" />
+        <Image src={item.image} alt={item.alt} fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 70vw, 50vw" className="object-cover" />
       </div>
 
       {/* Text panel — width 0 unless active, only place the title lives */}
@@ -41,13 +41,13 @@ export function EquipmentCardDesktop({
       >
         <div
           style={{ width: TEXT_WIDTH }}
-          className="flex h-full flex-col justify-center gap-3 p-8"
+          className="flex h-full flex-col justify-center gap-5 p-8"
         >
           <h4>{item.title}</h4>
           <p className="text-sm leading-relaxed text-secondary-text">
             {item.description}
           </p>
-          <div className="flex items-center gap-1.5 text-xs font-medium text-purple-light">
+          <div className="flex items-center gap-1.5 text-sm font-medium text-purple-light">
             <MapPin className="h-3.5 w-3.5 shrink-0" />
             {item.location}
           </div>
