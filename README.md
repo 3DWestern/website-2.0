@@ -1,5 +1,3 @@
-# This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app)
-
 ## Moving to pnpm
 
 If you have npm installed, run `npm install -g pnpm` or use corepack to install pnpm: `corepack enable`.
