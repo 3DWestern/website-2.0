@@ -1,7 +1,7 @@
 "use client";
 
+import { Spotlight } from "@/types/content";
 import Image from "next/image";
-import { Spotlight } from "@/components/data/spotlights";
 
 interface SpotlightCardProps {
   spotlight: Spotlight;
@@ -13,14 +13,16 @@ export function SpotlightCard({ spotlight }: SpotlightCardProps) {
       {/* Left — project photo */}
       <div className="relative w-full sm:w-80 shrink-0 min-h-[280px] sm:min-h-full bg-black-bg">
         <Image
-          src={spotlight.image}
-          alt={spotlight.alt}
+          src={spotlight.image.url}
+          alt={spotlight.image.alt}
           fill
           sizes="(max-width: 640px) 100vw, 320px"
           className="object-cover opacity-85"
         />
         <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-purple-dark to-transparent px-5 pt-10 pb-5">
-          <p className="text-sm font-semibold text-primary-text">{spotlight.name}</p>
+          <p className="text-sm font-semibold text-primary-text">
+            {spotlight.name}
+          </p>
           <p className="text-xs text-muted mt-0.5">{spotlight.program}</p>
         </div>
       </div>
@@ -38,14 +40,21 @@ export function SpotlightCard({ spotlight }: SpotlightCardProps) {
             Their project
           </p>
           <p className="text-sm font-semibold text-primary-text mb-1">
-            {spotlight.projectTitle}
+            {spotlight.name}
           </p>
           <p className="text-xs text-secondary-text leading-relaxed">
-            {spotlight.projectDescription}
+            {spotlight.description}
           </p>
-          <span className="mt-3 inline-block text-[11px] px-3 py-1 rounded-full gradient">
-            {spotlight.category}
-          </span>
+          <div className="flex gap-2">
+            {spotlight.tags.map((tag) => (
+              <span
+                key={tag}
+                className="mt-3 inline-block text-[11px] px-3 py-1 rounded-full gradient"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
         </div>
       </div>
     </div>

@@ -19,6 +19,8 @@ import {
   Teams,
   Logos,
   GalleryImages,
+  SporlightImages,
+  Spotlights,
 } from "@/cms/collections";
 import { Tags } from "@/cms/collections/Tags";
 
@@ -30,6 +32,7 @@ export default buildConfig({
     CoverImages,
     Logos,
     GalleryImages,
+    SporlightImages,
     Blogs,
     Tags,
     Projects,
@@ -40,6 +43,7 @@ export default buildConfig({
     ProjectCategories,
     EventCategories,
     Teams,
+    Spotlights,
   ],
 
   plugins: [
@@ -49,6 +53,7 @@ export default buildConfig({
         avatars: true,
         "cover-images": true,
         "gallery-images": true,
+        "spotlight-images": true,
       },
       bucket: process.env.SUPABASE_BUCKET ?? "",
       config: {

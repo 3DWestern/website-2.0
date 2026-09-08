@@ -72,6 +72,7 @@ export interface Config {
     'cover-images': CoverImage;
     logos: Logo;
     'gallery-images': GalleryImage;
+    'spotlight-images': SpotlightImage;
     blogs: Blog;
     tags: Tag;
     projects: Project;
@@ -82,6 +83,7 @@ export interface Config {
     'project-categories': ProjectCategory;
     'event-categories': EventCategory;
     teams: Team;
+    spotlights: Spotlight;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -94,6 +96,7 @@ export interface Config {
     'cover-images': CoverImagesSelect<false> | CoverImagesSelect<true>;
     logos: LogosSelect<false> | LogosSelect<true>;
     'gallery-images': GalleryImagesSelect<false> | GalleryImagesSelect<true>;
+    'spotlight-images': SpotlightImagesSelect<false> | SpotlightImagesSelect<true>;
     blogs: BlogsSelect<false> | BlogsSelect<true>;
     tags: TagsSelect<false> | TagsSelect<true>;
     projects: ProjectsSelect<false> | ProjectsSelect<true>;
@@ -104,6 +107,7 @@ export interface Config {
     'project-categories': ProjectCategoriesSelect<false> | ProjectCategoriesSelect<true>;
     'event-categories': EventCategoriesSelect<false> | EventCategoriesSelect<true>;
     teams: TeamsSelect<false> | TeamsSelect<true>;
+    spotlights: SpotlightsSelect<false> | SpotlightsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -167,6 +171,8 @@ export interface User {
         | 'teams'
         | 'logos'
         | 'gallery-images'
+        | 'spotlights'
+        | 'spotlight-images'
       )[]
     | null;
   updatedAt: string;
@@ -303,6 +309,37 @@ export interface GalleryImage {
   focalY?: number | null;
   sizes?: {
     logo?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+  };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "spotlight-images".
+ */
+export interface SpotlightImage {
+  id: number;
+  name: string;
+  alt: string;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
+  sizes?: {
+    'spotlight-showcase'?: {
       url?: string | null;
       width?: number | null;
       height?: number | null;
@@ -498,6 +535,23 @@ export interface Sponsor {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "spotlights".
+ */
+export interface Spotlight {
+  id: number;
+  name: string;
+  projectName: string;
+  description: string;
+  tags?: string[] | null;
+  image: number | SpotlightImage;
+  program: string;
+  year: number;
+  quote: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -541,6 +595,10 @@ export interface PayloadLockedDocument {
         value: number | GalleryImage;
       } | null)
     | ({
+        relationTo: 'spotlight-images';
+        value: number | SpotlightImage;
+      } | null)
+    | ({
         relationTo: 'blogs';
         value: number | Blog;
       } | null)
@@ -579,6 +637,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'teams';
         value: number | Team;
+      } | null)
+    | ({
+        relationTo: 'spotlights';
+        value: number | Spotlight;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -784,6 +846,40 @@ export interface GalleryImagesSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "spotlight-images_select".
+ */
+export interface SpotlightImagesSelect<T extends boolean = true> {
+  name?: T;
+  alt?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+  url?: T;
+  thumbnailURL?: T;
+  filename?: T;
+  mimeType?: T;
+  filesize?: T;
+  width?: T;
+  height?: T;
+  focalX?: T;
+  focalY?: T;
+  sizes?:
+    | T
+    | {
+        'spotlight-showcase'?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+      };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "blogs_select".
  */
 export interface BlogsSelect<T extends boolean = true> {
@@ -926,6 +1022,22 @@ export interface TeamsSelect<T extends boolean = true> {
   updatedAt?: T;
   createdAt?: T;
   _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "spotlights_select".
+ */
+export interface SpotlightsSelect<T extends boolean = true> {
+  name?: T;
+  projectName?: T;
+  description?: T;
+  tags?: T;
+  image?: T;
+  program?: T;
+  year?: T;
+  quote?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

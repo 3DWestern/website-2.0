@@ -5,6 +5,8 @@ import { SocialsSection } from "../sections/SocialsSection";
 import { SponsorSection } from "../sections/SponsorSection";
 import TeamSection from "../sections/TeamSection";
 import { ExploreHeader } from "../sections/ExploreHeader";
+import { DataSection } from "../sections/DataSection";
+import { api } from "@/lib/cms/api.server";
 
 export function ExplorePage() {
   return (
@@ -12,7 +14,12 @@ export function ExplorePage() {
       <ExploreHeader />
       <AnnouncementsSection />
       <ProjectsSection />
-      <StudentSection />
+      <DataSection
+        fetchers={{ spotlights: () => api.for("spotlights").getMany({}) }}
+        renderer={({ spotlights }) => (
+          <StudentSection spotlights={spotlights ?? []} />
+        )}
+      />
       <TeamSection />
       <SocialsSection />
       <SponsorSection />

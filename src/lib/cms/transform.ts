@@ -8,6 +8,7 @@ import {
   ProjectCategory,
   EventCategory,
   TeamMember,
+  Spotlight,
 } from "@/types/content";
 import {
   Event as PayloadEvent,
@@ -23,6 +24,8 @@ import {
   CoverImage as PayloadCI,
   GalleryImage as PayloadGI,
   Logo as PayloadLogo,
+  Spotlight as PayloadSpotlight,
+  SpotlightImage as PayloadSI,
 } from "../../../payload-types";
 
 export type DocType =
@@ -33,7 +36,8 @@ export type DocType =
   | PayloadBlogPost
   | PayloadTeamMember
   | PayloadTag
-  | PayloadPC;
+  | PayloadPC
+  | PayloadSpotlight;
 
 type ResolvedBlogPost = Omit<
   PayloadBlogPost,
@@ -69,7 +73,15 @@ export type ResolvedEvent = Omit<PayloadEvent, "image"> & {
   image: PayloadCI;
 };
 
+export type ResolvedSpotlight = Omit<PayloadSpotlight, "image"> & {
+  image: PayloadSI;
+};
+
 const BASE_URL = `${process.env.NEXT_PUBLIC_CMS_ENABLED === "true" ? process.env.NEXT_PUBLIC_BASE_URL : ""}`;
+
+const buildURL = (route: string | null = "/"): string => {
+  return `${BASE_URL}${route}`;
+};
 
 // Get the ordinal identifier for the day
 const getOrdinal = (day: number) => {
@@ -107,7 +119,7 @@ export const transformEvent = (doc: ResolvedEvent): Event => {
     id: doc.id,
     title: doc.title,
     image: {
-      src: `${BASE_URL}${doc.image.url}`,
+      src: buildURL(doc.image.url),
       alt: doc.image.alt,
     },
     description: doc.description,
@@ -161,7 +173,7 @@ export const transformSponsor = (doc: ResolvedSponsor): Sponsor => {
     id: doc.id,
     name: doc.name,
     logo: {
-      url: `${BASE_URL}${doc.logo.url}`,
+      url: buildURL(doc.logo.url),
       alt: doc.logo.alt,
     },
     website: doc.website || "",
@@ -189,7 +201,7 @@ export const transformBlog = (doc: ResolvedBlogPost): BlogPost => {
     date: doc.date,
     readingTime: doc.readingTime || undefined,
     coverImage: {
-      url: `${BASE_URL}${doc.coverImage.url}`,
+      url: buildURL(doc.coverImage.url),
       alt: doc.coverImage.alt,
     },
     tags:
@@ -212,7 +224,7 @@ export const transformAuthor = (doc: ResolvedAuthor): Author => {
     id: doc.id,
     name: doc.name,
     avatar: {
-      url: `${BASE_URL}${doc.avatar.url}`,
+      url: buildURL(doc.avatar.url),
       alt: doc.avatar.alt,
     },
   };
@@ -230,13 +242,13 @@ export const transformProject = (doc: ResolvedProject): Project => {
     title: doc.title,
     creator: doc.creator,
     image: {
-      src: `${BASE_URL}${doc.image.url}`,
+      src: buildURL(doc.image.url),
       alt: doc.image.alt,
     },
     contributors: doc.contributors || undefined,
     description: doc.description,
     galleryImages: doc.galleryImages?.map((image) => ({
-      src: `${BASE_URL}${image.url}`,
+      src: buildURL(image.url),
       alt: image.alt,
     })),
     categories: doc.categories || [],
@@ -272,7 +284,7 @@ export const transformProjectCategories = (
 export const transformTeamMember = (doc: ResolvedTeamMember): TeamMember => {
   return {
     image: {
-      url: `${BASE_URL}${doc.image.url}`,
+      url: buildURL(doc.image.url),
       alt: doc.image.alt,
     },
     name: doc.name,
@@ -312,3 +324,24 @@ export const transformDocs = <D extends DocType, T>(
 ): T[] => {
   return docs?.map(transformItem);
 };
+
+// ---------- SPOTLIGHT TRANSFORMS --------
+export const transformSpotlight = (doc: ResolvedSpotlight): Spotlight => {
+  return {
+    id: doc.id,
+    name: doc.name,
+    projectName: doc.projectName,
+    description: doc.description,
+    tags: doc.tags ?? [],
+    image: {
+      url: buildURL(doc.image.url),
+      alt: doc.image.alt,
+    },
+    program: doc.program,
+    year: doc.year,
+    quote: doc.quote,
+  };
+};
+
+export const transformSpotlights = (docs: ResolvedSpotlight[]): Spotlight[] =>
+  transformDocs(docs, transformSpotlight);
