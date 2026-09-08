@@ -9,3 +9,4 @@ export { ProjectCategories } from "./ProjectCategories";
 export { EventCategories } from "./EventCategories";
 export * from "./Media";
 export { Teams } from "./Teams";
+export { Spotlights } from "./Spotlights";

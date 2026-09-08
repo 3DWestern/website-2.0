@@ -30,7 +30,7 @@ export function BlogsPage() {
       <FilterBar
         search={search}
         onSearchChange={setSearch}
-        searchPlaceholder="Search projects..."
+        searchPlaceholder="Search blogs..."
         category={category}
         onCategoryChange={setCategory}
         options={tags.map((tag) => ({

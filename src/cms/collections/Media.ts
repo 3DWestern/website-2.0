@@ -136,3 +136,37 @@ export const GalleryImages: CollectionConfig = {
     },
   ],
 };
+
+export const SPOTLIGHTIMAGE_SLUG = "spotlight-images";
+
+export const SporlightImages: CollectionConfig = {
+  slug: SPOTLIGHTIMAGE_SLUG,
+  access: generalAccess(SPOTLIGHTIMAGE_SLUG),
+  versions: {
+    drafts: true,
+  },
+  admin: {
+    group: "Media",
+    useAsTitle: "name",
+  },
+  upload: {
+    disableLocalStorage: true,
+    imageSizes: [
+      {
+        name: "spotlight-showcase",
+        width: 1000,
+        height: 1000,
+        position: "center",
+        fit: "cover",
+      },
+    ],
+  },
+  fields: [
+    { name: "name", type: "text", required: true },
+    {
+      name: "alt",
+      type: "text",
+      required: true,
+    },
+  ],
+};

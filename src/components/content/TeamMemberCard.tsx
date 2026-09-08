@@ -3,10 +3,11 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Linkedin, Github, Globe } from "lucide-react";
-import { MenuItem } from "@/components/data/teamdata";
+import { TeamMember } from "@/types/content";
+import { RichText } from "@payloadcms/richtext-lexical/react";
 
 interface TeamMemberCardProps {
-  member: MenuItem;
+  member: TeamMember;
   onClick: () => void;
 }
 
@@ -34,8 +35,8 @@ export function TeamMemberCard({ member, onClick }: TeamMemberCardProps) {
     >
       <div className="relative w-full aspect-4/5 overflow-hidden shrink-0">
         <Image
-          src={member.image}
-          alt={member.name}
+          src={member.image.url}
+          alt={member.image.alt}
           fill
           sizes="(max-width: 640px) 90vw, (max-width: 1024px) 45vw, 20vw"
           className="object-cover object-top"
@@ -45,7 +46,7 @@ export function TeamMemberCard({ member, onClick }: TeamMemberCardProps) {
       <div className="px-2.5 pt-2 pb-2.5 flex flex-col gap-0.5">
         <div className="flex items-center justify-between gap-1">
           <p className="text-xs font-semibold text-primary-text truncate leading-snug">
-            {member.name}{" "}
+            {member.name}
             {member.emoji && <span aria-hidden="true">{member.emoji}</span>}
           </p>
           <div className="flex gap-1 shrink-0">
@@ -90,10 +91,10 @@ export function TeamMemberCard({ member, onClick }: TeamMemberCardProps) {
         <p className="text-[11px] font-medium text-purple-light leading-snug">
           {member.role}
         </p>
-        {member.description && (
-          <p className="text-[11px] text-secondary-text leading-relaxed mt-0.5 line-clamp-2">
-            {member.description}
-          </p>
+        {member.bio && (
+          <div className="text-[11px] text-secondary-text leading-relaxed mt-0.5 line-clamp-2">
+            <RichText data={member.bio} />
+          </div>
         )}
       </div>
     </button>

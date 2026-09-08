@@ -22,7 +22,15 @@ export const TeamMembers: CollectionConfig = {
       label: "Avatar",
     },
     { name: "name", type: "text", required: true },
-    { name: "role", type: "text", required: true },
+    {
+      name: "role",
+      type: "radio",
+      options: [
+        { label: "Leadership", value: "leadership" },
+        { label: "Vice President", value: "vice-president" },
+      ],
+      required: true,
+    },
     { name: "team", type: "relationship", relationTo: "teams", required: true },
     { name: "bio", type: "richText", required: true },
     { name: "emoji", type: "text" },

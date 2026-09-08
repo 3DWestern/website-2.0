@@ -1,28 +1,45 @@
 import { draftMode } from "next/headers";
+import { getPayload } from "payload";
+import config from "@payload-config";
 import { cmsClient } from "./cmsClient";
 import { transformBlog, transformProject } from "./transform";
+import { CMSEnabled } from "./utils";
+
+async function findBySlug(
+  collection: "projects" | "blogs",
+  slug: string,
+  draft: boolean,
+) {
+  if (!CMSEnabled()) {
+    const params = new URLSearchParams({
+      "where[slug][equals]": slug,
+      depth: "2",
+    });
+    if (draft) params.set("draft", "true");
+    return cmsClient.get(`/api/${collection}?${params}`);
+  }
+
+  const payload = await getPayload({ config });
+  return payload.find({
+    collection,
+    where: { slug: { equals: slug } },
+    depth: 2,
+    limit: 1,
+    draft,
+    overrideAccess: false,
+  });
+}
 
 export const getProjectBySlug = async (slug: string) => {
   const dm = await draftMode();
-
-  // build search params to match by slug
-  const params = new URLSearchParams();
-  params.set("where[slug][equals]", slug);
-  params.set("depth", "2");
-
-  if (dm.isEnabled) {
-    params.set("draft", "true");
-  }
-
-  const result = await cmsClient.get(`/api/projects?${params.toString()}`);
-
+  const result = await findBySlug("projects", slug, dm.isEnabled);
   return result.docs[0] ? transformProject(result.docs[0]) : null;
 };
 
 /**
  * Fetches a single blog post by its slug.
  *
- * Pulls from Payload's REST API when CMS_ENABLED=true, otherwise looks up
+ * Pulls from Payload's Local API when the CMS is enabled, otherwise looks up
  * the slug in local static sample data.
  *
  * @param slug - The unique slug identifying the blog post (used in the URL, e.g. /blog/my-post).
@@ -31,17 +48,6 @@ export const getProjectBySlug = async (slug: string) => {
  *          Callers should treat `null` as "not found" and trigger a 404.
  */
 export const getPostBySlug = async (slug: string) => {
-  const dm = await draftMode();
-
-  const params = new URLSearchParams({
-    "where[slug][equals]": slug,
-    depth: "2",
-  });
-
-  if (dm.isEnabled) {
-    // params.set("draft", "true");
-  }
-
-  const result = await cmsClient.get(`/api/blogs?${params}`);
+  const result = await findBySlug("blogs", slug, false);
   return result.docs[0] ? transformBlog(result.docs[0]) : null;
 };

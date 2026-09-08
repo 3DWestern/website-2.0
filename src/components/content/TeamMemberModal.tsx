@@ -1,5 +1,3 @@
-"use client";
-
 import Image from "next/image";
 import Link from "next/link";
 import { Linkedin, Github, Globe } from "lucide-react";
@@ -9,10 +7,11 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import type { MenuItem } from "@/components/data/teamdata";
+import { TeamMember } from "@/types/content";
+import { RichText } from "@payloadcms/richtext-lexical/react";
 
 interface TeamMemberModalProps {
-  member: MenuItem | null;
+  member: TeamMember | null;
   isOpen: boolean;
   onClose: () => void;
 }
@@ -58,8 +57,8 @@ export function TeamMemberModal({
 		{/* Photo — short cropped banner on mobile, full portrait from sm up */}
 		<div className="relative w-full shrink-0 aspect-[3/2] sm:aspect-4/5 sm:w-64">
 			<Image
-				src={member.image}
-				alt={member.name}
+				src={member.image.url}
+				alt={member.image.alt}
 				fill
 				priority
 				sizes="(max-width: 640px) 100vw, 256px"
@@ -79,9 +78,9 @@ export function TeamMemberModal({
               </p>
             </DialogHeader>
 
-            {(member.bio ?? member.description) && (
+            {member.bio && (
               <p className="text-sm leading-relaxed text-secondary-text">
-                {member.bio ?? member.description}
+                <RichText data={member.bio} />
               </p>
             )}
 

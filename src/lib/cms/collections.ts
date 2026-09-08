@@ -8,6 +8,7 @@ import {
   transformAuthors,
   transformSponsors,
   transformTeamMembers,
+  transformSpotlights,
 } from "@/lib/cms/transform";
 
 export type CollectionConfig<TDoc = any, TOut = any> = {
@@ -62,5 +63,9 @@ export const collections = {
   "team-members": {
     slug: "team-members",
     transform: transformTeamMembers,
+  },
+  spotlights: {
+    slug: "spotlights",
+    transform: transformSpotlights,
   },
 } as const satisfies Record<string, CollectionConfig>;

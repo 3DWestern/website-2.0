@@ -1,5 +1,3 @@
-# This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app)
-
 ## Moving to pnpm
 
 If you have npm installed, run `npm install -g pnpm` or use corepack to install pnpm: `corepack enable`.
@@ -154,6 +152,7 @@ To learn more about Next.js, check out the [Next.js Documentation](https://nextj
 For Payload CMS documentation, visit [payloadcms.com](https://payloadcms.com/docs).
 
 ## Deploy on Vercel
+test
 
 The easiest way to deploy is on [Vercel](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme).
 

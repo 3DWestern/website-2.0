@@ -34,16 +34,10 @@ export function ProjectsPage() {
         description="A browsable look at what the makerspace has built, newest first"
       ></PageHeader>
       {/* Featured spotlight */}
-      {featured.length > 0 && (
-        <section className=" pb-16">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid gap-6 md:grid-cols-2">
-            {featured.slice(0, 2).map((project, i) => (
-              <FeaturedProjectSpotlight
-                key={project.id}
-                project={project}
-                index={i}
-              />
-            ))}
+      {featured[0] && (
+        <section className="pb-16">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <FeaturedProjectSpotlight project={featured[0]} />
           </div>
         </section>
       )}

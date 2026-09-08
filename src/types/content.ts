@@ -128,3 +128,15 @@ export interface TeamMember {
   github?: string;
   website?: string;
 }
+
+export type Spotlight = {
+  id: number;
+  name: string;
+  projectName: string;
+  description: string;
+  tags: string[];
+  image: Image;
+  program: string;
+  year: number;
+  quote: string;
+};

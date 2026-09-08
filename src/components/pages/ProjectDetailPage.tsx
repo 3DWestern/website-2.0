@@ -157,7 +157,7 @@ export function ProjectDetailPage({
             <h2 className={`text-2xl mb-8 `}>
               More Projects
             </h2>
-            <div className="columns-1 sm:columns-2 lg:columns-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {related.map((p) => (
                 <ProjectShowcaseCard key={p.id} project={p} className="bg-grey-bg"/>
               ))}

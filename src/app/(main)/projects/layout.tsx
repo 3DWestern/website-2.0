@@ -1,7 +1,7 @@
 import { ProjectProvider } from "@/context/ProjectContext";
 import { api, projectsApi } from "@/lib/cms/api.server";
 
-const LIMIT = 2;
+const LIMIT = 6;
 
 export default async function ProjectsLayout({
   children,
@@ -10,7 +10,7 @@ export default async function ProjectsLayout({
 }) {
   const [initialProjects, featuredProjects, allCategories] = await Promise.all([
     api.for("projects").getMany({ limit: LIMIT, page: 1 }),
-    projectsApi.getFeatured(),
+    projectsApi.getFeatured({ limit: 1 }),
     api.for("project-categories").getMany(),
   ]);
   return (
