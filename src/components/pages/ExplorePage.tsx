@@ -35,7 +35,7 @@ export function ExplorePage() {
             <AnnouncementsSection />
 			<ProjectsSection />
             <StudentSection />
-			<TeamSection />
+			{/* <TeamSection /> */}
 			<SocialsSection />
 			<SponsorSection />
 			

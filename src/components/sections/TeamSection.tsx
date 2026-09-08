@@ -47,16 +47,16 @@ function useBreakpoint(): Breakpoint {
 }
 
 function columnsForBreakpoint(breakpoint: Breakpoint, maxCols: number) {
-  switch (breakpoint) {
-    case "lg":
-      return maxCols;
-    case "md":
-      return Math.min(3, maxCols);
-    case "sm":
-      return Math.min(2, maxCols);
-    default:
-      return 1;
-  }
+	switch (breakpoint) {
+		case "lg":
+			return maxCols;
+		case "md":
+			return Math.min(3, maxCols);
+		case "sm":
+			return Math.min(2, maxCols);
+		default:
+			return Math.min(2, maxCols); // was 1
+	}
 }
 
 interface TierProps {
@@ -161,26 +161,39 @@ export function TeamSection() {
   return (
     <section className="py-16 bg-w">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="mb-10">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.6 }}
+          className="mb-10"
+        >
           <p className="text-xs font-medium tracking-widest uppercase text-secondary-text mb-1">
             Who we are
           </p>
           <h2 className="text-3xl sm:text-4xl">Meet the team</h2>
-        </div>
+        </motion.div>
 
         <div className="flex flex-col gap-10">
-          <Tier
-            label="Leadership"
-            members={leadership}
-            maxCols={4}
-            onSelect={setSelectedMember}
-          />
-          <Tier
-            label="Vice Presidents"
-            members={vicePresidents}
-            maxCols={5}
-            onSelect={setSelectedMember}
-          />
+          {[
+            { label: "Leadership", members: leadership, maxCols: 4 },
+            { label: "Vice Presidents", members: vicePresidents, maxCols: 5 },
+          ].map((tier, i) => (
+            <motion.div
+              key={tier.label}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{ duration: 0.5, delay: i * 0.1 }}
+            >
+              <Tier
+                label={tier.label}
+                members={tier.members}
+                maxCols={tier.maxCols}
+                onSelect={setSelectedMember}
+              />
+            </motion.div>
+          ))}
         </div>
       </div>
 

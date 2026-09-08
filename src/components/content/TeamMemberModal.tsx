@@ -42,25 +42,30 @@ export function TeamMemberModal({
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-2xl gap-0 overflow-hidden p-0 sm:max-w-2xl  rounded-2xl">
-        <div className="flex flex-col sm:flex-row" style={{
-							backgroundImage: `
-								radial-gradient(circle closest-corner at 25% 60%, rgba(147, 51, 234, 0.25), transparent),
-								radial-gradient(circle farthest-side at 71% 16%, rgba(168, 85, 247, 0.2), transparent 35%),
-								radial-gradient(circle closest-corner at 32% 38%, rgba(192, 132, 252, 0.15), transparent 76%),
-								radial-gradient(circle farthest-side at 69% 81%, rgba(139, 92, 246, 0.15), transparent 76%),
-								linear-gradient(#18181b, #18181b)
-							`}}>
-          {/* Photo */}
-          <div className="relative aspect-4/5 w-full shrink-0 sm:w-64">
-            <Image
-              src={member.image}
-              alt={member.name}
-              fill
-              sizes="(max-width: 640px) 100vw, 256px"
-              className="object-cover object-top"
-            />
-          </div>
+      <DialogContent className="max-w-[calc(100%-2rem)] gap-0 overflow-hidden p-0 sm:max-w-2xl rounded-2xl [&>button]:top-3 [&>button]:right-3 [&>button]:z-20 [&>button]:rounded-full [&>button]:bg-black/50 [&>button]:p-1.5 [&>button]:text-white [&>button]:opacity-100 [&>button]:backdrop-blur-sm [&>button]:transition-colors [&>button:hover]:bg-black/70">
+	<div
+		className="flex flex-col sm:flex-row max-h-[85vh] overflow-y-auto"
+		style={{
+			backgroundImage: `
+				radial-gradient(circle closest-corner at 25% 60%, rgba(147, 51, 234, 0.25), transparent),
+				radial-gradient(circle farthest-side at 71% 16%, rgba(168, 85, 247, 0.2), transparent 35%),
+				radial-gradient(circle closest-corner at 32% 38%, rgba(192, 132, 252, 0.15), transparent 76%),
+				radial-gradient(circle farthest-side at 69% 81%, rgba(139, 92, 246, 0.15), transparent 76%),
+				linear-gradient(#18181b, #18181b)
+			`,
+		}}
+	>
+		{/* Photo — short cropped banner on mobile, full portrait from sm up */}
+		<div className="relative w-full shrink-0 aspect-[3/2] sm:aspect-4/5 sm:w-64">
+			<Image
+				src={member.image}
+				alt={member.name}
+				fill
+				priority
+				sizes="(max-width: 640px) 100vw, 256px"
+				className="object-cover object-[center_25%] sm:object-top"
+			/>
+		</div>
 
           {/* Info */}
           <div className="flex flex-1 flex-col gap-4 p-6">

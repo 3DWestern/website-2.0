@@ -7,12 +7,11 @@ import {
 	AccordionTrigger,
 } from '@/components/ui/accordion';
 import { motion } from 'motion/react';
-import { koulen } from '@/lib/fonts';
 import { faqs } from '@/components/data/faqs';
 
 export function FAQSection() {
 	return (
-		<section className="py-12 lg:py-20 bg-slate-50" id="faq">
+		<section className="py-12 lg:py-20" id="faq">
 			<div className="container mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 max-w-5xl">
 				<motion.div
 					initial={{ opacity: 0, y: 30 }}
@@ -21,7 +20,7 @@ export function FAQSection() {
 					transition={{ duration: 0.6 }}
 					className="text-center mb-12 sm:mb-20"
 				>
-					<h2 className={`font-bold text-3xl lg:text-5xl xl:text-6xl mb-4 ${koulen.className}`}>FAQs</h2>
+					<h2 className={`font-bold text-3xl lg:text-5xl xl:text-6xl mb-4 `}>FAQs</h2>
 				</motion.div>
 
 				<motion.div
@@ -41,12 +40,12 @@ export function FAQSection() {
 							>
 								<AccordionItem
 									value={`item-${faq.id}`}
-									className="border-l-2 border-transparent hover:border-slate-300 transition-colors data-[state=open]:bg-slate-50 data-[state=open]:border-purple-500"
+									className="border-l-2 border-transparent hover:bg-grey-bg transition-colors data-[state=open]:bg-grey-bg data-[state=open]:border-purple-light"
 								>
-									<AccordionTrigger className="text-md sm:text-lg md:text-xl text-left transition-colors hover:text-slate-700 data-[state=open]:text-purple-700 data-[state=open]:font-semibold">
+									<AccordionTrigger className="text-xl md:text-2xl text-left transition-colors hover:text-primary-text data-[state=open]:text-purple-light data-[state=open]:font-semibold">
 										{faq.question}
 									</AccordionTrigger>
-									<AccordionContent className="text-sm md:text-md lg:text-lg text-muted-foreground pl-4">
+									<AccordionContent className="text-base lg:text-lg text-secondary-text pl-4">
 										{faq.answer}
 									</AccordionContent>
 								</AccordionItem>
