@@ -6,7 +6,7 @@ import { EventsProvider } from "@/context/EventContext";
 export const metadata: Metadata = {
   title: "Events | 3D Western",
   description:
-    "See what's happening at 3D Western — workshops, socials, meetings, and more, all in one calendar.",
+    "See what's happening at 3D Western: workshops, socials, meetings, and more, all in one calendar.",
 };
 
 export default async function Page() {

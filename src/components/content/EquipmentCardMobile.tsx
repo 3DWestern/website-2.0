@@ -43,12 +43,14 @@ export function EquipmentCardMobile({
             <p className="text-sm leading-relaxed text-secondary-text">
               {item.description}
             </p>
-            <div className="mt-3 flex items-center gap-1.5 text-xs font-medium text-purple-light">
+            <div className="mt-3 flex items-center gap-1.5 text-sm font-medium text-purple-light">
               <MapPin className="h-3.5 w-3.5 shrink-0" />
               {item.location}
             </div>
             <Link
               href={item.href}
+              target={item.href.startsWith("http") ? "_blank" : undefined}
+              rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined}
               className="mt-3 inline-flex items-center gap-1.5 text-sm font-medium text-primary-text hover:text-purple-light"
             >
               Book equipment

@@ -49,7 +49,7 @@ export function AboutUsSection() {
 
           <p className="mt-3 text-[15px] leading-relaxed text-base text-secondary-text sm:text-base mb-8">
             Partnered with Morrissette Entrepreneurship at Western, we now
-            offer CNC, laser cutting, water jet, and woodworking — free to
+            offer CNC, laser cutting, water jet, and woodworking, free to
             access for any student on campus.
           </p>
 

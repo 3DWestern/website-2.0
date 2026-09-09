@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
 import { CalendarX } from "lucide-react";
 import {
   CalendarGrid,
@@ -40,7 +39,7 @@ export function EventsPage() {
     <main className="min-h-screen pt-[88px]">
       <PageHeader
         title="Our Events"
-        description="Workshops, socials, and meetings — see what's happening in the makerspace"
+        description="Workshops, socials, and meetings. See what's happening in the makerspace"
       ></PageHeader>
       <FilterBar
         search={search}
@@ -160,12 +159,12 @@ export function EventsPage() {
         <div className="flex flex-col items-center justify-center w-full py-4 mt-12">
           <p className="text-lg font-semibold mb-4 text-center text-secondary-text">
             Want to organize an event?&nbsp;
-            <Link
-              href="/contact"
+            <a
+              href="mailto:contact@3dwestern.ca"
               className="text-purple-light hover:text-purple-light/60"
             >
               Contact Us
-            </Link>
+            </a>
           </p>
         </div>
       </section>

@@ -12,7 +12,8 @@ const routeResolvers: Record<string, Resolver> = {
   "/api/projects": resolvers.resolveProjects,
   "/api/events": resolvers.resolveEvents,
   "/api/event-categories": () => resolvers.resolveEventCategories(),
-  "/api/team-members": () => resolvers.resolveTeamMembers(),
+  "/api/team-members": resolvers.resolveTeamMembers,
+  "/api/spotlights": () => resolvers.resolveSpotlights(),
 };
 
 export async function getMockResponse(path: string, options: RequestInit = {}) {

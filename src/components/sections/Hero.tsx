@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import { motion } from "motion/react";
 import { ArrowRight } from "lucide-react";
 import { Button } from "../ui/button";
 
@@ -35,7 +36,7 @@ function HeroCTAs() {
         </Link>
       </Button>
       <Button variant="outlined" size="pill" asChild>
-        <Link href="/contact">Contact us</Link>
+        <a href="mailto:contact@3dwestern.ca">Contact us</a>
       </Button>
     </div>
   );
@@ -45,11 +46,12 @@ export function Hero() {
   return (
     <section className="relative flex min-h-[100svh] w-full flex-col items-start justify-center overflow-hidden px-6 pt-28 pb-16 sm:pt-32 lg:px-16 lg:pt-36 lg:pb-28">
       <HeroBackground />
-      <div className="relative flex max-w-xl flex-col items-start text-left">
-        {/* <div className="mb-4 flex items-center gap-3 text-sm font-medium tracking-wider text-purple-light uppercase">
-          <span className="h-px w-6 bg-purple-light" />
-          Western University
-        </div> */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+        className="relative flex max-w-xl flex-col items-start text-left"
+      >
         <h1>
           Think It. Design It.
           <br />
@@ -60,7 +62,7 @@ export function Hero() {
           collaborative design.
         </p>
         <HeroCTAs />
-      </div>
+      </motion.div>
     </section>
   );
 } // export function Hero() {

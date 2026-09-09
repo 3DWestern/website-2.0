@@ -32,7 +32,7 @@ export const spotlights: Spotlight[] = [
 			'The laser cutter let me go from a sketch on paper to a finished object in the same afternoon. That feedback loop is addictive.',
 		projectTitle: 'Interlocking desk organiser',
 		projectDescription:
-			'Modelled and cut a fully press-fit birch plywood organiser — no glue, no screws, just tight tolerances.',
+			'Modelled and cut a fully press-fit birch plywood organiser, no glue, no screws, just tight tolerances.',
 		category: 'Laser cutting',
 		image: '/images/spotlights/priya-s.jpg',
 		alt: 'Priya assembling the laser-cut plywood organiser',

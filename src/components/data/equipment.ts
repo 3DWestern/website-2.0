@@ -17,7 +17,7 @@ export const equipment: EquipmentItem[] = [
     description:
       "Over 30 3D printers available. After completing the 3D printing certification on our OWL course, you can submit jobs through our online portal. Simply upload your STL file, select your material preferences, and our team will process your request.",
     location: "Digital Makerspace, Morrissette",
-    href: "/training",
+    href: "https://westernu.brightspace.com/d2l/le/discovery/view/course/151344",
   },
   {
     id: "laser-cutters",
@@ -27,7 +27,7 @@ export const equipment: EquipmentItem[] = [
     description:
       "Cut and engrave wood, acrylic, and cardstock with precision. Great for enclosures, signage, and detailed prototypes. Complete Level 1 training on OWL to start booking time on the machines.",
     location: "Digital Makerspace, Morrissette",
-    href: "/training",
+    href: "https://westernu.brightspace.com/d2l/le/discovery/view/course/151344",
   },
   {
     id: "waterjet",
@@ -37,7 +37,7 @@ export const equipment: EquipmentItem[] = [
     description:
       "Cut through metal, plastic, and composites with a high pressure jet of water and abrasive. Ideal for structural parts and materials our laser cutters cannot handle. Training required before use.",
     location: "Digital Makerspace, Morrissette",
-    href: "/training",
+    href: "https://westernu.brightspace.com/d2l/le/discovery/view/course/151344",
   },
   {
     id: "woodworking",
@@ -47,7 +47,7 @@ export const equipment: EquipmentItem[] = [
     description:
       "Table saws, band saws, a CNC router, drill presses, sanders, and a full wall of hand tools. Walk in during open hours to build furniture, enclosures, or display pieces.",
     location: "Sabourin Makerspace, Morrissette",
-    href: "/makerspaces",
+    href: "/makerspace",
   },
   {
     id: "cricut",
@@ -57,7 +57,7 @@ export const equipment: EquipmentItem[] = [
     description:
       "Cut, write, draw, and foil with our Cricut machines. Perfect for stickers, labels, iron on designs, and small craft projects. No training required, just stop by and ask a team member to get started.",
     location: "Digital Makerspace, Morrissette",
-    href: "/makerspaces",
+    href: "/makerspace",
   },
   {
     id: "soldering",
@@ -67,6 +67,6 @@ export const equipment: EquipmentItem[] = [
     description:
       "Full electronics workbenches with soldering stations, for assembling PCBs, repairing components, and wiring up custom electronics projects from start to finish.",
     location: "Digital Makerspace, Morrissette",
-    href: "/makerspaces",
+    href: "/makerspace",
   },
 ];

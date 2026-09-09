@@ -90,7 +90,7 @@ export function EventDetailModal({
           <div className="flex items-center gap-2 text-sm text-secondary-text">
             <Clock size={16} aria-hidden="true" />
             <span>
-              {formatTime(event.schedule.startTime)} –{" "}
+              {formatTime(event.schedule.startTime)} -{" "}
               {formatTime(event.schedule.endTime)}
             </span>
           </div>

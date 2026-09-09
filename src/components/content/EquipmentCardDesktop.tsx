@@ -53,6 +53,8 @@ export function EquipmentCardDesktop({
           </div>
           <Link
             href={item.href}
+            target={item.href.startsWith("http") ? "_blank" : undefined}
+            rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined}
             className="inline-flex w-fit items-center gap-1.5 text-sm font-medium text-primary-text hover:text-purple-light"
           >
             Book equipment

@@ -20,7 +20,6 @@ export function ExplorePage() {
           <StudentSection spotlights={spotlights ?? []} />
         )}
       />
-      <TeamSection />
       <SocialsSection />
       <SponsorSection />
     </main>

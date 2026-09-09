@@ -1,13 +1,8 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
+import Marquee from "react-fast-marquee";
 import { ArrowRight } from "lucide-react";
-import AutoScroll from "embla-carousel-auto-scroll";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-} from "@/components/ui/carousel";
 import ProjectCard from "../content/ProjectCard";
 import { apiClient } from "@/lib/cms/api.client";
 import { Project } from "@/types/content";
@@ -17,20 +12,16 @@ const ProjectsSection = () => {
   const [projects, setProjects] = useState<Project[]>([]);
   useEffect(() => {
     const fetchProjects = async () => {
-      let projs = await apiClient.for("projects").getMany({ limit: 10 });
+      const projs = await apiClient.for("projects").getMany({ limit: 10 });
       setProjects(projs);
     };
     fetchProjects();
   }, []);
 
-  const plugin = useRef(
-    AutoScroll({ speed: 1, stopOnInteraction: false, stopOnMouseEnter: true }),
-  );
-
   return (
-    <div className="flex flex-col py-16 px-4 sm:px-6 lg:px-8">
-      <div className="flex items-center justify-between mb-10">
-        <h2 className={`text-4xl font-bold `}>Projects Showcase</h2>
+    <div className="flex flex-col py-16">
+      <div className="flex items-center justify-between mb-10 px-4 sm:px-6 lg:px-8">
+        <h2 className="text-4xl font-bold">Projects Showcase</h2>
         <Button size="pill" variant="gradient" asChild>
           <Link href="/projects">
             View all projects
@@ -38,25 +29,29 @@ const ProjectsSection = () => {
           </Link>
         </Button>
       </div>
+
       {projects.length > 0 ? (
-        <Carousel opts={{ loop: true }} plugins={[plugin.current]}>
-          <CarouselContent className="-ml-4 min-h-70">
+        <div className="relative py-2">
+          {/* Edge fades, matching the Sponsors marquee */}
+          <div className="absolute left-0 top-0 bottom-0 w-24 z-10 pointer-events-none bg-gradient-to-r from-black-bg to-transparent" />
+          <div className="absolute right-0 top-0 bottom-0 w-24 z-10 pointer-events-none bg-gradient-to-l from-black-bg to-transparent" />
+
+          <Marquee autoFill direction="left" speed={40} pauseOnHover>
             {projects.map((project) => (
-              <CarouselItem
-                className="w-auto pl-4 h-64 basis-auto"
-                key={project.id}
-              >
+              <div key={project.id} className="mx-2">
                 <ProjectCard project={project} />
-              </CarouselItem>
+              </div>
             ))}
-          </CarouselContent>
-        </Carousel>
+          </Marquee>
+        </div>
       ) : (
-        <Button className="w-fit m-auto" size="pill" variant="outlined" asChild>
-          <Link href="/projects">
-            No projects found, visit our projects page for more information.
-          </Link>
-        </Button>
+        <div className="px-4 sm:px-6 lg:px-8">
+          <Button className="w-fit m-auto" size="pill" variant="outlined" asChild>
+            <Link href="/projects">
+              No projects found, visit our projects page for more information.
+            </Link>
+          </Button>
+        </div>
       )}
     </div>
   );

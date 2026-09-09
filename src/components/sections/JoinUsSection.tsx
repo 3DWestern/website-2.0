@@ -53,7 +53,7 @@ export function JoinUsSection() {
         transition={{ duration: 0.7 }}
         className="relative mx-auto flex max-w-2xl flex-col items-center text-center"
       >
-        <div className="mb-5 text-sm font-medium tracking-wider text-purple-light uppercase">
+        <div className="eyebrow mb-5 text-sm text-purple-light">
           Ready to make something?
         </div>
 

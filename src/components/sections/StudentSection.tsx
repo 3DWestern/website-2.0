@@ -15,6 +15,9 @@ export function StudentSection({ spotlights }: StudentSectionProps) {
   const [current, setCurrent] = useState(0);
   const [direction, setDirection] = useState(1);
 
+  // Nothing to show yet (e.g. no spotlights seeded / CMS disabled).
+  if (spotlights.length === 0) return null;
+
   const go = (index: number) => {
     setDirection(index > current ? 1 : -1);
     setCurrent(index);
@@ -39,7 +42,7 @@ export function StudentSection({ spotlights }: StudentSectionProps) {
         {/* Header row */}
         <div className="flex items-end justify-between mb-10">
           <div>
-            <p className="text-xs font-medium tracking-widest uppercase text-secondary-text mb-1">
+            <p className="eyebrow text-xs text-secondary-text mb-1">
               Made by our members
             </p>
             <h2 className={`text-3xl sm:text-4xl `}>Student Spotlight</h2>

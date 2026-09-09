@@ -25,7 +25,7 @@ export function JoinTeamSection() {
 					</p>
 					<p className="text-secondary-text max-w-lg">
 						We&apos;re looking for the founding team of makerspace
-						supervisors — teaching and supporting other students on the
+						supervisors who teach and support other students on the
 						equipment. Any faculty, any year, any experience level welcome.
 					</p>
 					<div className="flex flex-wrap items-center justify-center gap-4 mt-2">

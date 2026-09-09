@@ -10,7 +10,7 @@ export function SponsorSection() {
 		<section className="py-16">
 			{/* Header */}
 			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-8">
-				<p className="text-xs font-medium tracking-widest uppercase text-secondary-text mb-1">
+				<p className="eyebrow text-xs text-secondary-text mb-1">
 					Made possible by
 				</p>
 				<h2 className={`text-3xl sm:text-4xl`}>

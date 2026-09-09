@@ -7,7 +7,7 @@ export default function ContactInfo() {
     <FooterSecton title="CONTACT">
       <div className="flex flex-col gap-4">
         <a href="mailto:contact@3dwestern.ca" className="flex gap-2">
-          <Mail size={24} className="text-purple-light"></Mail>
+          <Mail size={24} className="text-footer-text shrink-0"></Mail>
           <span className="text-footer-text flex-1 self-center">
             contact@3dwestern.ca
           </span>
@@ -18,7 +18,7 @@ export default function ContactInfo() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <MapPin size={24} className="text-purple-light"></MapPin>
+          <MapPin size={24} className="text-footer-text shrink-0"></MapPin>
 
           <span className="text-footer-text text-pretty flex-1 self-end">
             Ronald D. Schmeichel Building for Entrepreneurship and Innovation,

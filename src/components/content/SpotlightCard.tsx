@@ -20,10 +20,12 @@ export function SpotlightCard({ spotlight }: SpotlightCardProps) {
           className="object-cover opacity-85"
         />
         <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-purple-dark to-transparent px-5 pt-10 pb-5">
-          <p className="text-sm font-semibold text-primary-text">
+          <p className="text-base font-semibold text-primary-text">
             {spotlight.name}
           </p>
-          <p className="text-xs text-muted mt-0.5">{spotlight.program}</p>
+          <p className="text-[13px] text-secondary-text mt-0.5">
+            {spotlight.program}
+          </p>
         </div>
       </div>
 
@@ -36,20 +38,20 @@ export function SpotlightCard({ spotlight }: SpotlightCardProps) {
         </div>
 
         <div className="bg-black-bg border-t border-b-grey px-6 py-5">
-          <p className="text-[11px] uppercase tracking-widest text-purple-light mb-2">
+          <p className="eyebrow text-xs text-purple-light mb-2">
             Their project
           </p>
-          <p className="text-sm font-semibold text-primary-text mb-1">
+          <p className="text-base font-semibold text-primary-text mb-1">
             {spotlight.name}
           </p>
-          <p className="text-xs text-secondary-text leading-relaxed">
+          <p className="text-[15px] leading-relaxed text-secondary-text sm:text-base">
             {spotlight.description}
           </p>
           <div className="flex gap-2">
             {spotlight.tags.map((tag) => (
               <span
                 key={tag}
-                className="mt-3 inline-block text-[11px] px-3 py-1 rounded-full gradient"
+                className="mt-3 inline-block text-xs px-3 py-1 rounded-full gradient"
               >
                 {tag}
               </span>

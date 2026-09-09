@@ -74,7 +74,7 @@ export function ProjectGallery({ images }: ProjectGalleryProps) {
           >
             <Image
               src={image.src}
-              alt={`${image.alt} — image ${i + 1} of ${images.length}`}
+              alt={`${image.alt}, image ${i + 1} of ${images.length}`}
               fill
               className="object-cover hover:scale-105 transition-transform duration-500"
               sizes="(max-width: 640px) 50vw, 33vw"
@@ -133,7 +133,7 @@ export function ProjectGallery({ images }: ProjectGalleryProps) {
             >
               <Image
                 src={images[activeIndex].src}
-                alt={`${images[activeIndex].alt} — image ${activeIndex + 1} of ${images.length}`}
+                alt={`${images[activeIndex].alt}, image ${activeIndex + 1} of ${images.length}`}
                 fill
                 className="object-contain"
                 sizes="90vw"

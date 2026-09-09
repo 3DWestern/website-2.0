@@ -59,7 +59,7 @@ export const instagramPosts: InstagramPost[] = [
 	{
 		id: '6',
 		username: 'yourclub',
-		caption: 'Sponsor shoutout — thank you for keeping the lights on',
+		caption: 'Sponsor shoutout, thank you for keeping the lights on',
 		likes: 202,
 		permalink: 'https://instagram.com/yourclub',
 	},

@@ -36,8 +36,16 @@ export default function MobileMenu({ isActive, navLinks }: MobileMenuProps) {
           mobile={true}
         />
       ))}
-      <div className="flex flex-col sm:hidden gap-2">
-        <Button variant="outlined" size="pill" asChild>
+
+      <div className="h-px w-40 bg-primary-text/15 sm:hidden" />
+
+      <div className="flex flex-col gap-3 sm:hidden">
+        <Button
+          variant="outlined"
+          size="pill"
+          asChild
+          className="px-7 py-2.5 text-base"
+        >
           <a
             href="https://westernu.brightspace.com/d2l/le/discovery/view/course/151344"
             target="_blank"
@@ -46,7 +54,7 @@ export default function MobileMenu({ isActive, navLinks }: MobileMenuProps) {
             Training
           </a>
         </Button>
-        <DashButton />
+        <DashButton className="px-7 py-2.5 text-base" />
       </div>
     </div>
   );

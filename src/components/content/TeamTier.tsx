@@ -15,7 +15,7 @@ function columnsForBreakpoint(breakpoint: Breakpoint, maxCols: number) {
     case "sm":
       return Math.min(2, maxCols);
     default:
-      return 1;
+      return Math.min(2, maxCols);
   }
 }
 
@@ -51,7 +51,7 @@ export default function Tier({ label, members, maxCols, onSelect }: TierProps) {
   return (
     <div>
       <div className="flex items-center justify-between mb-3 pb-2 border-b border-[#29323b]">
-        <p className="text-xs font-medium tracking-widest uppercase text-secondary-text">
+        <p className="eyebrow text-xs text-secondary-text">
           {label}
         </p>
         {showNav && (

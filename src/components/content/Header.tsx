@@ -1,4 +1,7 @@
+"use client";
+
 import { motion } from "framer-motion";
+
 interface HeaderProps {
   title: string;
   description?: string | React.ReactNode;

@@ -79,9 +79,9 @@ export function TeamMemberModal({
             </DialogHeader>
 
             {member.bio && (
-              <p className="text-sm leading-relaxed text-secondary-text">
+              <div className="text-sm leading-relaxed text-secondary-text">
                 <RichText data={member.bio} />
-              </p>
+              </div>
             )}
 
             {(linkedinHref || githubHref || websiteHref) && (

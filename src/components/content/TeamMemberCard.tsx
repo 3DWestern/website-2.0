@@ -45,7 +45,7 @@ export function TeamMemberCard({ member, onClick }: TeamMemberCardProps) {
 
       <div className="px-2.5 pt-2 pb-2.5 flex flex-col gap-0.5">
         <div className="flex items-center justify-between gap-1">
-          <p className="text-xs font-semibold text-primary-text truncate leading-snug">
+          <p className="text-[13px] font-semibold text-primary-text truncate leading-snug">
             {member.name}
             {member.emoji && <span aria-hidden="true">{member.emoji}</span>}
           </p>
@@ -88,11 +88,11 @@ export function TeamMemberCard({ member, onClick }: TeamMemberCardProps) {
             )}
           </div>
         </div>
-        <p className="text-[11px] font-medium text-purple-light leading-snug">
+        <p className="text-xs font-medium text-purple-light leading-snug">
           {member.role}
         </p>
         {member.bio && (
-          <div className="text-[11px] text-secondary-text leading-relaxed mt-0.5 line-clamp-2">
+          <div className="text-xs text-secondary-text leading-relaxed mt-0.5 line-clamp-2">
             <RichText data={member.bio} />
           </div>
         )}

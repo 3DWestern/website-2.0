@@ -31,35 +31,27 @@ export function NavBar() {
     setIsMenuOpen(false);
   }, [pathname, setIsMenuOpen]);
 
-  // Prevent scrolling when menu is open
+  // Lock scrolling while the menu is open — without moving the page.
+  // (Setting position:fixed on <body> shifts scroll to 0 and then jumps
+  //  back on close, which reads as a teleport + auto-scroll.)
   useEffect(() => {
-    if (isMenuOpen) {
-      const scrollY = window.scrollY;
+    if (!isMenuOpen) return;
 
-      document.documentElement.style.overflow = "hidden";
-      document.body.style.overflow = "hidden";
-      document.body.style.position = "fixed";
-      document.body.style.top = `-${scrollY}px`;
-      document.body.style.width = "100%";
+    document.documentElement.style.overflow = "hidden";
+    document.body.style.overflow = "hidden";
 
-      window.addEventListener("wheel", preventDefault, { passive: false });
-      window.addEventListener("touchmove", preventDefault, { passive: false });
-      window.addEventListener("keydown", preventKeyScroll, { passive: false });
+    window.addEventListener("wheel", preventDefault, { passive: false });
+    window.addEventListener("touchmove", preventDefault, { passive: false });
+    window.addEventListener("keydown", preventKeyScroll, { passive: false });
 
-      return () => {
-        document.documentElement.style.overflow = "";
-        document.body.style.overflow = "";
-        document.body.style.position = "";
-        document.body.style.top = "";
-        document.body.style.width = "";
+    return () => {
+      document.documentElement.style.overflow = "";
+      document.body.style.overflow = "";
 
-        window.removeEventListener("wheel", preventDefault);
-        window.removeEventListener("touchmove", preventDefault);
-        window.removeEventListener("keydown", preventKeyScroll);
-
-        window.scrollTo(0, scrollY);
-      };
-    }
+      window.removeEventListener("wheel", preventDefault);
+      window.removeEventListener("touchmove", preventDefault);
+      window.removeEventListener("keydown", preventKeyScroll);
+    };
   }, [isMenuOpen]);
 
   const isActive = (path: string) => pathname === path;
@@ -73,22 +65,10 @@ export function NavBar() {
       }`}
     >
       <div className="flex items-center justify-between px-4 lg:px-8 h-16">
-        <div className="flex gap-2 items-center">
-          {/** Mobile Menu Hamburger */}
-          <button
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-            aria-expanded={isMenuOpen}
-            className="lg:hidden p-2 text-white"
-          >
-            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
-
-          {/* Logo */}
-          <Link href="/">
-            <Logo></Logo>
-          </Link>
-        </div>
+        {/* Logo */}
+        <Link href="/">
+          <Logo></Logo>
+        </Link>
 
         {/* Desktop Links */}
         <div className="hidden lg:flex items-center gap-8">
@@ -97,18 +77,31 @@ export function NavBar() {
           ))}
         </div>
 
-        {/* Dashboard + Training Buttons --- VISIBLE ON DESKTOP */}
-        <div className="hidden sm:flex gap-2">
-          <Button variant="outlined" size="pill" asChild>
-            <a
-              href="https://westernu.brightspace.com/d2l/le/discovery/view/course/151344"
-              target="_blank"
-              rel="noreferrer noopener"
-            >
-              Training
-            </a>
-          </Button>
-          <DashButton />
+        {/* Right cluster: action buttons (desktop/tablet) + hamburger (mobile) */}
+        <div className="flex items-center gap-2">
+          {/* Dashboard + Training Buttons --- VISIBLE ON DESKTOP/TABLET */}
+          <div className="hidden sm:flex gap-2">
+            <Button variant="outlined" size="pill" asChild>
+              <a
+                href="https://westernu.brightspace.com/d2l/le/discovery/view/course/151344"
+                target="_blank"
+                rel="noreferrer noopener"
+              >
+                Training
+              </a>
+            </Button>
+            <DashButton />
+          </div>
+
+          {/** Mobile Menu Hamburger */}
+          <button
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={isMenuOpen}
+            className="lg:hidden -mr-2 flex h-11 w-11 items-center justify-center text-white"
+          >
+            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
         </div>
       </div>
 

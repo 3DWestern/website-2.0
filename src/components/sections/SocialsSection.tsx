@@ -36,7 +36,7 @@ export function SocialsSection() {
 		<section className="py-16 bg-grey-bg overflow-hidden">
 			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 				<div className="mb-10">
-					<p className="text-xs font-medium tracking-widest uppercase text-secondary-text mb-1">
+					<p className="eyebrow text-xs text-secondary-text mb-1">
 						Follow along
 					</p>
 					<h2 className={`text-3xl sm:text-4xl `}>

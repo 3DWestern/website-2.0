@@ -23,7 +23,7 @@ export function MorrissetteSection() {
 					/>
 					<p className="text-secondary-text text-center md:text-right max-w-xl">
 						Built in partnership with{" "}
-						<span className="text-primary-text">Morrissette Entrepreneurship</span> —
+						<span className="text-primary-text">Morrissette Entrepreneurship</span>,
 						supporting student innovation from first idea to finished prototype.
 					</p>
 				</motion.div>

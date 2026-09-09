@@ -27,7 +27,7 @@ export function FeaturedProjectSpotlight({
       <Link
         href={`/projects/${project.slug}`}
         aria-label={`View featured project: ${project.title}`}
-        className="group grid md:grid-cols-2 bg-grey-bg text-primary-text rounded-2xl overflow-hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400"
+        className="group grid md:grid-cols-2 overflow-hidden rounded-2xl border-2 border-purple-light/40 bg-gradient-to-br from-black-bg to-purple-dark/10 text-primary-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400"
       >
         <div className="relative h-56 md:h-full min-h-70 overflow-hidden">
           <Image

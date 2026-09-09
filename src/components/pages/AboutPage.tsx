@@ -1,12 +1,9 @@
-'use client';
-
 import { TrainingSection } from "../archive/sections/TrainingSection";
 import PageHeader from "../content/Header";
 import { BigTextSection } from "../sections/BigTextSection";
 import { AboutInfoSection } from "../sections/AboutInfoSection";
 import { FAQSection } from "../sections/FAQSection";
-import { TeamSection } from "../sections/TeamSection";
-import { Badge } from "../ui/badge";
+import TeamSection from "../sections/TeamSection";
 import { JoinTeamSection } from "../sections/JoinTeamSection";
 import { MorrissetteSection } from "../sections/MorrissetteSection";
 

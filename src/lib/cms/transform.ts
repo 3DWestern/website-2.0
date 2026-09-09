@@ -285,7 +285,7 @@ export const transformTeamMember = (doc: ResolvedTeamMember): TeamMember => {
   return {
     image: {
       url: buildURL(doc.image.url),
-      alt: doc.image.alt,
+      alt: doc.image.alt || doc.name,
     },
     name: doc.name,
     role: doc.role,

@@ -1,16 +1,16 @@
 import Image from "next/image";
+import { cn } from "./ui/utils";
 
-export default function Logo() {
+export default function Logo({ className }: { className?: string }) {
   return (
-    <div className="relative shrink-0 w-45 h-10 ">
+    <div className={cn("relative h-10 w-[174px] shrink-0", className)}>
       <Image
-        src="/full-logo.png"
-        alt="Makerspaces"
+        src="/02-primary-lockup-for-dark.svg"
+        alt="3D Western"
         fill
-        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 70vw, 50vw"
-        className="object-cover"
-        loading="eager"
-      ></Image>
+        priority
+        className="object-contain"
+      />
     </div>
   );
 }

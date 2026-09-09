@@ -12,8 +12,8 @@ export function MakerspacesSection() {
     <section className=" py-16 lg:py-24">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 xl:px-12">
         <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6 }}
           className="mb-12 text-center lg:mb-16"
@@ -28,10 +28,10 @@ export function MakerspacesSection() {
           {spaces.map((space, index) => (
             <motion.div
               key={space.id}
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.7, delay: 0.15 }}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
             >
               <Card className="clip-corners overflow-hidden rounded-none border-0 bg-[#171C24] p-0">
                 <div
@@ -66,7 +66,7 @@ export function MakerspacesSection() {
                       {space.tools.map((tool) => (
                         <div
                           key={tool}
-                          className="flex items-start gap-2 text-[14px] text-secondary-text"
+                          className="flex items-start gap-2 text-[15px] text-secondary-text sm:text-base"
                         >
                           <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-secondary-text" />
                           <span>{tool}</span>
@@ -91,7 +91,13 @@ export function MakerspacesSection() {
           ))}
         </div>
 
-        <div className="mt-14 flex flex-col items-center gap-5 text-center lg:mt-16">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.6 }}
+          className="mt-14 flex flex-col items-center gap-5 text-center lg:mt-16"
+        >
           <p className="text-[15px] text-secondary-text sm:text-base">
             Complete level 1 training on our OWL course to access the
             Makerspaces.
@@ -103,7 +109,7 @@ export function MakerspacesSection() {
             Access Training
           </Link>
           </Button>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

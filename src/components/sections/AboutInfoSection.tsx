@@ -50,7 +50,7 @@ export function AboutInfoSection() {
 						</p>
 						<p className="text-primary-text/80">
 							Across both facilities, we support every step of the creation
-							process — from concept sketching and rapid prototyping to
+							process, from concept sketching and rapid prototyping to
 							manufacturing fabrication, testing, and idea validation. Walk
 							into the Sabourin Makerspace for woodworking, or submit a job
 							through our dashboard (coming soon!) for 3D prints, CNC, laser,
@@ -135,7 +135,7 @@ export function AboutInfoSection() {
 					</p>
 					<p className="text-primary-text/80 text-lg">
 						We&apos;re building a community here at Western where anyone can
-						create, learn, and innovate — no experience required, and
+						create, learn, and innovate, no experience required, and
 						completely free of charge.
 					</p>
 				</motion.div>

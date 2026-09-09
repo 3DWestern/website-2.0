@@ -1,5 +1,8 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
+import { motion } from "motion/react";
 import { ArrowRight } from "lucide-react";
 import type { BlogPost, Project } from "@/types/content";
 import { formatLongDate } from "../utils";
@@ -13,14 +16,26 @@ export function LatestSection({ post, projects }: LatestSectionProps) {
   return (
     <section className="w-full bg-grey-bg px-6 py-16 lg:px-16 lg:py-24">
       <div className="mx-auto max-w-7xl">
-        <div className="mb-12 text-center lg:mb-16">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.6 }}
+          className="mb-12 text-center lg:mb-16"
+        >
           <h2>Latest from 3D Western</h2>
           <p className="mt-3 text-[15px] text-secondary-text sm:text-base">
             New exciting projects and blogs for tips, breakdowns, and more
           </p>
-        </div>
+        </motion.div>
 
-        <div className="grid gap-6 lg:grid-cols-2 lg:gap-8">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.6, delay: 0.1 }}
+          className="grid gap-6 lg:grid-cols-2 lg:gap-8"
+        >
           {/* Blog post — left */}
           <Link
             href={`/blogs/${post.slug}`}
@@ -94,7 +109,7 @@ export function LatestSection({ post, projects }: LatestSectionProps) {
               </Link>
             ))}
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

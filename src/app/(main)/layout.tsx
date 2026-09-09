@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { MenuProvider } from "@/context/MenuContext";
-import { chakraPetch, workSans } from "@/lib/fonts";
+import { chakraPetch, spaceGrotesk, ibmPlexMono } from "@/lib/fonts";
 import { NavBar } from "@/components/navigation/NavBar";
 import Footer from "@/components/Footer";
 
@@ -74,7 +74,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`scroll-smooth overflow-x-hidden ${workSans.variable} ${chakraPetch.variable}`}
+      className={`scroll-smooth overflow-x-hidden ${spaceGrotesk.variable} ${chakraPetch.variable} ${ibmPlexMono.variable}`}
     >
       <body className="antialiased">
         <MenuProvider>

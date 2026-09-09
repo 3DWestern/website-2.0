@@ -126,6 +126,69 @@ export function resolveProjectCategories(): ResponsePayload {
   };
 }
 
+// Placeholder Student Spotlight data for local/dev (CMS disabled). Same
+// spirit as the other sample data — swap for real entries via the CMS.
+const sampleSpotlights = [
+  {
+    id: 1,
+    name: "Ava Chen",
+    projectName: "Foldable Cargo Bike Frame",
+    description:
+      "A collapsible cargo bike frame designed for small apartments, built from CNC-cut aluminium plate and 3D-printed jigs. Went through five weld-fixture revisions in the Sabourin Makerspace before the geometry held up under load.",
+    tags: ["CNC", "Welding"],
+    image: {
+      url: "/images/workshop1.webp",
+      alt: "Ava Chen's foldable cargo bike frame",
+    },
+    program: "Mechatronic Systems Engineering",
+    year: 3,
+    quote:
+      "I walked in not knowing how to weld. Two months later I had a frame that actually carries groceries.",
+  },
+  {
+    id: 2,
+    name: "Diego Fernandez",
+    projectName: "Braille Label Printer",
+    description:
+      "A low-cost desktop printer that embosses Braille labels, using a laser-cut chassis and a custom solenoid head. Built for a campus accessibility club and now used to label lab equipment across two buildings.",
+    tags: ["Laser Cutting", "Electronics"],
+    image: {
+      url: "/images/workshop2.webp",
+      alt: "Diego Fernandez's Braille label printer",
+    },
+    program: "Electrical Engineering",
+    year: 4,
+    quote:
+      "The makerspace let me fail cheaply. I burned through a lot of acrylic before the head alignment worked.",
+  },
+  {
+    id: 3,
+    name: "Priya Nair",
+    projectName: "Modular Hydroponics Wall",
+    description:
+      "A wall-mounted hydroponics system with snap-together 3D-printed modules and a sensor board that logs pH and nutrient levels. Started as a first-year side project and grew into a demo piece for makerspace tours.",
+    tags: ["3D Printing", "IoT"],
+    image: {
+      url: "/images/print_workshop.webp",
+      alt: "Priya Nair's modular hydroponics wall",
+    },
+    program: "Chemical Engineering",
+    year: 2,
+    quote:
+      "Everything I know about rapid prototyping I learned from other students on shift here.",
+  },
+];
+
+export function resolveSpotlights(): ResponsePayload {
+  return {
+    docs: sampleSpotlights,
+    totalDocs: sampleSpotlights.length,
+    limit: 10,
+    page: 1,
+    totalPages: 1,
+  };
+}
+
 export function resolveEventCategories(): ResponsePayload {
   return {
     docs: sampleEventCategories,
@@ -224,10 +287,73 @@ export function resolveEvents(params: URLSearchParams): ResponsePayload {
   };
 }
 
-export function resolveTeamMembers() {
+// Wrap a plain string in the minimal Lexical editor state that
+// @payloadcms/richtext-lexical's <RichText> can render.
+function textToLexical(text: string) {
   return {
-    docs: sampleTeamMembers,
-    totalDocs: sampleTeamMembers.length,
+    root: {
+      type: "root",
+      direction: "ltr" as const,
+      format: "" as const,
+      indent: 0,
+      version: 1,
+      children: [
+        {
+          type: "paragraph",
+          direction: "ltr" as const,
+          format: "" as const,
+          indent: 0,
+          version: 1,
+          textFormat: 0,
+          children: text
+            ? [
+                {
+                  type: "text",
+                  detail: 0,
+                  format: 0,
+                  mode: "normal",
+                  style: "",
+                  text,
+                  version: 1,
+                },
+              ]
+            : [],
+        },
+      ],
+    },
+  };
+}
+
+const isLeadershipRole = (role: string) =>
+  role === "President" || role.startsWith("Chief");
+
+export function resolveTeamMembers(params?: URLSearchParams) {
+  const roleFilter = params?.get("where[role][equals]");
+
+  const docs = sampleTeamMembers
+    .filter((m) => {
+      if (roleFilter === "leadership") return isLeadershipRole(m.role);
+      if (roleFilter === "vice-president") return !isLeadershipRole(m.role);
+      return true;
+    })
+    .map((m, i) => ({
+      id: i + 1,
+      // Old teamdata.ts stores a bare public path; new transform expects
+      // a populated Avatar relation ({ url, alt }).
+      image: { url: m.image, alt: m.name },
+      name: m.name,
+      role: m.role,
+      team: "",
+      bio: textToLexical(m.bio ?? m.description ?? ""),
+      emoji: m.emoji,
+      linkedin: m.linkedin,
+      github: m.github,
+      website: m.website,
+    }));
+
+  return {
+    docs,
+    totalDocs: docs.length,
     limit: 10,
     page: 1,
     totalPages: 1,
