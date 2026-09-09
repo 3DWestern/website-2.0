@@ -12,7 +12,7 @@ export const Sponsors: CollectionConfig = {
   },
   admin: {
     useAsTitle: "name",
-    group: "Sponsor Content",
+    group: "People",
   },
   fields: [
     { name: "name", type: "text", required: true },

@@ -10,3 +10,5 @@ export { EventCategories } from "./EventCategories";
 export * from "./Media";
 export { Teams } from "./Teams";
 export { Spotlights } from "./Spotlights";
+export { Announcements } from "./Announcements";
+export { Tags } from "./Tags";

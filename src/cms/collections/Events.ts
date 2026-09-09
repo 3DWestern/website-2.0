@@ -11,7 +11,7 @@ export const Events: CollectionConfig = {
     drafts: true,
   },
   admin: {
-    group: "Event Content",
+    group: "Written Content",
     useAsTitle: "title",
   },
   fields: [

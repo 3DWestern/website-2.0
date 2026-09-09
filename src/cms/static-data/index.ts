@@ -7,3 +7,5 @@ export { sampleSponsors } from "./sponsors";
 export { sampleProjectCategories } from "./projectCategories";
 export { sampleEventCategories } from "./eventCategories";
 export { sampleTeams } from "./teams";
+export { sampleAnnouncements } from "./announcements";
+export { sampleSpotlights } from "./spotlights";

@@ -13,7 +13,7 @@ export default function ContactInfo() {
           </span>
         </a>
         <a
-          href="https://maps.app.goo.gl/FtS4wmJwDNHaoiKdA"
+          href="https://maps.app.goo.gl/2LSMgsLUtEdmRzke7"
           className="flex gap-2"
           target="_blank"
           rel="noopener noreferrer"

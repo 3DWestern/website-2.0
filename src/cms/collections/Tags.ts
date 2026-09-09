@@ -10,8 +10,12 @@ export const Tags: CollectionConfig = {
     drafts: true,
   },
   admin: {
-    group: "Blog Content",
+    group: "Categorization",
     useAsTitle: "title",
+  },
+  labels: {
+    singular: "Blog Category",
+    plural: "Blog Categories",
   },
   fields: [
     { name: "title", type: "text", required: true },

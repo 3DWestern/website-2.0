@@ -140,3 +140,10 @@ export type Spotlight = {
   year: number;
   quote: string;
 };
+
+export type Announcement = {
+  id: number;
+  title: string;
+  announcement: DefaultTypedEditorState;
+  createdAt: string;
+};

@@ -14,6 +14,8 @@ import {
   sampleProjects,
   sampleSponsors,
   sampleTags,
+  sampleAnnouncements,
+  sampleSpotlights,
 } from "../static-data";
 import { sampleTeams } from "../static-data/teams";
 
@@ -23,6 +25,17 @@ const createData = async <S extends CollectionSlug>(
   slug: S,
   data: RequiredDataFromCollectionSlug<S>[],
 ) => {
+  // Only seed if collection is empty
+  const existing = await payload.count({ collection: slug });
+
+  if (existing.totalDocs > 0) {
+    console.log(
+      `Skipped seeding ${slug} — already has ${existing.totalDocs} entries`,
+    );
+    return;
+  }
+
+  // Seed sample data
   let count = 0;
   for (const entry of data) {
     const created = await payload.create({
@@ -69,6 +82,12 @@ const seed = async () => {
 
   console.log("\n----- PROJECTS -----");
   await createData("projects", sampleProjects);
+
+  console.log("\n----- SPOTLIGHTS -----");
+  await createData("spotlights", sampleSpotlights);
+
+  console.log("\n----- ANNOUNCEMENTS -----");
+  await createData("announcements", sampleAnnouncements);
 
   // exit process
   process.exit(0);

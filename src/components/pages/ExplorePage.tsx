@@ -12,7 +12,12 @@ export function ExplorePage() {
   return (
     <main className="min-h-screen pt-[88px]">
       <ExploreHeader />
-      <AnnouncementsSection />
+      <DataSection
+        fetchers={{ announcements: () => api.for("announcements").getMany() }}
+        renderer={({ announcements }) => (
+          <AnnouncementsSection announcements={announcements ?? []} />
+        )}
+      />
       <ProjectsSection />
       <DataSection
         fetchers={{ spotlights: () => api.for("spotlights").getMany({}) }}
