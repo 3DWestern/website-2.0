@@ -1,9 +1,9 @@
 import { draftMode } from "next/headers";
 import { getPayload } from "payload";
 import config from "@payload-config";
-import { cmsClient } from "./cmsClient";
 import { transformBlog, transformProject } from "./transform";
 import { CMSEnabled } from "./utils";
+import { findDocs } from "./api.server";
 
 async function findBySlug(
   collection: "projects" | "blogs",
@@ -16,7 +16,7 @@ async function findBySlug(
       depth: "2",
     });
     if (draft) params.set("draft", "true");
-    return cmsClient.get(`/api/${collection}?${params}`);
+    return findDocs(collection, params.toString());
   }
 
   const payload = await getPayload({ config });
