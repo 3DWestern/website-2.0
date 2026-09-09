@@ -11,7 +11,7 @@ export const ProjectCategories: CollectionConfig = {
     drafts: true,
   },
   admin: {
-    group: "Project Content",
+    group: "Categorization",
     useAsTitle: "name",
   },
   fields: [

@@ -84,6 +84,7 @@ export interface Config {
     'event-categories': EventCategory;
     teams: Team;
     spotlights: Spotlight;
+    announcements: Announcement;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -108,6 +109,7 @@ export interface Config {
     'event-categories': EventCategoriesSelect<false> | EventCategoriesSelect<true>;
     teams: TeamsSelect<false> | TeamsSelect<true>;
     spotlights: SpotlightsSelect<false> | SpotlightsSelect<true>;
+    announcements: AnnouncementsSelect<false> | AnnouncementsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -552,6 +554,31 @@ export interface Spotlight {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "announcements".
+ */
+export interface Announcement {
+  id: number;
+  title: string;
+  announcement: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -641,6 +668,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'spotlights';
         value: number | Spotlight;
+      } | null)
+    | ({
+        relationTo: 'announcements';
+        value: number | Announcement;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -1036,6 +1067,16 @@ export interface SpotlightsSelect<T extends boolean = true> {
   program?: T;
   year?: T;
   quote?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "announcements_select".
+ */
+export interface AnnouncementsSelect<T extends boolean = true> {
+  title?: T;
+  announcement?: T;
   updatedAt?: T;
   createdAt?: T;
 }

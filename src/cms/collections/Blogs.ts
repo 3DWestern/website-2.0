@@ -18,7 +18,7 @@ export const Blogs: CollectionConfig = {
     },
   },
   admin: {
-    group: "Blog Content",
+    group: "Written Content",
     // Builds the URL used for the "Preview" button in the Payload admin UI.
     // This lets an editor view a draft/unpublished blog on the live frontend
     // before it's published, by hitting a special /preview route that your

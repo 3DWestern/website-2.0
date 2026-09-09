@@ -9,6 +9,7 @@ import {
   EventCategory,
   TeamMember,
   Spotlight,
+  Announcement,
 } from "@/types/content";
 import {
   Event as PayloadEvent,
@@ -26,6 +27,7 @@ import {
   Logo as PayloadLogo,
   Spotlight as PayloadSpotlight,
   SpotlightImage as PayloadSI,
+  Announcement as PayloadAnnouncement,
 } from "../../../payload-types";
 
 export type DocType =
@@ -345,3 +347,17 @@ export const transformSpotlight = (doc: ResolvedSpotlight): Spotlight => {
 
 export const transformSpotlights = (docs: ResolvedSpotlight[]): Spotlight[] =>
   transformDocs(docs, transformSpotlight);
+
+// ---------- ANNOUNCEMENTS TRANSFORM ----------
+export const transformAnnouncement = (
+  doc: PayloadAnnouncement,
+): Announcement => ({
+  id: doc.id,
+  title: doc.title,
+  announcement: doc.announcement,
+  createdAt: doc.createdAt,
+});
+
+export const transformAnnouncements = (
+  docs: PayloadAnnouncement[],
+): Announcement[] => transformDocs(docs, transformAnnouncement);

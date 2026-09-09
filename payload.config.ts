@@ -21,8 +21,9 @@ import {
   GalleryImages,
   SporlightImages,
   Spotlights,
+  Announcements,
+  Tags,
 } from "@/cms/collections";
-import { Tags } from "@/cms/collections/Tags";
 
 export default buildConfig({
   editor: lexicalEditor({}),
@@ -44,6 +45,7 @@ export default buildConfig({
     EventCategories,
     Teams,
     Spotlights,
+    Announcements,
   ],
 
   plugins: [

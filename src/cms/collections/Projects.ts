@@ -14,7 +14,7 @@ export const Projects: CollectionConfig = {
     },
   },
   admin: {
-    group: "Project Content",
+    group: "Written Content",
     useAsTitle: "title",
 
     preview: ({ slug }) => {

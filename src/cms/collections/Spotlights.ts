@@ -8,7 +8,7 @@ export const Spotlights: CollectionConfig = {
   access: generalAccess(SPOTLIGHTS_SLUG),
   admin: {
     useAsTitle: "name",
-    group: "Spotlight Content",
+    group: "Written Content",
   },
   fields: [
     { name: "name", type: "text", required: true },
