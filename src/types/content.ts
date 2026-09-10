@@ -88,7 +88,7 @@ export type ProjectCategory = {
 };
 
 export type ProjectImage = {
-  src: string;
+  url: string;
   alt: string;
 };
 

@@ -79,9 +79,10 @@ export type ResolvedSpotlight = Omit<PayloadSpotlight, "image"> & {
   image: PayloadSI;
 };
 
-const BASE_URL = `${process.env.NEXT_PUBLIC_CMS_ENABLED === "true" ? process.env.NEXT_PUBLIC_BASE_URL : ""}`;
+const BASE_URL = `${process.env.NEXT_PUBLIC_CMS_ENABLED === "true" ? process.env.NEXT_PUBLIC_BASE_URL : "/"}`;
 
-const buildURL = (route: string | null = "/"): string => {
+const buildURL = (route: string | null = ""): string => {
+  if (process.env.NEXT_PUBLIC_CMS_ENABLED === "false") return route ?? "";
   return `${BASE_URL}${route}`;
 };
 
@@ -244,13 +245,13 @@ export const transformProject = (doc: ResolvedProject): Project => {
     title: doc.title,
     creator: doc.creator,
     image: {
-      src: buildURL(doc.image.url),
+      url: buildURL(doc.image.url),
       alt: doc.image.alt,
     },
     contributors: doc.contributors || undefined,
     description: doc.description,
     galleryImages: doc.galleryImages?.map((image) => ({
-      src: buildURL(image.url),
+      url: buildURL(image.url),
       alt: image.alt,
     })),
     categories: doc.categories || [],
