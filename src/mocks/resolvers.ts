@@ -16,6 +16,7 @@ import {
   sampleCoverImages,
   sampleGalleryImages,
 } from "@/cms/static-data/media";
+import { sampleInstagramPosts } from "@/cms/static-data/instagramPosts";
 
 export interface ResponsePayload {
   docs: unknown[];
@@ -320,6 +321,16 @@ export function resolveTeamMembers(params?: URLSearchParams) {
   return {
     docs,
     totalDocs: docs.length,
+    limit: 10,
+    page: 1,
+    totalPages: 1,
+  };
+}
+
+export function resolveInstaPosts() {
+  return {
+    docs: sampleInstagramPosts,
+    totalDocs: sampleInstagramPosts.length,
     limit: 10,
     page: 1,
     totalPages: 1,

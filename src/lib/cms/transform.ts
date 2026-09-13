@@ -10,6 +10,7 @@ import {
   TeamMember,
   Spotlight,
   Announcement,
+  InstagramPost,
 } from "@/types/content";
 import {
   Event as PayloadEvent,
@@ -28,6 +29,8 @@ import {
   Spotlight as PayloadSpotlight,
   SpotlightImage as PayloadSI,
   Announcement as PayloadAnnouncement,
+  InstagramPost as PayloadInstagramPost,
+  InstagramThumbnail as PayloadIT,
 } from "../../../payload-types";
 
 export type DocType =
@@ -39,7 +42,8 @@ export type DocType =
   | PayloadTeamMember
   | PayloadTag
   | PayloadPC
-  | PayloadSpotlight;
+  | PayloadSpotlight
+  | PayloadInstagramPost;
 
 type ResolvedBlogPost = Omit<
   PayloadBlogPost,
@@ -77,6 +81,14 @@ export type ResolvedEvent = Omit<PayloadEvent, "image"> & {
 
 export type ResolvedSpotlight = Omit<PayloadSpotlight, "image"> & {
   image: PayloadSI;
+};
+
+export type ResolvedInstagramPost = Omit<
+  PayloadInstagramPost,
+  "postImage" | "avatar"
+> & {
+  postImage: PayloadIT;
+  avatar: PayloadAvatar;
 };
 
 const BASE_URL = `${process.env.NEXT_PUBLIC_CMS_ENABLED === "true" ? process.env.NEXT_PUBLIC_BASE_URL : "/"}`;
@@ -287,8 +299,8 @@ export const transformProjectCategories = (
 export const transformTeamMember = (doc: ResolvedTeamMember): TeamMember => {
   return {
     image: {
-      url: buildURL(doc.image.url),
-      alt: doc.image.alt || doc.name,
+      url: buildURL(doc.image?.url ?? ""),
+      alt: doc.image?.alt ?? doc.name,
     },
     name: doc.name,
     role: doc.role,
@@ -362,3 +374,30 @@ export const transformAnnouncement = (
 export const transformAnnouncements = (
   docs: PayloadAnnouncement[],
 ): Announcement[] => transformDocs(docs, transformAnnouncement);
+
+// ---------- INSTAGRAM POST TRANSFORMS ----------
+export const transformInstagramPost = (
+  doc: ResolvedInstagramPost,
+): InstagramPost => ({
+  id: doc.id.toString(),
+  username: doc.username,
+  avatar: doc.avatar
+    ? {
+        url: buildURL(doc.avatar?.url),
+        alt: doc.avatar?.alt,
+      }
+    : undefined,
+  image: doc.postImage
+    ? {
+        url: buildURL(doc.postImage?.url),
+        alt: doc.postImage?.alt,
+      }
+    : undefined,
+  caption: doc.caption ?? undefined,
+  likes: doc.likes ?? undefined,
+  permalink: doc.permalink,
+});
+
+export const transformInstagramPosts = (
+  docs: ResolvedInstagramPost[],
+): InstagramPost[] => transformDocs(docs, transformInstagramPost);

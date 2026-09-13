@@ -15,6 +15,7 @@ const routeResolvers: Record<string, Resolver> = {
   "/api/team-members": resolvers.resolveTeamMembers,
   "/api/spotlights": () => resolvers.resolveSpotlights(),
   "/api/announcements": () => resolvers.resolveAnnouncements(),
+  "/api/instagram-posts": () => resolvers.resolveInstaPosts(),
 };
 
 export async function getMockResponse(path: string, options: RequestInit = {}) {
